@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.modules.code.CodeMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap>
+	
+	<sql id ="selectCommon">
+		from 
+			infrCodeGroup a
+		where 1=1
+			and a.ifcgDelNy = 0
+	</sql>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			*
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT * FROM TB_EP_AUTH WHERE AUTH_SEQ = #{AUTH_SEQ}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO
+			TB_EP_AUTH (
+			  	AUTH_SEQ
+			    ,AUTH_NM
+			    ,CLNT_DISP
+			    ,AUTH_MEMO
+			    ,ORGEH
+			)
+		VALUES (
+		  	TB_EP_AUTH_SEQ.NEXTVAL
+		    ,#{AUTH_NM}
+		    ,#{CLNT_DISP}
+		    ,#{AUTH_MEMO}
+		    ,#{ORGEH}
+		 )
+		 <selectKey resultType="String" keyProperty="AUTH_SEQ" order="AFTER">
+		 	SELECT TB_EP_AUTH_SEQ.CURRVAL FROM DUAL
+		 </selectKey>
+	</insert>
+	
+	
+	<update id="update">
+		UPDATE
+			TB_EP_AUTH
+		SET
+			AUTH_NM = #{AUTH_NM}
+			, CLNT_DISP = #{CLNT_DISP}
+			, AUTH_MEMO = #{AUTH_MEMO}
+			, ORGEH = #{ORGEH}
+		WHERE
+			AUTH_SEQ = #{AUTH_SEQ}
+	</update>
+	
+	<delete id="delete">
+	
+	</delete>
+	
+    <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT 
+			ifcdSeq
+			, ifcdName
+			, ifcgSeq
+		FROM
+			infrCode
+		WHERE 1=1
+			AND ifcdDelNy = 0
+		    AND ifcdUseNy = 1
+    </select>
+    
+</mapper>
+
+
+

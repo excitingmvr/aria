@@ -1,0 +1,1 @@
+publicCorona1List

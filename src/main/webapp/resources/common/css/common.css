@@ -1,0 +1,4 @@
+/* jquery datepicker button text size smaller */
+.ui-widget button {
+	font-size: 0.7em;
+}
