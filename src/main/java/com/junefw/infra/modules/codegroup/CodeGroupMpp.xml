@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.modules.codegroup.CodeGroupMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.modules.codegroup.CodeGroup"></resultMap>
+	
+	<sql id ="selectCommon">
+		from 
+			infrCodeGroup a
+		where 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND ifcgDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOption == 1">AND ifcgSeq = #{shValue}</when>
+				<when test="shOption == 2">AND ifcgName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND ifcgNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.ifcgSeq
+				, a.ifcgName
+				, a.ifcgNameEng
+				,(select count(aa.ifcdSeq) from infrCode aa where 1=1 and aa.ifcdDelNy = 0 and aa.ifcgSeq = a.ifcgSeq) as xifcdSeq
+				<include refid="Base.selectRegMod" />
+			<include refid="selectCommon" />
+			ORDER BY a.ifcgSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT * FROM infrCodeGroup WHERE ifcgSeq = #{ifcgSeq}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO
+			infrCodeGroup (
+				ifcgSeq
+				,ifcgSeqAnother
+				,ifcgName
+				,ifcgNameEng
+				,ifcgUseNy
+				,ifcgOrder
+				,ifcgReferenceV1
+				,ifcgReferenceV2
+				,ifcgReferenceV3
+				,ifcgReferenceI1
+				,ifcgReferenceI2
+				,ifcgReferenceI3
+				,ifcgDesc
+				,ifcgDelNy
+			)
+		VALUES (
+			#{ifcgSeq}
+			,#{ifcgSeqAnother}
+			,#{ifcgName}
+			,#{ifcgNameEng}
+			,#{ifcgUseNy}
+			,#{ifcgOrder}
+			,#{ifcgReferenceV1}
+			,#{ifcgReferenceV2}
+			,#{ifcgReferenceV3}
+			,#{ifcgReferenceI1}
+			,#{ifcgReferenceI2}
+			,#{ifcgReferenceI3}
+			,#{ifcgDesc}
+			,0
+		 )
+		 <selectKey resultType="String" keyProperty="ifcgSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+	
+	
+	<update id="update">
+		UPDATE
+			infrCodeGroup
+		SET
+			ifcgSeqAnother = #{ifcgSeqAnother}
+			,ifcgName = #{ifcgName}
+			,ifcgNameEng = #{ifcgNameEng}
+			,ifcgUseNy = #{ifcgUseNy}
+			,ifcgOrder = #{ifcgOrder}
+			,ifcgReferenceV1 = #{ifcgReferenceV1}
+			,ifcgReferenceV2 = #{ifcgReferenceV2}
+			,ifcgReferenceV3 = #{ifcgReferenceV3}
+			,ifcgReferenceI1 = #{ifcgReferenceI1}
+			,ifcgReferenceI2 = #{ifcgReferenceI2}
+			,ifcgReferenceI3 = #{ifcgReferenceI3}
+			,ifcgDesc = #{ifcgDesc}
+		WHERE
+			AUTH_SEQ = #{AUTH_SEQ}
+	</update>
+	
+	<update id="uelete">
+		UPDATE infrCodeGroup SET ifcgDelNy = 1 WHERE ifcgSeq = #{ifcgSeq}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM infrCodeGroup WHERE ifcgSeq = #{ifcgSeq}
+	</delete>
+	<!-- infrMember e -->
+	
+    <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT 
+			ifcdSeq
+			, ifcdName
+			, ifcgSeq
+		FROM
+			infrCode
+		WHERE 1=1
+			AND ifcdDelNy = 0
+		    AND ifcdUseNy = 1
+    </select>
+    
+</mapper>
+
+
+

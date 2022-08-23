@@ -95,13 +95,11 @@
 	<sql id="selectRegMod">	
 		,regIp
 		,regSeq
-		,(select ifmmId from infrMember where ifmmSeq = regSeq) as regId
 		,regDeviceCd
 		,regDateTime
 		,regDateTimeSvr
 		,modIp
 		,modSeq
-		,(select ifmmId from infrMember where ifmmSeq = modSeq) as modId
 		,modDeviceCd
 		,modDateTime
 		,modDateTimeSvr
