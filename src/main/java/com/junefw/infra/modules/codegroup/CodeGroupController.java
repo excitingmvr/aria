@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.TextTable.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -125,31 +124,32 @@ public class CodeGroupController extends BaseController{
 	}
 
 	
-//	@RequestMapping(value = "nationalityMultiUele")
-//	public String nationalityMultiUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
-//
-//		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-//			dto.setIfnaSeq(checkboxSeq);
-//			service.uelete(dto);
-//		}
-//
-//		redirectAttributes.addFlashAttribute("vo", vo);
-//
-//		return "redirect:/nationality/nationalityList";
-//	}
-//
-//	
-//	@RequestMapping(value = "nationalityMultiDele")
-//	public String nationalityMultiDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
-//
-//		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-//			vo.setIfnaSeq(checkboxSeq);
-//		}
-//
-//		redirectAttributes.addFlashAttribute("vo", vo);
-//
-//		return "redirect:/nationality/nationalityList";
-//	}
+	@RequestMapping(value = "codeGroupMultiUele")
+	public String codeGroupMultiUele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
+
+		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
+			vo.setIfcgSeq(checkboxSeq);
+			service.uelete(vo);
+		}
+
+		redirectAttributes.addFlashAttribute("vo", vo);
+
+		return "redirect:/codeGroup/codeGroupList";
+	}
+
+	
+	@RequestMapping(value = "codeGroupMultiDele")
+	public String nationalityMultiDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
+
+		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
+			vo.setIfcgSeq(checkboxSeq);
+			service.delete(vo);
+		}
+
+		redirectAttributes.addFlashAttribute("vo", vo);
+
+		return "redirect:/codeGroup/codeGroupList";
+	}
 	
 
 	@RequestMapping("excelDownload")

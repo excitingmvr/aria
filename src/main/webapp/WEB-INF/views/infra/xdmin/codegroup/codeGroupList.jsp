@@ -203,7 +203,12 @@
                 <td><c:out value="${item.ifcgSeq }"/></td>
                 <td><a href="javascript:goForm(<c:out value="${item.ifcgSeq }"/>)"><c:out value="${item.ifcgName }"/></a></td>
                 <td><c:out value="${item.ifcgNameEng }"/></td>
-                <td><c:out value="${item.xifcdSeq }"/></td>
+                <td>
+	                <c:choose>
+	                	<c:when test="${item.xifcdSeq ne 0 }"><a href="/code/codeList?ifcgSeq=<c:out value="${item.ifcgSeq }"/>"><c:out value="${item.ifcgSeq }"/></a></c:when>
+	                	<c:otherwise>0</c:otherwise>
+	                </c:choose>
+                </td>
                 <td><fmt:formatDate value="${item.regDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
