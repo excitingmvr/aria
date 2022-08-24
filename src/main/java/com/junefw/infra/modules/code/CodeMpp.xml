@@ -9,16 +9,36 @@
     <resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap>
 	
 	<sql id ="selectCommon">
-		from 
-			infrCodeGroup a
-		where 1=1
-			and a.ifcgDelNy = 0
+		FROM infrCode a
+			left join infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
+		WHERE 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND ifcdDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOption == 1">AND a.ifcgSeq = #{shValue}</when>
+				<when test="shOption == 2">AND b.ifcgName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND a.ifcdSeq = #{shValue}</when>
+				<when test="shOption == 4">AND a.ifcdSeqAnother = #{shValue}</when>
+				<when test="shOption == 5">AND a.ifcdName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 6">AND a.ifcdNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
 	</sql>
 	
 	<select id="selectList" resultMap="resultMapObj">
-		SELECT
-			*
-		<include refid="selectCommon" />
+		<include refid="Base.selectListUpperForMysql" />	
+			SELECT
+				a.ifcgSeq
+			    , b.ifcgName
+				, a.ifcdSeq
+				, a.ifcdSeqAnother
+				, a.ifcdName
+				, a.ifcdNameEng
+				, a.ifcdUseNy
+				, a.ifcdOrder
+				<include refid="Base.selectRegModWithAlies" />
+			<include refid="selectCommon" />
+			ORDER BY a.ifcgSeq, a.ifcdOrder, a.ifcdSeq
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
 	</select>
 	
 	<select id="selectOneCount" resultType="Integer">
@@ -27,24 +47,19 @@
 	</select>
 	
 	<select id="selectOne" resultMap="resultMapObj">
-		SELECT * FROM TB_EP_AUTH WHERE AUTH_SEQ = #{AUTH_SEQ}
+		SELECT 
+		
+		FROM infrCode 
+		WHERE 1=1
+			AND 
 	</select>
 	
 	<insert id="insert">
 		INSERT INTO
-			TB_EP_AUTH (
-			  	AUTH_SEQ
-			    ,AUTH_NM
-			    ,CLNT_DISP
-			    ,AUTH_MEMO
-			    ,ORGEH
+
 			)
 		VALUES (
-		  	TB_EP_AUTH_SEQ.NEXTVAL
-		    ,#{AUTH_NM}
-		    ,#{CLNT_DISP}
-		    ,#{AUTH_MEMO}
-		    ,#{ORGEH}
+
 		 )
 		 <selectKey resultType="String" keyProperty="AUTH_SEQ" order="AFTER">
 		 	SELECT TB_EP_AUTH_SEQ.CURRVAL FROM DUAL

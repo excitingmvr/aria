@@ -9,9 +9,8 @@
     <resultMap id="resultMapObj" type="com.junefw.infra.modules.codegroup.CodeGroup"></resultMap>
 	
 	<sql id ="selectCommon">
-		from 
-			infrCodeGroup a
-		where 1=1
+		FROM infrCodeGroup a
+		WHERE 1=1
 			<if test="shDelNy != null and !shDelNy.equals('')">AND ifcgDelNy = #{shDelNy}</if>
 			<choose>
 				<when test="shOption == 1">AND ifcgSeq = #{shValue}</when>
@@ -27,7 +26,7 @@
 				, a.ifcgName
 				, a.ifcgNameEng
 				,(select count(aa.ifcdSeq) from infrCode aa where 1=1 and aa.ifcdDelNy = 0 and aa.ifcgSeq = a.ifcgSeq) as xifcdSeq
-				<include refid="Base.selectRegMod" />
+				<include refid="Base.selectRegModWithAlies" />
 			<include refid="selectCommon" />
 			ORDER BY a.ifcgSeq DESC
 			<include refid="Base.orderByLimitForMysql" />

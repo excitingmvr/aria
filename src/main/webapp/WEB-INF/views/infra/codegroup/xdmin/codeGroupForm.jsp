@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<!-- head s -->
 <%@include file="../../../common/xdmin/includeV1/head.jsp"%>
-<!-- head e -->
+
+<title>CodeGroup</title>		<!-- #-> -->
 
 <style type="text/css">
 
@@ -112,10 +112,10 @@
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
 <form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
 <!-- *Vo.jsp s -->
-<%@include file="codeGroupVo.jsp"%>
+<%@include file="codeGroupVo.jsp"%>		<!-- #-> -->
 <!-- *Vo.jsp e -->
 
-<h3 class="mt-3 mb-0">코드그룹 관리</h3>
+<h3 class="mt-3 mb-0">코드그룹 관리</h3>		<!-- #-> -->
  
 <div class="container-fluid px-0 px-sm-5 mt-2">
 	<div class="row mt-sm-4">
@@ -201,7 +201,7 @@
 		</div>
 	</div>
 
-<c:if test="${not empty item.ifcgSeq }">
+<c:if test="${not empty item.ifcgSeq }">		<!-- #-> -->
 <!-- regMod s -->
 <%@include file="../../../common/xdmin/includeV1/regmod.jsp"%>
 <!-- regMod e -->
@@ -226,7 +226,7 @@
 </form>
 <form name="formVo" id="formVo" method="post">
 <!-- *Vo.jsp s -->
-<%@include file="codeGroupVo.jsp"%>
+<%@include file="codeGroupVo.jsp"%>		<!-- #-> -->
 <!-- *Vo.jsp e -->
 </form>
 <!-- main e -->

@@ -2,7 +2,7 @@
 
 <%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 
-<title>CodeGroup</title>
+<title>Code</title>		<!-- #-> -->
 
 <style type="text/css">
 	
@@ -97,9 +97,9 @@
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 	<input type="hidden" name="checkboxSeqArray" >
-	<input type="hidden" name="ifcgSeq">	<!-- #-> -->
+	<input type="hidden" name="ifcdSeq">	<!-- #-> -->
 	
-<h3 class="mt-3 mb-0">코드그룹 관리</h3> 
+<h3 class="mt-3 mb-0">코드 관리</h3>		<!-- #-> -->
 
 <!--  -->
 <div class="container-fluid px-0 d-block d-sm-none">
@@ -145,7 +145,10 @@
                 <option value="" <c:if test="${empty vo.shOption}">selected</c:if>>검색구분</option>
                 <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>코드그룹 코드</option>
                 <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>코드그룹 이름 (한글)</option>
-                <option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>코드그룹 이름 (영문)</option>
+                <option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>코드</option>
+                <option value="4" <c:if test="${vo.shOption eq 4}">selected</c:if>>대체 코드</option>
+                <option value="5" <c:if test="${vo.shOption eq 5}">selected</c:if>>코드 이름 (한글)</option>
+                <option value="6" <c:if test="${vo.shOption eq 6}">selected</c:if>>코드 이름 (영문)</option>
             </select>
         </div>                    
         <div class="col">
@@ -176,8 +179,12 @@
                 <th width="80px">#</th>
                 <th>코드그룹 코드</th>
                 <th>코드그룹 이름 (한글)</th>
-                <th>코드그룹 이름 (영문)</th>
-                <th>코드갯수</th>
+                <th>코드</th>
+                <th>대체 코드</th>
+                <th>코드 이름 (한글)</th>
+                <th>코드 이름 (영문)</th>
+                <th>사용</th>
+                <th>순서</th>
                 <th width="200px">등록일</th>
                 <th width="200px">수정일</th>
             </tr>
@@ -196,19 +203,23 @@
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifcgSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifcdSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
                 <td><c:out value="${item.ifcgSeq }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${item.ifcgSeq }"/>)"><c:out value="${item.ifcgName }"/></a></td>
-                <td><c:out value="${item.ifcgNameEng }"/></td>
+                <td><c:out value="${item.ifcgName }"/></td>
+                <td><c:out value="${item.ifcdSeq }"/></td>
+                <td><c:out value="${item.ifcdSeqAnother }"/></td>
+                <td><a href="javascript:goForm(<c:out value="${item.ifcdSeq }"/>)"><c:out value="${item.ifcdName }"/></a></td>
+                <td><c:out value="${item.ifcdNameEng }"/></td>
                 <td>
-	                <c:choose>
-	                	<c:when test="${item.xifcdSeq ne 0 }"><a href="/code/codeList?ifcgSeq=<c:out value="${item.ifcgSeq }"/>"><c:out value="${item.ifcgSeq }"/></a></c:when>
-	                	<c:otherwise>0</c:otherwise>
-	                </c:choose>
+                	<c:choose>
+                		<c:when test="${item.ifcdUseNy eq 0 }">N</c:when>
+                		<c:otherwise>Y</c:otherwise>
+                	</c:choose>
                 </td>
+                <td><c:out value="${item.ifcdOrder }"/></td>
                 <td><fmt:formatDate value="${item.regDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
@@ -267,12 +278,14 @@
 		 $("#shDateStart, #shDateEnd").datepicker();
 	}); 
 	
-	var goUrlList = "/codeGroup/codeGroupList";					/* #-> */
-	var goUrlForm = "/codeGroup/codeGroupForm";					/* #-> */
-	var goUrlMultiUele = "/codeGroup/codeGroupMultiUele";			/* #-> */
-	var goUrlMultiDele = "/codeGroup/codeGroupMultiDele";			/* #-> */
+	var goUrlList = "/code/codeList";					/* #-> */
+	var goUrlForm = "/code/codeForm";					/* #-> */
+	var goUrlMultiUele = "/code/codeMultiUele";			/* #-> */
+	var goUrlMultiDele = "/code/codeMultiDele";			/* #-> */
 	
-	var seq = $("input:hidden[name=ifcgSeq]");				/* #-> */
+	var seq = $("input:hidden[name=ifcdSeq]");			/* #-> */
+	
+	var excelUri = "/code/excelDownload";				/* #-> */
 	
 	var form = $("form[name=formList]");
 	
@@ -393,7 +406,7 @@
 
 	
 	$("#btnExcel").click(function() {
-		form.attr("action", "/codeGroup/excelDownload").submit();
+		form.attr("action", excelUri).submit();
 	});
 	
 </script>

@@ -17,11 +17,13 @@ public class CodeDao {
 	
 	private static String namespace = "com.junefw.infra.modules.code.CodeMpp";
 
-	public int selectOneCount(Code code) { return sqlSession.selectOne(namespace + ".selectOneCount", code); }
-	public List<Code> selectList(Code code){ return sqlSession.selectList(namespace + ".selectList", code); }
-	public Code selectOne(Code code) { return sqlSession.selectOne(namespace + ".selectOne", code); }
-	public int insert(Code code) { return sqlSession.insert(namespace + ".insert", code); }
-	public int update(Code code) { return sqlSession.update(namespace + ".update", code); }
+	public int selectOneCount(CodeVo vo) { return sqlSession.selectOne(namespace + ".selectOneCount", vo); }
+	public List<Code> selectList(CodeVo vo){ return sqlSession.selectList(namespace + ".selectList", vo); }
+	public Code selectOne(CodeVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
+	public int insert(Code dto) { return sqlSession.insert(namespace + ".insert", dto); }
+	public int update(Code dto) { return sqlSession.update(namespace + ".update", dto); }
+	public int uelete(CodeVo vo) { return sqlSession.update(namespace + ".uelete", vo); }
+	public int delete(CodeVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
 	
 //	for cache
 	public List<Code> selectListCachedCodeArrayList(){ return sqlSession.selectList(namespace + ".selectListCachedCodeArrayList", null); }

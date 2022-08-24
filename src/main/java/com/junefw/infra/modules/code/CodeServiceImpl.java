@@ -16,34 +16,47 @@ public class CodeServiceImpl implements CodeService{
 
 	
 	@Override
-	public int selectOneCount(Code code) throws Exception {
-		return dao.selectOneCount(code);
+	public int selectOneCount(CodeVo vo) throws Exception {
+		return dao.selectOneCount(vo);
 	}
 	
 	
 	@Override
-	public List<Code> selectList(Code code) throws Exception {
-		return dao.selectList(code);
+	public List<Code> selectList(CodeVo vo) throws Exception {
+		return dao.selectList(vo);
 	}
 	
 	
 	@Override
-	public Code selectOne(Code code) throws Exception {
-		return dao.selectOne(code);
+	public Code selectOne(CodeVo vo) throws Exception {
+		return dao.selectOne(vo);
 	}
 
 	
 	@Override
-	public int insert(Code code) throws Exception {
-		return dao.insert(code);
+	public int insert(Code dto) throws Exception {
+		return dao.insert(dto);
 	}
 
 	
 	@Override
-	public int update(Code code) throws Exception {
-		return dao.update(code);
+	public int update(Code dto) throws Exception {
+		return dao.update(dto);
 	}
+	
+	
+	@Override
+	public int uelete(CodeVo vo) throws Exception {
+		return dao.uelete(vo);
+	}
+	
+	
+	@Override
+	public int delete(CodeVo vo) throws Exception {
+		return dao.delete(vo);
+	}	
 
+	
 	@PostConstruct
 	public void selectListCachedCodeArrayList() throws Exception {
 		List<Code> codeListFromDb = (ArrayList<Code>) dao.selectListCachedCodeArrayList();
@@ -53,6 +66,7 @@ public class CodeServiceImpl implements CodeService{
 		System.out.println("cachedCodeArrayList: " + Code.cachedCodeArrayList.size() + " chached !");
 	}
 
+	
 	public static List<Code> selectListCachedCode(String ifcgSeq) throws Exception {
 		List<Code> rt = new ArrayList<Code>();
 		for(Code codeRow : Code.cachedCodeArrayList) {
@@ -65,6 +79,7 @@ public class CodeServiceImpl implements CodeService{
 		return rt;
 	}
 
+	
 	public static Code selectOneCachedCode(String ifcdSeq) throws Exception {
 		Code rt = new Code();
 		for(Code codeRow : Code.cachedCodeArrayList) {
@@ -76,6 +91,7 @@ public class CodeServiceImpl implements CodeService{
 		}
 		return rt;
 	}
+	
 	
 	public static void clear() throws Exception {
 		Code.cachedCodeArrayList.clear();

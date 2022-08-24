@@ -50,7 +50,7 @@ public class CodeGroupController extends BaseController{
 			model.addAttribute("list", list);
 		}
 
-		return "infra/xdmin/codegroup/codeGroupList";
+		return "infra/codegroup/xdmin/codeGroupList";
 	}
 
 	
@@ -64,7 +64,7 @@ public class CodeGroupController extends BaseController{
 			model.addAttribute("item", item);
 		}
 
-		return "infra/xdmin/codegroup/codeGroupForm";
+		return "infra/codegroup/xdmin/codeGroupForm";
 	}
 	
 
