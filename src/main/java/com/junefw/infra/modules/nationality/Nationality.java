@@ -75,5 +75,6 @@ public class Nationality extends Base{
 	public void setIfnaDelNy(Integer ifnaDelNy) {
 		this.ifnaDelNy = ifnaDelNy;
 	}
+	
 
 }
