@@ -10,7 +10,7 @@
 	
 	<sql id ="selectCommon">
 		FROM infrCode a
-			left join infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
+			LEFT JOIN infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
 		WHERE 1=1
 			<if test="shDelNy != null and !shDelNy.equals('')">AND ifcdDelNy = #{shDelNy}</if>
 			<choose>
@@ -48,40 +48,46 @@
 	
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT 
-		
-		FROM infrCode 
+			a.*
+			,b.
+		FROM infrCode a
+			LEFT JOIN infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
 		WHERE 1=1
-			AND 
+			AND a.ifcdSeq = #{ifcdSeq}
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO
-
+		INSERT INTO	
+			
 			)
 		VALUES (
 
 		 )
-		 <selectKey resultType="String" keyProperty="AUTH_SEQ" order="AFTER">
-		 	SELECT TB_EP_AUTH_SEQ.CURRVAL FROM DUAL
+		 <selectKey resultType="String" keyProperty="ifcdSeq" order="AFTER">
+		 	SELECT last_insert_id()
 		 </selectKey>
 	</insert>
 	
 	
 	<update id="update">
 		UPDATE
-			TB_EP_AUTH
+			infrCode
 		SET
-			AUTH_NM = #{AUTH_NM}
-			, CLNT_DISP = #{CLNT_DISP}
-			, AUTH_MEMO = #{AUTH_MEMO}
-			, ORGEH = #{ORGEH}
+
 		WHERE
-			AUTH_SEQ = #{AUTH_SEQ}
+
 	</update>
 	
-	<delete id="delete">
 	
+	<update id="uelete">
+		UPDATE infrCode SET ifcdDelNy = 1 WHERE ifcdSeq = #{ifcdSeq}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM infrCode WHERE ifcdSeq = #{ifcdSeq}
 	</delete>
+	
 	
     <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
 		SELECT 

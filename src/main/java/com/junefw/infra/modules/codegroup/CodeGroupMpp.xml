@@ -25,7 +25,7 @@
 				a.ifcgSeq
 				, a.ifcgName
 				, a.ifcgNameEng
-				,(select count(aa.ifcdSeq) from infrCode aa where 1=1 and aa.ifcdDelNy = 0 and aa.ifcgSeq = a.ifcgSeq) as xifcdSeq
+				,(select count(aa.ifcdSeq) from infrCode aa where 1=1 and aa.ifcdDelNy = 0 and aa.ifcgSeq = a.ifcgSeq) as xifcdSeqCount
 				<include refid="Base.selectRegModWithAlies" />
 			<include refid="selectCommon" />
 			ORDER BY a.ifcgSeq DESC
@@ -39,26 +39,29 @@
 	</select>
 	
 	<select id="selectOne" resultMap="resultMapObj">
-		SELECT * FROM infrCodeGroup WHERE ifcgSeq = #{ifcgSeq}
+		SELECT
+			a.*
+		 FROM infrCodeGroup a
+		 WHERE 1=1
+		 	AND ifcgSeq = #{ifcgSeq}
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO
-			infrCodeGroup (
-				ifcgSeq
-				,ifcgSeqAnother
-				,ifcgName
-				,ifcgNameEng
-				,ifcgUseNy
-				,ifcgOrder
-				,ifcgReferenceV1
-				,ifcgReferenceV2
-				,ifcgReferenceV3
-				,ifcgReferenceI1
-				,ifcgReferenceI2
-				,ifcgReferenceI3
-				,ifcgDesc
-				,ifcgDelNy
+		INSERT INTO infrCodeGroup (
+			ifcgSeq
+			,ifcgSeqAnother
+			,ifcgName
+			,ifcgNameEng
+			,ifcgUseNy
+			,ifcgOrder
+			,ifcgReferenceV1
+			,ifcgReferenceV2
+			,ifcgReferenceV3
+			,ifcgReferenceI1
+			,ifcgReferenceI2
+			,ifcgReferenceI3
+			,ifcgDesc
+			,ifcgDelNy
 			)
 		VALUES (
 			#{ifcgSeq}
@@ -99,8 +102,9 @@
 			,ifcgReferenceI3 = #{ifcgReferenceI3}
 			,ifcgDesc = #{ifcgDesc}
 		WHERE
-			AUTH_SEQ = #{AUTH_SEQ}
+			ifcgSeq = #{ifcgSeq}
 	</update>
+	
 	
 	<update id="uelete">
 		UPDATE infrCodeGroup SET ifcgDelNy = 1 WHERE ifcgSeq = #{ifcgSeq}
@@ -110,7 +114,7 @@
 	<delete id="delete">
 		DELETE FROM infrCodeGroup WHERE ifcgSeq = #{ifcgSeq}
 	</delete>
-	<!-- infrMember e -->
+
 	
     <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
 		SELECT 

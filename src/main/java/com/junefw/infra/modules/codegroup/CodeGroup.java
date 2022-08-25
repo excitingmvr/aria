@@ -22,7 +22,7 @@ public class CodeGroup extends Base {
 	private String ifcgDesc;
 	private Integer ifcgDelNy;
 	
-	private Integer xifcdSeq;
+	private Integer xifcdSeqCount;
 //	----------
 
 //	for cache
@@ -112,11 +112,12 @@ public class CodeGroup extends Base {
 	public void setIfcgDelNy(Integer ifcgDelNy) {
 		this.ifcgDelNy = ifcgDelNy;
 	}
-	public Integer getXifcdSeq() {
-		return xifcdSeq;
+	public Integer getXifcdSeqCount() {
+		return xifcdSeqCount;
 	}
-	public void setXifcdSeq(Integer xifcdSeq) {
-		this.xifcdSeq = xifcdSeq;
+	public void setXifcdSeqCount(Integer xifcdSeqCount) {
+		this.xifcdSeqCount = xifcdSeqCount;
 	}
+
 	
 }
