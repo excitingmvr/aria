@@ -120,6 +120,18 @@
 <div class="container-fluid px-0 px-sm-5 mt-2">
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
+			<label for="ifcdUseNy" class="form-label">사용여부</label>
+			<select id="ifcdUseNy" name="ifcdUseNy" class="form-select form-select-sm">
+				<c:forEach items="${list}" var="item" varStatus="status">
+111
+				</c:forEach>
+			</select>
+		</div>
+		<div class="col-sm-6">
+		</div>
+	</div>
+	<div class="row mt-sm-4">
+		<div class="col-sm-6">
 			<label for="ifcdSeq" class="form-label">코드</label>
 			<input type="text" id="ifcdSeq" name="ifcdSeq" value="<c:out value="${item.ifcdSeq}"/>" maxlength="20" placeholder="" class="form-control form-control-sm" readonly>
 		</div>

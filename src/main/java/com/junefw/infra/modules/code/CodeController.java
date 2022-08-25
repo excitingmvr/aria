@@ -20,14 +20,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
+import com.junefw.infra.modules.codegroup.CodeGroup;
 import com.junefw.infra.modules.codegroup.CodeGroupServiceImpl;
+import com.junefw.infra.modules.codegroup.CodeGroupVo;
 
 @Controller
 @RequestMapping(value="/code/")
 public class CodeController extends BaseController{
 	
-	@Autowired
-	CodeGroupServiceImpl serviceCodeGroup;
+//	@Autowired
+//	CodeGroupServiceImpl codeGroupServiceImpl;
+	
+	CodeGroupServiceImpl codeGroupServiceImpl = new CodeGroupServiceImpl();
 	
 	@Autowired
 	CodeServiceImpl service;
@@ -59,9 +63,11 @@ public class CodeController extends BaseController{
 
 	
 	@RequestMapping(value = "codeForm")
-	public String codeForm(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+	public String codeForm(@ModelAttribute("vo") CodeVo vo, CodeGroupVo codeGroupVo,  Model model) throws Exception {
 		
-//		serviceCodeGroup.selectList(null)
+		codeGroupVo.setShDelNy(0);
+		List<CodeGroup> list = codeGroupServiceImpl.selectList(codeGroupVo);
+		model.addAttribute("list", list);
 		
 		if (vo.getIfcdSeq().equals("0") || vo.getIfcdSeq().equals("")) {
 			//	insert
