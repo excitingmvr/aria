@@ -49,7 +49,7 @@
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT 
 			a.*
-			,b.
+			,b.ifcgName
 		FROM infrCode a
 			LEFT JOIN infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
 		WHERE 1=1
@@ -57,37 +57,85 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO	
-			
-			)
+		INSERT INTO infrCode
+			ifcdSeqAnother
+			,ifcdName
+			,ifcdNameEng
+			,ifcdNameLang1
+			,ifcdNameLang2
+			,ifcdNameLang3
+			,ifcdNameLang4
+			,ifcdNameLang5
+			,ifcdUseNy
+			,ifcdOrder
+			,ifcdReferenceV1
+			,ifcdReferenceV2
+			,ifcdReferenceV3
+			,ifcdReferenceI1
+			,ifcdReferenceI2
+			,ifcdReferenceI3
+			,ifcdDesc
+			,ifcdDelNy
+			,ifcgSeq	
+		)
 		VALUES (
-
-		 )
-		 <selectKey resultType="String" keyProperty="ifcdSeq" order="AFTER">
-		 	SELECT last_insert_id()
-		 </selectKey>
+			#{ifcdSeqAnother}
+			,#{ifcdName}
+			,#{ifcdNameEng}
+			,#{ifcdNameLang1}
+			,#{ifcdNameLang2}
+			,#{ifcdNameLang3}
+			,#{ifcdNameLang4}
+			,#{ifcdNameLang5}
+			,#{ifcdUseNy}
+			,#{ifcdOrder}
+			,#{ifcdReferenceV1}
+			,#{ifcdReferenceV2}
+			,#{ifcdReferenceV3}
+			,#{ifcdReferenceI1}
+			,#{ifcdReferenceI2}
+			,#{ifcdReferenceI3}
+			,#{ifcdDesc}
+			,0
+			,#{ifcgSeq}
+		)
+		<selectKey resultType="String" keyProperty="ifcdSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
 	</insert>
 	
-	
 	<update id="update">
-		UPDATE
-			infrCode
+		UPDATE infrCode
 		SET
-
-		WHERE
-
+			ifcdSeqAnother = #{ifcdSeqAnother}
+			,ifcdName = #{ifcdName}
+			,ifcdNameEng = #{ifcdNameEng}
+			,ifcdNameLang1 = #{ifcdNameLang1}
+			,ifcdNameLang2 = #{ifcdNameLang2}
+			,ifcdNameLang3 = #{ifcdNameLang3}
+			,ifcdNameLang4 = #{ifcdNameLang4}
+			,ifcdNameLang5 = #{ifcdNameLang5}
+			,ifcdUseNy = #{ifcdUseNy}
+			,ifcdOrder = #{ifcdOrder}
+			,ifcdReferenceV1 = #{ifcdReferenceV1}
+			,ifcdReferenceV2 = #{ifcdReferenceV2}
+			,ifcdReferenceV3 = #{ifcdReferenceV3}
+			,ifcdReferenceI1 = #{ifcdReferenceI1}
+			,ifcdReferenceI2 = #{ifcdReferenceI2}
+			,ifcdReferenceI3 = #{ifcdReferenceI3}
+			,ifcdDesc = #{ifcdDesc}
+			,ifcgSeq = #{ifcgSeq}
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}		
 	</update>
-	
 	
 	<update id="uelete">
 		UPDATE infrCode SET ifcdDelNy = 1 WHERE ifcdSeq = #{ifcdSeq}
 	</update>
 	
-	
 	<delete id="delete">
 		DELETE FROM infrCode WHERE ifcdSeq = #{ifcdSeq}
 	</delete>
-	
 	
     <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
 		SELECT 
@@ -100,7 +148,6 @@
 			AND ifcdDelNy = 0
 		    AND ifcdUseNy = 1
     </select>
-    
 </mapper>
 
 

@@ -120,82 +120,82 @@
 <div class="container-fluid px-0 px-sm-5 mt-2">
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifcgSeq" class="form-label">코드그룹 코드</label>
-			<input type="text" id="ifcgSeq" name="ifcgSeq" value="<c:out value="${item.ifcgSeq}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">
+			<label for="ifcdSeq" class="form-label">코드</label>
+			<input type="text" id="ifcdSeq" name="ifcdSeq" value="<c:out value="${item.ifcdSeq}"/>" maxlength="20" placeholder="" class="form-control form-control-sm" readonly>
 		</div>
 		<div class="col-sm-6">
-			<label for="ifcgSeqAnother" class="form-label">코드그룹 코드 (Another)</label>
-			<input type="text" id="ifcgSeqAnother" name="ifcgSeqAnother" value="<c:out value="${item.ifcgSeqAnother}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">        
-		</div>
-	</div> 
-	<div class="row mt-sm-4">
-		<div class="col-sm-6">
-			<label for="ifcgName" class="form-label">코드그룹 이름 (한글)</label>
-			<input type="text" id="ifcgName" name="ifcgName" value="<c:out value="${item.ifcgName}"/>" maxlength="20" placeholder="한글,숫자" class="form-control form-control-sm">
-		</div>
-		<div class="col-sm-6">
-			<label for="ifcgNameEng" class="form-label">코드그룹 이름 (영문)</label>
-			<input type="text" id="ifcgNameEng" name="ifcgNameEng" value="<c:out value="${item.ifcgNameEng}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">        
+			<label for="ifcdSeqAnother" class="form-label">코드 (Another)</label>
+			<input type="text" id="ifcdSeqAnother" name="ifcdSeqAnother" value="<c:out value="${item.ifcdSeqAnother}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
 		</div>
 	</div> 
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifcgUseNy" class="form-label">사용여부</label>
-			<select id="ifcgUseNy" name="ifcgUseNy" class="form-select form-select-sm">
-				<option value="1" <c:if test="${item.ifcgUseNy eq 1 }">selected</c:if>>Y</option>
-				<option value="0" <c:if test="${item.ifcgUseNy eq 0 }">selected</c:if>>N</option>
+			<label for="ifcdName" class="form-label">코드 이름 (한글)</label>
+			<input type="text" id="ifcdName" name="ifcdName" value="<c:out value="${item.ifcdName}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+		</div>
+		<div class="col-sm-6">
+			<label for="ifcdNameEng" class="form-label">코드 이름 (영문)</label>
+			<input type="text" id="ifcdNameEng" name="ifcdNameEng" value="<c:out value="${item.ifcdNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+		</div>
+	</div> 
+	<div class="row mt-sm-4">
+		<div class="col-sm-6">
+			<label for="ifcdUseNy" class="form-label">사용여부</label>
+			<select id="ifcdUseNy" name="ifcdUseNy" class="form-select form-select-sm">
+				<option value="1" <c:if test="${item.ifcdUseNy eq 1 }">selected</c:if>>Y</option>
+				<option value="0" <c:if test="${item.ifcdUseNy eq 0 }">selected</c:if>>N</option>
 			</select>
 		</div>
 		<div class="col-sm-6">
-			<label for="ifcgOrder" class="form-label">순서</label>
-			<input type="text" id="ifcgOrder" name="ifcgOrder" value="<c:out value="${item.ifcgOrder}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">        
+			<label for="ifcdOrder" class="form-label">순서</label>
+			<input type="text" id="ifcdOrder" name="ifcdOrder" value="<c:out value="${item.ifcdOrder}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
 		</div>
 	</div>
 	<div class="row mt-sm-4">
 		<div class="col-sm-6 mt-3 mt-sm-0">
-			<label for="ifcgDesc" class="form-label">설명</label>
-			<textarea id="ifcgDesc" name="ifcgDesc" class="form-control"><c:out value="${item.ifcgDesc }"/></textarea>
+			<label for="ifcdDesc" class="form-label">설명</label>
+			<textarea id="ifcdDesc" name="ifcdDesc" class="form-control"><c:out value="${item.ifcdDesc }"/></textarea>
 		</div>
 		<div class="col-sm-6 mt-3 mt-sm-0">
-			<label for="ifcgDelNy" class="form-label">삭제여부</label>
-			<select id="ifcgDelNy" name="ifcgDelNy" class="form-select form-select-sm">
-				<option value="0" <c:if test="${item.ifcgDelNy eq 0 }">selected</c:if>>N</option>
-				<option value="1" <c:if test="${item.ifcgDelNy eq 1 }">selected</c:if>>Y</option>
+			<label for="ifcdDelNy" class="form-label">삭제여부</label>
+			<select id="ifcdDelNy" name="ifcdDelNy" class="form-select form-select-sm">
+				<option value="0" <c:if test="${item.ifcdDelNy eq 0 }">selected</c:if>>N</option>
+				<option value="1" <c:if test="${item.ifcdDelNy eq 1 }">selected</c:if>>Y</option>
 			</select>
 		</div>
 	</div>  
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifcgReferenceV1" class="form-label">예비1 (varchar type)</label>
-			<input type="text" id="ifcgReferenceV1" name="ifcgReferenceV1" value="<c:out value="${item.ifcgReferenceV1}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">
+			<label for="ifcdReferenceV1" class="form-label">예비1 (varchar type)</label>
+			<input type="text" id="ifcdReferenceV1" name="ifcdReferenceV1" value="<c:out value="${item.ifcdReferenceV1}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
 		</div>
 		<div class="col-sm-6">
-			<label for="ifcgReferenceV2" class="form-label">예비2 (varchar type)</label>
-			<input type="text" id="ifcgReferenceV2" name="ifcgReferenceV2" value="<c:out value="${item.ifcgReferenceV2}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">        
-		</div>
-	</div>	
-	<div class="row mt-sm-4">
-		<div class="col-sm-6">
-			<label for="ifcgReferenceV3" class="form-label">예비3 (varchar type)</label>
-			<input type="text" id="ifcgReferenceV3" name="ifcgReferenceV3" value="<c:out value="${item.ifcgReferenceV3}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">
-		</div>
-		<div class="col-sm-6">
+			<label for="ifcdReferenceV2" class="form-label">예비2 (varchar type)</label>
+			<input type="text" id="ifcdReferenceV2" name="ifcdReferenceV2" value="<c:out value="${item.ifcdReferenceV2}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
 		</div>
 	</div>	
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifcgReferenceI1" class="form-label">예비1 (Int type)</label>
-			<input type="text" id="ifcgReferenceI1" name="ifcgReferenceI1" value="<c:out value="${item.ifcgReferenceI1}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<label for="ifcdReferenceV3" class="form-label">예비3 (varchar type)</label>
+			<input type="text" id="ifcdReferenceV3" name="ifcdReferenceV3" value="<c:out value="${item.ifcdReferenceV3}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
 		</div>
 		<div class="col-sm-6">
-			<label for="ifcgReferenceI2" class="form-label">예비2 (Int type)</label>
-			<input type="text" id="ifcgReferenceI2" name="ifcgReferenceI2" value="<c:out value="${item.ifcgReferenceI2}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">        
 		</div>
 	</div>	
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifcgReferenceI3" class="form-label">예비3 (Int type)</label>
-			<input type="text" id="ifcgReferenceI3" name="ifcgReferenceI3" value="<c:out value="${item.ifcgReferenceI3}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<label for="ifcdReferenceI1" class="form-label">예비1 (Int type)</label>
+			<input type="text" id="ifcdReferenceI1" name="ifcdReferenceI1" value="<c:out value="${item.ifcdReferenceI1}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+		</div>
+		<div class="col-sm-6">
+			<label for="ifcdReferenceI2" class="form-label">예비2 (Int type)</label>
+			<input type="text" id="ifcdReferenceI2" name="ifcdReferenceI2" value="<c:out value="${item.ifcdReferenceI2}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+		</div>
+	</div>	
+	<div class="row mt-sm-4">
+		<div class="col-sm-6">
+			<label for="ifcdReferenceI3" class="form-label">예비3 (Int type)</label>
+			<input type="text" id="ifcdReferenceI3" name="ifcdReferenceI3" value="<c:out value="${item.ifcdReferenceI3}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
 		</div>
 		<div class="col-sm-6">
 		</div>

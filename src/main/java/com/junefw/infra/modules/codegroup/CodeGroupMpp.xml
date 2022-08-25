@@ -84,10 +84,8 @@
 		 </selectKey>
 	</insert>
 	
-	
 	<update id="update">
-		UPDATE
-			infrCodeGroup
+		UPDATE infrCodeGroup
 		SET
 			ifcgSeqAnother = #{ifcgSeqAnother}
 			,ifcgName = #{ifcgName}
@@ -105,16 +103,13 @@
 			ifcgSeq = #{ifcgSeq}
 	</update>
 	
-	
 	<update id="uelete">
 		UPDATE infrCodeGroup SET ifcgDelNy = 1 WHERE ifcgSeq = #{ifcgSeq}
 	</update>
 	
-	
 	<delete id="delete">
 		DELETE FROM infrCodeGroup WHERE ifcgSeq = #{ifcgSeq}
 	</delete>
-
 	
     <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
 		SELECT 
@@ -127,7 +122,6 @@
 			AND ifcdDelNy = 0
 		    AND ifcdUseNy = 1
     </select>
-    
 </mapper>
 
 
