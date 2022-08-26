@@ -11,18 +11,20 @@ import com.junefw.infra.modules.member.Member;
 
 public class BaseServiceImpl {
 
-	public <?> void setRegMod(? dto) throws Exception {
+	public <T> void setRegMod(T dto) throws Exception {
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
 		((Base) dto).setRegIp(UtilRegMod.getClientIp(httpServletRequest));
-		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-		dto.setRegDeviceCd(UtilRegMod.getDevice());
-		dto.setRegDateTime(UtilDateTime.nowDate());
 		
-		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
-		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-		dto.setModDeviceCd(UtilRegMod.getDevice());
-		dto.setModDateTime(UtilDateTime.nowDate());
+//		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
+//		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+//		dto.setRegDeviceCd(UtilRegMod.getDevice());
+//		dto.setRegDateTime(UtilDateTime.nowDate());
+//		
+//		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
+//		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+//		dto.setModDeviceCd(UtilRegMod.getDevice());
+//		dto.setModDateTime(UtilDateTime.nowDate());
 	}
 
 }
