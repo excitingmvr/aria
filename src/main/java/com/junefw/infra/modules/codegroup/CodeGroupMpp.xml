@@ -111,6 +111,17 @@
 		DELETE FROM infrCodeGroup WHERE ifcgSeq = #{ifcgSeq}
 	</delete>
 	
+	<select id="selectListWithoutPaging" resultMap="resultMapObj">
+		SELECT
+			a.ifcgSeq
+			, a.ifcgName
+		FROM infrCodeGroup a
+		WHERE 1=1
+			AND ifcgDelNy = 0
+			And ifcgUseNy = 1
+		ORDER BY a.ifcgSeq DESC
+	</select>	
+	
     <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
 		SELECT 
 			ifcdSeq

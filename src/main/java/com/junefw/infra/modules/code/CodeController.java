@@ -28,10 +28,8 @@ import com.junefw.infra.modules.codegroup.CodeGroupVo;
 @RequestMapping(value="/code/")
 public class CodeController extends BaseController{
 	
-//	@Autowired
-//	CodeGroupServiceImpl codeGroupServiceImpl;
-	
-	CodeGroupServiceImpl codeGroupServiceImpl = new CodeGroupServiceImpl();
+	@Autowired
+	CodeGroupServiceImpl codeGroupServiceImpl;
 	
 	@Autowired
 	CodeServiceImpl service;
@@ -63,11 +61,9 @@ public class CodeController extends BaseController{
 
 	
 	@RequestMapping(value = "codeForm")
-	public String codeForm(@ModelAttribute("vo") CodeVo vo, CodeGroupVo codeGroupVo,  Model model) throws Exception {
+	public String codeForm(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 		
-		codeGroupVo.setShDelNy(0);
-		List<CodeGroup> list = codeGroupServiceImpl.selectList(codeGroupVo);
-		model.addAttribute("list", list);
+		model.addAttribute("list", codeGroupServiceImpl.selectListWithoutPaging());
 		
 		if (vo.getIfcdSeq().equals("0") || vo.getIfcdSeq().equals("")) {
 			//	insert
@@ -86,7 +82,7 @@ public class CodeController extends BaseController{
 
 		service.insert(dto);
 	
-		vo.setIfcdSeq(dto.getIfcgSeq());
+		vo.setIfcdSeq(dto.getIfcdSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 

@@ -199,29 +199,29 @@
 		</tr>	
 	</c:when>
 	<c:otherwise>
-		<c:forEach items="${list}" var="item" varStatus="status">	
+		<c:forEach items="${list}" var="list" varStatus="status">	
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifcdSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${list.ifcdSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
-                <td><c:out value="${item.ifcgSeq }"/></td>
-                <td><c:out value="${item.ifcgName }"/></td>
-                <td><c:out value="${item.ifcdSeq }"/></td>
-                <td><c:out value="${item.ifcdSeqAnother }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${item.ifcdSeq }"/>)"><c:out value="${item.ifcdName }"/></a></td>
-                <td><c:out value="${item.ifcdNameEng }"/></td>
+                <td><c:out value="${list.ifcgSeq }"/></td>
+                <td><c:out value="${list.ifcgName }"/></td>
+                <td><c:out value="${list.ifcdSeq }"/></td>
+                <td><c:out value="${list.ifcdSeqAnother }"/></td>
+                <td><a href="javascript:goForm(<c:out value="${list.ifcdSeq }"/>)"><c:out value="${list.ifcdName }"/></a></td>
+                <td><c:out value="${list.ifcdNameEng }"/></td>
                 <td>
                 	<c:choose>
-                		<c:when test="${item.ifcdUseNy eq 0 }">N</c:when>
+                		<c:when test="${list.ifcdUseNy eq 0 }">N</c:when>
                 		<c:otherwise>Y</c:otherwise>
                 	</c:choose>
                 </td>
-                <td><c:out value="${item.ifcdOrder }"/></td>
-                <td><fmt:formatDate value="${item.regDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><c:out value="${list.ifcdOrder }"/></td>
+                <td><fmt:formatDate value="${list.regDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${list.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
 		</c:forEach>
 	</c:otherwise>

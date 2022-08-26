@@ -57,7 +57,7 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO infrCode
+		INSERT INTO infrCode (
 			ifcdSeqAnother
 			,ifcdName
 			,ifcdNameEng
@@ -76,7 +76,8 @@
 			,ifcdReferenceI3
 			,ifcdDesc
 			,ifcdDelNy
-			,ifcgSeq	
+			<include refid="Base.insertRegModColumn" />
+			,ifcgSeq
 		)
 		VALUES (
 			#{ifcdSeqAnother}
@@ -97,6 +98,7 @@
 			,#{ifcdReferenceI3}
 			,#{ifcdDesc}
 			,0
+			<include refid="Base.insertRegModValue" />
 			,#{ifcgSeq}
 		)
 		<selectKey resultType="String" keyProperty="ifcdSeq" order="AFTER">

@@ -120,10 +120,11 @@
 <div class="container-fluid px-0 px-sm-5 mt-2">
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifcdUseNy" class="form-label">사용여부</label>
-			<select id="ifcdUseNy" name="ifcdUseNy" class="form-select form-select-sm">
-				<c:forEach items="${list}" var="item" varStatus="status">
-111
+			<label for="ifcgSeq" class="form-label">사용여부</label>
+			<select id="ifcgSeq" name="ifcgSeq" class="form-select form-select-sm">
+				<option>선택하세요</option>
+				<c:forEach items="${list}" var="list" varStatus="status">
+				<option value="<c:out value="${list.ifcgSeq }"/>"<c:if test="${list.ifcgSeq eq item.ifcgSeq }">selected</c:if>><c:out value="${list.ifcgName }"/></option>
 				</c:forEach>
 			</select>
 		</div>
@@ -133,7 +134,7 @@
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcdSeq" class="form-label">코드</label>
-			<input type="text" id="ifcdSeq" name="ifcdSeq" value="<c:out value="${item.ifcdSeq}"/>" maxlength="20" placeholder="" class="form-control form-control-sm" readonly>
+			<input type="text" id="ifcdSeq" name="ifcdSeq" value="<c:out value="${item.ifcdSeq}"/>" maxlength="20" placeholder="자동생성" class="form-control form-control-sm" readonly>
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcdSeqAnother" class="form-label">코드 (Another)</label>

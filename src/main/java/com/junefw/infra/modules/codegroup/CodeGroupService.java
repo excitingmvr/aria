@@ -12,4 +12,5 @@ public interface CodeGroupService {
 	public int uelete(CodeGroupVo vo) throws Exception; 
 	public int delete(CodeGroupVo vo) throws Exception;
 	
+	public List<CodeGroup> selectListWithoutPaging() throws Exception; 
 }
