@@ -11,10 +11,12 @@ import com.junefw.infra.modules.member.Member;
 
 public class BaseServiceImpl {
 
-	public <T> void setRegMod(T dto) throws Exception {
+	public void setRegMod(Object dto) throws Exception {
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
 		((Base) dto).setRegIp(UtilRegMod.getClientIp(httpServletRequest));
+		
+//		((Base) dto).setRegIp(UtilRegMod.getClientIp(httpServletRequest));
 		
 //		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
 //		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));

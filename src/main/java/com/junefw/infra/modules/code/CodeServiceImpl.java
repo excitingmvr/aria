@@ -35,6 +35,7 @@ public class CodeServiceImpl implements CodeService{
 	
 	@Override
 	public int insert(Code dto) throws Exception {
+    	setRegMod(dto);
 		return dao.insert(dto);
 	}
 
