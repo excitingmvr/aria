@@ -119,7 +119,11 @@
 	</update>
 	
 	<update id="uelete">
-		UPDATE infrCodeGroup SET ifcgDelNy = 1 WHERE ifcgSeq = #{ifcgSeq}
+		UPDATE infrCodeGroup 
+		SET
+			ifcgDelNy = 1
+			<include refid="Base.updateModColumnValue" />	
+		WHERE ifcgSeq = #{ifcgSeq}
 	</update>
 	
 	<delete id="delete">
