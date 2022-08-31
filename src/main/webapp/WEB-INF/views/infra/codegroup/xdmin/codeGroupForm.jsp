@@ -121,21 +121,21 @@
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcgSeq" class="form-label">코드그룹 코드</label>
-			<input type="text" id="ifcgSeq" name="ifcgSeq" value="<c:out value="${item.ifcgSeq}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcgSeq" name="ifcgSeq" value="<c:out value="${item.ifcgSeq}"/>" maxlength="20" placeholder="자동생성" class="form-control form-control-sm" readonly>
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgSeqAnother" class="form-label">코드그룹 코드 (Another)</label>
-			<input type="text" id="ifcgSeqAnother" name="ifcgSeqAnother" value="<c:out value="${item.ifcgSeqAnother}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">        
+			<input type="text" id="ifcgSeqAnother" name="ifcgSeqAnother" value="<c:out value="${item.ifcgSeqAnother}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
 		</div>
 	</div> 
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcgName" class="form-label">코드그룹 이름 (한글)</label>
-			<input type="text" id="ifcgName" name="ifcgName" value="<c:out value="${item.ifcgName}"/>" maxlength="20" placeholder="한글,숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcgName" name="ifcgName" value="<c:out value="${item.ifcgName}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgNameEng" class="form-label">코드그룹 이름 (영문)</label>
-			<input type="text" id="ifcgNameEng" name="ifcgNameEng" value="<c:out value="${item.ifcgNameEng}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">        
+			<input type="text" id="ifcgNameEng" name="ifcgNameEng" value="<c:out value="${item.ifcgNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
 		</div>
 	</div> 
 	<div class="row mt-sm-4">
@@ -157,11 +157,13 @@
 			<textarea id="ifcgDesc" name="ifcgDesc" class="form-control"><c:out value="${item.ifcgDesc }"/></textarea>
 		</div>
 		<div class="col-sm-6 mt-3 mt-sm-0">
+<%-- 		
 			<label for="ifcgDelNy" class="form-label">삭제여부</label>
 			<select id="ifcgDelNy" name="ifcgDelNy" class="form-select form-select-sm">
 				<option value="0" <c:if test="${item.ifcgDelNy eq 0 }">selected</c:if>>N</option>
 				<option value="1" <c:if test="${item.ifcgDelNy eq 1 }">selected</c:if>>Y</option>
 			</select>
+ --%>
 		</div>
 	</div>  
 	<div class="row mt-sm-4">

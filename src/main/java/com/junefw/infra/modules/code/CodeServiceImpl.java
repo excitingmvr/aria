@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.junefw.infra.common.util.UtilDateTime;
+import com.junefw.infra.common.util.UtilRegMod;
 
 @Service
 public class CodeServiceImpl implements CodeService{
@@ -14,6 +20,21 @@ public class CodeServiceImpl implements CodeService{
 	@Autowired
 	CodeDao dao;
 
+	@Override
+	public void setRegMod(Code dto) throws Exception {
+		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+		dto.setRegDeviceCd(UtilRegMod.getDevice());
+		dto.setRegDateTime(UtilDateTime.nowDate());
+		
+		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+		dto.setModDeviceCd(UtilRegMod.getDevice());
+		dto.setModDateTime(UtilDateTime.nowDate());
+	}
+	
 	
 	@Override
 	public int selectOneCount(CodeVo vo) throws Exception {

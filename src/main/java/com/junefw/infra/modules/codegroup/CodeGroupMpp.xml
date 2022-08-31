@@ -40,16 +40,29 @@
 	
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
-			a.*
+			a.ifcgSeq
+			, a.ifcgSeqAnother
+			, a.ifcgName
+			, a.ifcgNameEng
+			, a.ifcgUseNy
+			, a.ifcgOrder
+			, a.ifcgReferenceV1
+			, a.ifcgReferenceV2
+			, a.ifcgReferenceV3
+			, a.ifcgReferenceI1
+			, a.ifcgReferenceI2
+			, a.ifcgReferenceI3
+			, a.ifcgDesc
+			, a.ifcgDelNy
+			<include refid="Base.selectRegModWithAlies" />			
 		 FROM infrCodeGroup a
 		 WHERE 1=1
-		 	AND ifcgSeq = #{ifcgSeq}
+		 	AND a.ifcgSeq = #{ifcgSeq}
 	</select>
 	
 	<insert id="insert">
 		INSERT INTO infrCodeGroup (
-			ifcgSeq
-			,ifcgSeqAnother
+			ifcgSeqAnother
 			,ifcgName
 			,ifcgNameEng
 			,ifcgUseNy
@@ -62,10 +75,10 @@
 			,ifcgReferenceI3
 			,ifcgDesc
 			,ifcgDelNy
+			<include refid="Base.insertRegModColumn" />			
 			)
 		VALUES (
-			#{ifcgSeq}
-			,#{ifcgSeqAnother}
+			#{ifcgSeqAnother}
 			,#{ifcgName}
 			,#{ifcgNameEng}
 			,#{ifcgUseNy}
@@ -78,6 +91,7 @@
 			,#{ifcgReferenceI3}
 			,#{ifcgDesc}
 			,0
+			<include refid="Base.insertRegModValue" />			
 		 )
 		 <selectKey resultType="String" keyProperty="ifcgSeq" order="AFTER">
 			SELECT last_insert_id()
@@ -99,6 +113,7 @@
 			,ifcgReferenceI2 = #{ifcgReferenceI2}
 			,ifcgReferenceI3 = #{ifcgReferenceI3}
 			,ifcgDesc = #{ifcgDesc}
+			<include refid="Base.updateModColumnValue" />
 		WHERE
 			ifcgSeq = #{ifcgSeq}
 	</update>
