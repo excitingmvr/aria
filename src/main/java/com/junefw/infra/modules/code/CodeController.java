@@ -20,9 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
-import com.junefw.infra.modules.codegroup.CodeGroup;
 import com.junefw.infra.modules.codegroup.CodeGroupServiceImpl;
-import com.junefw.infra.modules.codegroup.CodeGroupVo;
 
 @Controller
 @RequestMapping(value="/code/")
@@ -111,9 +109,9 @@ public class CodeController extends BaseController{
 
 	
 	@RequestMapping(value = "codeUele")
-	public String codeUele(CodeVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String codeUele(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		service.uelete(vo);
+		service.uelete(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -133,11 +131,11 @@ public class CodeController extends BaseController{
 
 	
 	@RequestMapping(value = "codeMultiUele")
-	public String codeMultiUele(CodeVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String codeMultiUele(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
 			vo.setIfcdSeq(checkboxSeq);
-			service.uelete(vo);
+			service.uelete(dto);
 		}
 
 		redirectAttributes.addFlashAttribute("vo", vo);

@@ -103,9 +103,9 @@ public class CodeGroupController extends BaseController{
 
 	
 	@RequestMapping(value = "codeGroupUele")
-	public String codeGroupUele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String codeGroupUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		service.uelete(vo);
+		service.uelete(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -125,11 +125,11 @@ public class CodeGroupController extends BaseController{
 
 	
 	@RequestMapping(value = "codeGroupMultiUele")
-	public String codeGroupMultiUele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String codeGroupMultiUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
 			vo.setIfcgSeq(checkboxSeq);
-			service.uelete(vo);
+			service.uelete(dto);
 		}
 
 		redirectAttributes.addFlashAttribute("vo", vo);

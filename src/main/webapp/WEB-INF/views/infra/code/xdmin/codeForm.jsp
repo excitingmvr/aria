@@ -170,11 +170,13 @@
 			<textarea id="ifcdDesc" name="ifcdDesc" class="form-control"><c:out value="${item.ifcdDesc }"/></textarea>
 		</div>
 		<div class="col-sm-6 mt-3 mt-sm-0">
+<%-- 		
 			<label for="ifcdDelNy" class="form-label">삭제여부</label>
 			<select id="ifcdDelNy" name="ifcdDelNy" class="form-select form-select-sm">
 				<option value="0" <c:if test="${item.ifcdDelNy eq 0 }">selected</c:if>>N</option>
 				<option value="1" <c:if test="${item.ifcdDelNy eq 1 }">selected</c:if>>Y</option>
 			</select>
+ --%>		
 		</div>
 	</div>  
 	<div class="row mt-sm-4">

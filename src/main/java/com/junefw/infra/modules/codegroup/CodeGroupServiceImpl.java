@@ -68,9 +68,9 @@ public class CodeGroupServiceImpl extends BaseServiceImpl implements CodeGroupSe
 	
 	
 	@Override
-	public int uelete(CodeGroupVo vo) throws Exception {
-//		setRegMod(dto);
-		return dao.uelete(vo);
+	public int uelete(CodeGroup dto) throws Exception {
+		setRegMod(dto);
+		return dao.uelete(dto);
 	}
 	
 	

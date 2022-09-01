@@ -22,7 +22,7 @@ public class CodeGroupDao {
 	public CodeGroup selectOne(CodeGroupVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
 	public int insert(CodeGroup dto) { return sqlSession.insert(namespace + ".insert", dto); }
 	public int update(CodeGroup dto) { return sqlSession.update(namespace + ".update", dto); }
-	public int uelete(CodeGroupVo vo) { return sqlSession.update(namespace + ".uelete", vo); }
+	public int uelete(CodeGroup dto) { return sqlSession.update(namespace + ".uelete", dto); }
 	public int delete(CodeGroupVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
 	
 	public List<CodeGroup> selectListWithoutPaging(){ return sqlSession.selectList(namespace + ".selectListWithoutPaging", ""); }

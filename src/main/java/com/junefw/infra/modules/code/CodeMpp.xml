@@ -49,6 +49,7 @@
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT 
 			a.*
+			<include refid="Base.selectRegModWithAlies" />
 			,b.ifcgName
 		FROM infrCode a
 			LEFT JOIN infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
@@ -126,13 +127,18 @@
 			,ifcdReferenceI2 = #{ifcdReferenceI2}
 			,ifcdReferenceI3 = #{ifcdReferenceI3}
 			,ifcdDesc = #{ifcdDesc}
+			<include refid="Base.updateModColumnValue" />
 			,ifcgSeq = #{ifcgSeq}
 		WHERE 1=1
 			AND ifcdSeq = #{ifcdSeq}		
 	</update>
 	
 	<update id="uelete">
-		UPDATE infrCode SET ifcdDelNy = 1 WHERE ifcdSeq = #{ifcdSeq}
+		UPDATE infrCode
+		SET
+			ifcdDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE ifcdSeq = #{ifcdSeq}
 	</update>
 	
 	<delete id="delete">
