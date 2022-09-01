@@ -205,7 +205,7 @@
                 <td><c:out value="${list.ifcgNameEng }"/></td>
                 <td>
 	                <c:choose>
-	                	<c:when test="${list.xifcdSeqCount ne 0 }"><a href="/code/codeList?ifcgSeq=<c:out value="${list.ifcgSeq }"/>"><c:out value="${list.ifcgSeq }"/></a></c:when>
+	                	<c:when test="${list.xifcdSeqCount ne 0 }"><a href="/code/codeList?ifcgSeq=<c:out value="${list.ifcgSeq }"/>"><c:out value="${list.xifcdSeqCount }"/></a></c:when>
 	                	<c:otherwise>0</c:otherwise>
 	                </c:choose>
                 </td>
