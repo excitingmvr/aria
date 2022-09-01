@@ -132,10 +132,16 @@
 		<div class="col-sm-6">
 			<label for="ifcgName" class="form-label">코드그룹 이름 (한글)</label>
 			<input type="text" id="ifcgName" name="ifcgName" value="<c:out value="${item.ifcgName}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+			<div class="invalid-feedback">
+				코드그룹 이름 (한글)을 입력해 주세요!
+			</div>			
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgNameEng" class="form-label">코드그룹 이름 (영문)</label>
-			<input type="text" id="ifcgNameEng" name="ifcgNameEng" value="<c:out value="${item.ifcgNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+			<input type="text" id="ifcgNameEng" name="ifcgNameEng" value="<c:out value="${item.ifcgNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+			<div class="invalid-feedback">
+				코드그룹 이름 (영문)을 입력해 주세요!
+			</div>	    
 		</div>
 	</div> 
 	<div class="row mt-sm-4">
@@ -148,7 +154,10 @@
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgOrder" class="form-label">순서</label>
-			<input type="text" id="ifcgOrder" name="ifcgOrder" value="<c:out value="${item.ifcgOrder}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">        
+			<input type="text" id="ifcgOrder" name="ifcgOrder" value="<c:out value="${item.ifcgOrder}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback">
+				순서는 숫자만 가능합니다.
+			</div>				        
 		</div>
 	</div>
 	<div class="row mt-sm-4">
@@ -275,8 +284,6 @@
 		if (seq.val() == "0" || seq.val() == ""){
 	   		// insert
 	   		if (validationInst() == false) return false;
- 			setCheckboxValue($("#ifmmEmailConsent"), $("#ifmmEmailConsentNy"));
-			setCheckboxValue($("#ifmmSmsConsent"), $("#ifmmSmsConsentNy"));
 	   		form.attr("action", goUrlInst).submit();
 	   	} else {
 	   		// update
@@ -302,8 +309,8 @@
 
 	
 	validationUpdt = function() {
-		<!-- if(!checkNull($.trim($("input[name=MENU_NAME]").val()), "MENU_NAME")) return false;  -->
-		/* if(!checkNull($('input[name=AUTH_NM]'), $.trim($('input[name=AUTH_NM]').val()), "권한명을 등록 해주세요!")) return false; */
+		if(!checkNull($('input[name=ifcgName]'), $.trim($('input[name=ifcgName]').val()), "코드그룹 이름 (한글)을 입력해 주세요!")) return false;
+		if(!checkNull($('input[name=ifcgNameEng]'), $.trim($('input[name=ifcgNameEng]').val()), "코드그룹 이름 (영문)을 입력해 주세요!")) return false;
 	}
 	
 	
@@ -342,173 +349,6 @@
 		$("#modalConfirm").modal("hide");
 		formVo.attr("action", goUrlDele).submit();
 	});
-	
-	
-	$("#btnAddress").on("click", function(){	
-	    sample4_execDaumPostcode();
-	});	  
-	
-	
-	function sample4_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 참고 항목 변수
-
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('ifmaZipcodeArray0').value = data.zonecode;
-                document.getElementById("ifmaAddress1Array0").value = roadAddr;
-                /* document.getElementById("").value = data.jibunAddress; */
-                
-                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                  
-                if(roadAddr !== ''){
-                    document.getElementById("ifmaAddress3Array0").value = extraRoadAddr;
-                } else {
-                    document.getElementById("ifmaAddress3Array0").value = '';
-                }
-                
-/*  
-                var guideTextBox = document.getElementById("guide");
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
- */               
-				
- 				/* lat and lng from address s */
- 				
-				// 주소-좌표 변환 객체를 생성
-				var geocoder = new daum.maps.services.Geocoder();
-				
-				// 주소로 좌표를 검색
-				geocoder.addressSearch(roadAddr, function(result, status) {
-				 
-					// 정상적으로 검색이 완료됐으면,
-					if (status == daum.maps.services.Status.OK) {
-						
-						document.getElementById("ifmaLatArray0").value=result[0].y;
-						document.getElementById("ifmaLngArray0").value=result[0].x;
-						
-/* 						
-						var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-				
-						y = result[0].x;
-						x = result[0].y;
-				
-						// 결과값으로 받은 위치를 마커로 표시합니다.
-						var marker = new daum.maps.Marker({
-							map: map,
-							position: coords
-						});
-				
-						// 인포윈도우로 장소에 대한 설명표시
-						var infowindow = new daum.maps.InfoWindow({
-							content: '<div style="width:150px;text-align:center;padding:5px 0;">좌표위치</div>'
-						});
-				
-						infowindow.open(map,marker);
-				
-						// 지도 중심을 이동
-						map.setCenter(coords);
-						
-						document.getElementById("ifmaLatArray0").value=x;
-						document.getElementById("ifmaLngArray0").value=y;
- */						
-					}
-				});
-				/* lat and lng from address e */
-
-       }
-   
-        }).open();
-        
-
-    }
-	
-
-	$("#btnAddressClear").on("click", function(){	
-		$("#ifmaZipcodeArray0").val('');
-		$("#ifmaAddress1Array0").val('');
-		$("#ifmaAddress2Array0").val('');
-		$("#ifmaAddress3Array0").val('');
-	});
-	
-	
-	upload = function(seq, div) {
-		
-		$("#ulFile" + seq).children().remove();
-		
-		var fileCount = $("input[type=file]")[seq].files.length;
-		
-		if(checkUploadedTotalFileNumber(fileCount, seq) == false) { return false; }
-		
-		var totalFileSize;
-		for (var i = 0 ; i < fileCount ; i++) {
-			if(div == 1) {
-				if(checkUploadedAllExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
-			} else if (div == 2){
-				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
-			} else {
-				return false;
-			}
-			
-			if(checkUploadedEachFileSize($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
-			totalFileSize += $("input[type=file]")[seq].files[i].size;
-		}
-		
-		if(checkUploadedTotalFileSize(totalFileSize, seq) == false) { return false; }
-		
-		for (var i = 0 ; i < fileCount ; i++) {
-			addUploadLi(seq, i, $("input[type=file]")[seq].files[i].name);
-		}
-	}
-	
-	
-	addUploadLi = function (seq, index, name){
-		
-		var ul_list = $("#ulFile0");
-		
-		li = '<li id="li_'+seq+'_'+index+'" class="list-group-item d-flex justify-content-between align-items-center">';
-		li = li + name;
-		li = li + '<span class="badge bg-danger rounded-pill" onClick="delLi('+ seq +','+ index +')"><i class="fa-solid fa-x" style="cursor: pointer;"></i></span>';
-		li = li + '</li>';
-		
-		$("#ulFile"+seq).append(li);
-	}
-	
-	
-	delLi = function(seq, index) {
-		$("#li_"+seq+"_"+index).remove();
-	}
 	
 	
 </script>

@@ -2,10 +2,17 @@ validationTest = function() {
 	alert("validationTest");
 }
 
+
+validationOutput = function(obj, message) {
+	// alert(message);
+	obj.addClass("is-invalid");
+	obj.focus();
+}
+
+
 checkNull = function(obj, value, message) {
     if (value == "" || value == null) {
-        alert(message);
-        obj.focus();
+		validationOutput(obj, message);
         return false;
     } else {
         return true;
@@ -35,8 +42,7 @@ checkOnlyNumber = function(obj, value, message) {
     if(regExp.test(value)) {
 		return true;
 	} else {
-		alert(message);
-        obj.focus();
+		validationOutput(obj, message);
 		return false;
 	}
 }
@@ -46,8 +52,7 @@ checkId = function(obj, value, message) {
     if(regExp.test(value)) {
 		return true;
 	} else {
-		alert(message);
-        obj.focus();
+		validationOutput(obj, message);
 		return false;
 	}
 }
@@ -58,8 +63,7 @@ checkPassword = function(obj, value, message) {
     if(regExp.test(value)) {
 		return true;
 	} else {
-		alert(message);
-        obj.focus();
+		validationOutput(obj, message);
 		return false;
 	}
 }
