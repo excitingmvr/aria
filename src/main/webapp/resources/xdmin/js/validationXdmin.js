@@ -19,6 +19,7 @@ checkNull = function(obj, value, message) {
     }
 }
 
+
 checkNullWithoutFocus = function(value, message) {
     if (value == "" || value == null) {
         alert(message);
@@ -27,6 +28,78 @@ checkNullWithoutFocus = function(value, message) {
         return true;
     }
 }
+
+
+checkOnlyEnglishNumber = function(obj, value, message) {
+	alert("checkOnlyEnglishNumber");
+    var regExp = /^[A-Z|a-z|0-9]+$/;
+    if(regExp.test(value) && value != "" && value != null){
+		return true;
+	} else {
+		validationOutput(obj, message);
+		return false;
+	}
+}
+
+
+checkOnlyKoreanEnglishNumber = function(obj, value, message) {
+	alert("checkOnlyKoreanEnglishNumber");
+	var feedback = "Feedback";
+	var objFeedback = obj[feedback];
+	alert(objFeedback);
+    var regExp = /^[ㄱ-ㅎ|가-힣|A-Z|a-z|0-9]+$/;
+    if(regExp.test(value) && value != "" && value != null){
+		// objFeedback.style.display = "none";
+		obj.removeClass("is-invalid");
+		return true;
+	} else {
+		validationOutput(obj, message);
+		return false;
+	}
+}
+
+
+checkOnlyEnglish = function(obj, value, message) {
+	alert("checkOnlyKorean");
+    var regExp = /^[A-Z|a-z]+$/;
+    if(regExp.test(value) && value != "" && value != null){
+		return true;
+	} else {
+		validationOutput(obj, message);
+		return false;
+	}
+}
+
+
+checkOnlyKorean = function(obj, value, message) {
+	alert("checkOnlyKorean");
+    var regExp = /^[ㄱ-ㅎ|가-힣]+$/;
+    if(regExp.test(value) && value != "" && value != null){
+		return true;
+	} else {
+		validationOutput(obj, message);
+		return false;
+	}
+}
+
+
+checkOnlyNumber = function(obj, value, message) {
+	alert("checkOnlyKorean");
+    var regExp = /^[0-9]+$/;
+    if(regExp.test(value) && value != "" && value != null){
+		return true;
+	} else {
+		validationOutput(obj, message);
+		return false;
+	}
+}
+
+
+
+
+
+
+
 
 checkPasswordAndRe = function(password, passwordRe, message){
     if(password == passwordRe){

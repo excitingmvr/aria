@@ -125,20 +125,23 @@
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgSeqAnother" class="form-label">코드그룹 코드 (Another)</label>
-			<input type="text" id="ifcgSeqAnother" name="ifcgSeqAnother" value="<c:out value="${item.ifcgSeqAnother}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+			<input type="text" id="ifcgSeqAnother" name="ifcgSeqAnother" value="<c:out value="${item.ifcgSeqAnother}"/>" maxlength="20" placeholder="영대소문자,숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgSeqAnotherFeedback">
+				코드그룹 코드는 한글, 영대소문자, 숫자만 입력 가능합니다.
+			</div>	
 		</div>
 	</div> 
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifcgName" class="form-label">코드그룹 이름 (한글)</label>
-			<input type="text" id="ifcgName" name="ifcgName" value="<c:out value="${item.ifcgName}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+			<label for="ifcgName" class="form-label">코드그룹 이름</label>
+			<input type="text" id="ifcgName" name="ifcgName" value="<c:out value="${item.ifcgName}"/>" maxlength="20" placeholder="한글, 영대소문자, 숫자" class="form-control form-control-sm">
 			<div class="invalid-feedback">
 				코드그룹 이름 (한글)을 입력해 주세요!
 			</div>			
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgNameEng" class="form-label">코드그룹 이름 (영문)</label>
-			<input type="text" id="ifcgNameEng" name="ifcgNameEng" value="<c:out value="${item.ifcgNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+			<input type="text" id="ifcgNameEng" name="ifcgNameEng" value="<c:out value="${item.ifcgNameEng}"/>" maxlength="20" placeholder="영대소문자, 숫자" class="form-control form-control-sm">
 			<div class="invalid-feedback">
 				코드그룹 이름 (영문)을 입력해 주세요!
 			</div>	    
@@ -309,8 +312,13 @@
 
 	
 	validationUpdt = function() {
-		if(!checkNull($('input[name=ifcgName]'), $.trim($('input[name=ifcgName]').val()), "코드그룹 이름 (한글)을 입력해 주세요!")) return false;
-		if(!checkNull($('input[name=ifcgNameEng]'), $.trim($('input[name=ifcgNameEng]').val()), "코드그룹 이름 (영문)을 입력해 주세요!")) return false;
+		
+ 		if(!checkOnlyKoreanEnglishNumber($('input[name=ifcgSeqAnother]'), $.trim($('input[name=ifcgSeqAnother]').val()), "코드그룹 코드는 한글, 영대소문자, 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyKoreanEnglishNumber($('input[name=ifcgName]'), $.trim($('input[name=ifcgName]').val()), "코드그룹 코드는 한글, 영대소문자, 숫자만 입력 가능합니다.")) return false;
+ 		
+/* 		if(!checkNull($('input[name=ifcgName]'), $.trim($('input[name=ifcgName]').val()), "코드그룹 이름 (한글)을 입력해 주세요!")) return false;
+		if(!checkNull($('input[name=ifcgNameEng]'), $.trim($('input[name=ifcgNameEng]').val()), "코드그룹 이름 (영문)을 입력해 주세요!")) return false; */
+		return false;
 	}
 	
 	
