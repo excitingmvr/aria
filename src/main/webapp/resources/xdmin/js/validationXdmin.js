@@ -3,14 +3,8 @@ validationTest = function() {
 }
 
 
-validationOutput = function(obj, message) {
-	// alert(message);
-	obj.addClass("is-invalid");
-	obj.focus();
-}
-
-
-checkNull = function(obj, value, message) {
+function checkNull (obj, value, message) {
+// checkNull = function(obj, value, message) {
     if (value == "" || value == null) {
 		validationOutput(obj, message);
         return false;
@@ -20,7 +14,8 @@ checkNull = function(obj, value, message) {
 }
 
 
-checkNullWithoutFocus = function(value, message) {
+function checkNullWithoutFocus (value, message) {
+// checkNullWithoutFocus = function(value, message) {
     if (value == "" || value == null) {
         alert(message);
         return false;
@@ -30,70 +25,89 @@ checkNullWithoutFocus = function(value, message) {
 }
 
 
-checkOnlyEnglishNumber = function(obj, value, message) {
-	alert("checkOnlyEnglishNumber");
-    var regExp = /^[A-Z|a-z|0-9]+$/;
-    if(regExp.test(value) && value != "" && value != null){
+function checkLogic (objName, pattern, nullAllowedNy, message, regExp) {
+// checkLogic = function (obj, value, pattern, message, regExp) {
+	
+	var obj = document.getElementById(objName);
+	var objValue = document.getElementById(objName).value.trim();
+	var objFeedback = document.getElementById(objName+"Feedback");
+	
+	if(nullAllowedNy == 0) {
+		if(regExp.test(objValue) && objValue != "" && objValue != null){
+			// obj.removeClass("is-invalid");
+			obj.classList.remove('is-invalid');
+			return true;
+		} else {
+			switch(pattern) {
+				case 1:	
+				// alert
+					alert(message);
+					obj.focus();
+					break;
+				case 2:
+				// bootstrap validation
+					//obj.addClass("is-invalid");
+					obj.classList.add('is-invalid');
+					objFeedback.innerText = message;
+					obj.focus();
+					break;
+				case 3:
+				// bootstrap modal
+					break;
+			}
+			return false;
+		}
+	} else if (nullAllowedNy == 1) {
 		return true;
 	} else {
-		validationOutput(obj, message);
+		alert("error: param nullAllowedNy in checkLogic");
 		return false;
 	}
+	
+
+}
+
+         
+function checkOnlyKoreanEnglishNumber (objName, pattern, nullAllowedNy, message) {
+// checkOnlyKoreanEnglishNumber = function(obj, value, message) {
+    var regExp = /^[ㄱ-ㅎ가-힣A-Za-z0-9]+$/;
+    return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 }
 
 
-checkOnlyKoreanEnglishNumber = function(obj, value, message) {
-	alert("checkOnlyKoreanEnglishNumber");
-	var feedback = "Feedback";
-	var objFeedback = obj[feedback];
-	alert(objFeedback);
-    var regExp = /^[ㄱ-ㅎ|가-힣|A-Z|a-z|0-9]+$/;
-    if(regExp.test(value) && value != "" && value != null){
-		// objFeedback.style.display = "none";
-		obj.removeClass("is-invalid");
-		return true;
-	} else {
-		validationOutput(obj, message);
-		return false;
-	}
+function checkOnlyEnglishNumber (objName, pattern, nullAllowedNy, message) {
+// checkOnlyEnglishNumber = function(obj, value, message) {
+    var regExp = /^[A-Za-z0-9]+$/;
+    return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 }
 
 
-checkOnlyEnglish = function(obj, value, message) {
-	alert("checkOnlyKorean");
-    var regExp = /^[A-Z|a-z]+$/;
-    if(regExp.test(value) && value != "" && value != null){
-		return true;
-	} else {
-		validationOutput(obj, message);
-		return false;
-	}
+function checkOnlyEnglish (objName, pattern, nullAllowedNy, message) {
+// checkOnlyEnglish = function(obj, value, message) {
+    var regExp = /^[A-Za-z]+$/;
+	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 }
 
 
-checkOnlyKorean = function(obj, value, message) {
-	alert("checkOnlyKorean");
-    var regExp = /^[ㄱ-ㅎ|가-힣]+$/;
-    if(regExp.test(value) && value != "" && value != null){
-		return true;
-	} else {
-		validationOutput(obj, message);
-		return false;
-	}
+function checkOnlyKoreanNumber (objName, pattern, nullAllowedNy, message) {
+// checkOnlyKoreanNumber = function(obj, value, message) {
+    var regExp = /^[ㄱ-ㅎ가-힣0-9]+$/;
+	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 }
 
 
-checkOnlyNumber = function(obj, value, message) {
-	alert("checkOnlyKorean");
+function checkOnlyKorean (objName, pattern, nullAllowedNy, message) {
+// checkOnlyKorean = function(obj, value, message) {
+    var regExp = /^[ㄱ-ㅎ가-힣]+$/;
+	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+}
+
+
+function checkOnlyNumber (objName, pattern, nullAllowedNy, message) {
+// checkOnlyNumber = function(obj, value, message) {
     var regExp = /^[0-9]+$/;
-    if(regExp.test(value) && value != "" && value != null){
-		return true;
-	} else {
-		validationOutput(obj, message);
-		return false;
-	}
+    return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 }
-
 
 
 
@@ -110,15 +124,7 @@ checkPasswordAndRe = function(password, passwordRe, message){
     }
 }
 
-checkOnlyNumber = function(obj, value, message) {
-    var regExp = /^[0-9]+$/;
-    if(regExp.test(value)) {
-		return true;
-	} else {
-		validationOutput(obj, message);
-		return false;
-	}
-}
+
 
 checkId = function(obj, value, message) {
     var regExp = /^[A-Za-z0-9,_-]{4,20}$/;
@@ -141,11 +147,7 @@ checkPassword = function(obj, value, message) {
 	}
 }
 
-checkOnlyEnglish = function(value) {
-    var regExp = /^[A-Za-z]+$/ 
-    if(regExp.test(value)) return true;
-    else return false;
-}
+
 
 checkDob = function(year, month, day, message) {
     if (Number(year) > 0 && Number(month) > 0 && Number(day) > 0){
