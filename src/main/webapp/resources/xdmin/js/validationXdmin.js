@@ -25,49 +25,6 @@ function checkNullWithoutFocus (value, message) {
 }
 
 
-function checkLogic (objName, pattern, nullAllowedNy, message, regExp) {
-// checkLogic = function (obj, value, pattern, message, regExp) {
-	
-	var obj = document.getElementById(objName);
-	var objValue = document.getElementById(objName).value.trim();
-	var objFeedback = document.getElementById(objName+"Feedback");
-	
-	if(nullAllowedNy == 0) {
-		if(regExp.test(objValue) && objValue != "" && objValue != null){
-			// obj.removeClass("is-invalid");
-			obj.classList.remove('is-invalid');
-			return true;
-		} else {
-			switch(pattern) {
-				case 1:	
-				// alert
-					alert(message);
-					obj.focus();
-					break;
-				case 2:
-				// bootstrap validation
-					//obj.addClass("is-invalid");
-					obj.classList.add('is-invalid');
-					objFeedback.innerText = message;
-					obj.focus();
-					break;
-				case 3:
-				// bootstrap modal
-					break;
-			}
-			return false;
-		}
-	} else if (nullAllowedNy == 1) {
-		return true;
-	} else {
-		alert("error: param nullAllowedNy in checkLogic");
-		return false;
-	}
-	
-
-}
-
-         
 function checkOnlyKoreanEnglishNumber (objName, pattern, nullAllowedNy, message) {
 // checkOnlyKoreanEnglishNumber = function(obj, value, message) {
     var regExp = /^[ㄱ-ㅎ가-힣A-Za-z0-9]+$/;
@@ -110,7 +67,62 @@ function checkOnlyNumber (objName, pattern, nullAllowedNy, message) {
 }
 
 
+function checkLogic (objName, pattern, nullAllowedNy, message, regExp) {
+// checkLogic = function (obj, value, pattern, message, regExp) {
+	
+	var obj = document.getElementById(objName);
+	var objValue = document.getElementById(objName).value.trim();
+	var objFeedback = document.getElementById(objName+"Feedback");
+	
+	if(nullAllowedNy == 0) {
+		if(regExp.test(objValue)){
+			// obj.removeClass("is-invalid");
+			obj.classList.remove('is-invalid');
+			return true;
+		} else {
+			checkLogicExpression (obj, objFeedback, pattern, message);
+			return false;
+		}
+	} else if (nullAllowedNy == 1) {
+		if(objValue != "" && objValue != null) {
+			if(regExp.test(objValue)) {
+				// obj.removeClass("is-invalid");
+				obj.classList.remove('is-invalid');
+				return true;
+			} else {
+				checkLogicExpression (obj, objFeedback, pattern, message);
+				return false;
+			}			
+		} else {
+			obj.classList.remove('is-invalid');
+			return true;
+		}
+	} else {
+		alert("error: param nullAllowedNy in checkLogic");
+		return false;
+	}
+}
 
+
+function checkLogicExpression (obj, objFeedback, pattern, message) {
+	switch(pattern) {
+	case 1:	
+	// alert
+		alert(message);
+		obj.focus();
+		break;
+	case 2:
+	// bootstrap validation
+		//obj.addClass("is-invalid");
+		obj.classList.add('is-invalid');
+		objFeedback.innerText = message;
+		obj.focus();
+		break;
+	case 3:
+	// bootstrap modal
+		break;
+	}
+}
 
 
 
