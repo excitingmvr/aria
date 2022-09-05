@@ -151,7 +151,7 @@
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgOrder" class="form-label">순서 <span class="text-danger">*</span></label>
-			<input type="text" id="ifcgOrder" name="ifcgOrder" value="<c:out value="${item.ifcgOrder}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcgOrder" name="ifcgOrder" value="<c:out value="${item.ifcgOrder}"/>" maxlength="20" placeholder="숫자(0~255)" class="form-control form-control-sm">
 			<div class="invalid-feedback" id="ifcgOrderFeedback"></div>				        
 		</div>
 	</div>
@@ -173,37 +173,49 @@
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcgReferenceV1" class="form-label">예비1 (varchar type)</label>
-			<input type="text" id="ifcgReferenceV1" name="ifcgReferenceV1" value="<c:out value="${item.ifcgReferenceV1}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcgReferenceV1" name="ifcgReferenceV1" value="<c:out value="${item.ifcgReferenceV1}"/>" maxlength="20" placeholder="영대소문자,숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgReferenceV1Feedback"></div>
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgReferenceV2" class="form-label">예비2 (varchar type)</label>
-			<input type="text" id="ifcgReferenceV2" name="ifcgReferenceV2" value="<c:out value="${item.ifcgReferenceV2}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">        
+			<input type="text" id="ifcgReferenceV2" name="ifcgReferenceV2" value="<c:out value="${item.ifcgReferenceV2}"/>" maxlength="20" placeholder="영대소문자,숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgReferenceV2Feedback"></div>        
 		</div>
 	</div>	
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcgReferenceV3" class="form-label">예비3 (varchar type)</label>
-			<input type="text" id="ifcgReferenceV3" name="ifcgReferenceV3" value="<c:out value="${item.ifcgReferenceV3}"/>" maxlength="20" placeholder="영문(대소문자),숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcgReferenceV3" name="ifcgReferenceV3" value="<c:out value="${item.ifcgReferenceV3}"/>" maxlength="20" placeholder="영대소문자,숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgReferenceV3Feedback"></div>
 		</div>
 		<div class="col-sm-6">
+			<label for="ifcgReferenceV4" class="form-label">예비4 (varchar type)</label>
+			<input type="text" id="ifcgReferenceV4" name="ifcgReferenceV4" value="<c:out value="${item.ifcgReferenceV4}"/>" maxlength="20" placeholder="영대소문자,숫자" class="form-control form-control-sm">	
+			<div class="invalid-feedback" id="ifcgReferenceV4Feedback"></div>	
 		</div>
 	</div>	
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcgReferenceI1" class="form-label">예비1 (Int type)</label>
 			<input type="text" id="ifcgReferenceI1" name="ifcgReferenceI1" value="<c:out value="${item.ifcgReferenceI1}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgReferenceI1Feedback"></div>
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcgReferenceI2" class="form-label">예비2 (Int type)</label>
-			<input type="text" id="ifcgReferenceI2" name="ifcgReferenceI2" value="<c:out value="${item.ifcgReferenceI2}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">        
+			<input type="text" id="ifcgReferenceI2" name="ifcgReferenceI2" value="<c:out value="${item.ifcgReferenceI2}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgReferenceI2Feedback"></div>
 		</div>
 	</div>	
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcgReferenceI3" class="form-label">예비3 (Int type)</label>
 			<input type="text" id="ifcgReferenceI3" name="ifcgReferenceI3" value="<c:out value="${item.ifcgReferenceI3}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgReferenceI3Feedback"></div>
 		</div>
 		<div class="col-sm-6">
+			<label for="ifcgReferenceI4" class="form-label">예비4 (Int type)</label>
+			<input type="text" id="ifcgReferenceI4" name="ifcgReferenceI4" value="<c:out value="${item.ifcgReferenceI4}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifcgReferenceI4Feedback"></div>		
 		</div>
 	</div>
 
@@ -307,9 +319,15 @@
  		if(!checkOnlyEnglishNumber('ifcgSeqAnother', 2, 1, "코드그룹 코드 (Another)는 영대소문자, 숫자만 입력 가능합니다.")) return false;
  		if(!checkOnlyKoreanEnglishNumber('ifcgName', 2, 0, "코드그룹 이름은 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false;
  		if(!checkOnlyEnglishNumber('ifcgNameEng', 2, 1, "코드그룹 이름 (영문)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
- 		if(!checkOnlyNumber('ifcgOrder', 2, 0, "순서는 숫자만 입력 가능합니다.")) return false;
- 		
-		return false;
+ 		if(!checkOnlyNumber('ifcgOrder', 2, 0, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyEnglishNumber('ifcgReferenceV1', 2, 1, "예비1 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyEnglishNumber('ifcgReferenceV2', 2, 1, "예비2 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyEnglishNumber('ifcgReferenceV3', 2, 1, "예비3 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyEnglishNumber('ifcgReferenceV4', 2, 1, "예비4 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifcgReferenceI1', 2, 1, -128, 127, "예비1 (Int type)은 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifcgReferenceI2', 2, 1, -128, 127, "예비2 (Int type)은 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifcgReferenceI3', 2, 1, -128, 127, "예비3 (Int type)은 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifcgReferenceI4', 2, 1, -128, 127, "예비4 (Int type)은 숫자만 입력 가능합니다.")) return false;
 	}
 	
 	

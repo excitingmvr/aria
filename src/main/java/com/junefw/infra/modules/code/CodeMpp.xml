@@ -67,14 +67,17 @@
 			,ifcdNameLang3
 			,ifcdNameLang4
 			,ifcdNameLang5
+			,ifcdNameLang6
 			,ifcdUseNy
 			,ifcdOrder
 			,ifcdReferenceV1
 			,ifcdReferenceV2
 			,ifcdReferenceV3
+			,ifcdReferenceV4
 			,ifcdReferenceI1
 			,ifcdReferenceI2
 			,ifcdReferenceI3
+			,ifcdReferenceI4
 			,ifcdDesc
 			,ifcdDelNy
 			<include refid="Base.insertRegModColumn" />
@@ -89,14 +92,17 @@
 			,#{ifcdNameLang3}
 			,#{ifcdNameLang4}
 			,#{ifcdNameLang5}
+			,#{ifcdNameLang6}
 			,#{ifcdUseNy}
 			,#{ifcdOrder}
 			,#{ifcdReferenceV1}
 			,#{ifcdReferenceV2}
 			,#{ifcdReferenceV3}
+			,#{ifcdReferenceV4}
 			,#{ifcdReferenceI1}
 			,#{ifcdReferenceI2}
 			,#{ifcdReferenceI3}
+			,#{ifcdReferenceI4}
 			,#{ifcdDesc}
 			,0
 			<include refid="Base.insertRegModValue" />
@@ -118,14 +124,17 @@
 			,ifcdNameLang3 = #{ifcdNameLang3}
 			,ifcdNameLang4 = #{ifcdNameLang4}
 			,ifcdNameLang5 = #{ifcdNameLang5}
+			,ifcdNameLang6 = #{ifcdNameLang6}
 			,ifcdUseNy = #{ifcdUseNy}
 			,ifcdOrder = #{ifcdOrder}
 			,ifcdReferenceV1 = #{ifcdReferenceV1}
 			,ifcdReferenceV2 = #{ifcdReferenceV2}
 			,ifcdReferenceV3 = #{ifcdReferenceV3}
+			,ifcdReferenceV4 = #{ifcdReferenceV4}
 			,ifcdReferenceI1 = #{ifcdReferenceI1}
 			,ifcdReferenceI2 = #{ifcdReferenceI2}
 			,ifcdReferenceI3 = #{ifcdReferenceI3}
+			,ifcdReferenceI4 = #{ifcdReferenceI4}
 			,ifcdDesc = #{ifcdDesc}
 			<include refid="Base.updateModColumnValue" />
 			,ifcgSeq = #{ifcgSeq}

@@ -17,25 +17,28 @@ public class Code extends Base {
 	private String ifcdNameLang3;
 	private String ifcdNameLang4;
 	private String ifcdNameLang5;
+	private String ifcdNameLang6;
 	private Integer ifcdUseNy;
 	private Integer ifcdOrder;
 	private String ifcdReferenceV1;
 	private String ifcdReferenceV2;
 	private String ifcdReferenceV3;
+	private String ifcdReferenceV4;
 	private Integer ifcdReferenceI1;
 	private Integer ifcdReferenceI2;
 	private Integer ifcdReferenceI3;
+	private Integer ifcdReferenceI4;
 	private String ifcdDesc;
 	private Integer ifcdDelNy;
 	private String ifcgSeq;
 	
 	private String ifcgName;
-
+//	----------
 	
 //	for cache
 	public static List<Code> cachedCodeArrayList = new ArrayList<Code>();
 
-//	----------
+
 	public String getIfcdSeq() {
 		return ifcdSeq;
 	}
@@ -126,6 +129,16 @@ public class Code extends Base {
 	}
 
 
+	public String getIfcdNameLang6() {
+		return ifcdNameLang6;
+	}
+
+
+	public void setIfcdNameLang6(String ifcdNameLang6) {
+		this.ifcdNameLang6 = ifcdNameLang6;
+	}
+
+
 	public Integer getIfcdUseNy() {
 		return ifcdUseNy;
 	}
@@ -176,6 +189,16 @@ public class Code extends Base {
 	}
 
 
+	public String getIfcdReferenceV4() {
+		return ifcdReferenceV4;
+	}
+
+
+	public void setIfcdReferenceV4(String ifcdReferenceV4) {
+		this.ifcdReferenceV4 = ifcdReferenceV4;
+	}
+
+
 	public Integer getIfcdReferenceI1() {
 		return ifcdReferenceI1;
 	}
@@ -203,6 +226,16 @@ public class Code extends Base {
 
 	public void setIfcdReferenceI3(Integer ifcdReferenceI3) {
 		this.ifcdReferenceI3 = ifcdReferenceI3;
+	}
+
+
+	public Integer getIfcdReferenceI4() {
+		return ifcdReferenceI4;
+	}
+
+
+	public void setIfcdReferenceI4(Integer ifcdReferenceI4) {
+		this.ifcdReferenceI4 = ifcdReferenceI4;
 	}
 
 
@@ -244,6 +277,15 @@ public class Code extends Base {
 	public void setIfcgName(String ifcgName) {
 		this.ifcgName = ifcgName;
 	}
-	
+
+
+	public static List<Code> getCachedCodeArrayList() {
+		return cachedCodeArrayList;
+	}
+
+
+	public static void setCachedCodeArrayList(List<Code> cachedCodeArrayList) {
+		Code.cachedCodeArrayList = cachedCodeArrayList;
+	}
 	
 }

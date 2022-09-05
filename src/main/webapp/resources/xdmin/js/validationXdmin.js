@@ -60,10 +60,19 @@ function checkOnlyKorean (objName, pattern, nullAllowedNy, message) {
 }
 
 
-function checkOnlyNumber (objName, pattern, nullAllowedNy, message) {
+function checkOnlyNumber (objName, pattern, nullAllowedNy, min, max, message) {
 // checkOnlyNumber = function(obj, value, message) {
+	var obj = document.getElementById(objName);
+	var objValue = document.getElementById(objName).value.trim();
+	var objFeedback = document.getElementById(objName+"Feedback");
     var regExp = /^[0-9]+$/;
-    return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+	
+	if(objValue >= min && objValue <= max) {
+    	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+	} else {
+		checkLogicExpression (obj, objFeedback, pattern, message);
+		return fasle;
+	}
 }
 
 

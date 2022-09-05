@@ -49,9 +49,11 @@
 			, a.ifcgReferenceV1
 			, a.ifcgReferenceV2
 			, a.ifcgReferenceV3
+			, a.ifcgReferenceV4
 			, a.ifcgReferenceI1
 			, a.ifcgReferenceI2
 			, a.ifcgReferenceI3
+			, a.ifcgReferenceI4
 			, a.ifcgDesc
 			, a.ifcgDelNy
 			<include refid="Base.selectRegModWithAlies" />			
@@ -70,9 +72,11 @@
 			,ifcgReferenceV1
 			,ifcgReferenceV2
 			,ifcgReferenceV3
+			,ifcgReferenceV4
 			,ifcgReferenceI1
 			,ifcgReferenceI2
 			,ifcgReferenceI3
+			,ifcgReferenceI4
 			,ifcgDesc
 			,ifcgDelNy
 			<include refid="Base.insertRegModColumn" />			
@@ -86,9 +90,11 @@
 			,#{ifcgReferenceV1}
 			,#{ifcgReferenceV2}
 			,#{ifcgReferenceV3}
+			,#{ifcgReferenceV4}
 			,#{ifcgReferenceI1}
 			,#{ifcgReferenceI2}
 			,#{ifcgReferenceI3}
+			,#{ifcgReferenceI4}
 			,#{ifcgDesc}
 			,0
 			<include refid="Base.insertRegModValue" />			
@@ -109,9 +115,11 @@
 			,ifcgReferenceV1 = #{ifcgReferenceV1}
 			,ifcgReferenceV2 = #{ifcgReferenceV2}
 			,ifcgReferenceV3 = #{ifcgReferenceV3}
+			,ifcgReferenceV4 = #{ifcgReferenceV4}
 			,ifcgReferenceI1 = #{ifcgReferenceI1}
 			,ifcgReferenceI2 = #{ifcgReferenceI2}
 			,ifcgReferenceI3 = #{ifcgReferenceI3}
+			,ifcgReferenceI4 = #{ifcgReferenceI4}
 			,ifcgDesc = #{ifcgDesc}
 			<include refid="Base.updateModColumnValue" />
 		WHERE
