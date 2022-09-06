@@ -26,6 +26,5 @@ public class CodeGroupDao {
 	public int delete(CodeGroupVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
 	
 	public List<CodeGroup> selectListWithoutPaging(){ return sqlSession.selectList(namespace + ".selectListWithoutPaging", ""); }
-//	for cache
-//	public List<CodeGroup> selectListCachedCodeArrayList(){ return sqlSession.selectList(namespace + ".selectListCachedCodeArrayList", null); }
+	
 }

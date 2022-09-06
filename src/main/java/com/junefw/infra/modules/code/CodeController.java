@@ -27,12 +27,12 @@ import com.junefw.infra.modules.codegroup.CodeGroupServiceImpl;
 public class CodeController extends BaseController{
 	
 	@Autowired
-	CodeGroupServiceImpl codeGroupServiceImpl;
-	
-	@Autowired
 	CodeServiceImpl service;
 
+	@Autowired
+	CodeGroupServiceImpl codeGroupServiceImpl;
 	
+
 	public void setSearchAndPaging(CodeVo vo) throws Exception {
 		
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 2 : vo.getShOptionDate());

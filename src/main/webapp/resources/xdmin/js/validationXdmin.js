@@ -76,6 +76,21 @@ function checkOnlyNumber (objName, pattern, nullAllowedNy, min, max, message) {
 }
 
 
+function checkSelectNull (objName, pattern, message) {
+	var obj = document.getElementById(objName);
+	var objValue = document.getElementById(objName).options[obj.selectedIndex].value;
+	var objFeedback = document.getElementById(objName+"Feedback");
+	
+	if(objValue != "" && objValue != null) {
+		obj.classList.remove('is-invalid');
+		return true;
+	} else {
+		checkLogicExpression (obj, objFeedback, pattern, message)
+		return false;
+	}
+}
+
+
 function checkLogic (objName, pattern, nullAllowedNy, message, regExp) {
 // checkLogic = function (obj, value, pattern, message, regExp) {
 	
@@ -179,6 +194,7 @@ checkDob = function(year, month, day, message) {
     }
 }
 
+/*
 checkNullSelect = function(value, message) {
     if(Number(value) == 0){
         alert(message);
@@ -194,7 +210,7 @@ checkNullSelectNy = function(value, message) {
     }
     else return true;
 }
-
+*/
 checkHhmm = function(obj, value, message) {
     var regExp = /^([01][0-9]|2[0-3]):([0-5][0-9])$/;
     if(regExp.test(value)) {

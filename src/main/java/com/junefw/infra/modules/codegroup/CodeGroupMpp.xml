@@ -149,17 +149,6 @@
 		ORDER BY a.ifcgSeq DESC
 	</select>	
 	
-    <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
-		SELECT 
-			ifcdSeq
-			, ifcdName
-			, ifcgSeq
-		FROM
-			infrCode
-		WHERE 1=1
-			AND ifcdDelNy = 0
-		    AND ifcdUseNy = 1
-    </select>
 </mapper>
 
 

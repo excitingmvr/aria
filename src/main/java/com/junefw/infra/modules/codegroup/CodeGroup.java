@@ -1,8 +1,5 @@
 package com.junefw.infra.modules.codegroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.junefw.infra.common.base.Base;
 
 public class CodeGroup extends Base {
@@ -25,9 +22,6 @@ public class CodeGroup extends Base {
 	private Integer ifcgDelNy;
 	
 	private Integer xifcdSeqCount;
-	
-//	for cache
-	public static List<CodeGroup> cachedCodeArrayList = new ArrayList<CodeGroup>();	
 //	----------
 
 	public String getIfcgSeq() {

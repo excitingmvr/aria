@@ -122,7 +122,7 @@
 		<div class="col-sm-6">
 			<label for="ifcgSeq" class="form-label">코드그룹 <span class="text-danger">*</span></label>
 			<select id="ifcgSeq" name="ifcgSeq" class="form-select form-select-sm">
-				<option>선택하세요</option>
+				<option value="">선택하세요</option>
 				<c:forEach items="${list}" var="list" varStatus="status">
 				<option value="<c:out value="${list.ifcgSeq }"/>"<c:if test="${list.ifcgSeq eq item.ifcgSeq }">selected</c:if>><c:out value="${list.ifcgName }"/></option>
 				</c:forEach>
@@ -362,6 +362,8 @@
 
 	
 	validationUpdt = function() {
+
+		if(!checkSelectNull('ifcgSeq', 2, "코드그룹을 선택해 주세요.")) return false;
 		if(!checkOnlyEnglishNumber('ifcdSeqAnother', 2, 1, "코드 (Another)는 영대소문자, 숫자만 입력 가능합니다.")) return false;
 		if(!checkOnlyKoreanEnglishNumber('ifcdName', 2, 0, "코드 이름은 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false;
 		if(!checkOnlyEnglishNumber('ifcdNameEng', 2, 1, "코드 이름 (영문)는 영대소문자, 숫자만 입력 가능합니다.")) return false;
@@ -374,6 +376,7 @@
  		if(!checkOnlyNumber('ifcdReferenceI2', 2, 1, -128, 127, "예비2 (Int type)은 숫자만 입력 가능합니다.")) return false;
  		if(!checkOnlyNumber('ifcdReferenceI3', 2, 1, -128, 127, "예비3 (Int type)은 숫자만 입력 가능합니다.")) return false;
  		if(!checkOnlyNumber('ifcdReferenceI4', 2, 1, -128, 127, "예비4 (Int type)은 숫자만 입력 가능합니다.")) return false;		
+
 	}
 	
 	

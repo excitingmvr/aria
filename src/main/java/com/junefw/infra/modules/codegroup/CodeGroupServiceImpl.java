@@ -78,51 +78,11 @@ public class CodeGroupServiceImpl extends BaseServiceImpl implements CodeGroupSe
 	public int delete(CodeGroupVo vo) throws Exception {
 		return dao.delete(vo);
 	}
-	
+
 
 	@Override
 	public List<CodeGroup> selectListWithoutPaging() throws Exception {
 		return dao.selectListWithoutPaging();
 	}
-	
-//	@PostConstruct
-//	public void selectListCachedCodeArrayList() throws Exception {
-//		List<CodeGroup> codeListFromDb = (ArrayList<CodeGroup>) dao.selectListCachedCodeArrayList();
-////		codeListFromDb = (ArrayList<Code>) dao.selectListCachedCodeArrayList();
-//		CodeGroup.cachedCodeArrayList.clear(); 
-//		CodeGroup.cachedCodeArrayList.addAll(codeListFromDb);
-//		System.out.println("cachedCodeArrayList: " + CodeGroup.cachedCodeArrayList.size() + " chached !");
-//	}
-//
-//	public static List<CodeGroup> selectListCachedCode(String ifcgSeq) throws Exception {
-//		List<CodeGroup> rt = new ArrayList<CodeGroup>();
-//		for(CodeGroup codeRow : CodeGroup.cachedCodeArrayList) {
-//			if (codeRow.getIfcgSeq().equals(ifcgSeq)) {
-//				rt.add(codeRow);
-//			} else {
-//				// by pass
-//			}
-//		}
-//		return rt;
-//	}
-//
-//	public static CodeGroup selectOneCachedCode(String ifcdSeq) throws Exception {
-//		CodeGroup rt = new CodeGroup();
-//		for(CodeGroup codeRow : CodeGroup.cachedCodeArrayList) {
-//			if (codeRow.getIfcdSeq().equals(ifcdSeq)) {
-//				rt = codeRow;
-//			} else {
-//				// by pass
-//			}
-//		}
-//		return rt;
-//	}
-//	
-//	public static void clear() throws Exception {
-//		CodeGroup.cachedCodeArrayList.clear();
-//	}
-
-
-
 	
 }
