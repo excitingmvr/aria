@@ -153,6 +153,7 @@
         </div>                    
         <div class="col">
             <input type="text" id="shValue" name="shValue" value="<c:out value="${vo.shValue }"/>" placeholder="검색어" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="shValueFeedback"></div>
         </div> 
         <div class="col">
 			<button type="button" class="btn btn-warning btn-sm" name="" id="btnSearch"><i class="fas fa-search"></i></button>
@@ -244,6 +245,7 @@
             <button type="button" class="btn btn-danger btn-sm" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button>
         </div>
         <div class="col-6 text-end">
+        	<button type="button" class="btn btn-secondary btn-sm" name="" id="btnCodeInit"><i class="fas fa-redo-alt"></i></button>
             <button type="button" class="btn btn-success btn-sm" name="" id="btnExcel"><i class="far fa-file-excel fa-lg"></i></button>
             <button type="button" class="btn btn-primary btn-sm" name="" id="btnForm"><i class="fas fa-plus"></i></button>
         </div>
@@ -299,7 +301,8 @@
     
 	
 	validationList = function() {
-		/* if(!checkNull($.trim($("input[name=searchValue]").val()), "searchValue")) return false; */
+		/* if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어는 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false; */
+		if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어를 입력해 주세요.")) return false;
 	}
 	
 	
@@ -313,6 +316,21 @@
 		form.attr("action", goUrlList).submit();
 	}); 
 		
+	
+	$("#checkboxAll").click(function() {
+		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+		else $("input[name=checkboxSeq]").prop("checked", false);
+	});
+	
+	
+	$("input[name=checkboxSeq]").click(function() {
+		var total = $("input[name=checkboxSeq]").length;
+		var checked = $("input[name=checkboxSeq]:checked").length;
+		
+		if(total != checked) $("#checkboxAll").prop("checked", false);
+		else $("#checkboxAll").prop("checked", true); 
+	});
+	
 	
 	goForm = function(key) {
     	/* if(key != 0) seq.val(btoa(key)); */
@@ -385,28 +403,30 @@
 	});
 
 	
-	$('#btnForm').on("click", function() {
-		goForm(0);                
-	});
-	
-	
-	$("#checkboxAll").click(function() {
-		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
-		else $("input[name=checkboxSeq]").prop("checked", false);
-	});
-	
-	
-	$("input[name=checkboxSeq]").click(function() {
-		var total = $("input[name=checkboxSeq]").length;
-		var checked = $("input[name=checkboxSeq]:checked").length;
-		
-		if(total != checked) $("#checkboxAll").prop("checked", false);
-		else $("#checkboxAll").prop("checked", true); 
-	});
+	$("#btnCodeInit").click(function() {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			,url: "/code/codeInit"
+			,data : { }
+			,success: function(response) {
 
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	});
+	
 	
 	$("#btnExcel").click(function() {
 		form.attr("action", excelUri).submit();
+	});
+	
+	
+	$('#btnForm').on("click", function() {
+		goForm(0);                
 	});
 	
 </script>

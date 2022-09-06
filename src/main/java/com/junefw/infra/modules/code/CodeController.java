@@ -1,8 +1,11 @@
 package com.junefw.infra.modules.code;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.TextTable.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -15,10 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
+import com.junefw.infra.common.util.UtilCookie;
 import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.modules.codegroup.CodeGroupServiceImpl;
 
@@ -226,4 +231,13 @@ public class CodeController extends BaseController{
 	        workbook.close();
 		}
     }
+	
+	@ResponseBody
+	@RequestMapping(value = "codeInit")
+	public Map<String, Object> logoutProc() throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		service.selectListCachedCodeArrayList();
+		returnMap.put("rt", "success");
+		return returnMap;
+	}	
 }

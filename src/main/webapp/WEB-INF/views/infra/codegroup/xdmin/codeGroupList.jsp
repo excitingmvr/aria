@@ -150,6 +150,7 @@
         </div>                    
         <div class="col">
             <input type="text" id="shValue" name="shValue" value="<c:out value="${vo.shValue }"/>" placeholder="검색어" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="shValueFeedback"></div>
         </div> 
         <div class="col">
 			<button type="button" class="btn btn-warning btn-sm" name="" id="btnSearch"><i class="fas fa-search"></i></button>
@@ -288,7 +289,8 @@
     
 	
 	validationList = function() {
-		/* if(!checkNull($.trim($("input[name=searchValue]").val()), "searchValue")) return false; */
+		/* if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어는 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false; */
+		if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어를 입력해 주세요.")) return false;
 	}
 	
 	
@@ -301,7 +303,22 @@
 		$("input:hidden[name=rowNumToShow]").val($("#changeRowNum option:selected").val());
 		form.attr("action", goUrlList).submit();
 	}); 
+	
+	
+	$("#checkboxAll").click(function() {
+		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+		else $("input[name=checkboxSeq]").prop("checked", false);
+	});
+	
+	
+	$("input[name=checkboxSeq]").click(function() {
+		var total = $("input[name=checkboxSeq]").length;
+		var checked = $("input[name=checkboxSeq]:checked").length;
 		
+		if(total != checked) $("#checkboxAll").prop("checked", false);
+		else $("#checkboxAll").prop("checked", true); 
+	});
+	
 	
 	goForm = function(key) {
     	/* if(key != 0) seq.val(btoa(key)); */
@@ -376,21 +393,6 @@
 	
 	$('#btnForm').on("click", function() {
 		goForm(0);                
-	});
-	
-	
-	$("#checkboxAll").click(function() {
-		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
-		else $("input[name=checkboxSeq]").prop("checked", false);
-	});
-	
-	
-	$("input[name=checkboxSeq]").click(function() {
-		var total = $("input[name=checkboxSeq]").length;
-		var checked = $("input[name=checkboxSeq]:checked").length;
-		
-		if(total != checked) $("#checkboxAll").prop("checked", false);
-		else $("#checkboxAll").prop("checked", true); 
 	});
 
 	
