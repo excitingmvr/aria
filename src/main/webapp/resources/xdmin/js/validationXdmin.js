@@ -78,7 +78,7 @@ function checkOnlyNumber (objName, pattern, nullAllowedNy, min, max, message) {
 
 function checkSelectNull (objName, pattern, message) {
 	var obj = document.getElementById(objName);
-	var objValue = document.getElementById(objName).options[obj.selectedIndex].value;
+	var objValue = document.getElementById(objName).value;
 	var objFeedback = document.getElementById(objName+"Feedback");
 	
 	if(objValue != "" && objValue != null) {
@@ -86,6 +86,22 @@ function checkSelectNull (objName, pattern, message) {
 		return true;
 	} else {
 		checkLogicExpression (obj, objFeedback, pattern, message)
+		return false;
+	}
+}
+
+
+
+function checkRadio (objName, pattern, nullAllowedNy, message, regExp) {
+	var obj = document.getElementById(objName);
+	var objFeedback = document.getElementById(objName+"Feedback");
+	
+	// if(document.querySelector("input[name='gender']:checked") != null){
+	if(document.querySelector("input[name='gender']:checked") != null){
+		obj.classList.remove('is-invalid');
+		return true;
+	} else {
+		checkLogicExpression (obj, objFeedback, pattern, message);
 		return false;
 	}
 }
@@ -147,6 +163,8 @@ function checkLogicExpression (obj, objFeedback, pattern, message) {
 		break;
 	}
 }
+
+
 
 
 
