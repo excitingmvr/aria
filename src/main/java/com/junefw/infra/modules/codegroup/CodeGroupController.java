@@ -4,8 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.TextTable.Cell;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -162,7 +163,7 @@ public class CodeGroupController extends BaseController{
 			
 //			Workbook workbook = new HSSFWorkbook();	// for xls
 	        Workbook workbook = new XSSFWorkbook();
-	        Sheet sheet = workbook.createSheet("첫번째 시트");
+	        Sheet sheet = workbook.createSheet("Sheet1");
 	        CellStyle cellStyle = workbook.createCellStyle();        
 	        Row row = null;
 	        Cell cell = null;
@@ -172,44 +173,50 @@ public class CodeGroupController extends BaseController{
 	        sheet.setColumnWidth(1, 3100);
 
 //	        Header
-	        String[] tableHeader = {"번호","이름","아이디","생년월일","수정일"};
+	        String[] tableHeader = {"코드그룹 코드", "코드그룹 이름", "코드그룹 이름 (영문)", "코드갯수", "등록일", "수정일"};
 
 	        row = sheet.createRow(rowNum++);
-//			for(int i=0; i<tableHeader.length; i++) {
-//				cell = row.createCell(i);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//				cell.setCellValue(tableHeader[i]);
-//			}
+	        
+			for(int i=0; i<tableHeader.length; i++) {
+				cell = row.createCell(i);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+				cell.setCellValue(tableHeader[i]);
+			}
 
 	        // Body
 	        for (int i=0; i<list.size(); i++) {
 	            row = sheet.createRow(rowNum++);
 	            
-//	            cell = row.createCell(0);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	            cell.setCellValue(Integer.parseInt(list.get(i).getIfmmSeq()));
-//	            
-//	            cell = row.createCell(1);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	        	cell.setCellValue(list.get(i).getIfmmName());
-//	        	
-//	            cell = row.createCell(2);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	        	cell.setCellValue(list.get(i).getIfmmId());
-//	        	
-//	            cell = row.createCell(3);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	            cell.setCellValue(list.get(i).getIfmmDob());
-//	            
-//	            cell = row.createCell(4);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	            cell.setCellValue(dateTimeToString(list.get(i).getRegDateTime()));
+	            cell = row.createCell(0);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	            cell.setCellValue(Integer.parseInt(list.get(i).getIfcgSeq()));
+	            
+	            cell = row.createCell(1);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getIfcgName());
+	        	
+	            cell = row.createCell(2);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getIfcgNameEng());
+	        	
+	            cell = row.createCell(3);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	            cell.setCellValue(list.get(i).getXifcdSeqCount());
+	            
+	            cell = row.createCell(4);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(dateTimeToString(list.get(i).getRegDateTime()));
+	            
+	            cell = row.createCell(5);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            cell.setCellValue(dateTimeToString(list.get(i).getModDateTime()));
 	        }
 
 	        httpServletResponse.setContentType("ms-vnd/excel");
