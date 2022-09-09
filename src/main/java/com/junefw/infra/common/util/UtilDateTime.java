@@ -92,4 +92,18 @@ public class UtilDateTime {
 		return date + " 23:59:59";
 	}
 	
+	
+	public static String dateToString(Date dateParam) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String dateRt = simpleDateFormat.format(dateParam);
+		return dateRt;
+	}
+	
+	
+	public static String dateTimeToString(Date dateTimeParam) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTimeRt = simpleDateFormat.format(dateTimeParam);
+		return dateTimeRt;
+	}
+	
 }

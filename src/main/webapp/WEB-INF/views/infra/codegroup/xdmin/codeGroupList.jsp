@@ -202,7 +202,7 @@
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
                 <td><c:out value="${list.ifcgSeq }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${list.ifcgSeq }"/>)"><c:out value="${list.ifcgName }"/></a></td>
+                <td><a href="javascript:goForm(<c:out value="${list.ifcgSeq }"/>)" class="text-decoration-none"><c:out value="${list.ifcgName }"/></a></td>
                 <td><c:out value="${list.ifcgNameEng }"/></td>
                 <td>
 	                <c:choose>

@@ -6,7 +6,6 @@ import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -112,21 +111,4 @@ public class BaseController {
 //		}
 //	}
 	
-	public String dateToString(Date dateParam) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String dateRt = simpleDateFormat.format(dateParam);
-		return dateRt;
-	}
-	
-	public String dateTimeToString(Date dateTimeParam) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		if(dateTimeParam != null) {
-			String dateTimeRt = simpleDateFormat.format(dateTimeParam);
-			return dateTimeRt;
-		} else {
-			// by pass
-			return "";
-		}
-	}
-
 }

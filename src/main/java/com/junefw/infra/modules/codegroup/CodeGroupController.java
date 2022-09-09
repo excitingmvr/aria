@@ -169,6 +169,7 @@ public class CodeGroupController extends BaseController{
 	        Cell cell = null;
 	        int rowNum = 0;
 			
+//	        each column width setting	        
 	        sheet.setColumnWidth(0, 2100);
 	        sheet.setColumnWidth(1, 3100);
 
@@ -184,9 +185,13 @@ public class CodeGroupController extends BaseController{
 				cell.setCellValue(tableHeader[i]);
 			}
 
-	        // Body
+//	        Body
 	        for (int i=0; i<list.size(); i++) {
 	            row = sheet.createRow(rowNum++);
+	            
+//	            String type: null 전달 되어도 ok
+//	            int, date type: null 시 오류 발생 하므로 null check
+//	            String type 이지만 정수형 데이터가 전체인 seq 의 경우 캐스팅	            
 	            
 	            cell = row.createCell(0);
 	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
@@ -211,12 +216,12 @@ public class CodeGroupController extends BaseController{
 	            cell = row.createCell(4);
 	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
 	        	cell.setCellStyle(cellStyle);
-	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(dateTimeToString(list.get(i).getRegDateTime()));
+	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getRegDateTime()));
 	            
 	            cell = row.createCell(5);
 	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
 	            cell.setCellStyle(cellStyle);
-	            cell.setCellValue(dateTimeToString(list.get(i).getModDateTime()));
+	            if(list.get(i).getModDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getModDateTime()));
 	        }
 
 	        httpServletResponse.setContentType("ms-vnd/excel");

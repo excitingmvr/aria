@@ -212,7 +212,7 @@
                 <td><c:out value="${list.ifcgName }"/></td>
                 <td><c:out value="${list.ifcdSeq }"/></td>
                 <td><c:out value="${list.ifcdSeqAnother }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${list.ifcdSeq }"/>)"><c:out value="${list.ifcdName }"/></a></td>
+                <td><a href="javascript:goForm(<c:out value="${list.ifcdSeq }"/>)" class="text-decoration-none"><c:out value="${list.ifcdName }"/></a></td>
                 <td><c:out value="${list.ifcdNameEng }"/></td>
                 <td>
                 	<c:choose>
