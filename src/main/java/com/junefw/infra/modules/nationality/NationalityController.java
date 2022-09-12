@@ -172,7 +172,7 @@ public class NationalityController extends BaseController {
 	        sheet.setColumnWidth(1, 3100);
 
 //	        Header
-	        String[] tableHeader = {"코드그룹 코드", "코드그룹 이름", "코드그룹 이름 (영문)", "코드갯수", "등록일", "수정일"};
+	        String[] tableHeader = {"Seq", "국가 이름", "국가 이름 (영문)", "국가 코드 (2자리)", "국가 코드 (3자리)", "사용", "순서", "등록일", "수정일"};
 
 	        row = sheet.createRow(rowNum++);
 	        
@@ -191,35 +191,50 @@ public class NationalityController extends BaseController {
 //	            int, date type: null 시 오류 발생 하므로 null check
 //	            String type 이지만 정수형 데이터가 전체인 seq 의 경우 캐스팅	            
 	            
-//	            cell = row.createCell(0);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	            cell.setCellValue(Integer.parseInt(list.get(i).getIfcgSeq()));
-//	            
-//	            cell = row.createCell(1);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	        	cell.setCellValue(list.get(i).getIfcgName());
-//	        	
-//	            cell = row.createCell(2);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	        	cell.setCellValue(list.get(i).getIfcgNameEng());
-//	        	
-//	            cell = row.createCell(3);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	            cell.setCellValue(list.get(i).getXifcdSeqCount());
-//	            
-//	            cell = row.createCell(4);
-//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	        	cell.setCellStyle(cellStyle);
-//	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getRegDateTime()));
-//	            
-//	            cell = row.createCell(5);
-//	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
-//	            cell.setCellStyle(cellStyle);
-//	            if(list.get(i).getModDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getModDateTime()));
+	            cell = row.createCell(0);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	            cell.setCellValue(Integer.parseInt(list.get(i).getIfnaSeq()));
+	            
+	            cell = row.createCell(1);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getIfnaName());
+	        	
+	            cell = row.createCell(2);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	cell.setCellValue(list.get(i).getIfnaNameEng());
+	        	
+	            cell = row.createCell(3);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	            cell.setCellValue(list.get(i).getIfnaCode2Char());
+	            
+	            cell = row.createCell(4);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            cell.setCellValue(list.get(i).getIfnaCode3Char());
+	            
+	            cell = row.createCell(5);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            if(list.get(i).getIfnaUseNy() != null) cell.setCellValue(list.get(i).getIfnaUseNy() == 0 ? "N" : "Y");
+	            
+	            cell = row.createCell(6);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            if(list.get(i).getIfnaOrder() != null) cell.setCellValue(list.get(i).getIfnaOrder());	            
+	            
+	            cell = row.createCell(7);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getRegDateTime()));
+	            
+	            cell = row.createCell(8);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            if(list.get(i).getModDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getModDateTime()));
 	        }
 
 	        httpServletResponse.setContentType("ms-vnd/excel");

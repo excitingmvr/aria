@@ -173,7 +173,7 @@ public class CodeGroupController extends BaseController{
 	        sheet.setColumnWidth(1, 3100);
 
 //	        Header
-	        String[] tableHeader = {"코드그룹 코드", "코드그룹 이름", "코드그룹 이름 (영문)", "코드갯수", "등록일", "수정일"};
+	        String[] tableHeader = {"코드그룹 코드", "코드그룹 이름", "코드그룹 이름 (영문)", "코드갯수", "사용", "순서", "등록일", "수정일"};
 
 	        row = sheet.createRow(rowNum++);
 	        
@@ -213,11 +213,21 @@ public class CodeGroupController extends BaseController{
 	            cell.setCellValue(list.get(i).getXifcdSeqCount());
 	            
 	            cell = row.createCell(4);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            if(list.get(i).getIfcgUseNy() != null) cell.setCellValue(list.get(i).getIfcgUseNy() == 0 ? "N" : "Y");
+	            
+	            cell = row.createCell(5);
+	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            cell.setCellStyle(cellStyle);
+	            if(list.get(i).getIfcgOrder() != null) cell.setCellValue(list.get(i).getIfcgOrder());
+	            
+	            cell = row.createCell(6);
 	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
 	        	cell.setCellStyle(cellStyle);
 	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getRegDateTime()));
 	            
-	            cell = row.createCell(5);
+	            cell = row.createCell(7);
 	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
 	            cell.setCellStyle(cellStyle);
 	            if(list.get(i).getModDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getModDateTime()));

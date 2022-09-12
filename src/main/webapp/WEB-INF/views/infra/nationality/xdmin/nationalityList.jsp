@@ -174,6 +174,7 @@
                     </div>
                 </th>
                 <th width="80px">#</th>
+                <th>Seq</th>
                 <th>국가 이름</th>
                 <th>국가 이름 (영문)</th>
                 <th>국가 코드 (2자리)</th>
@@ -189,7 +190,7 @@
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
-			<td class="text-center" colspan="10">There is no data!</td>
+			<td class="text-center" colspan="11">There is no data!</td>
 		</tr>	
 	</c:when>
 	<c:otherwise>
@@ -201,6 +202,7 @@
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
+                <td><c:out value="${list.ifnaSeq }"/></td>
                 <td><a href="javascript:goForm(<c:out value="${list.ifnaSeq}"/>)" class="text-decoration-none"><c:out value="${list.ifnaName }"/></a></td>
                 <td><c:out value="${list.ifnaNameEng }"/></td>
                 <td><c:out value="${list.ifnaCode2Char }"/></td>
