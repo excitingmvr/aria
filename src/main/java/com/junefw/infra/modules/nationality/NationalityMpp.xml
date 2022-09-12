@@ -19,6 +19,9 @@
 			</choose>
 			<choose>
 				<when test="shOption == 1">AND ifnaName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND ifnaNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND ifnaCode2Char LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND ifnaCode3Char LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
 	</sql>
 	

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../include/head.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
+
+<title>Nationality</title>		<!-- #-> -->
 
 <style type="text/css">
 	
@@ -9,15 +11,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../include/top.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../include/gnb.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../include/right.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -97,7 +99,7 @@
 	<input type="hidden" name="checkboxSeqArray" >
 	<input type="hidden" name="ifnaSeq">	<!-- #-> -->
 	
-<h3 class="mt-3 mb-0">국가코드관리</h3>			<!-- #-> -->
+<h3 class="mt-3 mb-0">국가코드 관리</h3>			<!-- #-> -->
 
 <!--  -->
 <div class="container-fluid px-0 d-block d-sm-none">
@@ -140,7 +142,10 @@
         <div class="col">
             <select id="shOption" name="shOption" class="form-select form-select-sm">
                 <option value="" <c:if test="${empty vo.shOption}">selected</c:if>>검색구분</option>
-                <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>이름</option>
+                <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>국가 이름</option>
+                <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>국가 이름 (영문)</option>
+                <option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>국가 코드 (2자리))</option>
+                <option value="4" <c:if test="${vo.shOption eq 4}">selected</c:if>>국가 코드 (3자리))</option>
             </select>
         </div>                    
         <div class="col">
@@ -155,7 +160,7 @@
 <!-- search e -->
 
 <!-- totalAndRowNum s -->
-<%@include file="../include/totalAndRowNum.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/totalAndRowNum.jsp"%>
 <!-- totalAndRowNumu e -->
 
 <!-- table s -->
@@ -169,11 +174,14 @@
                     </div>
                 </th>
                 <th width="80px">#</th>
-                <th>이름</th>
-                <th>이름(영문)</th>
-                <th>코드(2)</th>
-                <th>코드(3)</th>
-                <th width="180px">최근수정일</th>
+                <th>국가 이름</th>
+                <th>국가 이름 (영문)</th>
+                <th>국가 코드 (2자리)</th>
+                <th>국가 코드 (3자리)</th>
+                <th>사용</th>
+                <th>순서</th>
+                <th width="200px">등록일</th>
+                <th width="200px">수정일</th>
             </tr>
         </thead>
         <tbody>
@@ -181,23 +189,31 @@
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
-			<td class="text-center" colspan="7">There is no data!</td>
+			<td class="text-center" colspan="10">There is no data!</td>
 		</tr>	
 	</c:when>
 	<c:otherwise>
-		<c:forEach items="${list}" var="item" varStatus="status">	
+		<c:forEach items="${list}" var="list" varStatus="status">	
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifnaSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${list.ifnaSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${item.ifnaSeq}"/>)"><c:out value="${item.ifnaName }"/></a></td>
-                <td><c:out value="${item.ifnaNameEng }"/></td>
-                <td><c:out value="${item.ifnaCode2Char }"/></td>
-                <td><c:out value="${item.ifnaCode3Char }"/></td>
-                <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><a href="javascript:goForm(<c:out value="${list.ifnaSeq}"/>)" class="text-decoration-none"><c:out value="${list.ifnaName }"/></a></td>
+                <td><c:out value="${list.ifnaNameEng }"/></td>
+                <td><c:out value="${list.ifnaCode2Char }"/></td>
+                <td><c:out value="${list.ifnaCode3Char }"/></td>
+                <td>
+                	<c:choose>
+                		<c:when test="${list.ifnaUseNy eq 0 }">N</c:when>
+                		<c:otherwise>Y</c:otherwise>
+                	</c:choose>
+                </td>
+                <td><c:out value="${list.ifnaOrder }"/></td>
+                <td><fmt:formatDate value="${list.regDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${list.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
 		</c:forEach>
 	</c:otherwise>
@@ -209,7 +225,7 @@
 <!-- table e -->
 
 <!-- pagination s -->
-<%@include file="../include/pagination.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/pagination.jsp"%>
 <!-- pagination e -->
 
 <!-- button s -->
@@ -236,15 +252,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../include/footer.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../include/modalBase.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../include/linkJs.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script>
@@ -260,6 +276,8 @@
 	var goUrlMultiDele = "/nationality/nationalityMultiDele";			/* #-> */
 	
 	var seq = $("input:hidden[name=ifnaSeq]");				/* #-> */
+	
+	var excelUri = "/nationality/excelDownload";					/* #-> */
 	
 	var form = $("form[name=formList]");
 	
@@ -278,7 +296,8 @@
 	
 	
  	$("#btnReset").on("click", function(){
-		$(nationality).attr("href", goUrlList);
+ 		alert("asdfasdf");
+		$(location).attr("href", goUrlList);
 	});
  	
  		
@@ -287,6 +306,21 @@
 		form.attr("action", goUrlList).submit();
 	}); 
 		
+	
+	$("#checkboxAll").click(function() {
+		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+		else $("input[name=checkboxSeq]").prop("checked", false);
+	});
+	
+	
+	$("input[name=checkboxSeq]").click(function() {
+		var total = $("input[name=checkboxSeq]").length;
+		var checked = $("input[name=checkboxSeq]:checked").length;
+		
+		if(total != checked) $("#checkboxAll").prop("checked", false);
+		else $("#checkboxAll").prop("checked", true); 
+	});
+	
 	
 	goForm = function(key) {
     	/* if(key != 0) seq.val(btoa(key)); */
@@ -364,19 +398,10 @@
 	});
 	
 	
-	$("#checkboxAll").click(function() {
-		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
-		else $("input[name=checkboxSeq]").prop("checked", false);
+	$("#btnExcel").click(function() {
+		form.attr("action", excelUri).submit();
 	});
-	
-	
-	$("input[name=checkboxSeq]").click(function() {
-		var total = $("input[name=checkboxSeq]").length;
-		var checked = $("input[name=checkboxSeq]:checked").length;
-		
-		if(total != checked) $("#checkboxAll").prop("checked", false);
-		else $("#checkboxAll").prop("checked", true); 
-	});
+
      
 </script>
 

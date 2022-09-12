@@ -24,6 +24,7 @@ import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilCookie;
 import com.junefw.infra.common.util.UtilDateTime;
+import com.junefw.infra.common.util.UtilSecurity;
 
 @Controller
 @RequestMapping(value = "/member/")
@@ -75,7 +76,9 @@ public class MemberController extends BaseController {
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "memberInst")
 	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
-
+		
+		dto.setIfmmPassword(UtilSecurity.encryptSha256(dto.getIfmmPassword()));
+		
 		service.insert(dto);
 	
 		vo.setIfmmSeq(dto.getIfmmSeq());

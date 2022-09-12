@@ -6,7 +6,7 @@ public class Nationality extends Base{
 	
 	private String ifnaSeq;
 	private String ifnaName;
-	private Integer ifnaNameKor;
+	private String ifnaNameKor;
 	private String ifnaNameEng;
 	private String ifnaCode2Char;
 	private String ifnaCode3Char;
@@ -27,10 +27,10 @@ public class Nationality extends Base{
 	public void setIfnaName(String ifnaName) {
 		this.ifnaName = ifnaName;
 	}
-	public Integer getIfnaNameKor() {
+	public String getIfnaNameKor() {
 		return ifnaNameKor;
 	}
-	public void setIfnaNameKor(Integer ifnaNameKor) {
+	public void setIfnaNameKor(String ifnaNameKor) {
 		this.ifnaNameKor = ifnaNameKor;
 	}
 	public String getIfnaNameEng() {
@@ -75,6 +75,5 @@ public class Nationality extends Base{
 	public void setIfnaDelNy(Integer ifnaDelNy) {
 		this.ifnaDelNy = ifnaDelNy;
 	}
-	
 
 }

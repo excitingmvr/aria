@@ -37,13 +37,12 @@ public class CodeGroupController extends BaseController{
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 
 		vo.setParamsPaging(service.selectOneCount(vo));
-		
 	}
 	
 	
 	@RequestMapping(value = "codeGroupList")
 	public String codeGroupList(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
-
+		
 		setSearchAndPaging(vo);
 		
 		if (vo.getTotalRows() > 0) {

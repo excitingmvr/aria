@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!-- head s -->
-<%@include file="../include/head.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 <!-- head e -->
+
+<title>Nationality</title>		<!-- #-> -->
 
 <style type="text/css">
 
@@ -25,15 +27,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../include/top.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../include/gnb.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../include/right.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -118,39 +120,60 @@
 <h3 class="mt-3 mb-0">국가코드관리</h3>		<!-- #-> -->
  
 <div class="container-fluid px-0 px-sm-5 mt-2">
+	<div class="row mt-sm-4">
+		<div class="col-sm-6">
+			<label for="ifnaSeq" class="form-label">국가코드<span class="text-danger">*</span></label>
+			<input type="text" id="ifnaSeq" name="ifnaSeq" value="<c:out value="${item.ifnaSeq}"/>" maxlength="20" placeholder="자동생성" class="form-control form-control-sm" readonly>
+		</div>
+		<div class="col-sm-6">	
+		</div>
+	</div> 
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-            <label for="ifnaName" class="form-label">이름</label>
+            <label for="ifnaName" class="form-label">국가 이름 <span class="text-danger">*</span></label>
             <input type="text" id="ifnaName" name="ifnaName" value="<c:out value="${item.ifnaName}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifnaNameFeedback"></div>
         </div>
         <div class="col-sm-6">
-			<label for="ifnaNameEng" class="form-label">이름(영문)</label>
-            <input type="text" id="ifnaNameEng" name="ifnaNameEng" value="<c:out value="${item.ifnaNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-            <label for="ifnaCode2Char" class="form-label">코드(2)</label>
+            <label for="ifnaNameKor" class="form-label">국가 이름 (한글)</label>
+            <input type="text" id="ifnaNameKor" name="ifnaNameKor" value="<c:out value="${item.ifnaNameKor}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifnaNameKorFeedback"></div>
+        </div>
+        <div class="col-sm-6">
+			<label for="ifnaNameEng" class="form-label">국가 이름 (영문)</label>
+            <input type="text" id="ifnaNameEng" name="ifnaNameEng" value="<c:out value="${item.ifnaNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifnaNameEngFeedback"></div>        
+        </div>
+    </div>    
+    <div class="row mt-sm-4">
+        <div class="col-sm-6">
+            <label for="ifnaCode2Char" class="form-label">국가 코드 (2자리) <span class="text-danger">*</span></label>
             <input type="text" id="ifnaCode2Char" name="ifnaCode2Char" value="<c:out value="${item.ifnaCode2Char}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifnaCode2CharFeedback"></div>
         </div>
         <div class="col-sm-6">
-			<label for="ifnaCode3Char" class="form-label">코드(3)</label>
-            <input type="text" id="ifnaCode3Char" name="ifnaCode3Char" value="<c:out value="${item.ifnaCode3Char}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+			<label for="ifnaCode3Char" class="form-label">국가 코드 (3자리) <span class="text-danger">*</span></label>
+            <input type="text" id="ifnaCode3Char" name="ifnaCode3Char" value="<c:out value="${item.ifnaCode3Char}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifnaCode3CharFeedback"></div>        
         </div>
     </div>
     <div class="row mt-sm-4">
-        <div class="col-sm-6">
-            <label for="ifnaOrder" class="form-label">순서</label>
-            <input type="text" id="ifnaOrder" name="ifnaOrder" value="<c:out value="${item.ifnaOrder}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
-        </div>
-        <div class="col-sm-6">
-			<label for="ifnaUseNy" class="form-label">사용여부</label>
-            <select id="ifnaUseNy" name="ifnaUseNy" class="form-select form-select-sm">
-				<option value="">::선택::</option>
-				<option value="1" <c:if test="${item.ifnaUseNy eq 1 or empty item.ifnaUseNy }">selected</c:if>>Y</option>
-				<option value="0" <c:if test="${item.ifnaUseNy eq 0}">selected</c:if>>N</option>
-              </select>                    
-        </div>
+		<div class="col-sm-6">
+			<label for="ifnaUseNy" class="form-label">사용여부 <span class="text-danger">*</span></label>
+			<select id="ifnaUseNy" name="ifnaUseNy" class="form-select form-select-sm">
+				<option value="1" <c:if test="${item.ifnaUseNy eq 1 }">selected</c:if>>Y</option>
+				<option value="0" <c:if test="${item.ifnaUseNy eq 0 }">selected</c:if>>N</option>
+			</select>
+		</div>
+		<div class="col-sm-6">
+			<label for="ifnaOrder" class="form-label">순서 <span class="text-danger">*</span></label>
+			<input type="text" id="ifnaOrder" name="ifnaOrder" value="<c:out value="${item.ifnaOrder}"/>" maxlength="20" placeholder="숫자(0~255)" class="form-control form-control-sm">
+			<div class="invalid-feedback" id="ifnaOrderFeedback"></div>				        
+		</div>
     </div>
  
     <div class="row mt-sm-4">
@@ -159,11 +182,19 @@
             <textarea id="ifnaDesc" name="ifnaDesc" rows="5" class="form-control"><c:out value="${item.ifnaDesc }"/></textarea>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
+<%--         
+			<label for="ifnaUseNy" class="form-label">사용여부</label>
+            <select id="ifnaUseNy" name="ifnaUseNy" class="form-select form-select-sm">
+				<option value="">::선택::</option>
+				<option value="1" <c:if test="${item.ifnaUseNy eq 1 or empty item.ifnaUseNy }">selected</c:if>>Y</option>
+				<option value="0" <c:if test="${item.ifnaUseNy eq 0}">selected</c:if>>N</option>
+			</select>
+ --%>		        
         </div>
     </div>  
 <c:if test="${not empty item.ifnaSeq }">	<!-- #-> -->
 <!-- regMod s -->
-<%@include file="../include/regmod.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/regmod.jsp"%>
 <!-- regMod e -->
 </c:if>
 </div>
@@ -197,15 +228,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../include/footer.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../include/modalBase.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../include/linkJs.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script>
@@ -247,8 +278,12 @@
 
 	
 	validationUpdt = function() {
-		<!-- if(!checkNull($.trim($("input[name=MENU_NAME]").val()), "MENU_NAME")) return false;  -->
-		/* if(!checkNull($('input[name=AUTH_NM]'), $.trim($('input[name=AUTH_NM]').val()), "권한명을 등록 해주세요!")) return false; */
+ 		if(!checkOnlyKoreanEnglishNumber('ifnaName', 2, 0, "국가 이름은 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyKorean('ifnaNameKor', 2, 1, "국가 이름 (한글)은 한글만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyEnglish('ifnaNameEng', 2, 1, "국가 이름 (영문)은 영대소문자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyEnglish('ifnaCode2Char', 2, 0, "국가 코드 (2자리)은 영대소문자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyEnglish('ifnaCode3Char', 2, 0, "국가 코드 (3자리)은 영대소문자만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifnaOrder', 2, 0, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
 	}
 	
 	

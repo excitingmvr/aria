@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
-
-<title>CodeGroup</title>		<!-- #-> -->
+<%@include file="../include/head.jsp"%>
 
 <style type="text/css">
 	
@@ -11,15 +9,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
+<%@include file="../include/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
+<%@include file="../include/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
+<%@include file="../include/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -97,9 +95,9 @@
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 	<input type="hidden" name="checkboxSeqArray" >
-	<input type="hidden" name="ifcgSeq">	<!-- #-> -->
+	<input type="hidden" name="ifmmSeq">	<!-- #-> -->
 	
-<h3 class="mt-3 mb-0">코드그룹 관리</h3>		<!-- #-> -->
+<h3 class="mt-3 mb-0">Code</h3> 
 
 <!--  -->
 <div class="container-fluid px-0 d-block d-sm-none">
@@ -143,14 +141,12 @@
         <div class="col">
             <select id="shOption" name="shOption" class="form-select form-select-sm">
                 <option value="" <c:if test="${empty vo.shOption}">selected</c:if>>검색구분</option>
-                <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>코드그룹 코드</option>
-                <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>코드그룹 이름</option>
-                <option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>코드그룹 이름 (영문)</option>
+                <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>이름</option>
+                <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>아이디</option>
             </select>
         </div>                    
         <div class="col">
             <input type="text" id="shValue" name="shValue" value="<c:out value="${vo.shValue }"/>" placeholder="검색어" class="form-control form-control-sm">
-            <div class="invalid-feedback" id="shValueFeedback"></div>
         </div> 
         <div class="col">
 			<button type="button" class="btn btn-warning btn-sm" name="" id="btnSearch"><i class="fas fa-search"></i></button>
@@ -161,7 +157,7 @@
 <!-- search e -->
 
 <!-- totalAndRowNum s -->
-<%@include file="../../../common/xdmin/includeV1/totalAndRowNum.jsp"%>
+<%@include file="../include/totalAndRowNum.jsp"%>
 <!-- totalAndRowNumu e -->
 
 <!-- table s -->
@@ -174,20 +170,19 @@
                         <input type="checkbox" id="checkboxAll" name="" value="" class="form-check-input">
                     </div>
                 </th>
-                <th width="80px">#</th>
-                <th>코드그룹 코드</th>
-                <th>코드그룹 이름</th>
-                <th>코드그룹 이름 (영문)</th>
-                <th>코드갯수</th>
-                <th>사용</th>
-                <th>순서</th>
-                <th width="200px">등록일</th>
-                <th width="200px">수정일</th>
+                <th class="text-center" width="80px">#</th>
+                <th>이름</th>
+                <th>아이디</th>
+                <th>성별</th>
+                <th>생일</th>
+                <th>이메일</th>
+                <th>모바일</th>
+                <th>가입일</th>
             </tr>
         </thead>
         <tbody>
 
-<%-- <c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/> --%>
+<c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/>
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
@@ -195,32 +190,39 @@
 		</tr>	
 	</c:when>
 	<c:otherwise>
-		<c:forEach items="${list}" var="list" varStatus="status">	
+		<c:forEach items="${list}" var="item" varStatus="status">	
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${list.ifcgSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifmmSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
-                <td><c:out value="${list.ifcgSeq }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${list.ifcgSeq }"/>)" class="text-decoration-none"><c:out value="${list.ifcgName }"/></a></td>
-                <td><c:out value="${list.ifcgNameEng }"/></td>
+                <td><a href="javascript:goForm(<c:out value="${item.ifmmSeq}"/>)"><c:out value="${item.ifmmName }"/></a></td>
+                <td><c:out value="${item.ifmmId }"/></td>
                 <td>
-	                <c:choose>
-	                	<c:when test="${list.xifcdSeqCount ne 0 }"><a href="/code/codeList?ifcgSeq=<c:out value="${list.ifcgSeq }"/>"><c:out value="${list.xifcdSeqCount }"/></a></c:when>
-	                	<c:otherwise>0</c:otherwise>
-	                </c:choose>
+					<c:forEach items="${listCodeGender}" var="itemGender" varStatus="statusGender">
+						<c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq}"><c:out value="${itemGender.ifcdName }"/></c:if>
+					</c:forEach>
                 </td>
+                <td><c:out value="${item.ifmmDob }"/></td>
+                <td><c:out value="${item.ifmeEmailFull }"/></td>
                 <td>
+                	<c:set var="numberPhone" value="${item.ifmpNumber }"/>
                 	<c:choose>
-                		<c:when test="${list.ifcgUseNy eq 0 }">N</c:when>
-                		<c:otherwise>Y</c:otherwise>
-                	</c:choose>
+                		<c:when test="${fn:length(numberPhone) eq 10 }">
+							<c:out value="${fn:substring(numberPhone,0,3)}"/>
+							- <c:out value="${fn:substring(numberPhone,3,6)}"/>
+							- <c:out value="${fn:substring(numberPhone,6,10)}"/>
+                		</c:when>
+                		<c:otherwise>
+							<c:out value="${fn:substring(numberPhone,0,3)}"/>
+							- <c:out value="${fn:substring(numberPhone,3,7)}"/>
+							- <c:out value="${fn:substring(numberPhone,7,11)}"/>
+                		</c:otherwise>
+               		</c:choose>
                 </td>
-                <td><c:out value="${list.ifcgOrder }"/></td>                
-                <td><fmt:formatDate value="${list.regDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td><fmt:formatDate value="${list.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
 		</c:forEach>
 	</c:otherwise>
@@ -232,7 +234,7 @@
 <!-- table e -->
 
 <!-- pagination s -->
-<%@include file="../../../common/xdmin/includeV1/pagination.jsp"%>
+<%@include file="../include/pagination.jsp"%>
 <!-- pagination e -->
 
 <!-- button s -->
@@ -259,15 +261,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
+<%@include file="../include/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
+<%@include file="../include/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
+<%@include file="../include/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script>
@@ -277,14 +279,12 @@
 		 $("#shDateStart, #shDateEnd").datepicker();
 	}); 
 	
-	var goUrlList = "/codeGroup/codeGroupList";					/* #-> */
-	var goUrlForm = "/codeGroup/codeGroupForm";					/* #-> */
-	var goUrlMultiUele = "/codeGroup/codeGroupMultiUele";		/* #-> */
-	var goUrlMultiDele = "/codeGroup/codeGroupMultiDele";		/* #-> */
+	var goUrlList = "/member/memberList";					/* #-> */
+	var goUrlForm = "/member/memberForm";					/* #-> */
+	var goUrlMultiUele = "/member/memberMultiUele";			/* #-> */
+	var goUrlMultiDele = "/member/memberMultiDele";			/* #-> */
 	
-	var seq = $("input:hidden[name=ifcgSeq]");					/* #-> */
-	
-	var excelUri = "/codeGroup/excelDownload";					/* #-> */
+	var seq = $("input:hidden[name=ifmmSeq]");				/* #-> */
 	
 	var form = $("form[name=formList]");
 	
@@ -298,8 +298,7 @@
     
 	
 	validationList = function() {
-		/* if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어는 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false; */
-		if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어를 입력해 주세요.")) return false;
+		/* if(!checkNull($.trim($("input[name=searchValue]").val()), "searchValue")) return false; */
 	}
 	
 	
@@ -312,22 +311,7 @@
 		$("input:hidden[name=rowNumToShow]").val($("#changeRowNum option:selected").val());
 		form.attr("action", goUrlList).submit();
 	}); 
-	
-	
-	$("#checkboxAll").click(function() {
-		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
-		else $("input[name=checkboxSeq]").prop("checked", false);
-	});
-	
-	
-	$("input[name=checkboxSeq]").click(function() {
-		var total = $("input[name=checkboxSeq]").length;
-		var checked = $("input[name=checkboxSeq]:checked").length;
 		
-		if(total != checked) $("#checkboxAll").prop("checked", false);
-		else $("#checkboxAll").prop("checked", true); 
-	});
-	
 	
 	goForm = function(key) {
     	/* if(key != 0) seq.val(btoa(key)); */
@@ -403,12 +387,22 @@
 	$('#btnForm').on("click", function() {
 		goForm(0);                
 	});
-
 	
-	$("#btnExcel").click(function() {
-		form.attr("action", excelUri).submit();
+	
+	$("#checkboxAll").click(function() {
+		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+		else $("input[name=checkboxSeq]").prop("checked", false);
 	});
 	
+	
+	$("input[name=checkboxSeq]").click(function() {
+		var total = $("input[name=checkboxSeq]").length;
+		var checked = $("input[name=checkboxSeq]:checked").length;
+		
+		if(total != checked) $("#checkboxAll").prop("checked", false);
+		else $("#checkboxAll").prop("checked", true); 
+	});
+     
 </script>
 
 </body>

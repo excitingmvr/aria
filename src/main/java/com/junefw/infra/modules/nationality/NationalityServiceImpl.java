@@ -21,6 +21,21 @@ public class NationalityServiceImpl extends BaseServiceImpl implements Nationali
 	NationalityDao dao;
 
 	@Override
+	public void setRegMod(Nationality dto) throws Exception {
+		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+		dto.setRegDeviceCd(UtilRegMod.getDevice());
+		dto.setRegDateTime(UtilDateTime.nowDate());
+		
+		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+		dto.setModDeviceCd(UtilRegMod.getDevice());
+		dto.setModDateTime(UtilDateTime.nowDate());
+	}
+	
+	@Override
 	public int selectOneCount(NationalityVo vo){
 		return dao.selectOneCount(vo);
 	}
@@ -56,21 +71,6 @@ public class NationalityServiceImpl extends BaseServiceImpl implements Nationali
 	@Override
 	public int delete(NationalityVo vo) throws Exception {
 		return dao.delete(vo);
-	}
-	
-	
-	public void setRegMod(Nationality dto) throws Exception {
-		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		
-		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
-		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-		dto.setRegDeviceCd(UtilRegMod.getDevice());
-		dto.setRegDateTime(UtilDateTime.nowDate());
-		
-		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
-		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-		dto.setModDeviceCd(UtilRegMod.getDevice());
-		dto.setModDateTime(UtilDateTime.nowDate());
 	}
 
 }
