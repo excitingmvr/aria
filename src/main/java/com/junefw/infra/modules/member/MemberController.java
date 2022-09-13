@@ -9,14 +9,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,27 +40,31 @@ public class MemberController extends BaseController {
 	@Autowired
 	MemberServiceImpl service;
 
+	
+	public void setSearchAndPaging(MemberVo vo) throws Exception {
+		
+		vo.setShOptionDate(vo.getShOptionDate() == null ? null : vo.getShOptionDate());
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
+
+		vo.setParamsPaging(service.selectOneCount(vo));
+	}
+	
+	
 	@RequestMapping(value = "memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
-		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
-		vo.setShDateStart(vo.getShDateStart() == null
-				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
-				: UtilDateTime.add00TimeString(vo.getShDateStart()));
-		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString()
-				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
-
-		vo.setParamsPaging(service.selectOneCount(vo));
+		setSearchAndPaging(vo);
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
 //			List<?> list = service.selectList(vo);
 			model.addAttribute("list", list);
 		}
-
-		return "xdmin/member/memberList";
+		return "infra/member/xdmin/memberList";
 	}
 
+	
 	@RequestMapping(value = "memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
@@ -70,9 +81,10 @@ public class MemberController extends BaseController {
 //		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));
 //		model.addAttribute("codeTelecom", CodeServiceImpl.selectListCachedCode("10"));
 
-		return "xdmin/member/memberForm";
+		return "infra/member/xdmin/memberForm";
 	}
 
+	
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "memberInst")
 	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
@@ -92,6 +104,7 @@ public class MemberController extends BaseController {
 		}
 	}
 	
+	
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "memberUpdt")
 	public String memberUpdt(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
@@ -106,6 +119,7 @@ public class MemberController extends BaseController {
 			return "redirect:/member/memberList";
 		}
 	}
+	
 
 	@RequestMapping(value = "memberUele")
 	public String memberUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
@@ -117,6 +131,7 @@ public class MemberController extends BaseController {
 		return "redirect:/member/memberList";
 	}
 
+	
 	@RequestMapping(value = "memberDele")
 	public String memberDele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
@@ -127,6 +142,7 @@ public class MemberController extends BaseController {
 		return "redirect:/member/memberList";
 	}
 
+	
 	@RequestMapping(value = "memberMultiUele")
 	public String memberMultiUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
@@ -139,6 +155,7 @@ public class MemberController extends BaseController {
 
 		return "redirect:/member/memberList";
 	}
+	
 
 	@RequestMapping(value = "memberMultiDele")
 	public String memberMultiDele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
@@ -152,6 +169,103 @@ public class MemberController extends BaseController {
 
 		return "redirect:/member/memberList";
 	}
+	
+	
+	@RequestMapping("excelDownload")
+    public void excelDownload(MemberVo vo, HttpServletResponse httpServletResponse) throws Exception {
+		
+		setSearchAndPaging(vo);
+
+		if (vo.getTotalRows() > 0) {
+			List<Member> list = service.selectList(vo);
+			
+//			Workbook workbook = new HSSFWorkbook();	// for xls
+	        Workbook workbook = new XSSFWorkbook();
+	        Sheet sheet = workbook.createSheet("Sheet1");
+	        CellStyle cellStyle = workbook.createCellStyle();        
+	        Row row = null;
+	        Cell cell = null;
+	        int rowNum = 0;
+			
+//	        each column width setting	        
+	        sheet.setColumnWidth(0, 2100);
+	        sheet.setColumnWidth(1, 3100);
+
+//	        Header
+	        String[] tableHeader = {"Seq", "국가 이름", "국가 이름 (영문)", "국가 코드 (2자리)", "국가 코드 (3자리)", "사용", "순서", "등록일", "수정일"};
+
+	        row = sheet.createRow(rowNum++);
+	        
+			for(int i=0; i<tableHeader.length; i++) {
+				cell = row.createCell(i);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+				cell.setCellValue(tableHeader[i]);
+			}
+
+//	        Body
+	        for (int i=0; i<list.size(); i++) {
+	            row = sheet.createRow(rowNum++);
+	            
+//	            String type: null 전달 되어도 ok
+//	            int, date type: null 시 오류 발생 하므로 null check
+//	            String type 이지만 정수형 데이터가 전체인 seq 의 경우 캐스팅	            
+	            
+//	            cell = row.createCell(0);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	            cell.setCellValue(Integer.parseInt(list.get(i).getIfnaSeq()));
+//	            
+//	            cell = row.createCell(1);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	        	cell.setCellValue(list.get(i).getIfnaName());
+//	        	
+//	            cell = row.createCell(2);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	        	cell.setCellValue(list.get(i).getIfnaNameEng());
+//	        	
+//	            cell = row.createCell(3);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	            cell.setCellValue(list.get(i).getIfnaCode2Char());
+//	            
+//	            cell = row.createCell(4);
+//	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	            cell.setCellStyle(cellStyle);
+//	            cell.setCellValue(list.get(i).getIfnaCode3Char());
+//	            
+//	            cell = row.createCell(5);
+//	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	            cell.setCellStyle(cellStyle);
+//	            if(list.get(i).getIfnaUseNy() != null) cell.setCellValue(list.get(i).getIfnaUseNy() == 0 ? "N" : "Y");
+//	            
+//	            cell = row.createCell(6);
+//	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	            cell.setCellStyle(cellStyle);
+//	            if(list.get(i).getIfnaOrder() != null) cell.setCellValue(list.get(i).getIfnaOrder());	            
+//	            
+//	            cell = row.createCell(7);
+//	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	        	cell.setCellStyle(cellStyle);
+//	        	if(list.get(i).getRegDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getRegDateTime()));
+//	            
+//	            cell = row.createCell(8);
+//	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//	            cell.setCellStyle(cellStyle);
+//	            if(list.get(i).getModDateTime() != null) cell.setCellValue(UtilDateTime.dateTimeToString(list.get(i).getModDateTime()));
+	        }
+
+	        httpServletResponse.setContentType("ms-vnd/excel");
+//	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xls");	// for xls
+	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xlsx");
+
+	        workbook.write(httpServletResponse.getOutputStream());
+	        workbook.close();
+		}
+    }
+	
 
 	@RequestMapping(value = "loginForm")
 	public String loginForm(MemberVo vo, HttpSession httpSession) throws Exception {
@@ -180,6 +294,7 @@ public class MemberController extends BaseController {
 		}
 	}
 
+	
 	@ResponseBody
 	@RequestMapping(value = "loginProc")
 	public Map<String, Object> loginProc(Member dto, HttpSession httpSession) throws Exception {
@@ -230,6 +345,7 @@ public class MemberController extends BaseController {
 		return returnMap;
 	}
 
+	
 	@ResponseBody
 	@RequestMapping(value = "logoutProc")
 	public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
@@ -240,18 +356,21 @@ public class MemberController extends BaseController {
 		return returnMap;
 	}
 
+	
 	@RequestMapping(value = "findIdPwdForm")
 	public String findIdPwdForm() throws Exception {
-
-		return "xdmin/member/findIdPwdForm";
+		
+		return "infra/member/xdmin/findIdPwdForm";
 	}
 
+	
 	@RequestMapping(value = "changePwdForm")
 	public String changePwdForm() throws Exception {
-
-		return "xdmin/member/changePwdForm";
+		
+		return "infra/member/xdmin/changePwdForm";
 	}
 
+	
 	@ResponseBody
 	@RequestMapping(value = "extendPwd")
 	public Map<String, Object> extendPwd(Member dto) throws Exception {
@@ -261,22 +380,4 @@ public class MemberController extends BaseController {
 		return returnMap;
 	}
 
-//	구글api를 이용하여 주소값을 던지면 위도 경도를 받아오는 정적 함수
-//	구글 계정 등록이 필요하여 현재는 주석 처리
-//	@ResponseBody
-//	@RequestMapping(value = "addressFindGeoProc")
-//	public Map<String, Object> addressFindGeoProc(Member dto) throws Exception {
-//		Map<String, Object> returnMap = new HashMap<String, Object>();
-//		
-//		System.out.println("dto.getIfmaAddress1Array()[0]: " + dto.getIfmaAddress1Array()[0]);
-//		
-//		Float[] rtFloat = UtilMis.getLatLng(dto.getIfmaAddress1Array()[0]);
-//		
-//		System.out.println("rtFloat[0]: " + rtFloat[0]);
-//		System.out.println("rtFloat[1]: " + rtFloat[1]);
-//		
-//		returnMap.put("rtFloat", rtFloat);
-//		returnMap.put("rt", "success");
-//		return returnMap;
-//	}
 }

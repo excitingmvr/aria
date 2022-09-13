@@ -298,7 +298,6 @@
 	
 	
  	$("#btnReset").on("click", function(){
- 		alert("asdfasdf");
 		$(location).attr("href", goUrlList);
 	});
  	

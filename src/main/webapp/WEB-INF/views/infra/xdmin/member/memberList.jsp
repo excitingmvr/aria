@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../include/head.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
+
+<title>Member</title>		<!-- #-> -->
 
 <style type="text/css">
 	
@@ -9,15 +11,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../include/top.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../include/gnb.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../include/right.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -97,7 +99,7 @@
 	<input type="hidden" name="checkboxSeqArray" >
 	<input type="hidden" name="ifmmSeq">	<!-- #-> -->
 	
-<h3 class="mt-3 mb-0">Code</h3> 
+<h3 class="mt-3 mb-0">회원 관리</h3> 
 
 <!--  -->
 <div class="container-fluid px-0 d-block d-sm-none">
@@ -157,7 +159,7 @@
 <!-- search e -->
 
 <!-- totalAndRowNum s -->
-<%@include file="../include/totalAndRowNum.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/totalAndRowNum.jsp"%>
 <!-- totalAndRowNumu e -->
 
 <!-- table s -->
@@ -234,7 +236,7 @@
 <!-- table e -->
 
 <!-- pagination s -->
-<%@include file="../include/pagination.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/pagination.jsp"%>
 <!-- pagination e -->
 
 <!-- button s -->
@@ -261,15 +263,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../include/footer.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../include/modalBase.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../include/linkJs.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script>

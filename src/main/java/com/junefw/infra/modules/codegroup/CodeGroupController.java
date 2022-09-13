@@ -89,7 +89,9 @@ public class CodeGroupController extends BaseController{
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "codeGroupUpdt")
 	public String codeGroupUpdt(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
-
+		
+		System.out.println("dto.getIfcgSeq(): " + dto.getIfcgSeq());
+		
 		service.update(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);

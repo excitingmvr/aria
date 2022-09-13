@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../include/head.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
+
+<title>Member</title>		<!-- #-> -->
 
 <style type="text/css">
 	
@@ -9,15 +11,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../include/top.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../include/gnb.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../include/right.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -97,7 +99,7 @@
 	<input type="hidden" name="checkboxSeqArray" >
 	<input type="hidden" name="ifmmSeq">	<!-- #-> -->
 	
-<h3 class="mt-3 mb-0">Code</h3> 
+<h3 class="mt-3 mb-0">회원 관리</h3>		<!-- #-> -->
 
 <!--  -->
 <div class="container-fluid px-0 d-block d-sm-none">
@@ -143,6 +145,8 @@
                 <option value="" <c:if test="${empty vo.shOption}">selected</c:if>>검색구분</option>
                 <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>이름</option>
                 <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>아이디</option>
+                <option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>이메일</option>
+                <option value="4" <c:if test="${vo.shOption eq 4}">selected</c:if>>모바일</option>
             </select>
         </div>                    
         <div class="col">
@@ -157,7 +161,7 @@
 <!-- search e -->
 
 <!-- totalAndRowNum s -->
-<%@include file="../include/totalAndRowNum.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/totalAndRowNum.jsp"%>
 <!-- totalAndRowNumu e -->
 
 <!-- table s -->
@@ -171,13 +175,15 @@
                     </div>
                 </th>
                 <th class="text-center" width="80px">#</th>
+                <th>Seq</th>                
                 <th>이름</th>
                 <th>아이디</th>
                 <th>성별</th>
                 <th>생일</th>
                 <th>이메일</th>
                 <th>모바일</th>
-                <th>가입일</th>
+                <th width="200px">등록일</th>
+                <th width="200px">수정일</th>
             </tr>
         </thead>
         <tbody>
@@ -186,43 +192,41 @@
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
-			<td class="text-center" colspan="9">There is no data!</td>
+			<td class="text-center" colspan="11">There is no data!</td>
 		</tr>	
 	</c:when>
 	<c:otherwise>
-		<c:forEach items="${list}" var="item" varStatus="status">	
+		<c:forEach items="${list}" var="list" varStatus="status">	
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ifmmSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${list.ifmmSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${item.ifmmSeq}"/>)"><c:out value="${item.ifmmName }"/></a></td>
-                <td><c:out value="${item.ifmmId }"/></td>
+				<td><c:out value="${list.ifmmSeq }"/></td>
+                <td><a href="javascript:goForm(<c:out value="${list.ifmmSeq}"/>)" class="text-decoration-none"><c:out value="${list.ifmmName }"/></a></td>
+                <td><c:out value="${list.ifmmId }"/></td>
                 <td>
-					<c:forEach items="${listCodeGender}" var="itemGender" varStatus="statusGender">
-						<c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq}"><c:out value="${itemGender.ifcdName }"/></c:if>
+					<c:forEach items="${listCodeGender}" var="listGender" varStatus="statusGender">
+						<c:if test="${list.ifmmGenderCd eq listGender.ifcdSeq}"><c:out value="${listGender.ifcdName }"/></c:if>
 					</c:forEach>
                 </td>
-                <td><c:out value="${item.ifmmDob }"/></td>
-                <td><c:out value="${item.ifmeEmailFull }"/></td>
+                <td><c:out value="${list.ifmmDob }"/></td>
+                <td><c:out value="${list.ifmeEmailFull }"/></td>
                 <td>
-                	<c:set var="numberPhone" value="${item.ifmpNumber }"/>
+                	<c:set var="numberPhone" value="${list.ifmpNumber }"/>
                 	<c:choose>
                 		<c:when test="${fn:length(numberPhone) eq 10 }">
-							<c:out value="${fn:substring(numberPhone,0,3)}"/>
-							- <c:out value="${fn:substring(numberPhone,3,6)}"/>
-							- <c:out value="${fn:substring(numberPhone,6,10)}"/>
+							<c:out value="${fn:substring(numberPhone,0,3)}"/>-<c:out value="${fn:substring(numberPhone,3,6)}"/>-<c:out value="${fn:substring(numberPhone,6,10)}"/>
                 		</c:when>
                 		<c:otherwise>
-							<c:out value="${fn:substring(numberPhone,0,3)}"/>
-							- <c:out value="${fn:substring(numberPhone,3,7)}"/>
-							- <c:out value="${fn:substring(numberPhone,7,11)}"/>
+							<c:out value="${fn:substring(numberPhone,0,3)}"/>-<c:out value="${fn:substring(numberPhone,3,7)}"/>-<c:out value="${fn:substring(numberPhone,7,11)}"/>
                 		</c:otherwise>
                		</c:choose>
                 </td>
-                <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${list.regDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${list.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
 		</c:forEach>
 	</c:otherwise>
@@ -234,7 +238,7 @@
 <!-- table e -->
 
 <!-- pagination s -->
-<%@include file="../include/pagination.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/pagination.jsp"%>
 <!-- pagination e -->
 
 <!-- button s -->
@@ -261,15 +265,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../include/footer.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../include/modalBase.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../include/linkJs.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script>
@@ -285,6 +289,8 @@
 	var goUrlMultiDele = "/member/memberMultiDele";			/* #-> */
 	
 	var seq = $("input:hidden[name=ifmmSeq]");				/* #-> */
+	
+	var excelUri = "/member/excelDownload";					/* #-> */
 	
 	var form = $("form[name=formList]");
 	
@@ -312,6 +318,21 @@
 		form.attr("action", goUrlList).submit();
 	}); 
 		
+	
+	$("#checkboxAll").click(function() {
+		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+		else $("input[name=checkboxSeq]").prop("checked", false);
+	});
+	
+	
+	$("input[name=checkboxSeq]").click(function() {
+		var total = $("input[name=checkboxSeq]").length;
+		var checked = $("input[name=checkboxSeq]:checked").length;
+		
+		if(total != checked) $("#checkboxAll").prop("checked", false);
+		else $("#checkboxAll").prop("checked", true); 
+	});
+	
 	
 	goForm = function(key) {
     	/* if(key != 0) seq.val(btoa(key)); */
@@ -389,19 +410,10 @@
 	});
 	
 	
-	$("#checkboxAll").click(function() {
-		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
-		else $("input[name=checkboxSeq]").prop("checked", false);
+	$("#btnExcel").click(function() {
+		form.attr("action", excelUri).submit();
 	});
-	
-	
-	$("input[name=checkboxSeq]").click(function() {
-		var total = $("input[name=checkboxSeq]").length;
-		var checked = $("input[name=checkboxSeq]:checked").length;
-		
-		if(total != checked) $("#checkboxAll").prop("checked", false);
-		else $("#checkboxAll").prop("checked", true); 
-	});
+
      
 </script>
 

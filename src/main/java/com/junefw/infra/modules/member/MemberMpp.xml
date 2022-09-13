@@ -15,15 +15,18 @@
 			LEFT JOIN infrMemberEmail b ON b.ifmeDelny = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
 			LEFT JOIN infrMemberPhone c ON c.ifmpDelny = 0 AND c.ifmpDefaultNy = 1 AND c.ifmmSeq = a.ifmmSeq
 		WHERE 1=1
-			<if test="shDelNy != null and !shDelNy.equals('')">AND ifmmDelNy = #{shDelNy}</if>
+			<if test="shDelNy != null and !shDelNy.equals('')">AND a.ifmmDelNy = #{shDelNy}</if>
+			<if test="shAdminNy != null and !shAdminNy.equals('')">AND a.ifmmAdminNy = #{shAdminNy}</if>
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 				<when test="shOptionDate == 3">AND a.ifmmDob BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 			</choose>
 			<choose>
-				<when test="shOption == 1">AND ifmmName LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 2">AND ifmmId LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 1">AND a.ifmmName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND a.ifmmId LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND b.ifmeEmailFull LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND c.ifmpNumber LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
 	</sql>
 	
