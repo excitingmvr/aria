@@ -59,7 +59,7 @@
 			<include refid="Base.selectRegModWithAlies" />			
 		 FROM infrCodeGroup a
 		 WHERE 1=1
-		 	AND a.ifcgSeq = #{ifcgSeq}
+		 	AND a.ifcgSeq = #{mainKey}  
 	</select>
 	
 	<insert id="insert">

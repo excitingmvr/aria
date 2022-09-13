@@ -290,10 +290,12 @@
 	$("#btnSave").on("click", function(){
 		if (seq.val() == "0" || seq.val() == ""){
 	   		// insert
+	   		//seq.remove();
 	   		if (validationInst() == false) return false;
 	   		form.attr("action", goUrlInst).submit();
 	   	} else {
 	   		// update
+	   		//seq.remove();
 	   		/* keyName.val(atob(keyName.val())); */
 	   		if (validationUpdt() == false) return false;
 	   		form.attr("action", goUrlUpdt).submit();

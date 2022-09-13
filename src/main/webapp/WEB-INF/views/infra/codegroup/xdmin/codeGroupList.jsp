@@ -98,6 +98,7 @@
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 	<input type="hidden" name="checkboxSeqArray" >
 	<input type="hidden" name="ifcgSeq">	<!-- #-> -->
+	<input type="hidden" name="mainKey">	<!-- #-> -->
 	
 <h3 class="mt-3 mb-0">코드그룹 관리</h3>		<!-- #-> -->
 
@@ -286,6 +287,7 @@
 	
 	var excelUri = "/codeGroup/excelDownload";					/* #-> */
 	
+	var mainKey = $("input:hidden[name=mainKey]");
 	var form = $("form[name=formList]");
 	
 	var checkboxSeqArray = [];
@@ -329,9 +331,11 @@
 	});
 	
 	
-	goForm = function(key) {
+	goForm = function(keyValue) {
     	/* if(key != 0) seq.val(btoa(key)); */
-		seq.val(key);
+		// seq.val(key);
+    	mainKey.val(keyValue);
+    	alert("mainKey.val(): " + mainKey.val());
 		form.attr("action", goUrlForm).submit();
 	}
 	
