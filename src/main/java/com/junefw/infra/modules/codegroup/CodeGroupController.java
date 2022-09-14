@@ -130,7 +130,7 @@ public class CodeGroupController extends BaseController{
 	public String codeGroupMultiUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setMainKey(checkboxSeq);
+			dto.setIfcgSeq(checkboxSeq);
 			service.uelete(dto);
 		}
 
@@ -141,7 +141,7 @@ public class CodeGroupController extends BaseController{
 
 	
 	@RequestMapping(value = "codeGroupMultiDele")
-	public String nationalityMultiDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String codeGroupMultiDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
 			vo.setMainKey(checkboxSeq);
