@@ -135,7 +135,7 @@
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM infrCodeGroup WHERE ifcgSeq = #{ifcgSeq}
+		DELETE FROM infrCodeGroup WHERE ifcgSeq = #{mainKey}
 	</delete>
 	
 	<select id="selectListWithoutPaging" resultMap="resultMapObj">

@@ -281,21 +281,19 @@
 	var goUrlUele = "/codeGroup/codeGroupUele";				/* #-> */
 	var goUrlDele = "/codeGroup/codeGroupDele";				/* #-> */
 	
-	var seq = $("input:hidden[name=ifcgSeq]");				/* #-> */
+	var mainKey = $("input:hidden[name=mainKey]"); 
 	
 	var form = $("form[name=form]");
 	var formVo = $("form[name=formVo]");
 	
 	
 	$("#btnSave").on("click", function(){
-		if (seq.val() == "0" || seq.val() == ""){
+		if (mainKey.val() == "0" || mainKey.val() == ""){
 	   		// insert
-	   		//seq.remove();
 	   		if (validationInst() == false) return false;
 	   		form.attr("action", goUrlInst).submit();
 	   	} else {
 	   		// update
-	   		//seq.remove();
 	   		/* keyName.val(atob(keyName.val())); */
 	   		if (validationUpdt() == false) return false;
 	   		form.attr("action", goUrlUpdt).submit();

@@ -57,12 +57,6 @@ public class CodeGroupController extends BaseController{
 	@RequestMapping(value = "codeGroupForm")
 	public String codeGroupForm(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
 		
-//		if (vo.getIfcgSeq().equals("0") || vo.getIfcgSeq().equals("")) {
-//			//	insert
-//		} else {
-//			CodeGroup item = service.selectOne(vo);
-//			model.addAttribute("item", item);
-//		}
 		if (vo.getMainKey().equals("0") || vo.getMainKey().equals("")) {
 			//	insert
 		} else {
@@ -78,11 +72,9 @@ public class CodeGroupController extends BaseController{
 	@RequestMapping(value = "codeGroupInst")
 	public String codeGroupyInst(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		System.out.println("dto.getIfcgSeq(): " + dto.getIfcgSeq());
-		
 		service.insert(dto);
 	
-		vo.setIfcgSeq(dto.getIfcgSeq());
+		vo.setMainKey(dto.getIfcgSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -97,8 +89,6 @@ public class CodeGroupController extends BaseController{
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "codeGroupUpdt")
 	public String codeGroupUpdt(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
-		
-		System.out.println("dto.getIfcgSeq(): " + dto.getIfcgSeq());
 		
 		service.update(dto);
 
@@ -115,6 +105,8 @@ public class CodeGroupController extends BaseController{
 	@RequestMapping(value = "codeGroupUele")
 	public String codeGroupUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
+		dto.setIfcgSeq(vo.getMainKey());
+		
 		service.uelete(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
@@ -138,7 +130,7 @@ public class CodeGroupController extends BaseController{
 	public String codeGroupMultiUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfcgSeq(checkboxSeq);
+			vo.setMainKey(checkboxSeq);
 			service.uelete(dto);
 		}
 
@@ -152,7 +144,7 @@ public class CodeGroupController extends BaseController{
 	public String nationalityMultiDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfcgSeq(checkboxSeq);
+			vo.setMainKey(checkboxSeq);
 			service.delete(vo);
 		}
 

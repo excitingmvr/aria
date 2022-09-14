@@ -94,12 +94,11 @@
 
 <!-- main s -->
 <form name="formList" id="formList" method="post">
+	<input type="hidden" name="mainKey">
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 	<input type="hidden" name="checkboxSeqArray" >
-	<input type="hidden" name="ifcgSeq">	<!-- #-> -->
-	<input type="hidden" name="mainKey">	<!-- #-> -->
-	
+
 <h3 class="mt-3 mb-0">코드그룹 관리</h3>		<!-- #-> -->
 
 <!--  -->
@@ -283,11 +282,10 @@
 	var goUrlMultiUele = "/codeGroup/codeGroupMultiUele";		/* #-> */
 	var goUrlMultiDele = "/codeGroup/codeGroupMultiDele";		/* #-> */
 	
-	var seq = $("input:hidden[name=ifcgSeq]");					/* #-> */
-	
 	var excelUri = "/codeGroup/excelDownload";					/* #-> */
 	
 	var mainKey = $("input:hidden[name=mainKey]");
+
 	var form = $("form[name=formList]");
 	
 	var checkboxSeqArray = [];
@@ -301,10 +299,13 @@
 	
 	validationList = function() {
 		/* if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어는 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false; */
-		if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어를 입력해 주세요.")) return false;
+//		alert($("#shOption").value);
+//		if($("#shOption").value != ""){
+//			if(!checkOnlyKoreanEnglishNumber('shValue', 2, 0, "검색어를 입력해 주세요.")) return false;
+//		}
 	}
 	
-	
+
  	$("#btnReset").on("click", function(){
 		$(location).attr("href", goUrlList);
 	});
@@ -332,10 +333,8 @@
 	
 	
 	goForm = function(keyValue) {
-    	/* if(key != 0) seq.val(btoa(key)); */
-		// seq.val(key);
+    	/* if(keyValue != 0) seq.val(btoa(keyValue)); */
     	mainKey.val(keyValue);
-    	alert("mainKey.val(): " + mainKey.val());
 		form.attr("action", goUrlForm).submit();
 	}
 	
