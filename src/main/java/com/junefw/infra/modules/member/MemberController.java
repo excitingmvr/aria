@@ -68,7 +68,7 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
-		if (vo.getIfmmSeq().equals("0") || vo.getIfmmSeq().equals("")) {
+		if (vo.getMainKey().equals("0") || vo.getMainKey().equals("")) {
 //			insert
 		} else {
 //			update
@@ -93,7 +93,7 @@ public class MemberController extends BaseController {
 		
 		service.insert(dto);
 	
-		vo.setIfmmSeq(dto.getIfmmSeq());
+		vo.setMainKey(dto.getIfmmSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -122,9 +122,11 @@ public class MemberController extends BaseController {
 	
 
 	@RequestMapping(value = "memberUele")
-	public String memberUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String memberUele(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		service.uelete(vo);
+		dto.setIfmmSeq(vo.getMainKey());
+		
+		service.uelete(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -144,11 +146,11 @@ public class MemberController extends BaseController {
 
 	
 	@RequestMapping(value = "memberMultiUele")
-	public String memberMultiUele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
+	public String memberMultiUele(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfmmSeq(checkboxSeq);
-			service.uelete(vo);
+			dto.setIfmmSeq(checkboxSeq);
+			service.uelete(dto);
 		}
 
 		redirectAttributes.addFlashAttribute("vo", vo);
@@ -161,7 +163,7 @@ public class MemberController extends BaseController {
 	public String memberMultiDele(MemberVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfmmSeq(checkboxSeq);
+			vo.setMainKey(checkboxSeq);
 //			service.delete(vo);
 		}
 
@@ -270,13 +272,11 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "loginForm")
 	public String loginForm(MemberVo vo, HttpSession httpSession) throws Exception {
 		if(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ) != null) {
+
 			//	auto login
-			
-			System.out.println("UtilCookie.getValue(Constants.COOKIE_NAME_SEQ): " + UtilCookie.getValue(Constants.COOKIE_NAME_SEQ));
-			
 			if(httpSession.getAttribute("sessSeq") == null) {
 				
-				vo.setIfmmSeq(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ));
+				vo.setMainKey(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ));
 				
 				Member rtMember = service.selectOne(vo);
 				

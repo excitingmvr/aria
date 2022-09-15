@@ -2,7 +2,7 @@ package com.junefw.infra.modules.nationality;
 
 import com.junefw.infra.common.base.Base;
 
-public class Nationality extends Base{
+public class Nationality extends Base {
 	
 	private String ifnaSeq;
 	private String ifnaName;

@@ -44,7 +44,6 @@ public class CodeController extends BaseController{
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 
 		vo.setParamsPaging(service.selectOneCount(vo));
-		
 	}
 	
 	
@@ -67,13 +66,13 @@ public class CodeController extends BaseController{
 		
 		model.addAttribute("list", codeGroupServiceImpl.selectListWithoutPaging());
 		
-		if (vo.getIfcdSeq().equals("0") || vo.getIfcdSeq().equals("")) {
+		if (vo.getMainKey().equals("0") || vo.getMainKey().equals("")) {
 			//	insert
 		} else {
 			Code item = service.selectOne(vo);
 			model.addAttribute("item", item);
 		}
-
+		
 		return "infra/code/xdmin/codeForm";
 	}
 	
@@ -84,7 +83,7 @@ public class CodeController extends BaseController{
 
 		service.insert(dto);
 	
-		vo.setIfcdSeq(dto.getIfcdSeq());
+		vo.setMainKey(dto.getIfcdSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -115,6 +114,8 @@ public class CodeController extends BaseController{
 	@RequestMapping(value = "codeUele")
 	public String codeUele(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
 
+		dto.setIfcdSeq(vo.getMainKey());
+		
 		service.uelete(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
@@ -138,7 +139,7 @@ public class CodeController extends BaseController{
 	public String codeMultiUele(CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfcdSeq(checkboxSeq);
+			dto.setIfcdSeq(checkboxSeq);
 			service.uelete(dto);
 		}
 
@@ -152,7 +153,7 @@ public class CodeController extends BaseController{
 	public String nationalityMultiDele(CodeVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setIfcdSeq(checkboxSeq);
+			vo.setMainKey(checkboxSeq);
 			service.delete(vo);
 		}
 

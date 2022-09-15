@@ -367,7 +367,6 @@
 		formVo.attr("action", goUrlDele).submit();
 	});
 	
-	
 </script>
 
 </body>

@@ -69,7 +69,7 @@
 		FROM
 			infrNationality a
 		WHERE 1=1
-			AND a.ifnaSeq = #{ifnaSeq}
+			AND a.ifnaSeq = #{mainKey}
 	</select>
 	
 	
@@ -131,7 +131,7 @@
 	
 	
 	<delete id="delete">
-		DELETE FROM infrNationality WHERE ifnaSeq = #{ifnaSeq}
+		DELETE FROM infrNationality WHERE ifnaSeq = #{mainKey}
 	</delete>
 
 	

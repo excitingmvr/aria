@@ -15,6 +15,7 @@ import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.common.util.UtilRegMod;
 import com.junefw.infra.common.util.UtilUpload;
+import com.junefw.infra.modules.codegroup.CodeGroup;
 
 
 @Service
@@ -22,6 +23,21 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 
 	@Autowired
 	MemberDao dao;
+	
+	@Override
+	public void setRegMod(CodeGroup dto) throws Exception {
+		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+		dto.setRegDeviceCd(UtilRegMod.getDevice());
+		dto.setRegDateTime(UtilDateTime.nowDate());
+		
+		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
+		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
+		dto.setModDeviceCd(UtilRegMod.getDevice());
+		dto.setModDateTime(UtilDateTime.nowDate());
+	}
 
 	@Override
 	public int selectOneCount(MemberVo vo){
@@ -118,12 +134,14 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 
 	@Override
 	public int update(Member dto) throws Exception {
+		setRegMod(dto);
 		return dao.update(dto);
 	}
 	
 	@Override
-	public int uelete(MemberVo vo) throws Exception {
-		return dao.uelete(vo);
+	public int uelete(Member dto) throws Exception {
+		setRegMod(dto);
+		return dao.uelete(dto);
 	}
 	
 	@Override

@@ -334,14 +334,14 @@
 	var goUrlUele = "/code/codeUele";			/* #-> */
 	var goUrlDele = "/code/codeDele";			/* #-> */
 	
-	var seq = $("input:hidden[name=ifcdSeq]");				/* #-> */
+	var mainKey = $("input:hidden[name=mainKey]"); 
 	
 	var form = $("form[name=form]");
 	var formVo = $("form[name=formVo]");
 	
 	
 	$("#btnSave").on("click", function(){
-		if (seq.val() == "0" || seq.val() == ""){
+		if (mainKey.val() == "0" || mainKey.val() == ""){
 	   		// insert
 	   		if (validationInst() == false) return false;
  			setCheckboxValue($("#ifmmEmailConsent"), $("#ifmmEmailConsentNy"));

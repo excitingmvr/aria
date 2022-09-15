@@ -94,10 +94,10 @@
 
 <!-- main s -->
 <form name="formList" id="formList" method="post">
+	<input type="hidden" name="mainKey">
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 	<input type="hidden" name="checkboxSeqArray" >
-	<input type="hidden" name="ifmmSeq">	<!-- #-> -->
 	
 <h3 class="mt-3 mb-0">회원 관리</h3>		<!-- #-> -->
 
@@ -288,9 +288,9 @@
 	var goUrlMultiUele = "/member/memberMultiUele";			/* #-> */
 	var goUrlMultiDele = "/member/memberMultiDele";			/* #-> */
 	
-	var seq = $("input:hidden[name=ifmmSeq]");				/* #-> */
-	
 	var excelUri = "/member/excelDownload";					/* #-> */
+
+	var mainKey = $("input:hidden[name=mainKey]");
 	
 	var form = $("form[name=formList]");
 	
@@ -334,9 +334,9 @@
 	});
 	
 	
-	goForm = function(key) {
+	goForm = function(keyValue) {
     	/* if(key != 0) seq.val(btoa(key)); */
-		seq.val(key);
+    	mainKey.val(keyValue);
 		form.attr("action", goUrlForm).submit();
 	}
 	
@@ -405,15 +405,14 @@
 	});
 
 	
-	$('#btnForm').on("click", function() {
-		goForm(0);                
-	});
-	
-	
 	$("#btnExcel").click(function() {
 		form.attr("action", excelUri).submit();
 	});
-
+	
+	
+	$('#btnForm').on("click", function() {
+		goForm(0);                
+	});
      
 </script>
 

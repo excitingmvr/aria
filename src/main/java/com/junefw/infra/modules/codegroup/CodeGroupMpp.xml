@@ -80,8 +80,7 @@
 			,ifcgDesc
 			,ifcgDelNy
 			<include refid="Base.insertRegModColumn" />			
-			)
-		VALUES (
+		) VALUES (
 			#{ifcgSeqAnother}
 			,#{ifcgName}
 			,#{ifcgNameEng}
@@ -122,7 +121,7 @@
 			,ifcgReferenceI4 = #{ifcgReferenceI4}
 			,ifcgDesc = #{ifcgDesc}
 			<include refid="Base.updateModColumnValue" />
-		WHERE
+		WHERE 1=1
 			ifcgSeq = #{ifcgSeq}
 	</update>
 	

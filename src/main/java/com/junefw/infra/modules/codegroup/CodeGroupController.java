@@ -70,7 +70,7 @@ public class CodeGroupController extends BaseController{
 
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "codeGroupInst")
-	public String codeGroupyInst(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
+	public String codeGroupInst(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		service.insert(dto);
 	

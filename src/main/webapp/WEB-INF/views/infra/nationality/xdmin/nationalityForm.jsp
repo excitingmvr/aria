@@ -145,19 +145,19 @@
         </div>
         <div class="col-sm-6">
 			<label for="ifnaNameEng" class="form-label">국가 이름 (영문)</label>
-            <input type="text" id="ifnaNameEng" name="ifnaNameEng" value="<c:out value="${item.ifnaNameEng}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ifnaNameEng" name="ifnaNameEng" value="<c:out value="${item.ifnaNameEng}"/>" maxlength="20" placeholder="영대소문자" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifnaNameEngFeedback"></div>        
         </div>
     </div>    
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ifnaCode2Char" class="form-label">국가 코드 (2자리) <span class="text-danger">*</span></label>
-            <input type="text" id="ifnaCode2Char" name="ifnaCode2Char" value="<c:out value="${item.ifnaCode2Char}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ifnaCode2Char" name="ifnaCode2Char" value="<c:out value="${item.ifnaCode2Char}"/>" maxlength="20" placeholder="영대소문자" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifnaCode2CharFeedback"></div>
         </div>
         <div class="col-sm-6">
 			<label for="ifnaCode3Char" class="form-label">국가 코드 (3자리) <span class="text-danger">*</span></label>
-            <input type="text" id="ifnaCode3Char" name="ifnaCode3Char" value="<c:out value="${item.ifnaCode3Char}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ifnaCode3Char" name="ifnaCode3Char" value="<c:out value="${item.ifnaCode3Char}"/>" maxlength="20" placeholder="영대소문자" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifnaCode3CharFeedback"></div>        
         </div>
     </div>
@@ -252,14 +252,14 @@
 	var goUrlUele = "/nationality/nationalityUele";			/* #-> */
 	var goUrlDele = "/nationality/nationalityDele";			/* #-> */
 	
-	var seq = $("input:hidden[name=ifnaSeq]");		/* #-> */
+	var mainKey = $("input:hidden[name=mainKey]"); 
 	
 	var form = $("form[name=form]");
 	var formVo = $("form[name=formVo]");
 	
 	
 	$("#btnSave").on("click", function(){
-		if (seq.val() == "0" || seq.val() == ""){
+		if (mainKey.val() == "0" || mainKey.val() == ""){
 	   		// insert
 	   		if (validationInst() == false) return false;
 	   		form.attr("action", goUrlInst).submit();
@@ -322,7 +322,6 @@
 		$("#modalConfirm").modal("hide");
 		formVo.attr("action", goUrlDele).submit();
 	});
-	
 	
 </script>
 

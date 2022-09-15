@@ -403,14 +403,15 @@
 	});
 
 	
+	$("#btnExcel").click(function() {
+		form.attr("action", excelUri).submit();
+	});
+	
+	
 	$('#btnForm').on("click", function() {
 		goForm(0);                
 	});
 
-	
-	$("#btnExcel").click(function() {
-		form.attr("action", excelUri).submit();
-	});
 	
 </script>
 

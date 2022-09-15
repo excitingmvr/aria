@@ -126,7 +126,7 @@
 			LEFT JOIN infrMemberEmail b ON b.ifmeDelNy = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
 			LEFT JOIN infrMemberAddress c ON c.ifmaDelNy = 0 AND c.ifmaDefaultNy = 1 AND c.ifmmSeq = a.ifmmSeq
 		WHERE 1=1
-			AND a.ifmmSeq = #{ifmmSeq}
+			AND a.ifmmSeq = #{mainKey}
 	</select>
 	
 	
@@ -156,8 +156,7 @@
 			,ifmmDesc
 			,ifmmDelNy
 			<include refid="Base.insertRegModColumn" />
-		)
-		VALUES (
+		) VALUES (
 			1
 			,0
 			,#{ifmmName}
@@ -193,8 +192,7 @@
 
 
 	<update id="update">
-		UPDATE
-			infrMember
+		UPDATE infrMember
 		SET
 			ifmmAdminNy = #{ifmmAdminNy}
 			,ifmmDormancyNy = #{ifmmDormancyNy}
@@ -224,12 +222,16 @@
 	
 	
 	<update id="uelete">
-		UPDATE infrMember SET ifmmDelNy = 1 WHERE ifmmSeq = #{ifmmSeq}
+		UPDATE infrMember
+		SET
+			ifmmDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE ifmmSeq = #{ifmmSeq}
 	</update>
 	
 	
 	<delete id="delete">
-		DELETE FROM infrMember WHERE ifmmSeq = #{ifmmSeq}
+		DELETE FROM infrMember WHERE ifmmSeq = #{mainKey}
 	</delete>
 	<!-- infrMember e -->
 	
@@ -246,8 +248,7 @@
 			,ifmeDelNy
 			<include refid="Base.insertRegModColumn" />
 			,ifmmSeq
-		)
-		VALUES (
+		) VALUES (
 			#{ifmeDefaultNy}
 			,#{ifmeTypeCd}
 			,#{ifmeEmailFull}
@@ -288,8 +289,7 @@
 			,ifmpDelNy
 			<include refid="Base.insertRegModColumn" />
 			,ifmmSeq
-		)
-		VALUES (
+		) VALUES (
 			#{ifmpDefaultNy}
 			,#{ifmpTypeCd}
 			,#{ifmpDeviceCd}
@@ -317,8 +317,7 @@
 			,ifmaDelNy
 			<include refid="Base.insertRegModColumn" />
 			,ifmmSeq
-		)
-		VALUES (
+		) VALUES (
 			#{ifmaDefaultNy}
 			,#{ifmaTypeCd}
 			,#{ifmaTitle}

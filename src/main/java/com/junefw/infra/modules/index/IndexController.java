@@ -11,7 +11,7 @@ public class IndexController extends Base{
 
 	@RequestMapping(value = "indexView")
 	public String indexView() throws Exception {
-		
-		return "xdmin/index/indexView";
+	
+		return "infra/index/xdmin/indexView";
 	}
 }

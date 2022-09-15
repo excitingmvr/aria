@@ -2,7 +2,11 @@ package com.junefw.infra.modules.member;
 
 import java.util.List;
 
+import com.junefw.infra.modules.codegroup.CodeGroup;
+
 public interface MemberService {
+
+	public void setRegMod(CodeGroup dto) throws Exception;
 
 //	infrMember
 	int selectOneCount(MemberVo vo) throws Exception;
@@ -10,7 +14,7 @@ public interface MemberService {
 	Member selectOne(MemberVo vo) throws Exception;
 	int insert(Member dto) throws Exception;
 	int update(Member dto) throws Exception; 
-	int uelete(MemberVo vo) throws Exception; 
+	int uelete(Member dto) throws Exception; 
 	int delete(MemberVo vo) throws Exception;
 	
 //	infrMemberPhone
