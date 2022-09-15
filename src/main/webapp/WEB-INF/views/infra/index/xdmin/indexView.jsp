@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../include/head.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 
 <style type="text/css">
 	
@@ -9,15 +9,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../include/top.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../include/gnb.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../include/right.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -42,15 +42,15 @@ cookie.seq: <c:out value="${cookie.cookieSeq.value }"/><br>
 
 
 <!-- footer s -->
-<%@include file="../include/footer.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../include/modalBase.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../include/linkJs.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 	
 <script>
