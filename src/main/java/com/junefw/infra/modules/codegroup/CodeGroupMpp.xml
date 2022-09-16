@@ -137,7 +137,7 @@
 	<delete id="delete">
 		DELETE FROM infrCodeGroup 
 		WHERE 1=1
-		AND ifcgSeq = #{ifcgSeq}
+			AND ifcgSeq = #{ifcgSeq}
 	</delete>
 	
 	<select id="selectListWithoutPaging" resultMap="resultMapObj">

@@ -54,7 +54,7 @@
 		FROM infrCode a
 			LEFT JOIN infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
 		WHERE 1=1
-			AND a.ifcdSeq = #{mainKey}
+			AND a.ifcdSeq = #{ifcdSeq}
 	</select>
 	
 	<insert id="insert">
@@ -147,11 +147,14 @@
 		SET
 			ifcdDelNy = 1
 			<include refid="Base.updateModColumnValue" />
-		WHERE ifcdSeq = #{ifcdSeq}
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM infrCode WHERE ifcdSeq = #{mainKey}
+		DELETE FROM infrCode
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}
 	</delete>
 	
     <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
