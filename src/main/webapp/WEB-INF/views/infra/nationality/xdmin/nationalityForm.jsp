@@ -252,20 +252,21 @@
 	var goUrlUele = "/nationality/nationalityUele";			/* #-> */
 	var goUrlDele = "/nationality/nationalityDele";			/* #-> */
 	
-	var mainKey = $("input:hidden[name=mainKey]"); 
+	var seq = $("input:hidden[name=ifnaSeq]"); 			/* #-> */
 	
 	var form = $("form[name=form]");
 	var formVo = $("form[name=formVo]");
 	
 	
 	$("#btnSave").on("click", function(){
-		if (mainKey.val() == "0" || mainKey.val() == ""){
+		if (seq.val() == "0" || seq.val() == ""){
 	   		// insert
 	   		if (validationInst() == false) return false;
 	   		form.attr("action", goUrlInst).submit();
 	   	} else {
 	   		// update
 	   		/* keyName.val(atob(keyName.val())); */
+	   		seq.remove();
 	   		if (validationUpdt() == false) return false;
 	   		form.attr("action", goUrlUpdt).submit();
 	   	}

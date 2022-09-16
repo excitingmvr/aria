@@ -69,7 +69,7 @@
 		FROM
 			infrNationality a
 		WHERE 1=1
-			AND a.ifnaSeq = #{mainKey}
+			AND a.ifnaSeq = #{ifnaSeq}
 	</select>
 	
 	
@@ -126,12 +126,15 @@
 		SET
 			ifnaDelNy = 1
 			<include refid="Base.updateModColumnValue" />
-		WHERE ifnaSeq = #{ifnaSeq}
+		WHERE 1=1
+			AND ifnaSeq = #{ifnaSeq}
 	</update>
 	
 	
 	<delete id="delete">
-		DELETE FROM infrNationality WHERE ifnaSeq = #{mainKey}
+		DELETE FROM infrNationality
+		WHERE 1=1
+			AND ifnaSeq = #{ifnaSeq}
 	</delete>
 
 	

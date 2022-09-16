@@ -8,9 +8,15 @@ public class NationalityVo extends BaseVo implements Serializable{
 
 	private static final long serialVersionUID = -7487131550711258015L;
 	
-//	search item extra (optional)
-	
-	
+	private String ifnaSeq;
 //	----------
+
+	public String getIfnaSeq() {
+		return ifnaSeq;
+	}
+
+	public void setIfnaSeq(String ifnaSeq) {
+		this.ifnaSeq = ifnaSeq;
+	}
 	
 }

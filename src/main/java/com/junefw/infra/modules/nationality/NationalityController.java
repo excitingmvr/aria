@@ -57,7 +57,7 @@ public class NationalityController extends BaseController {
 	@RequestMapping(value = "nationalityForm")
 	public String nationalityForm(@ModelAttribute("vo") NationalityVo vo, Model model) throws Exception {
 
-		if (vo.getMainKey().equals("0") || vo.getMainKey().equals("")) {
+		if (vo.getIfnaSeq().equals("0") || vo.getIfnaSeq().equals("")) {
 			//	insert
 		} else {
 			Nationality item = service.selectOne(vo);
@@ -74,7 +74,7 @@ public class NationalityController extends BaseController {
 
 		service.insert(dto);
 	
-		vo.setMainKey(dto.getIfnaSeq());
+		vo.setIfnaSeq(dto.getIfnaSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -105,8 +105,6 @@ public class NationalityController extends BaseController {
 	@RequestMapping(value = "nationalityUele")
 	public String nationalityUele(NationalityVo vo, Nationality dto, RedirectAttributes redirectAttributes) throws Exception {
 		
-		dto.setIfnaSeq(vo.getMainKey());
-
 		service.uelete(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
@@ -144,7 +142,7 @@ public class NationalityController extends BaseController {
 	public String nationalityMultiDele(NationalityVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setMainKey(checkboxSeq);
+			vo.setIfnaSeq(checkboxSeq);
 			service.delete(vo);
 		}
 
