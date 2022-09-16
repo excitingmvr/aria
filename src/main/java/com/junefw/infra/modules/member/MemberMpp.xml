@@ -126,7 +126,7 @@
 			LEFT JOIN infrMemberEmail b ON b.ifmeDelNy = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
 			LEFT JOIN infrMemberAddress c ON c.ifmaDelNy = 0 AND c.ifmaDefaultNy = 1 AND c.ifmmSeq = a.ifmmSeq
 		WHERE 1=1
-			AND a.ifmmSeq = #{mainKey}
+			AND a.ifmmSeq = #{ifmmSeq}
 	</select>
 	
 	
@@ -231,7 +231,7 @@
 	
 	
 	<delete id="delete">
-		DELETE FROM infrMember WHERE ifmmSeq = #{mainKey}
+		DELETE FROM infrMember WHERE ifmmSeq = #{ifmmSeq}
 	</delete>
 	<!-- infrMember e -->
 	

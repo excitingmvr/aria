@@ -8,9 +8,16 @@ public class CodeGroupVo extends BaseVo implements Serializable{
 
 	private static final long serialVersionUID = -650521427351122051L;
 	
-//	search item extra (optional)
-	
-	
+	private String ifcgSeq;
 //	----------
+
+	public String getIfcgSeq() {
+		return ifcgSeq;
+	}
+
+	public void setIfcgSeq(String ifcgSeq) {
+		this.ifcgSeq = ifcgSeq;
+	}
+	
 	
 }

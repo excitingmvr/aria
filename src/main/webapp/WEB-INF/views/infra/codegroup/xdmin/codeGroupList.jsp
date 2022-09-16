@@ -94,10 +94,10 @@
 
 <!-- main s -->
 <form name="formList" id="formList" method="post">
-	<input type="hidden" name="mainKey">
 	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
-	<input type="hidden" name="checkboxSeqArray" >
+	<input type="hidden" name="checkboxSeqArray">
+	<input type="hidden" name="ifcgSeq">	<!-- #-> -->
 
 <h3 class="mt-3 mb-0">코드그룹 관리</h3>		<!-- #-> -->
 
@@ -284,7 +284,7 @@
 	
 	var excelUri = "/codeGroup/excelDownload";					/* #-> */
 	
-	var mainKey = $("input:hidden[name=mainKey]");
+	var seq = $("input:hidden[name=ifcgSeq]");					/* #-> */
 
 	var form = $("form[name=formList]");
 	
@@ -334,7 +334,7 @@
 	
 	goForm = function(keyValue) {
     	/* if(keyValue != 0) seq.val(btoa(keyValue)); */
-    	mainKey.val(keyValue);
+    	seq.val(keyValue);
 		form.attr("action", goUrlForm).submit();
 	}
 	

@@ -4,8 +4,6 @@ import com.junefw.infra.common.constants.Constants;
 
 public class BaseVo {
 
-	private String mainKey;
-	
 //	paging
 	private int thisPage = 1;									// 현재 페이지
 	private int rowNumToShow = Constants.ROW_NUM_TO_SHOW;		// 화면에 보여줄 데이터 줄 갯수
@@ -86,12 +84,6 @@ public class BaseVo {
 		
 	}
 
-	public String getMainKey() {
-		return mainKey;
-	}
-	public void setMainKey(String mainKey) {
-		this.mainKey = mainKey;
-	}
 	public int getThisPage() {
 		return thisPage;
 	}

@@ -59,7 +59,7 @@
 			<include refid="Base.selectRegModWithAlies" />			
 		 FROM infrCodeGroup a
 		 WHERE 1=1
-		 	AND a.ifcgSeq = #{mainKey}  
+		 	AND a.ifcgSeq = #{ifcgSeq}  
 	</select>
 	
 	<insert id="insert">
@@ -122,7 +122,7 @@
 			,ifcgDesc = #{ifcgDesc}
 			<include refid="Base.updateModColumnValue" />
 		WHERE 1=1
-			ifcgSeq = #{ifcgSeq}
+			AND ifcgSeq = #{ifcgSeq}
 	</update>
 	
 	<update id="uelete">
@@ -130,11 +130,14 @@
 		SET
 			ifcgDelNy = 1
 			<include refid="Base.updateModColumnValue" />	
-		WHERE ifcgSeq = #{ifcgSeq}
+		WHERE 1=1
+			AND ifcgSeq = #{ifcgSeq}
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM infrCodeGroup WHERE ifcgSeq = #{mainKey}
+		DELETE FROM infrCodeGroup 
+		WHERE 1=1
+		AND ifcgSeq = #{ifcgSeq}
 	</delete>
 	
 	<select id="selectListWithoutPaging" resultMap="resultMapObj">

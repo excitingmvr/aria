@@ -57,7 +57,7 @@ public class CodeGroupController extends BaseController{
 	@RequestMapping(value = "codeGroupForm")
 	public String codeGroupForm(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
 		
-		if (vo.getMainKey().equals("0") || vo.getMainKey().equals("")) {
+		if (vo.getIfcgSeq().equals("0") || vo.getIfcgSeq().equals("")) {
 			//	insert
 		} else {
 			CodeGroup item = service.selectOne(vo);
@@ -73,8 +73,8 @@ public class CodeGroupController extends BaseController{
 	public String codeGroupInst(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		service.insert(dto);
-	
-		vo.setMainKey(dto.getIfcgSeq());
+		
+		vo.setIfcgSeq(dto.getIfcgSeq());
 		
 		redirectAttributes.addFlashAttribute("vo", vo);
 
@@ -104,8 +104,6 @@ public class CodeGroupController extends BaseController{
 	
 	@RequestMapping(value = "codeGroupUele")
 	public String codeGroupUele(CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
-
-		dto.setIfcgSeq(vo.getMainKey());
 		
 		service.uelete(dto);
 
@@ -144,7 +142,7 @@ public class CodeGroupController extends BaseController{
 	public String codeGroupMultiDele(CodeGroupVo vo, RedirectAttributes redirectAttributes) throws Exception {
 
 		for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-			vo.setMainKey(checkboxSeq);
+			vo.setIfcgSeq(checkboxSeq);
 			service.delete(vo);
 		}
 
