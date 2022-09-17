@@ -104,11 +104,11 @@ public class CodeServiceImpl implements CodeService{
 	}
 
 	
-	public static Code selectOneCachedCode(String ifcdSeq) throws Exception {
-		Code rt = new Code();
+	public static String selectOneCachedCode(int code) throws Exception {
+		String rt = "";
 		for(Code codeRow : Code.cachedCodeArrayList) {
-			if (codeRow.getIfcdSeq().equals(ifcdSeq)) {
-				rt = codeRow;
+			if (codeRow.getIfcdSeq().equals(Integer.toString(code))) {
+				rt = codeRow.getIfcdName();
 			} else {
 				// by pass
 			}
