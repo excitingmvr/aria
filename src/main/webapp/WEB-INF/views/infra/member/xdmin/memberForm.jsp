@@ -353,8 +353,10 @@
             <button type="button" class="btn btn-secondary btn-sm" name="" id="btnList"><i class="fa-solid fa-bars"></i></button>
         </div>
         <div class="col-6 text-end">
+<c:if test="${not empty item.ifmmSeq }">	<!-- #-> -->        
             <button type="button" class="btn btn-danger btn-sm" name="" id="btnDelete"><i class="fa-solid fa-x"></i></button>
             <button type="button" class="btn btn-danger btn-sm" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button>
+</c:if>
             <button type="button" class="btn btn-success btn-sm" name="" id="btnSave"><i class="fa-regular fa-bookmark"></i></button>
         </div>
     </div>
@@ -402,14 +404,14 @@
 	var goUrlUele = "/member/memberUele";			/* #-> */
 	var goUrlDele = "/member/memberDele";			/* #-> */
 	
-	var mainKey = $("input:hidden[name=mainKey]"); 
+	var seq = $("input:hidden[name=mainKey]"); 		/* #-> */
 	
 	var form = $("form[name=form]");
 	var formVo = $("form[name=formVo]");
 	
 	
 	$("#btnSave").on("click", function(){
-		if (mainKey.val() == "0" || mainKey.val() == ""){
+		if (seq.val() == "0" || seq.val() == ""){
 	   		// insert
 	   		if (validationInst() == false) return false;
  			setCheckboxValue($("#ifmmEmailConsent"), $("#ifmmEmailConsentNy"));
@@ -418,6 +420,7 @@
 	   	} else {
 	   		// update
 	   		/* keyName.val(atob(keyName.val())); */
+	   		seq.remove();
 	   		if (validationUpdt() == false) return false;
 	   		form.attr("action", goUrlUpdt).submit();
 	   	}

@@ -232,8 +232,10 @@
             <button type="button" class="btn btn-secondary btn-sm" name="" id="btnList"><i class="fa-solid fa-bars"></i></button>
         </div>
         <div class="col-6 text-end">
+<c:if test="${not empty item.ifcgSeq }">	<!-- #-> -->        
             <button type="button" class="btn btn-danger btn-sm" name="" id="btnDelete"><i class="fa-solid fa-x"></i></button>
             <button type="button" class="btn btn-danger btn-sm" name="" id="btnUelete"><i class="far fa-trash-alt"></i></button>
+</c:if>
             <button type="button" class="btn btn-success btn-sm" name="" id="btnSave"><i class="fa-regular fa-bookmark"></i></button>
         </div>
     </div>
