@@ -226,12 +226,15 @@
 		SET
 			ifmmDelNy = 1
 			<include refid="Base.updateModColumnValue" />
-		WHERE ifmmSeq = #{ifmmSeq}
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
 	</update>
 	
 	
 	<delete id="delete">
-		DELETE FROM infrMember WHERE ifmmSeq = #{ifmmSeq}
+		DELETE FROM infrMember
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
 	</delete>
 	<!-- infrMember e -->
 	
@@ -383,7 +386,9 @@
 	
 	
 	<update id="updateIfmmPwdModDate">
-		UPDATE infrMember SET ifmmPwdModDate = #{ifmmPwdModDate} WHERE ifmmSeq = #{ifmmSeq}
+		UPDATE infrMember SET ifmmPwdModDate = #{ifmmPwdModDate}
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
 	</update>
 </mapper>
 

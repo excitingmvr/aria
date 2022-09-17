@@ -122,7 +122,7 @@
 <div class="container-fluid px-0 px-sm-5 mt-2">
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
-			<label for="ifnaSeq" class="form-label">국가코드<span class="text-danger">*</span></label>
+			<label for="ifnaSeq" class="form-label">국가코드 <span class="text-danger">*</span></label>
 			<input type="text" id="ifnaSeq" name="ifnaSeq" value="<c:out value="${item.ifnaSeq}"/>" maxlength="20" placeholder="자동생성" class="form-control form-control-sm" readonly>
 		</div>
 		<div class="col-sm-6">	
@@ -152,12 +152,12 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ifnaCode2Char" class="form-label">국가 코드 (2자리) <span class="text-danger">*</span></label>
-            <input type="text" id="ifnaCode2Char" name="ifnaCode2Char" value="<c:out value="${item.ifnaCode2Char}"/>" maxlength="20" placeholder="영대소문자" class="form-control form-control-sm">
+            <input type="text" id="ifnaCode2Char" name="ifnaCode2Char" value="<c:out value="${item.ifnaCode2Char}"/>" maxlength="2" placeholder="영대소문자" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifnaCode2CharFeedback"></div>
         </div>
         <div class="col-sm-6">
 			<label for="ifnaCode3Char" class="form-label">국가 코드 (3자리) <span class="text-danger">*</span></label>
-            <input type="text" id="ifnaCode3Char" name="ifnaCode3Char" value="<c:out value="${item.ifnaCode3Char}"/>" maxlength="20" placeholder="영대소문자" class="form-control form-control-sm">
+            <input type="text" id="ifnaCode3Char" name="ifnaCode3Char" value="<c:out value="${item.ifnaCode3Char}"/>" maxlength="3" placeholder="영대소문자" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifnaCode3CharFeedback"></div>        
         </div>
     </div>

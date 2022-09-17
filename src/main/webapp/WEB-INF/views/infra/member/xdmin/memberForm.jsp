@@ -4,6 +4,8 @@
 <%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 <!-- head e -->
 
+<title>Member</title>		<!-- #-> -->
+
 <style type="text/css">
 
 	.addScroll{
@@ -112,37 +114,40 @@
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
 <form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
 <!-- *Vo.jsp s -->
-<%@include file="memberVo.jsp"%>
+<%@include file="memberVo.jsp"%>		<!-- #-> -->
 <!-- *Vo.jsp e -->
 
-<h3 class="mt-3 mb-0">회원관리</h3>
+<h3 class="mt-3 mb-0">회원 관리</h3>		<!-- #-> -->
  
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-            <label for="ifmmId" class="form-label">아이디</label>
+            <label for="ifmmId" class="form-label">아이디 <span class="text-danger">*</span></label>
             <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(-_.), 4~20자리 조합" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6">
+<%--         
 			<label for="ifmmNickname" class="form-label">별명</label>
             <input type="text" id="ifmmNickname" name="ifmmNickname" value="<c:out value="${item.ifmmNickname}"/>" maxlength="20" placeholder="별명" class="form-control form-control-sm">        
+ --%>
         </div>
     </div>
 <c:if test="${empty item.ifmmId }">    
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmPassword" class="form-label">비밀번호</label>
+            <label for="ifmmPassword" class="form-label">비밀번호 <span class="text-danger">*</span></label>
             <input type="password" id="ifmmPassword" name="ifmmPassword" value="" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(!@#$%^&*), 8~20자리 조합" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmPasswordRe" class="form-label">비밀번호확인</label>
+            <label for="ifmmPasswordRe" class="form-label">비밀번호확인 <span class="text-danger">*</span></label>
             <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="" maxlength="20" placeholder="비밀번호 확인" class="form-control form-control-sm">          
         </div>
     </div>
-</c:if>    
+</c:if>
+<%--   
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmName" class="form-label">이름</label>
+            <label for="ifmmName" class="form-label">이름 <span class="text-danger">*</span></label>
             <input type="text" id="ifmmName" name="ifmmName" value="<c:out value="${item.ifmmName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
@@ -150,16 +155,18 @@
             <input type="text" id="ifmmNameEng" name="ifmmNameEng" value="<c:out value="${item.ifmmNameEng}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">            
         </div>
     </div>
+ --%>
     <div class="row mt-sm-4 mt-3 mt-sm-0">
         <div class="col-sm-6">
-            <label for="ifmmLastName" class="form-label">성</label>
+            <label for="ifmmLastName" class="form-label">성 <span class="text-danger">*</span></label>
             <input type="text" id="ifmmLastName" name="ifmmLastName" value="<c:out value="${item.ifmmLastName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmFirstName" class="form-label">이름</label>
+            <label for="ifmmFirstName" class="form-label">이름 <span class="text-danger">*</span></label>
             <input type="text" id="ifmmFirstName" name="ifmmFirstName" value="<c:out value="${item.ifmmFirstName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>
+<%--     
     <div class="row mt-sm-4 mt-3 mt-sm-0">
         <div class="col-sm-6">
             <label for="ifmmLastNameEng" class="form-label">성 (영문)</label>
@@ -170,9 +177,10 @@
             <input type="text" id="ifmmFirstNameEng" name="ifmmFirstNameEng" value="<c:out value="${item.ifmmFirstNameEng}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>
+ --%>    
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmGenderCd" class="form-label">성별</label>
+            <label for="ifmmGenderCd" class="form-label">성별 <span class="text-danger">*</span></label>
             <select id="ifmmGenderCd" name="ifmmGenderCd" class="form-select form-select-sm">
 				<option value="">::선택::</option>
 	            	<c:forEach items="${listCodeGender}" var="itemGender" varStatus="statusGender">
@@ -181,7 +189,7 @@
               </select>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmDob" class="form-label">생일</label>
+            <label for="ifmmDob" class="form-label">생일 <span class="text-danger">*</span></label>
             <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm">          
         </div>
     </div>    
@@ -189,7 +197,7 @@
         <div class="col-sm-6 mt-3 mt-sm-0">
 			<input type="hidden" id="ifmeDefaultNyArray0" name="ifmeDefaultNyArray" value="1">
 			<input type="hidden" id="ifmeTypeCdArray0" name="ifmeTypeCdArray" value="44">
-            <label for="ifmeEmailFullArray0" class="form-label">Email</label>
+            <label for="ifmeEmailFullArray0" class="form-label">Email <span class="text-danger">*</span></label>
             <input type="text" id="ifmeEmailFullArray0" name="ifmeEmailFullArray" value="<c:out value="${item.ifmeEmailFull }"/>" maxlength="50" placeholder="account@example.com" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
@@ -221,7 +229,7 @@
         	<input type="hidden" id="ifmpDefaultNyArray0" name="ifmpDefaultNyArray" value="1">
         	<input type="hidden" id="ifmpTypeCdArray0" name="ifmpTypeCdArray" value="54">
         	<input type="hidden" id="ifmpDeviceCdArray0" name="ifmpDeviceCdArray" value="58">
-            <label for="ifmpTelecomCdArray0" class="form-label">통신사</label>
+            <label for="ifmpTelecomCdArray0" class="form-label">통신사 <span class="text-danger">*</span></label>
             <select id="ifmpTelecomCdArray0" name="ifmpTelecomCdArray" class="form-select form-select-sm">
 				<option value="">::선택::</option>            
 	            	<c:forEach items="${listCodeTelecom}" var="itemTelecom" varStatus="statusTelecom">
@@ -230,7 +238,7 @@
 			</select>
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
-            <label for="ifmpNumberArray0" class="form-label">핸드폰</label>
+            <label for="ifmpNumberArray0" class="form-label">핸드폰 <span class="text-danger">*</span></label>
             <input type="text" id="ifmpNumberArray0" name="ifmpNumberArray" value="<c:out value="${ifmpNumber58 }"/>" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
@@ -274,6 +282,7 @@
               </select>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">          
+<!-- 
             <label for="exampleDataList" class="form-label">Datalist example</label>
             <input list="datalistOptions" name="" id="exampleDataList" placeholder="Type to search..." class="form-control form-select-sm">
             <datalist id="datalistOptions">
@@ -283,6 +292,7 @@
                 <option value="Los Angeles">
                 <option value="Chicago">
             </datalist>
+ -->
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -339,7 +349,7 @@
             <%-- <p>${fn:replace(item.ifmmDesc, br, '<br/>')}</p> --%>
             <p><c:out value="${fn:replace(item.ifmmDesc, br, '<br/>')}" escapeXml = "false"/></p>
         </div>
-    </div>  
+    </div>
 <c:if test="${not empty item.ifmmSeq }">
 <!-- regMod s -->
 <%@include file="../../../common/xdmin/includeV1/regmod.jsp"%>
