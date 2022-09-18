@@ -121,9 +121,15 @@
  
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4">
+        <div class="col-sm-12">
+            <img src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+        </div>
+    </div>
+    <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ifmmId" class="form-label">아이디 <span class="text-danger">*</span></label>
-            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(-_.), 4~20자리 조합" class="form-control form-control-sm">
+            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영대소문자,숫자,특수문자(-_.),4~20자리" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmmIdFeedback"></div>
         </div>
         <div class="col-sm-6">
 <%--         
@@ -136,11 +142,13 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmPassword" class="form-label">비밀번호 <span class="text-danger">*</span></label>
-            <input type="password" id="ifmmPassword" name="ifmmPassword" value="" maxlength="20" placeholder="영문(대소문자),숫자,특수문자(!@#$%^&*), 8~20자리 조합" class="form-control form-control-sm">
+            <input type="password" id="ifmmPassword" name="ifmmPassword" value="" maxlength="20" placeholder="영대소문자,숫자,특수문자(!@#$%^&*),8~20자리 조합" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmmPasswordFeedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmPasswordRe" class="form-label">비밀번호확인 <span class="text-danger">*</span></label>
-            <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="" maxlength="20" placeholder="비밀번호 확인" class="form-control form-control-sm">          
+            <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="" maxlength="20" placeholder="비밀번호 확인" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmmPasswordReFeedback"></div>          
         </div>
     </div>
 </c:if>
@@ -160,10 +168,12 @@
         <div class="col-sm-6">
             <label for="ifmmLastName" class="form-label">성 <span class="text-danger">*</span></label>
             <input type="text" id="ifmmLastName" name="ifmmLastName" value="<c:out value="${item.ifmmLastName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmmLastNameFeedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmFirstName" class="form-label">이름 <span class="text-danger">*</span></label>
-            <input type="text" id="ifmmFirstName" name="ifmmFirstName" value="<c:out value="${item.ifmmFirstName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">          
+            <input type="text" id="ifmmFirstName" name="ifmmFirstName" value="<c:out value="${item.ifmmFirstName}"/>" maxlength="50" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmmFirstNameFeedback"></div>          
         </div>
     </div>
 <%--     
@@ -187,10 +197,12 @@
 				<option value="<c:out value="${itemGender.ifcdSeq }"/>" <c:if test="${item.ifmmGenderCd eq itemGender.ifcdSeq }">selected</c:if>><c:out value="${itemGender.ifcdName }"/></option>
 					</c:forEach>
               </select>
+              <div class="invalid-feedback" id="ifmmGenderCdFeedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmDob" class="form-label">생일 <span class="text-danger">*</span></label>
-            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm">          
+            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmmDobFeedback"></div>          
         </div>
     </div>    
     <div class="row mt-sm-4">    
@@ -199,6 +211,7 @@
 			<input type="hidden" id="ifmeTypeCdArray0" name="ifmeTypeCdArray" value="44">
             <label for="ifmeEmailFullArray0" class="form-label">Email <span class="text-danger">*</span></label>
             <input type="text" id="ifmeEmailFullArray0" name="ifmeEmailFullArray" value="<c:out value="${item.ifmeEmailFull }"/>" maxlength="50" placeholder="account@example.com" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmeEmailFullArray0Feedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmEmailConsent" class="form-label">이메일 정보 마케팅 사용 동의</label>
@@ -236,10 +249,12 @@
 				<option value="<c:out value="${itemTelecom.ifcdSeq }"/>" <c:if test="${ifmpTelecom58 eq itemTelecom.ifcdSeq }">selected</c:if>><c:out value="${itemTelecom.ifcdName }"/></option>
 					</c:forEach>
 			</select>
+			<div class="invalid-feedback" id="ifmpTelecomCdArray0Feedback"></div>
         </div>
         <div class="col-sm-3 mt-3 mt-sm-0">
-            <label for="ifmpNumberArray0" class="form-label">핸드폰 <span class="text-danger">*</span></label>
-            <input type="text" id="ifmpNumberArray0" name="ifmpNumberArray" value="<c:out value="${ifmpNumber58 }"/>" maxlength="11" placeholder="숫자만 (01044447777)" class="form-control form-control-sm">
+            <label for="ifmpNumberArray0" class="form-label">모바일 <span class="text-danger">*</span></label>
+            <input type="text" id="ifmpNumberArray0" name="ifmpNumberArray" value="<c:out value="${ifmpNumber58 }"/>" maxlength="11" placeholder="숫자 (01044447777)" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmpNumberArray0Feedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmSmsConsent" class="form-label">핸드폰 정보 마케팅 사용 동의</label>
@@ -260,7 +275,8 @@
         	<input type="hidden" id="ifmpDeviceCdArray1" name="ifmpDeviceCdArray" value="57">
         	<input type="hidden" id="ifmpTelecomCdArray1" name="ifmpTelecomCdArray" value="">
             <label for="ifmpNumberArray1" class="form-label">전화번호</label>
-            <input type="text" id="ifmpNumberArray1" name="ifmpNumberArray" value="<c:out value="${ifmpNumber57 }"/>" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+            <input type="text" id="ifmpNumberArray1" name="ifmpNumberArray" value="<c:out value="${ifmpNumber57 }"/>" maxlength="11" placeholder="숫자 (024447777)" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmpNumberArray1Feedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
         	<input type="hidden" id="ifmpDefaultNyArray2" name="ifmpDefaultNyArray" value="0">
@@ -268,7 +284,8 @@
         	<input type="hidden" id="ifmpDeviceCdArray2" name="ifmpDeviceCdArray" value="59">
         	<input type="hidden" id="ifmpTelecomCdArray2" name="ifmpTelecomCdArray" value="">
             <label for="ifmpNumberArray2" class="form-label">팩스번호</label>
-            <input type="text" id="ifmpNumberArray2" name="ifmpNumberArray" value="<c:out value="${ifmpNumber59 }"/>" maxlength="11" placeholder="숫자만 (024447777)" class="form-control form-control-sm">
+            <input type="text" id="ifmpNumberArray2" name="ifmpNumberArray" value="<c:out value="${ifmpNumber59 }"/>" maxlength="11" placeholder="숫자 (024447777)" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ifmpNumberArray2Feedback"></div>
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -297,38 +314,46 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-        	<input type="hidden" id="ifmaDefaultNyArray0" name="ifmaDefaultNyArray" value="1">
-        	<input type="hidden" id="ifmaTypeCdArray0" name="ifmaTypeCdArray" value="78">
-        	<input type="hidden" id="ifmaTitleArray0" name="ifmaTitleArray" value="기본">
-            <label for="memZip" class="form-label">주소 (한국전용)</label>
-            <div class="input-group input-group-sm ">
-                <input type="text" id="ifmaZipcodeArray0" name="ifmaZipcodeArray" value="<c:out value="${item.ifmaZipcode }"/>" placeholder="우편번호" class="form-control" readonly>
-                <button type="button" id="btnAddress" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
-                <button type="button" id="btnAddressClear" class="btn btn-outline-secondary"><i class="fa-solid fa-x"></i></button>
-            </div>
-            <input type="text" id="ifmaAddress1Array0" name="ifmaAddress1Array" value="<c:out value="${item.ifmaAddress1 }"/>" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
-            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="<c:out value="${item.ifmaAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
-            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
-			<div class="row">
-				<div class="col-sm-6"><input type="text" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
-				<div class="col-sm-6"><input type="text" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
+        	<div id="addressKorea">
+	        	<input type="hidden" id="ifmaDefaultNyArray0" name="ifmaDefaultNyArray" value="1">
+	        	<input type="hidden" id="ifmaTypeCdArray0" name="ifmaTypeCdArray" value="78">
+	        	<input type="hidden" id="ifmaTitleArray0" name="ifmaTitleArray" value="기본">
+	            <label for="memZip" class="form-label">주소 (한국전용)</label>
+	            <div class="input-group input-group-sm ">
+	                <input type="text" id="ifmaZipcodeArray0" name="ifmaZipcodeArray" value="<c:out value="${item.ifmaZipcode }"/>" placeholder="우편번호" class="form-control" readonly>
+	                <button type="button" id="btnAddress" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+	                <button type="button" id="btnAddressClear" class="btn btn-outline-secondary"><i class="fa-solid fa-x"></i></button>
+	            </div>
+	            <input type="text" id="ifmaAddress1Array0" name="ifmaAddress1Array" value="<c:out value="${item.ifmaAddress1 }"/>" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
+	            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="<c:out value="${item.ifmaAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
+	            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
+				<div class="row">
+					<div class="col-sm-6"><input type="text" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
+					<div class="col-sm-6"><input type="text" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
+				</div>
+			</div>
+			<div id="addressOthers">
+				<label for="memZipAbroad" class="form-label">주소 (한국외전용)</label>
+	            <input type="text" id="memZipAbroad" name="memZipAbroad" value="" maxlength="50" placeholder="우편번호" class="form-control form-control-sm" >
+	            <input type="text" id="memAddressAbroad1" name="memAddressAbroad1" value="" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2">
+	            <input type="text" id="memAddressAbroad2" name="memAddressAbroad2" value="" maxlength="50" placeholder="상세 주소" class="form-control form-control-sm mt-2">
 			</div>
         </div>
-        <div class="col-sm-6 mt-3 mt-sm-0">     
-			<label for="file0" class="form-label input-file-button">이미지첨부</label>
+        <div class="col-sm-6 mt-3 mt-sm-0">
+        	<label for="ifmmDesc" class="form-label">설명</label>
+            <textarea id="ifmmDesc" name="ifmmDesc" class="form-control" rows="4"><c:out value="${item.ifmmDesc }"/></textarea>
+            <%-- <p><c:out value="${fn:replace(item.ifmmDesc, br, '<br/>')}" escapeXml = "false"/></p> --%>     
+        </div>
+    </div>
+<!--     
+    <div class="row mt-sm-4">
+        <div class="col-sm-6 mt-3 mt-sm-0">
+            <label for="file0" class="form-label input-file-button">이미지첨부</label>
  			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
 			<div class="addScroll">
 				<ul id="ulFile0" class="list-group">
 				</ul>
 			</div>
-        </div>
-    </div>
-    <div class="row mt-sm-4">
-        <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memZipAbroad" class="form-label">주소 (한국외전용)</label>
-            <input type="text" id="memZipAbroad" name="memZipAbroad" value="" maxlength="50" placeholder="우편번호" class="form-control form-control-sm" >
-            <input type="text" id="memAddressAbroad1" name="memAddressAbroad1" value="" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2">
-            <input type="text" id="memAddressAbroad2" name="memAddressAbroad2" value="" maxlength="50" placeholder="상세 주소" class="form-control form-control-sm mt-2">
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
 			<label for="file1" class="form-label input-file-button">파일첨부</label>
@@ -339,17 +364,7 @@
 			</div>
         </div>
     </div>
-    <div class="row mt-sm-4">
-        <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmDesc" class="form-label">설명</label>
-            <textarea id="ifmmDesc" name="ifmmDesc" class="form-control"><c:out value="${item.ifmmDesc }"/></textarea>
-        </div>
-        <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmDesc" class="form-label">설명</label>
-            <%-- <p>${fn:replace(item.ifmmDesc, br, '<br/>')}</p> --%>
-            <p><c:out value="${fn:replace(item.ifmmDesc, br, '<br/>')}" escapeXml = "false"/></p>
-        </div>
-    </div>
+ -->
 <c:if test="${not empty item.ifmmSeq }">
 <!-- regMod s -->
 <%@include file="../../../common/xdmin/includeV1/regmod.jsp"%>
@@ -414,7 +429,7 @@
 	var goUrlUele = "/member/memberUele";			/* #-> */
 	var goUrlDele = "/member/memberDele";			/* #-> */
 	
-	var seq = $("input:hidden[name=mainKey]"); 		/* #-> */
+	var seq = $("input:hidden[name=ifmmSeq]"); 		/* #-> */
 	
 	var form = $("form[name=form]");
 	var formVo = $("form[name=formVo]");
@@ -447,13 +462,26 @@
 	
 	
 	validationInst = function() {
-	   	if(validationUpdt() == false) return false;
+		if(!checkId('ifmmId', 2, 0, "영대소문자,숫자,특수문자(-_.),4~20자리만 입력 가능합니다")) return false;
+		if(!checkPassword('ifmmPassword', 2, 0, "영대소문자,숫자,특수문자(!@#$%^&*),8~20자리 조합만 입력 가능합니다")) return false;
+		if(!checkPasswordAndRe('ifmmPassword', 2, "패스워드가 일치하지 않습니다")) return false;
+	   	
+		if(validationUpdt() == false) return false;
 	}
 
 	
 	validationUpdt = function() {
-		<!-- if(!checkNull($.trim($("input[name=MENU_NAME]").val()), "MENU_NAME")) return false;  -->
-		/* if(!checkNull($('input[name=AUTH_NM]'), $.trim($('input[name=AUTH_NM]').val()), "권한명을 등록 해주세요!")) return false; */
+		if(!checkOnlyKoreanEnglishNumber('ifmmLastName', 2, 0, "성을 입력해 주세요")) return false;
+		if(!checkOnlyKoreanEnglishNumber('ifmmFirstName', 2, 0, "이름을 입력해 주세요")) return false;
+		if(!checkSelectNull('ifmmGenderCd', 2, "성별을 선택해 주세요.")) return false;
+		if(!checkNull('ifmmDob', "생일을 선택해 주세요.")) return false;
+		if(!checkEmail('ifmeEmailFullArray0', 2, 0, "이메일 주소를 입력해 주세요")) return false;
+		if(!checkSelectNull('ifmpTelecomCdArray0', 2, "통신사를 선택해 주세요")) return false;
+		if(!checkOnlyNumber('ifmpNumberArray0', 2, 0, 0, 0, 0, "모바일은 숫자만 입력해 주세요")) return false;
+		if(!checkOnlyNumber('ifmpNumberArray1', 2, 1, 0, 0, 0, "전화번호은 숫자만 입력해 주세요")) return false;
+		if(!checkOnlyNumber('ifmpNumberArray2', 2, 1, 0, 0, 0, "팩스번호은 숫자만 입력해 주세요")) return false;
+
+		
 	}
 	
 	

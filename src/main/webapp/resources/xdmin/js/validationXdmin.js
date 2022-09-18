@@ -3,12 +3,17 @@ validationTest = function() {
 }
 
 
-function checkNull (obj, value, message) {
+function checkNull (objName, message) {
 // checkNull = function(obj, value, message) {
-    if (value == "" || value == null) {
-		validationOutput(obj, message);
+	var obj = document.getElementById(objName);
+	var objValue = document.getElementById(objName).value.trim();
+	var objFeedback = document.getElementById(objName+"Feedback");
+
+    if (objValue == "" || objValue == null) {
+		checkLogicExpression (obj, objFeedback, 2, message);
         return false;
     } else {
+		obj.classList.remove('is-invalid');
         return true;
     }
 }
@@ -60,18 +65,22 @@ function checkOnlyKorean (objName, pattern, nullAllowedNy, message) {
 }
 
 
-function checkOnlyNumber (objName, pattern, nullAllowedNy, min, max, message) {
+function checkOnlyNumber (objName, pattern, nullAllowedNy, minMaxCheckNy, min, max, message) {
 // checkOnlyNumber = function(obj, value, message) {
 	var obj = document.getElementById(objName);
 	var objValue = document.getElementById(objName).value.trim();
 	var objFeedback = document.getElementById(objName+"Feedback");
     var regExp = /^[0-9]+$/;
 	
-	if(objValue >= min && objValue <= max) {
-    	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+	if(minMaxCheckNy == 1) {
+		if(objValue >= min && objValue <= max) {
+	    	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+		} else {
+			checkLogicExpression (obj, objFeedback, pattern, message);
+			return fasle;
+		}
 	} else {
-		checkLogicExpression (obj, objFeedback, pattern, message);
-		return fasle;
+		return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 	}
 }
 
@@ -91,7 +100,6 @@ function checkSelectNull (objName, pattern, message) {
 }
 
 
-
 function checkRadio (objName, pattern, nullAllowedNy, message, regExp) {
 	var obj = document.getElementById(objName);
 	var objFeedback = document.getElementById(objName+"Feedback");
@@ -104,6 +112,50 @@ function checkRadio (objName, pattern, nullAllowedNy, message, regExp) {
 		checkLogicExpression (obj, objFeedback, pattern, message);
 		return false;
 	}
+}
+
+
+function checkId (objName, pattern, nullAllowedNy, message) {
+// checkId = function(obj, value, message) {
+    var regExp = /^[A-Za-z0-9,_-]{4,20}$/;
+    return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+}
+
+
+function checkPassword (objName, pattern, nullAllowedNy, message) {
+// checkPassword = function (objName, pattern, nullAllowedNy, message) {
+	var regExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*]).{8,20}$/;
+    return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+}
+
+
+function checkPasswordAndRe (objName, pattern, message){
+// checkPasswordAndRe = function(password, passwordRe, message){
+
+    var objPassword = document.getElementById(objName);
+	var objPasswordRe = document.getElementById(objName+"Re");
+	var objPasswordValue = objPassword.value.trim();
+	var objPasswordReValue = objPasswordRe.value.trim();
+	var objFeedback = document.getElementById(objName+"ReFeedback");
+    
+    if(objPasswordValue == objPasswordReValue){
+		objPasswordRe.classList.remove('is-invalid');
+        return true;
+    } else {
+        checkLogicExpression (objPasswordRe, objFeedback, pattern, message);
+        return false;
+    }
+}
+
+function checkDob (year, month, day, message) {
+// checkDob = function(year, month, day, message) {
+    if (Number(year) > 0 && Number(month) > 0 && Number(day) > 0){
+		objPasswordRe.classList.remove('is-invalid');
+        return true;
+    } else {
+        checkLogicExpression (objPasswordRe, objFeedback, pattern, message);
+        return false;
+    }
 }
 
 
@@ -164,52 +216,10 @@ function checkLogicExpression (obj, objFeedback, pattern, message) {
 	}
 }
 
-
-
-
-
-
-checkPasswordAndRe = function(password, passwordRe, message){
-    if(password == passwordRe){
-        return true;
-    } else {
-        alert(message);
-        return false;
-    }
-}
-
-
-
-checkId = function(obj, value, message) {
-    var regExp = /^[A-Za-z0-9,_-]{4,20}$/;
-    if(regExp.test(value)) {
-		return true;
-	} else {
-		validationOutput(obj, message);
-		return false;
-	}
-}
-
-checkPassword = function(obj, value, message) {
-	var regExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*]).{8,20}$/;
-    /*var regExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,20}$/;*/
-    if(regExp.test(value)) {
-		return true;
-	} else {
-		validationOutput(obj, message);
-		return false;
-	}
-}
-
-
-
-checkDob = function(year, month, day, message) {
-    if (Number(year) > 0 && Number(month) > 0 && Number(day) > 0){
-        return true;
-    } else {
-        alert(message);
-        return false;
-    }
+function checkEmail (objName, pattern, nullAllowedNy, message) {
+// checkEmail = function (objName, pattern, nullAllowedNy, message) { {
+    var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 }
 
 /*
@@ -257,16 +267,7 @@ nullToEmpty = function(value) {
      }
 }
 
-checkEmail = function(obj, value, message) {
-    var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    if(regExp.test(value)) {
-    	return true;
-    } else {
-		alert(message);
-		obj.focus();
-		return false;
-	}
-}
+
 
 checkPhone = function(obj, value, message) {
     var regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
