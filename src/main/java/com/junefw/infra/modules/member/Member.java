@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.junefw.infra.common.base.Base;
 
 
-public class Member extends Base{
+public class Member extends Base {
 	
 	private Boolean autoLogin;
 
@@ -36,6 +36,7 @@ public class Member extends Base{
 	private Integer ifmmEmailConsentNy;
 	private Integer ifmmSmsConsentNy;
 	private Integer ifmmPushConsentNy;
+	private Integer ifmmCountryResidence;
 	private String ifmmDesc;
 	private Integer ifmmDelNy;
 
@@ -273,6 +274,12 @@ public class Member extends Base{
 	}
 	public void setIfmmPushConsentNy(Integer ifmmPushConsentNy) {
 		this.ifmmPushConsentNy = ifmmPushConsentNy;
+	}
+	public Integer getIfmmCountryResidence() {
+		return ifmmCountryResidence;
+	}
+	public void setIfmmCountryResidence(Integer ifmmCountryResidence) {
+		this.ifmmCountryResidence = ifmmCountryResidence;
 	}
 	public String getIfmmDesc() {
 		return ifmmDesc;

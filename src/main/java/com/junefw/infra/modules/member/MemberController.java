@@ -1,4 +1,3 @@
-
 package com.junefw.infra.modules.member;
 
 import java.time.LocalDateTime;
@@ -33,6 +32,9 @@ import com.junefw.infra.common.util.UtilCookie;
 import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.common.util.UtilSecurity;
 import com.junefw.infra.modules.code.CodeServiceImpl;
+import com.junefw.infra.modules.nationality.Nationality;
+import com.junefw.infra.modules.nationality.NationalityServiceImpl;
+import com.junefw.infra.modules.nationality.NationalityVo;
 
 @Controller
 @RequestMapping(value = "/member/")
@@ -40,10 +42,14 @@ public class MemberController extends BaseController {
 
 	@Autowired
 	MemberServiceImpl service;
+	
+	@Autowired
+	NationalityServiceImpl serviceNationality;
 
 
 	public void setSearchAndPaging(MemberVo vo) throws Exception {
 		
+		vo.setShDelNy(vo.getShDelNy() == null ? 0 : vo.getShDelNy());
 		vo.setShOptionDate(vo.getShOptionDate() == null ? null : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
@@ -75,8 +81,11 @@ public class MemberController extends BaseController {
 
 	
 	@RequestMapping(value = "memberForm")
-	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model, NationalityVo voNationality) throws Exception {
 
+		List<Nationality> listNationality = serviceNationality.selectList(voNationality);
+		model.addAttribute("listNationality", listNationality);
+		
 		if (vo.getIfmmSeq().equals("0") || vo.getIfmmSeq().equals("")) {
 //			insert
 		} else {

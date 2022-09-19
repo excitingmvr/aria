@@ -32,6 +32,8 @@ public class NationalityController extends BaseController {
 	
 	public void setSearchAndPaging(NationalityVo vo) throws Exception {
 		
+		vo.setShUseNy(vo.getShUseNy() == null ? 1 : vo.getShUseNy());
+		vo.setShDelNy(vo.getShDelNy() == null ? 0 : vo.getShDelNy());
 		vo.setShOptionDate(vo.getShOptionDate() == null ? null : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));

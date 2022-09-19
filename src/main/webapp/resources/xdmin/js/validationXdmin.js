@@ -147,6 +147,7 @@ function checkPasswordAndRe (objName, pattern, message){
     }
 }
 
+
 function checkDob (year, month, day, message) {
 // checkDob = function(year, month, day, message) {
     if (Number(year) > 0 && Number(month) > 0 && Number(day) > 0){
@@ -156,6 +157,21 @@ function checkDob (year, month, day, message) {
         checkLogicExpression (objPasswordRe, objFeedback, pattern, message);
         return false;
     }
+}
+
+
+function checkEmail (objName, pattern, nullAllowedNy, message) {
+// checkEmail = function (objName, pattern, nullAllowedNy, message) { {
+    var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
+}
+
+
+function checkMobile (objName, pattern, nullAllowedNy, message) {
+// checkMobile = function(obj, value, message) {
+//    var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+    var regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;;
+    return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
 }
 
 
@@ -216,11 +232,7 @@ function checkLogicExpression (obj, objFeedback, pattern, message) {
 	}
 }
 
-function checkEmail (objName, pattern, nullAllowedNy, message) {
-// checkEmail = function (objName, pattern, nullAllowedNy, message) { {
-    var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-	return checkLogic (objName, pattern, nullAllowedNy, message, regExp);
-}
+
 
 /*
 checkNullSelect = function(value, message) {
@@ -280,16 +292,7 @@ checkPhone = function(obj, value, message) {
 	}
 }
 
-checkMobile = function(obj, value, message) {
-    var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
-    if(regExp.test(value)) {
-    	return true;
-    } else {
-		alert(message);
-		obj.focus();
-		return false;
-	}
-}
+
 
 checkBizNumber = function(obj, value, message) {
     var regExp = /^\d{3}-\d{2}-\d{5}$/;

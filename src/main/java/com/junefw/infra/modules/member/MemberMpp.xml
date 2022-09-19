@@ -58,6 +58,7 @@
 				,a.ifmmEmailConsentNy
 				,a.ifmmSmsConsentNy
 				,a.ifmmPushConsentNy
+				,a.ifmmCountryResidence
 				,a.ifmmDesc
 				,a.ifmmDelNy
 				,a.regIp
@@ -111,6 +112,7 @@
 			,a.ifmmEmailConsentNy
 			,a.ifmmSmsConsentNy
 			,a.ifmmPushConsentNy
+			,a.ifmmCountryResidence
 			,a.ifmmDesc
 			,a.ifmmDelNy
 			<include refid="Base.selectRegModWithAlies" />
@@ -153,6 +155,7 @@
 			,ifmmEmailConsentNy
 			,ifmmSmsConsentNy
 			,ifmmPushConsentNy
+			,ifmmCountryResidence
 			,ifmmDesc
 			,ifmmDelNy
 			<include refid="Base.insertRegModColumn" />
@@ -181,6 +184,7 @@
 			,#{ifmmEmailConsentNy}
 			,#{ifmmSmsConsentNy}
 			,#{ifmmPushConsentNy}
+			,#{ifmmCountryResidence}
 			,#{ifmmDesc}
 			,0
 			<include refid="Base.insertRegModValue" />
@@ -214,6 +218,7 @@
 			,ifmmEmailConsentNy = #{ifmmEmailConsentNy}
 			,ifmmSmsConsentNy = #{ifmmSmsConsentNy}
 			,ifmmPushConsentNy = #{ifmmPushConsentNy}
+			,ifmmCountryResidence = #{ifmmCountryResidence}
 			,ifmmDesc = #{ifmmDesc}
 			<include refid="Base.updateModColumnValue" />
 		WHERE 1=1

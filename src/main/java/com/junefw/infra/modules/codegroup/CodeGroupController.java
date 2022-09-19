@@ -32,6 +32,8 @@ public class CodeGroupController extends BaseController{
 	
 	public void setSearchAndPaging(CodeGroupVo vo) throws Exception {
 		
+		vo.setShUseNy(vo.getShUseNy() == null ? 1 : vo.getShUseNy());
+		vo.setShDelNy(vo.getShDelNy() == null ? 0 : vo.getShDelNy());
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 2 : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
@@ -44,6 +46,9 @@ public class CodeGroupController extends BaseController{
 	public String codeGroupList(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
 		
 		setSearchAndPaging(vo);
+		
+		System.out.println("vo.getShUseNy(): " + vo.getShUseNy());
+		System.out.println("vo.getShDelNy(): " + vo.getShDelNy());
 		
 		if (vo.getTotalRows() > 0) {
 			List<CodeGroup> list = service.selectList(vo);

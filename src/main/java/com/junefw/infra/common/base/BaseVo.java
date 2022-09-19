@@ -22,7 +22,8 @@ public class BaseVo {
 	
 	
 //	search
-	private Integer shDelNy = 0;
+	private Integer shUseNy;
+	private Integer shDelNy;
 	private Integer shOptionDate;
 	private String shDateStart;
 	private String shDateEnd;
@@ -172,6 +173,14 @@ public class BaseVo {
 		this.startRnumForMysql = startRnumForMysql;
 	}
 
+	public Integer getShUseNy() {
+		return shUseNy;
+	}
+
+	public void setShUseNy(Integer shUseNy) {
+		this.shUseNy = shUseNy;
+	}
+	
 	public Integer getShDelNy() {
 		return shDelNy;
 	}
@@ -227,5 +236,7 @@ public class BaseVo {
 	public void setCheckboxSeqArray(String[] checkboxSeqArray) {
 		this.checkboxSeqArray = checkboxSeqArray;
 	}
+
+	
 
 }

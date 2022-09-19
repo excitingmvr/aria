@@ -12,6 +12,7 @@
 		FROM 
 			infrNationality a
 		WHERE 1=1
+			<if test="shUseNy != null and !shUseNy.equals('')">AND ifnaUseNy = #{shUseNy}</if>
 			<if test="shDelNy != null and !shDelNy.equals('')">AND ifnaDelNy = #{shDelNy}</if>
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>

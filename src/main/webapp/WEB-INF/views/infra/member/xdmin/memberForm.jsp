@@ -290,13 +290,14 @@
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="memCountryResidence" class="form-label">거주국가</label>
-            <select id="memCountryResidence" name="memCountryResidence" class="form-select form-select-sm">
+            <label for="ifmmCountryResidence" class="form-label">거주국가</label>
+            <select id="ifmmCountryResidence" name="ifmmCountryResidence" class="form-select form-select-sm">
                 <option value="">::선택::</option>
-                <option value="1">한국</option>
-                <option value="2">미국</option>
-                <option value="3">일본</option>
+                <c:forEach items="${listNationality}" var="listNationality" varStatus="status">
+                	<option value="${listNationality.ifnaSeq }" <c:if test="${listNationality.ifnaSeq eq item.ifmmCountryResidence}">selected</c:if>>${listNationality.ifnaName }</option>
+                </c:forEach>
               </select>
+              <div class="invalid-feedback" id="ifmmCountryResidence"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">          
 <!-- 
@@ -462,23 +463,28 @@
 	
 	
 	validationInst = function() {
+/* 		
 		if(!checkId('ifmmId', 2, 0, "영대소문자,숫자,특수문자(-_.),4~20자리만 입력 가능합니다")) return false;
 		if(!checkPassword('ifmmPassword', 2, 0, "영대소문자,숫자,특수문자(!@#$%^&*),8~20자리 조합만 입력 가능합니다")) return false;
 		if(!checkPasswordAndRe('ifmmPassword', 2, "패스워드가 일치하지 않습니다")) return false;
-	   	
+ */	   	
 		if(validationUpdt() == false) return false;
 	}
 
 	
 	validationUpdt = function() {
+/* 		
 		if(!checkOnlyKoreanEnglishNumber('ifmmLastName', 2, 0, "성을 입력해 주세요")) return false;
 		if(!checkOnlyKoreanEnglishNumber('ifmmFirstName', 2, 0, "이름을 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmmGenderCd', 2, "성별을 선택해 주세요.")) return false;
 		if(!checkNull('ifmmDob', "생일을 선택해 주세요.")) return false;
 		if(!checkEmail('ifmeEmailFullArray0', 2, 0, "이메일 주소를 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmpTelecomCdArray0', 2, "통신사를 선택해 주세요")) return false;
-		if(!checkOnlyNumber('ifmpNumberArray0', 2, 0, 0, 0, 0, "모바일은 숫자만 입력해 주세요")) return false;
+ 		
+		if(!checkMobile('ifmpNumberArray0', 2, 0, "모바일은 숫자만 입력해 주세요")) return false;
+		
 		if(!checkOnlyNumber('ifmpNumberArray1', 2, 1, 0, 0, 0, "전화번호은 숫자만 입력해 주세요")) return false;
+*/		
 		if(!checkOnlyNumber('ifmpNumberArray2', 2, 1, 0, 0, 0, "팩스번호은 숫자만 입력해 주세요")) return false;
 
 		
