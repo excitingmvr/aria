@@ -284,7 +284,7 @@
  		if(!checkOnlyEnglish('ifnaNameEng', 2, 1, "국가 이름 (영문)은 영대소문자만 입력 가능합니다.")) return false;
  		if(!checkOnlyEnglish('ifnaCode2Char', 2, 0, "국가 코드 (2자리)은 영대소문자만 입력 가능합니다.")) return false;
  		if(!checkOnlyEnglish('ifnaCode3Char', 2, 0, "국가 코드 (3자리)은 영대소문자만 입력 가능합니다.")) return false;
- 		if(!checkOnlyNumber('ifnaOrder', 2, 0, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifnaOrder', 2, 0, 1, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
 	}
 	
 	

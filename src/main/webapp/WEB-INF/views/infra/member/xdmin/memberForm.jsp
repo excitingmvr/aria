@@ -421,6 +421,8 @@
 
 	$(document).ready(function(){
 		 $("#ifmmDob").datepicker();
+		 
+		 $("#addressOthers").hide();
 	}); 
 
 
@@ -526,6 +528,20 @@
 		$("#modalConfirm").modal("hide");
 		formVo.attr("action", goUrlDele).submit();
 	});
+	
+	
+	$("#ifmmCountryResidence").on("change", function(){
+		if ($("#ifmmCountryResidence").val() == 1) {
+			$("#addressKorea").show();
+			$("#addressOthers").hide();
+		} else {
+			$("#addressKorea").hide();
+			$("#addressOthers").show();
+		}
+	});
+	
+	
+	
 	
 	
 	$("#btnAddress").on("click", function(){	
