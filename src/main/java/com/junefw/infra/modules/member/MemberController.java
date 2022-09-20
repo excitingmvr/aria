@@ -81,9 +81,11 @@ public class MemberController extends BaseController {
 
 	
 	@RequestMapping(value = "memberForm")
-	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model, NationalityVo voNationality) throws Exception {
-
-		List<Nationality> listNationality = serviceNationality.selectList(voNationality);
+	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model, NationalityVo nationalityVo) throws Exception {
+		
+		nationalityVo.setShUseNy(1);
+		nationalityVo.setShDelNy(0);
+		List<Nationality> listNationality = serviceNationality.selectList(nationalityVo);
 		model.addAttribute("listNationality", listNationality);
 		
 		if (vo.getIfmmSeq().equals("0") || vo.getIfmmSeq().equals("")) {
