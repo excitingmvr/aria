@@ -48,7 +48,7 @@ public class Member extends Base {
 	private String ifmeEmailFull;
 	private String ifmeEmailAccount;
 	private String ifmeEmailDomain;
-	private String ifmeEmailDomainCd;
+	private Integer ifmeEmailDomainCd;
 	private Integer ifmeDelNy;
 //	private String ifmmSeq;
 	
@@ -60,7 +60,7 @@ public class Member extends Base {
 	private String[] ifmeEmailFullArray;
 	private String[] ifmeEmailAccountArray;
 	private String[] ifmeEmailDomainArray;
-	private String[] ifmeEmailDomainCdArray;
+	private Integer[] ifmeEmailDomainCdArray;
 	private Integer[] ifmeDelNyArray;
 //	private String ifmmSeq;
 	
@@ -329,10 +329,10 @@ public class Member extends Base {
 	public void setIfmeEmailDomain(String ifmeEmailDomain) {
 		this.ifmeEmailDomain = ifmeEmailDomain;
 	}
-	public String getIfmeEmailDomainCd() {
+	public Integer getIfmeEmailDomainCd() {
 		return ifmeEmailDomainCd;
 	}
-	public void setIfmeEmailDomainCd(String ifmeEmailDomainCd) {
+	public void setIfmeEmailDomainCd(Integer ifmeEmailDomainCd) {
 		this.ifmeEmailDomainCd = ifmeEmailDomainCd;
 	}
 	public Integer getIfmeDelNy() {
@@ -371,10 +371,10 @@ public class Member extends Base {
 	public void setIfmeEmailDomainArray(String[] ifmeEmailDomainArray) {
 		this.ifmeEmailDomainArray = ifmeEmailDomainArray;
 	}
-	public String[] getIfmeEmailDomainCdArray() {
+	public Integer[] getIfmeEmailDomainCdArray() {
 		return ifmeEmailDomainCdArray;
 	}
-	public void setIfmeEmailDomainCdArray(String[] ifmeEmailDomainCdArray) {
+	public void setIfmeEmailDomainCdArray(Integer[] ifmeEmailDomainCdArray) {
 		this.ifmeEmailDomainCdArray = ifmeEmailDomainCdArray;
 	}
 	public Integer[] getIfmeDelNyArray() {

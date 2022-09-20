@@ -17,6 +17,9 @@ public interface MemberService {
 	int uelete(Member dto) throws Exception; 
 	int delete(MemberVo vo) throws Exception;
 	
+	int selectOneIdCheck(Member dto) throws Exception;
+	
+	
 //	infrMemberPhone
 	List<Member> selectListPhone(MemberVo vo) throws Exception; 
 	

@@ -128,7 +128,14 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ifmmId" class="form-label">아이디 <span class="text-danger">*</span></label>
-            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영대소문자,숫자,특수문자(-_.),4~20자리" class="form-control form-control-sm">
+            <input type="hidden" id="ifmmIdAllowedNy" name="ifmmIdAllowedNy" value="0">
+            <input type="text" id="ifmmId" name="ifmmId" 
+            	value="<c:out value="${item.ifmmId}"/>" 
+            	maxlength="20" 
+            	placeholder="영대소문자,숫자,특수문자(-_.),4~20자리" 
+            	class="form-control form-control-sm"
+            	<c:if test="${not empty item.ifmmId }">readonly</c:if>
+            >
             <div class="invalid-feedback" id="ifmmIdFeedback"></div>
         </div>
         <div class="col-sm-6">
@@ -329,8 +336,8 @@
 	            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="<c:out value="${item.ifmaAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
 	            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
 				<div class="row">
-					<div class="col-sm-6"><input type="text" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
-					<div class="col-sm-6"><input type="text" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
+					<div class="col-sm-6"><input type="hidden" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
+					<div class="col-sm-6"><input type="hidden" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
 				</div>
 			</div>
 			<div id="addressOthers">
@@ -422,6 +429,7 @@
 	$(document).ready(function(){
 		 $("#ifmmDob").datepicker();
 		 
+		 $("#ifmmCountryResidence").val(1);
 		 $("#addressOthers").hide();
 	}); 
 
@@ -465,31 +473,23 @@
 	
 	
 	validationInst = function() {
-/* 		
 		if(!checkId('ifmmId', 2, 0, "영대소문자,숫자,특수문자(-_.),4~20자리만 입력 가능합니다")) return false;
 		if(!checkPassword('ifmmPassword', 2, 0, "영대소문자,숫자,특수문자(!@#$%^&*),8~20자리 조합만 입력 가능합니다")) return false;
 		if(!checkPasswordAndRe('ifmmPassword', 2, "패스워드가 일치하지 않습니다")) return false;
- */	   	
 		if(validationUpdt() == false) return false;
 	}
 
 	
 	validationUpdt = function() {
-/* 		
 		if(!checkOnlyKoreanEnglishNumber('ifmmLastName', 2, 0, "성을 입력해 주세요")) return false;
 		if(!checkOnlyKoreanEnglishNumber('ifmmFirstName', 2, 0, "이름을 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmmGenderCd', 2, "성별을 선택해 주세요.")) return false;
 		if(!checkNull('ifmmDob', "생일을 선택해 주세요.")) return false;
 		if(!checkEmail('ifmeEmailFullArray0', 2, 0, "이메일 주소를 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmpTelecomCdArray0', 2, "통신사를 선택해 주세요")) return false;
- 		
 		if(!checkMobile('ifmpNumberArray0', 2, 0, "모바일은 숫자만 입력해 주세요")) return false;
-		
 		if(!checkOnlyNumber('ifmpNumberArray1', 2, 1, 0, 0, 0, "전화번호은 숫자만 입력해 주세요")) return false;
-*/		
 		if(!checkOnlyNumber('ifmpNumberArray2', 2, 1, 0, 0, 0, "팩스번호은 숫자만 입력해 주세요")) return false;
-
-		
 	}
 	
 	
@@ -530,6 +530,47 @@
 	});
 	
 	
+	$("#ifmmId").on("focusout", function(){
+		
+		if(!checkId('ifmmId', 2, 0, "영대소문자,숫자,특수문자(-_.),4~20자리만 입력 가능합니다")) {
+			return false;
+		} else {
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				/* ,dataType:"json" */
+				,url: "/member/checkId"
+				/* ,data : $("#formLogin").serialize() */
+				,data : { "ifmmId" : $("#ifmmId").val() }
+				,success: function(response) {
+					if(response.rt == "success") {
+						document.getElementById("ifmmId").classList.add('is-valid');
+	
+						document.getElementById("ifmmIdFeedback").classList.remove('invalid-feedback');
+						document.getElementById("ifmmIdFeedback").classList.add('valid-feedback');
+						document.getElementById("ifmmIdFeedback").innerText = "사용 가능 합니다.";
+						
+						document.getElementById("ifmmIdAllowedNy").value = 1;
+						
+					} else {
+						document.getElementById("ifmmId").classList.add('is-invalid');
+						
+						document.getElementById("ifmmIdFeedback").classList.remove('valid-feedback');
+						document.getElementById("ifmmIdFeedback").classList.add('invalid-feedback');
+						document.getElementById("ifmmIdFeedback").innerText = "사용 불가능 합니다";
+						
+						document.getElementById("ifmmIdAllowedNy").value = 0;
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		}
+	});
+	
+	
 	$("#ifmmCountryResidence").on("change", function(){
 		if ($("#ifmmCountryResidence").val() == 1) {
 			$("#addressKorea").show();
@@ -539,9 +580,6 @@
 			$("#addressOthers").show();
 		}
 	});
-	
-	
-	
 	
 	
 	$("#btnAddress").on("click", function(){	
@@ -617,41 +655,11 @@
 						
 						document.getElementById("ifmaLatArray0").value=result[0].y;
 						document.getElementById("ifmaLngArray0").value=result[0].x;
-						
-/* 						
-						var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-				
-						y = result[0].x;
-						x = result[0].y;
-				
-						// 결과값으로 받은 위치를 마커로 표시합니다.
-						var marker = new daum.maps.Marker({
-							map: map,
-							position: coords
-						});
-				
-						// 인포윈도우로 장소에 대한 설명표시
-						var infowindow = new daum.maps.InfoWindow({
-							content: '<div style="width:150px;text-align:center;padding:5px 0;">좌표위치</div>'
-						});
-				
-						infowindow.open(map,marker);
-				
-						// 지도 중심을 이동
-						map.setCenter(coords);
-						
-						document.getElementById("ifmaLatArray0").value=x;
-						document.getElementById("ifmaLngArray0").value=y;
- */						
 					}
 				});
 				/* lat and lng from address e */
-
-       }
-   
+		}
         }).open();
-        
-
     }
 	
 
@@ -660,6 +668,8 @@
 		$("#ifmaAddress1Array0").val('');
 		$("#ifmaAddress2Array0").val('');
 		$("#ifmaAddress3Array0").val('');
+		$("#ifmaLatArray0").val('');
+		$("#ifmaLngArray0").val('');
 	});
 	
 	

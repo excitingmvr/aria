@@ -30,7 +30,6 @@ import com.junefw.infra.common.base.BaseController;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilCookie;
 import com.junefw.infra.common.util.UtilDateTime;
-import com.junefw.infra.common.util.UtilSecurity;
 import com.junefw.infra.modules.code.CodeServiceImpl;
 import com.junefw.infra.modules.nationality.Nationality;
 import com.junefw.infra.modules.nationality.NationalityServiceImpl;
@@ -108,8 +107,6 @@ public class MemberController extends BaseController {
 	@SuppressWarnings(value = { "all" })
 	@RequestMapping(value = "memberInst")
 	public String memberInst(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
-		
-		dto.setIfmmPassword(UtilSecurity.encryptSha256(dto.getIfmmPassword()));
 		
 		service.insert(dto);
 	
@@ -285,6 +282,23 @@ public class MemberController extends BaseController {
 	        workbook.close();
 		}
     }
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "checkId")
+	public Map<String, Object> checkId(Member dto) throws Exception {
+
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.selectOneIdCheck(dto);
+
+		if (result > 0) {
+			returnMap.put("rt", "fail");
+		} else {
+			returnMap.put("rt", "success");
+		}
+		return returnMap;
+	}
 	
 
 	@RequestMapping(value = "loginForm")

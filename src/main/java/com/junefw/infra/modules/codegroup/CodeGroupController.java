@@ -47,9 +47,6 @@ public class CodeGroupController extends BaseController{
 		
 		setSearchAndPaging(vo);
 		
-		System.out.println("vo.getShUseNy(): " + vo.getShUseNy());
-		System.out.println("vo.getShDelNy(): " + vo.getShDelNy());
-		
 		if (vo.getTotalRows() > 0) {
 			List<CodeGroup> list = service.selectList(vo);
 			model.addAttribute("list", list);

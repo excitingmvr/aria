@@ -241,6 +241,16 @@
 		WHERE 1=1
 			AND ifmmSeq = #{ifmmSeq}
 	</delete>
+	
+	
+	<select id="selectOneIdCheck" resultType="Integer">
+		SELECT
+			count(ifmmSeq)
+		FROM
+			infrMember a
+		WHERE 1=1
+			AND a.ifmmId = #{ifmmId}
+	</select>
 	<!-- infrMember e -->
 	
 	
