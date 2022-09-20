@@ -128,13 +128,7 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ifmmId" class="form-label">아이디 <span class="text-danger">*</span></label>
-            <input type="text" id="ifmmId" name="ifmmId" 
-            	value="<c:out value="${item.ifmmId}"/>" 
-            	maxlength="20" 
-            	placeholder="영대소문자,숫자,특수문자(-_.),4~20자리" 
-            	class="form-control form-control-sm"
-            	<c:if test="${not empty item.ifmmId }">readonly</c:if>
-            >
+            <input type="text" id="ifmmId" name="ifmmId" value="<c:out value="${item.ifmmId}"/>" maxlength="20" placeholder="영대소문자,숫자,특수문자(-_.),4~20자리" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifmmIdFeedback"></div>
         </div>
         <div class="col-sm-6">
@@ -427,8 +421,7 @@
 
 	$(document).ready(function(){
 		 $("#ifmmDob").datepicker();
-
-		 $("#ifmmCountryResidence").val(1);
+		 
 		 $("#addressOthers").hide();
 	}); 
 
@@ -472,23 +465,31 @@
 	
 	
 	validationInst = function() {
+/* 		
 		if(!checkId('ifmmId', 2, 0, "영대소문자,숫자,특수문자(-_.),4~20자리만 입력 가능합니다")) return false;
 		if(!checkPassword('ifmmPassword', 2, 0, "영대소문자,숫자,특수문자(!@#$%^&*),8~20자리 조합만 입력 가능합니다")) return false;
 		if(!checkPasswordAndRe('ifmmPassword', 2, "패스워드가 일치하지 않습니다")) return false;
+ */	   	
 		if(validationUpdt() == false) return false;
 	}
 
 	
 	validationUpdt = function() {
+/* 		
 		if(!checkOnlyKoreanEnglishNumber('ifmmLastName', 2, 0, "성을 입력해 주세요")) return false;
 		if(!checkOnlyKoreanEnglishNumber('ifmmFirstName', 2, 0, "이름을 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmmGenderCd', 2, "성별을 선택해 주세요.")) return false;
 		if(!checkNull('ifmmDob', "생일을 선택해 주세요.")) return false;
 		if(!checkEmail('ifmeEmailFullArray0', 2, 0, "이메일 주소를 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmpTelecomCdArray0', 2, "통신사를 선택해 주세요")) return false;
+ 		
 		if(!checkMobile('ifmpNumberArray0', 2, 0, "모바일은 숫자만 입력해 주세요")) return false;
+		
 		if(!checkOnlyNumber('ifmpNumberArray1', 2, 1, 0, 0, 0, "전화번호은 숫자만 입력해 주세요")) return false;
+*/		
 		if(!checkOnlyNumber('ifmpNumberArray2', 2, 1, 0, 0, 0, "팩스번호은 숫자만 입력해 주세요")) return false;
+
+		
 	}
 	
 	
@@ -527,6 +528,20 @@
 		$("#modalConfirm").modal("hide");
 		formVo.attr("action", goUrlDele).submit();
 	});
+	
+	
+	$("#ifmmCountryResidence").on("change", function(){
+		if ($("#ifmmCountryResidence").val() == 1) {
+			$("#addressKorea").show();
+			$("#addressOthers").hide();
+		} else {
+			$("#addressKorea").hide();
+			$("#addressOthers").show();
+		}
+	});
+	
+	
+	
 	
 	
 	$("#btnAddress").on("click", function(){	
