@@ -250,24 +250,24 @@
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcdReferenceI1" class="form-label">예비1 (Int type)</label>
-			<input type="text" id="ifcdReferenceI1" name="ifcdReferenceI1" value="<c:out value="${item.ifcdReferenceI1}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcdReferenceI1" name="ifcdReferenceI1" value="<c:out value="${item.ifcdReferenceI1}"/>" maxlength="4" placeholder="숫자" class="form-control form-control-sm">
 			<div class="invalid-feedback" id="ifcdReferenceI1Feedback"></div>
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcdReferenceI2" class="form-label">예비2 (Int type)</label>
-			<input type="text" id="ifcdReferenceI2" name="ifcdReferenceI2" value="<c:out value="${item.ifcdReferenceI2}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcdReferenceI2" name="ifcdReferenceI2" value="<c:out value="${item.ifcdReferenceI2}"/>" maxlength="4" placeholder="숫자" class="form-control form-control-sm">
 			<div class="invalid-feedback" id="ifcdReferenceI2Feedback"></div>        
 		</div>
 	</div>	
 	<div class="row mt-sm-4">
 		<div class="col-sm-6">
 			<label for="ifcdReferenceI3" class="form-label">예비3 (Int type)</label>
-			<input type="text" id="ifcdReferenceI3" name="ifcdReferenceI3" value="<c:out value="${item.ifcdReferenceI3}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcdReferenceI3" name="ifcdReferenceI3" value="<c:out value="${item.ifcdReferenceI3}"/>" maxlength="4" placeholder="숫자" class="form-control form-control-sm">
 			<div class="invalid-feedback" id="ifcdReferenceI3Feedback"></div>
 		</div>
 		<div class="col-sm-6">
 			<label for="ifcdReferenceI4" class="form-label">예비4 (Int type)</label>
-			<input type="text" id="ifcdReferenceI4" name="ifcdReferenceI4" value="<c:out value="${item.ifcdReferenceI4}"/>" maxlength="20" placeholder="숫자" class="form-control form-control-sm">
+			<input type="text" id="ifcdReferenceI4" name="ifcdReferenceI4" value="<c:out value="${item.ifcdReferenceI4}"/>" maxlength="4" placeholder="숫자" class="form-control form-control-sm">
 			<div class="invalid-feedback" id="ifcdReferenceI4Feedback"></div>		
 		</div>
 	</div>
@@ -379,15 +379,15 @@
 		if(!checkOnlyEnglishNumber('ifcdSeqAnother', 2, 1, "코드 (Another)는 영대소문자, 숫자만 입력 가능합니다.")) return false;
 		if(!checkOnlyKoreanEnglishNumber('ifcdName', 2, 0, "코드 이름은 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false;
 		if(!checkOnlyEnglishNumber('ifcdNameEng', 2, 1, "코드 이름 (영문)는 영대소문자, 숫자만 입력 가능합니다.")) return false;
-		if(!checkOnlyNumber('ifcdOrder', 2, 0, 0, 255, "순서는 숫자만 입력 가능합니다.")) return false;
+		if(!checkOnlyNumber('ifcdOrder', 2, 0, 1, 0, 255, "순서는 숫자(0~255)만 입력 가능합니다.")) return false;
 		if(!checkOnlyEnglishNumber('ifcdReferenceV1', 2, 1, "예비1 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
  		if(!checkOnlyEnglishNumber('ifcdReferenceV2', 2, 1, "예비2 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
  		if(!checkOnlyEnglishNumber('ifcdReferenceV3', 2, 1, "예비3 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
  		if(!checkOnlyEnglishNumber('ifcdReferenceV4', 2, 1, "예비4 (varchar type)은 영문대소문자, 숫자만 입력 가능합니다.")) return false;
- 		if(!checkOnlyNumber('ifcdReferenceI1', 2, 1, -128, 127, "예비1 (Int type)은 숫자만 입력 가능합니다.")) return false;
- 		if(!checkOnlyNumber('ifcdReferenceI2', 2, 1, -128, 127, "예비2 (Int type)은 숫자만 입력 가능합니다.")) return false;
- 		if(!checkOnlyNumber('ifcdReferenceI3', 2, 1, -128, 127, "예비3 (Int type)은 숫자만 입력 가능합니다.")) return false;
- 		if(!checkOnlyNumber('ifcdReferenceI4', 2, 1, -128, 127, "예비4 (Int type)은 숫자만 입력 가능합니다.")) return false;		
+ 		if(!checkOnlyNumber('ifcdReferenceI1', 2, 1, 1, -128, 127, "예비1 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifcdReferenceI2', 2, 1, 1, -128, 127, "예비2 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifcdReferenceI3', 2, 1, 1, -128, 127, "예비3 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;
+ 		if(!checkOnlyNumber('ifcdReferenceI4', 2, 1, 1, -128, 127, "예비4 (Int type)은 숫자(-128~127)만 입력 가능합니다.")) return false;		
 
 	}
 	
