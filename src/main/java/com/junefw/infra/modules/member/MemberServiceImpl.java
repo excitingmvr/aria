@@ -8,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.junefw.infra.common.base.BaseServiceImpl;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.common.util.UtilRegMod;
 import com.junefw.infra.common.util.UtilSecurity;
-import com.junefw.infra.common.util.UtilUpload;
 import com.junefw.infra.modules.codegroup.CodeGroup;
 
 
@@ -98,6 +96,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 //	    	}
 	    	
 	    	// infrMemberEmail
+	    	System.out.println("dto.getIfmeEmailFullArray().length: " + dto.getIfmeEmailFullArray().length);
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
 				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
 				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
@@ -116,34 +115,30 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 			}
 			
 //			infrMemberAddress
-			if (dto.getIfmaZipcodeArray()[0] != null && dto.getIfmaZipcodeArray()[0] != "" ) {
-				dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[0]);
-				dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[0]);
-				dto.setIfmaTitle(dto.getIfmaTitleArray()[0]);
-				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[0]);
-				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[0]);
-				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[0]);
-				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[0]);
-				dto.setIfmaLat(dto.getIfmaLatArray()[0]);
-				dto.setIfmaLng(dto.getIfmaLngArray()[0]);
-				
+			System.out.println("dto.getIfmaZipcodeArray().length: " + dto.getIfmaZipcodeArray().length);
+			if (dto.getIfmaZipcodeArray().length > 1) {
+				System.out.println("1");
+				for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
+					dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
+					dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
+					dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
+					dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
+					dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
+					dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
+					dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
+					dto.setIfmaLat(dto.getIfmaLatArray()[i]);
+					dto.setIfmaLng(dto.getIfmaLngArray()[i]);
+					
+					dao.insertAddress(dto);
+				}
+			} else if (dto.getIfmaZipcodeArray().length == 1){
+				System.out.println("2");
 				dao.insertAddress(dto);
+			
+			} else {
+				System.out.println("3");
+				// by pass
 			}
-//			for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
-//			for(int i = 0 ; i < 1 ; i++) {
-//				dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
-//				dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
-//				dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
-//				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
-//				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
-//				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
-//				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
-//				dto.setIfmaLat(dto.getIfmaLatArray()[i]);
-//				dto.setIfmaLng(dto.getIfmaLngArray()[i]);
-//				
-//				dao.insertAddress(dto);
-//
-//	    }
 			
 			return 1;
 
