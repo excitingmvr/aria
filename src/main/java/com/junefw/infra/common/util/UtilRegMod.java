@@ -152,8 +152,6 @@ public class UtilRegMod {
 //			}
 //	    }
 	   
-		System.out.println("device: " + device);
 		return device;
-	
 	}
 }

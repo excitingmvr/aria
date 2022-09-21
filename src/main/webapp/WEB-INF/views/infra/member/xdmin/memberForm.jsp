@@ -149,12 +149,12 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmPassword" class="form-label">비밀번호 <span class="text-danger">*</span></label>
-            <input type="password" id="ifmmPassword" name="ifmmPassword" value="" maxlength="20" placeholder="영대소문자,숫자,특수문자(!@#$%^&*),8~20자리 조합" class="form-control form-control-sm">
+            <input type="password" id="ifmmPassword" name="ifmmPassword" value="Wyj291872!#" maxlength="20" placeholder="영대소문자,숫자,특수문자(!@#$%^&*),8~20자리 조합" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifmmPasswordFeedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmPasswordRe" class="form-label">비밀번호확인 <span class="text-danger">*</span></label>
-            <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="" maxlength="20" placeholder="비밀번호 확인" class="form-control form-control-sm">
+            <input type="password" id="ifmmPasswordRe" name="ifmmPasswordRe" value="Wyj291872!#" maxlength="20" placeholder="비밀번호 확인" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ifmmPasswordReFeedback"></div>          
         </div>
     </div>
@@ -304,7 +304,7 @@
                 	<option value="${listNationality.ifnaSeq }" <c:if test="${listNationality.ifnaSeq eq item.ifmmCountryResidence}">selected</c:if>>${listNationality.ifnaName }</option>
                 </c:forEach>
               </select>
-              <div class="invalid-feedback" id="ifmmCountryResidence"></div>
+              <div class="invalid-feedback" id="ifmmCountryResidenceFeedback"></div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">          
 <!-- 
@@ -334,10 +334,11 @@
 	            </div>
 	            <input type="text" id="ifmaAddress1Array0" name="ifmaAddress1Array" value="<c:out value="${item.ifmaAddress1 }"/>" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
 	            <input type="text" id="ifmaAddress2Array0" name="ifmaAddress2Array" value="<c:out value="${item.ifmaAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
+	            <div class="invalid-feedback" id="ifmaAddress2Array0Feedback"></div>
 	            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
 				<div class="row">
-					<div class="col-sm-6"><input type="hidden" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
-					<div class="col-sm-6"><input type="hidden" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
+					<div class="col-sm-6"><input type="text" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
+					<div class="col-sm-6"><input type="text" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
 				</div>
 			</div>
 			<div id="addressOthers">
@@ -490,6 +491,15 @@
 		if(!checkMobile('ifmpNumberArray0', 2, 0, "모바일은 숫자만 입력해 주세요")) return false;
 		if(!checkOnlyNumber('ifmpNumberArray1', 2, 1, 0, 0, 0, "전화번호은 숫자만 입력해 주세요")) return false;
 		if(!checkOnlyNumber('ifmpNumberArray2', 2, 1, 0, 0, 0, "팩스번호은 숫자만 입력해 주세요")) return false;
+		
+		if ($("#ifmaZipcodeArray0").val() != "" && $("#ifmaAddress2Array0").val().trim() == "") {
+			$("#ifmaAddress2Array0").addClass('is-invalid');
+			$("#ifmaAddress2Array0Feedback").text("상세주소를 입력해 주세요");
+			return false;
+		} else {
+			// by pass
+			$("#ifmaAddress2Array0").removeClass('is-invalid');
+		}
 	}
 	
 	

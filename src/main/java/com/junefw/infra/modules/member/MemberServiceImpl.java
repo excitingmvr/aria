@@ -96,7 +96,6 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 //	    	}
 	    	
 	    	// infrMemberEmail
-	    	System.out.println("dto.getIfmeEmailFullArray().length: " + dto.getIfmeEmailFullArray().length);
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
 				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
 				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
@@ -115,9 +114,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 			}
 			
 //			infrMemberAddress
-			System.out.println("dto.getIfmaZipcodeArray().length: " + dto.getIfmaZipcodeArray().length);
-			if (dto.getIfmaZipcodeArray().length > 1) {
-				System.out.println("1");
+			if (dto.getIfmaZipcodeArray().length >= 1) {
 				for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
 					dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
 					dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
@@ -131,12 +128,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 					
 					dao.insertAddress(dto);
 				}
-			} else if (dto.getIfmaZipcodeArray().length == 1){
-				System.out.println("2");
-				dao.insertAddress(dto);
-			
 			} else {
-				System.out.println("3");
 				// by pass
 			}
 			
