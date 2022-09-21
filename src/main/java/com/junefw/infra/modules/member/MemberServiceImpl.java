@@ -142,6 +142,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	@Override
 	public int update(Member dto) throws Exception {
 		setRegMod(dto);
+    	
+		dto.setIfmmName(dto.getIfmmLastName() + dto.getIfmmFirstName());
+		
 		return dao.update(dto);
 	}
 	

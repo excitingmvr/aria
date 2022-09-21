@@ -354,6 +354,31 @@
             <%-- <p><c:out value="${fn:replace(item.ifmmDesc, br, '<br/>')}" escapeXml = "false"/></p> --%>     
         </div>
     </div>
+<c:if test="${not empty item.ifmmId }">        
+    <div class="row mt-sm-4">
+        <div class="col-sm-6 mt-3 mt-sm-0">
+            <label for="ifmmAdminNy" class="form-label">관리자</label>
+            <select id="ifmmAdminNy" name="ifmmAdminNy" class="form-select form-select-sm">
+				<option value="0" <c:if test="${item.ifmmAdminNy eq 0 }">selected</c:if>>N</option>
+				<option value="1" <c:if test="${item.ifmmAdminNy eq 1 }">selected</c:if>>Y</option>
+              </select>
+              <div class="invalid-feedback" id="ifmmCountryResidenceFeedback"></div>
+        </div>
+        <div class="col-sm-6 mt-3 mt-sm-0">          
+<!-- 
+            <label for="exampleDataList" class="form-label">Datalist example</label>
+            <input list="datalistOptions" name="" id="exampleDataList" placeholder="Type to search..." class="form-control form-select-sm">
+            <datalist id="datalistOptions">
+                <option value="San Francisco">
+                <option value="New York">
+                <option value="Seattle">
+                <option value="Los Angeles">
+                <option value="Chicago">
+            </datalist>
+ -->
+        </div>
+    </div>
+</c:if>      
 <!--     
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
@@ -457,7 +482,7 @@
 	   	} else {
 	   		// update
 	   		/* keyName.val(atob(keyName.val())); */
-	   		seq.remove();
+	   		// seq.remove();	html 에서 seq 보여지지 않으면 이 구문은 필요치 않다.
 	   		if (validationUpdt() == false) return false;
 	   		form.attr("action", goUrlUpdt).submit();
 	   	}
