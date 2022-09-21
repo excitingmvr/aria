@@ -120,9 +120,20 @@
 <h3 class="mt-3 mb-0">회원 관리</h3>		<!-- #-> -->
  
 <div class="container-fluid px-0 px-sm-5 mt-2">
-    <div class="row mt-sm-4">
-        <div class="col-sm-12">
+    <div class="row mt-sm-4 ">
+        <div class="col-sm-12 mx-auto">
             <img src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+            <button type="button" class="btn btn-primary">Primary</button>
+            <div class="">
+				<label for="file0" class="form-label input-file-button"><b>+</b>             </label>
+	 			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
+ 			</div>
+
+			<div class="addScroll">
+				<ul id="ulFile0" class="list-group">
+				</ul>
+			</div>
+
         </div>
     </div>
     <div class="row mt-sm-4">
