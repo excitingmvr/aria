@@ -125,12 +125,12 @@
             <img src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
 			<label for="file0" class="form-label input-file-button"><b>+</b></label>
  			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
-<!-- 
+<!-- 			
 			<div class="addScroll">
 				<ul id="ulFile0" class="list-group">
 				</ul>
 			</div>
- -->
+ -->			
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -387,26 +387,26 @@
         </div>
     </div>
 </c:if>      
-<!--     
+     
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="file0" class="form-label input-file-button">이미지첨부</label>
- 			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
-			<div class="addScroll">
-				<ul id="ulFile0" class="list-group">
-				</ul>
-			</div>
-        </div>
-        <div class="col-sm-6 mt-3 mt-sm-0">
-			<label for="file1" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 1);" >
+            <label for="file1" class="form-label input-file-button">이미지첨부</label>
+ 			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 2);">
 			<div class="addScroll">
 				<ul id="ulFile1" class="list-group">
 				</ul>
 			</div>
         </div>
+        <div class="col-sm-6 mt-3 mt-sm-0">
+			<label for="file2" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="file2" name="file2" type="file" multiple="multiple" style="display: none;" onChange="upload(2, 1);" >
+			<div class="addScroll">
+				<ul id="ulFile2" class="list-group">
+				</ul>
+			</div>
+        </div>
     </div>
- -->
+
 <c:if test="${not empty item.ifmmSeq }">
 <!-- regMod s -->
 <%@include file="../../../common/xdmin/includeV1/regmod.jsp"%>
@@ -721,7 +721,7 @@
 		$("#ulFile" + seq).children().remove();
 		
 		var fileCount = $("input[type=file]")[seq].files.length;
-		
+		alert(fileCount);
 		if(checkUploadedTotalFileNumber(fileCount, seq) == false) { return false; }
 		
 		var totalFileSize;
@@ -739,6 +739,10 @@
 		}
 		
 		if(checkUploadedTotalFileSize(totalFileSize, seq) == false) { return false; }
+		
+		
+		
+		
 		
 		for (var i = 0 ; i < fileCount ; i++) {
 			addUploadLi(seq, i, $("input[type=file]")[seq].files[i].name);
