@@ -28,9 +28,9 @@ $('#divSearchControl').on('click', function() {
  });
 
 
-checkUploadedTotalFileNumber = function(totalSize, seq) {
-	if(totalSize > MAX_TOTAL_FILE_NUMBER){
-		alert("전체 파일 갯수는 5개 까지 허용됩니다.");
+checkUploadedTotalFileNumber = function(seq, allowedMaxTotalFileNumber, fileCount) {
+	if(allowedMaxTotalFileNumber < fileCount){
+		alert("전체 파일 갯수는 "+ allowedMaxTotalFileNumber +"개 까지 허용됩니다.");
 		$("#file"+seq).val("");
 		return false;
 	}

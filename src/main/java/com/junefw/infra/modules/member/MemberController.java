@@ -322,7 +322,7 @@ public class MemberController extends BaseController {
 			return "redirect:/index/indexView";
 		} else {
 			//	by pass
-			return "xdmin/member/loginForm";
+			return "infra/member/xdmin/loginForm";
 		}
 	}
 

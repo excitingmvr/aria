@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!-- head s -->
-<%@include file="../include/head.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 <!-- head e -->
 
 <style type="text/css">
@@ -89,11 +89,11 @@
 <!-- contents e -->
 
 <!-- modalBase s -->
-<%@include file="../include/modalBase.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../include/linkJs.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 	
 <script type="text/javascript">
@@ -128,8 +128,8 @@
 
 	
 	validation = function() {
-		if(!checkNull($("#ifmmId"), $.trim($("#ifmmId").val()), "아이디를 입력해 주세요!")) return false;
-		if(!checkNull($("#ifmmPassword"), $.trim($("#ifmmPassword").val()), "비밀번호를 입력해 주세요!")) return false;
+		// if(!checkNull($("#ifmmId"), $.trim($("#ifmmId").val()), "아이디를 입력해 주세요!")) return false;
+		// if(!checkNull($("#ifmmPassword"), $.trim($("#ifmmPassword").val()), "비밀번호를 입력해 주세요!")) return false;
     }
 	
 

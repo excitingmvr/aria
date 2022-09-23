@@ -122,9 +122,9 @@
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4 ">
         <div class="col-sm-12 text-center">
-            <img src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+            <img id="ifmmProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
 			<label for="file0" class="form-label input-file-button"><b>+</b></label>
- 			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 2);">
+ 			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 1, 1);">
 <!-- 			
 			<div class="addScroll">
 				<ul id="ulFile0" class="list-group">
@@ -716,18 +716,37 @@
 	});
 	
 	
-	upload = function(seq, div) {
+	upload = function(seq, allowedMaxTotalFileNumber ,div) {
 		
-		$("#ulFile" + seq).children().remove();
-		
-		var fileCount = $("input[type=file]")[seq].files.length;
-		alert(fileCount);
-		if(checkUploadedTotalFileNumber(fileCount, seq) == false) { return false; }
-		
+		var allowedMaxTotalFileNumber;
 		var totalFileSize;
+		var fileCount = $("input[type=file]")[seq].files.length;
+		
+		if (allowedMaxTotalFileNumber == 0) {
+			allowedMaxTotalFileNumber = MAX_TOTAL_FILE_NUMBER;
+		} 
+		
+		if(checkUploadedTotalFileNumber(seq, allowedMaxTotalFileNumber, fileCount) == false) { return false; }
+		
 		for (var i = 0 ; i < fileCount ; i++) {
 			if(div == 1) {
 				if(checkUploadedAllExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
+			} else if (div == 2){
+				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
 			} else if (div == 2){
 				if(checkUploadedImageExt($("input[type=file]")[seq].files[i].name, seq) == false) { return false; }
 			} else {
@@ -740,9 +759,19 @@
 		
 		if(checkUploadedTotalFileSize(totalFileSize, seq) == false) { return false; }
 		
+		var fileReader = new FileReader();
+		 fileReader.readAsDataURL($("input[type=file]")[0].files[0]);
 		
+
+		 fileReader.onload = function () {
+			    //document.getElementById("previewImg").src = fileReader.result;
+			    
+			    $("#ifmmProfile").attr("src", fileReader.result);
+			  };
+		 
+		// $("#ifmmProfile").attr("src", $("input[type=file]")[0].files[0].name);
 		
-		
+		$("#ulFile" + seq).children().remove();
 		
 		for (var i = 0 ; i < fileCount ; i++) {
 			addUploadLi(seq, i, $("input[type=file]")[seq].files[i].name);

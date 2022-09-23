@@ -26,10 +26,32 @@ $.datepicker.setDefaults({
 var extArrayImage = new Array();
 extArrayImage = ["jpg","gif","png","jpeg","bmp","tif"];
 
-
 var extArrayAll = new Array();
-extArrayAll = ["txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx"];
+extArrayAll = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
+var extArrayCustom1 = new Array();
+extArrayCustom1 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+
+var extArrayCustom2 = new Array();
+extArrayCustom2 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+
+var extArrayCustom3 = new Array();
+extArrayCustom3 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+
+var extArrayCustom4 = new Array();
+extArrayCustom4 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+
+var extArrayCustom5 = new Array();
+extArrayCustom5 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+
+var extArrayCustom6 = new Array();
+extArrayCustom6 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+
+var extArrayCustom7 = new Array();
+extArrayCustom7 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+
+var extArrayCustom8 = new Array();
+extArrayCustom8 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
 
 
