@@ -22,36 +22,36 @@ $.datepicker.setDefaults({
 
 });
 
+// 이미지 전용
+var extArray1 = new Array();
+extArray1 = ["jpg","gif","png","jpeg","bmp","tif"];
 
-var extArrayImage = new Array();
-extArrayImage = ["jpg","gif","png","jpeg","bmp","tif"];
+// 문서관련
+var extArray2 = new Array();
+extArray2 = ["txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayAll = new Array();
-extArrayAll = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+// 이하는 커스텀
+var extArray3 = new Array();
+extArray3 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayCustom1 = new Array();
-extArrayCustom1 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+var extArray4 = new Array();
+extArray4 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayCustom2 = new Array();
-extArrayCustom2 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+var extArray5 = new Array();
+extArray5 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayCustom3 = new Array();
-extArrayCustom3 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+var extArray6 = new Array();
+extArray6 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayCustom4 = new Array();
-extArrayCustom4 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+var extArray7 = new Array();
+extArray7 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayCustom5 = new Array();
-extArrayCustom5 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+var extArray8 = new Array();
+extArray8 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayCustom6 = new Array();
-extArrayCustom6 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
+var extArray9 = new Array();
+extArray9 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
-var extArrayCustom7 = new Array();
-extArrayCustom7 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
-
-var extArrayCustom8 = new Array();
-extArrayCustom8 = ["jpg","gif","png","jpeg","bmp","tif","txt","pdf","hwp","doc","docx","xls","xlsx","ppt","pptx","html"];
 
 
 
