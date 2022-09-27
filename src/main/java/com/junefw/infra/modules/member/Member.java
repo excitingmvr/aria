@@ -125,6 +125,8 @@ public class Member extends Base {
 	private MultipartFile[] file0;		// memberForm.profileImage
 	private MultipartFile[] file1;		// memberForm.image
 	private MultipartFile[] file2;		// memberForm.file
+	
+	private MultipartFile[] memberProfileImage;
 //	----------
 	public Boolean getAutoLogin() {
 		return autoLogin;
@@ -623,6 +625,12 @@ public class Member extends Base {
 	}
 	public void setFile2(MultipartFile[] file2) {
 		this.file2 = file2;
+	}
+	public MultipartFile[] getMemberProfileImage() {
+		return memberProfileImage;
+	}
+	public void setMemberProfileImage(MultipartFile[] memberProfileImage) {
+		this.memberProfileImage = memberProfileImage;
 	}
 	
 }

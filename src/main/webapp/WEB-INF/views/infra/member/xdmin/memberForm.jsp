@@ -123,8 +123,10 @@
     <div class="row mt-sm-4 ">
         <div class="col-sm-12 text-center">
             <img id="ifmmProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
-			<label for="file0" class="form-label input-file-button"><b>+</b></label>
- 			<input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 1, 1, 0, 0, 3);">
+			<!-- <label for="file0" class="form-label input-file-button"><b>+</b></label> -->
+ 			<!-- <input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 1, 1, 0, 0, 3);"> -->
+			<label for="memberProfileImage" class="form-label input-file-button"><b>+</b></label>
+ 			<input class="form-control form-control-sm" id="memberProfileImage" name="memberProfileImage" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 1, 1, 0, 0, 3);">
 <!-- 			
 			<div class="addScroll">
 				<ul id="ulFile0" class="list-group">
@@ -717,6 +719,13 @@
 	
 	
 	upload = function(seq, allowedMaxTotalFileNumber, allowedExtdiv, allowedEachFileSize, allowedTotalFileSize, uiType) {
+		
+//	var obj = $("input[name=memberProfileImage]")[0].files[0];
+		var obj = $("#memberProfileImage")[0].files;
+		var objLength = obj.length;
+		alert(objLength);
+		return false;
+		
 		
 		var totalFileSize = 0;
 		var fileCount = $("input[type=file]")[seq].files.length;

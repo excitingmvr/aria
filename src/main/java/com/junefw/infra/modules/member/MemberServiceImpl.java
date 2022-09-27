@@ -73,8 +73,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    		
 	    		dto.setTableName("infrMemberUploaded");
 	    		dto.setType(0);
-	    		dto.setDefaultNy(0);
-	    		dto.setSort(j);
+	    		dto.setDefaultNy(j == 0 ? 1 : 0);
+	    		dto.setSort(j + 1);
 	    		dto.setPseq(dto.getIfmmSeq());
 
 				dao.insertUploaded(dto);
@@ -89,8 +89,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    			
 		    		dto.setTableName("infrMemberUploaded");
 		    		dto.setType(1);
-		    		dto.setDefaultNy(0);
-		    		dto.setSort(j);
+		    		dto.setDefaultNy(j == 0 ? 1 : 0);
+		    		dto.setSort(j + 1);
 		    		dto.setPseq(dto.getIfmmSeq());
 
 					dao.insertUploaded(dto);
@@ -104,8 +104,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    		
 	    		dto.setTableName("infrMemberUploaded");
 	    		dto.setType(2);
-	    		dto.setDefaultNy(0);
-	    		dto.setSort(j);
+	    		dto.setDefaultNy(j == 0 ? 1 : 0);
+	    		dto.setSort(j + 1);
 	    		dto.setPseq(dto.getIfmmSeq());
 	    		
 	    		dao.insertUploaded(dto);

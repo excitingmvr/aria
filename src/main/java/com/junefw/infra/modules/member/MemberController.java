@@ -335,6 +335,7 @@ public class MemberController extends BaseController {
 		Member rtMember = service.selectOneId(dto);
 
 		if (rtMember != null) {
+//			dto.setIfmmPassword(UtilSecurity.encryptSha256(dto.getIfmmPassword()));
 			Member rtMember2 = service.selectOneLogin(dto);
 
 			if (rtMember2 != null) {
