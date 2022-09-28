@@ -122,11 +122,13 @@ public class Member extends Base {
 	private Integer iflgResultNy;
 	private Integer iflgDelNy;
 	
-	private MultipartFile[] file0;		// memberForm.profileImage
-	private MultipartFile[] file1;		// memberForm.image
-	private MultipartFile[] file2;		// memberForm.file
+//	private MultipartFile[] file0;		// memberForm.profileImage
+//	private MultipartFile[] file1;		// memberForm.image
+//	private MultipartFile[] file2;		// memberForm.file
 	
-	private MultipartFile[] memberProfileImage;
+	private MultipartFile[] ifmmUploadedProfileImage;
+	private MultipartFile[] ifmmUploadedImage;
+	private MultipartFile[] ifmmUploadedFile;
 //	----------
 	public Boolean getAutoLogin() {
 		return autoLogin;
@@ -608,29 +610,23 @@ public class Member extends Base {
 	public void setIflgDelNy(Integer iflgDelNy) {
 		this.iflgDelNy = iflgDelNy;
 	}
-	public MultipartFile[] getFile0() {
-		return file0;
+	public MultipartFile[] getIfmmUploadedProfileImage() {
+		return ifmmUploadedProfileImage;
 	}
-	public void setFile0(MultipartFile[] file0) {
-		this.file0 = file0;
+	public void setIfmmUploadedProfileImage(MultipartFile[] ifmmUploadedProfileImage) {
+		this.ifmmUploadedProfileImage = ifmmUploadedProfileImage;
 	}
-	public MultipartFile[] getFile1() {
-		return file1;
+	public MultipartFile[] getIfmmUploadedImage() {
+		return ifmmUploadedImage;
 	}
-	public void setFile1(MultipartFile[] file1) {
-		this.file1 = file1;
+	public void setIfmmUploadedImage(MultipartFile[] ifmmUploadedImage) {
+		this.ifmmUploadedImage = ifmmUploadedImage;
 	}
-	public MultipartFile[] getFile2() {
-		return file2;
+	public MultipartFile[] getIfmmUploadedFile() {
+		return ifmmUploadedFile;
 	}
-	public void setFile2(MultipartFile[] file2) {
-		this.file2 = file2;
-	}
-	public MultipartFile[] getMemberProfileImage() {
-		return memberProfileImage;
-	}
-	public void setMemberProfileImage(MultipartFile[] memberProfileImage) {
-		this.memberProfileImage = memberProfileImage;
+	public void setIfmmUploadedFile(MultipartFile[] ifmmUploadedFile) {
+		this.ifmmUploadedFile = ifmmUploadedFile;
 	}
 	
 }

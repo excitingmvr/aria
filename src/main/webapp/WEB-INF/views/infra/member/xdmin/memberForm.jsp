@@ -122,11 +122,9 @@
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4 ">
         <div class="col-sm-12 text-center">
-            <img id="ifmmProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
-			<!-- <label for="file0" class="form-label input-file-button"><b>+</b></label> -->
- 			<!-- <input class="form-control form-control-sm" id="file0" name="file0" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 1, 1, 0, 0, 3);"> -->
-			<label for="memberProfileImage" class="form-label input-file-button"><b>+</b></label>
- 			<input class="form-control form-control-sm" id="memberProfileImage" name="memberProfileImage" type="file" multiple="multiple" style="display: none;" onChange="upload(0, 1, 1, 0, 0, 3);">
+            <img id="imgProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+			<label for="ifmmUploadedProfileImage" class="form-label input-file-button"><b>+</b></label>
+ 			<input class="form-control form-control-sm" id="ifmmUploadedProfileImage" name="ifmmUploadedProfileImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedProfileImage', 0, 1, 1, 0, 0, 3);">
 <!-- 			
 			<div class="addScroll">
 				<ul id="ulFile0" class="list-group">
@@ -392,16 +390,16 @@
      
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="file1" class="form-label input-file-button">이미지첨부</label>
- 			<input class="form-control form-control-sm" id="file1" name="file1" type="file" multiple="multiple" style="display: none;" onChange="upload(1, 0, 1, 0, 0, 1);">
+            <label for="ifmmUploadedImage" class="form-label input-file-button">이미지첨부</label>
+ 			<input class="form-control form-control-sm" id="ifmmUploadedImage" name="ifmmUploadedImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage', 1, 0, 1, 0, 0, 1);">
 			<div class="addScroll">
 				<ul id="ulFile1" class="list-group">
 				</ul>
 			</div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-			<label for="file2" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="file2" name="file2" type="file" multiple="multiple" style="display: none;" onChange="upload(2, 0, 2, 0, 0, 2);" >
+			<label for="ifmmUploadedFile" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="ifmmUploadedFile" name="ifmmUploadedFile" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedFile', 2, 0, 2, 0, 0, 2);" >
 			<div class="addScroll">
 				<ul id="ulFile2" class="list-group">
 				</ul>
@@ -718,29 +716,28 @@
 	});
 	
 	
-	upload = function(seq, allowedMaxTotalFileNumber, allowedExtdiv, allowedEachFileSize, allowedTotalFileSize, uiType) {
-		
-//	var obj = $("input[name=memberProfileImage]")[0].files[0];
-		var obj = $("#memberProfileImage")[0].files;
-		var objLength = obj.length;
-		alert(objLength);
-		return false;
-		
+	upload = function(objName, seq, allowedMaxTotalFileNumber, allowedExtdiv, allowedEachFileSize, allowedTotalFileSize, uiType) {
+
+//		objName 과 seq 는 jsp 내에서 유일 하여야 함.
+//		memberProfileImage: 1
+//		memberImage: 2
+//		memberFile : 3
 		
 		var totalFileSize = 0;
-		var fileCount = $("input[type=file]")[seq].files.length;
+		var obj = $("#" + objName +"")[0].files;	
+		var fileCount = obj.length;
 		
 		allowedMaxTotalFileNumber = allowedMaxTotalFileNumber == 0 ? MAX_TOTAL_FILE_NUMBER : allowedMaxTotalFileNumber;
 		allowedEachFileSize = allowedEachFileSize == 0 ? MAX_EACH_FILE_SIZE : allowedEachFileSize;
 		allowedTotalFileSize = allowedTotalFileSize == 0 ? MAX_TOTAL_FILE_SIZE : allowedTotalFileSize;
 		
-		if(checkUploadedTotalFileNumber(seq, allowedMaxTotalFileNumber, fileCount) == false) { return false; }
+		if(checkUploadedTotalFileNumber(obj, allowedMaxTotalFileNumber, fileCount) == false) { return false; }
 		
 		for (var i = 0 ; i < fileCount ; i++) {
-			if(checkUploadedExt($("input[type=file]")[seq].files[i].name, seq, allowedExtdiv) == false) { return false; }
-			if(checkUploadedEachFileSize($("input[type=file]")[seq].files[i], seq, allowedEachFileSize) == false) { return false; }
+			if(checkUploadedExt($("#" + objName +"")[0].files[i].name, seq, allowedExtdiv) == false) { return false; }
+			if(checkUploadedEachFileSize($("#" + objName +"")[0].files[i], seq, allowedEachFileSize) == false) { return false; }
 
-			totalFileSize += $("input[type=file]")[seq].files[i].size;
+			totalFileSize += $("#" + objName +"")[0].files[i].size;
 		}
 
 		if(checkUploadedTotalFileSize(seq, totalFileSize, allowedTotalFileSize) == false) { return false; }
@@ -749,20 +746,20 @@
 			$("#ulFile" + seq).children().remove();
 			
 			for (var i = 0 ; i < fileCount ; i++) {
-				addUploadLi(seq, i, $("input[type=file]")[seq].files[i].name);
+				addUploadLi(seq, i, $("#" + objName +"")[0].files[i].name);
 			}
 		} else if(uiType == 2) {
 			$("#ulFile" + seq).children().remove();
 			
 			for (var i = 0 ; i < fileCount ; i++) {
-				addUploadLi(seq, i, $("input[type=file]")[seq].files[i].name);
+				addUploadLi(seq, i, $("#" + objName +"")[0].files[i].name);
 			}
 		} else if (uiType == 3) {
 			var fileReader = new FileReader();
-			 fileReader.readAsDataURL($("input[type=file]")[0].files[0]);
+			 fileReader.readAsDataURL($("#" + objName +"")[0].files[0]);
 			
 			 fileReader.onload = function () {
-				 $("#ifmmProfile").attr("src", fileReader.result);		/* #-> */
+				 $("#imgProfile").attr("src", fileReader.result);		/* #-> */
 			 }		
 		} else {
 			return false;

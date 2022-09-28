@@ -28,10 +28,11 @@ $('#divSearchControl').on('click', function() {
  });
 
 
-checkUploadedTotalFileNumber = function(seq, allowedMaxTotalFileNumber, fileCount) {
+checkUploadedTotalFileNumber = function(obj, allowedMaxTotalFileNumber, fileCount) {
 	if(allowedMaxTotalFileNumber < fileCount){
 		alert("전체 파일 갯수는 "+ allowedMaxTotalFileNumber +"개 까지 허용됩니다.");
-		$("#file"+seq).val("");
+//		$("#file"+seq).val("");
+//		obj.val("");
 		return false;
 	}
 }
@@ -43,7 +44,7 @@ checkUploadedExt = function(objName, seq, div) {
 	
 	if(extArray.indexOf(ext) == -1) {
 		alert("허용된 확장자가 아닙니다.");
-		$("#file"+seq).val("");
+//		$("#file"+seq).val("");
 		return false;
 	}
 }

@@ -67,12 +67,12 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	dao.insert(dto);
 	    	
 	    	int j = 0;
-	    	for(MultipartFile multipartFile : dto.getFile0() ) {
+	    	for(MultipartFile multipartFile : dto.getIfmmUploadedProfileImage() ) {
 	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
 	    		UtilUpload.upload(multipartFile, pathModule, dto);
 	    		
 	    		dto.setTableName("infrMemberUploaded");
-	    		dto.setType(0);
+	    		dto.setType(1);
 	    		dto.setDefaultNy(j == 0 ? 1 : 0);
 	    		dto.setSort(j + 1);
 	    		dto.setPseq(dto.getIfmmSeq());
@@ -83,12 +83,12 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	
 	    	j = 0;
-	    	for(MultipartFile multipartFile : dto.getFile1() ) {
+	    	for(MultipartFile multipartFile : dto.getIfmmUploadedImage() ) {
 	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
 	    			UtilUpload.upload(multipartFile, pathModule, dto);
 	    			
 		    		dto.setTableName("infrMemberUploaded");
-		    		dto.setType(1);
+		    		dto.setType(2);
 		    		dto.setDefaultNy(j == 0 ? 1 : 0);
 		    		dto.setSort(j + 1);
 		    		dto.setPseq(dto.getIfmmSeq());
@@ -98,12 +98,12 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	}
 
 	    	j = 0;
-	    	for(MultipartFile multipartFile : dto.getFile2() ) {
+	    	for(MultipartFile multipartFile : dto.getIfmmUploadedFile() ) {
 	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
 	    		UtilUpload.upload(multipartFile, pathModule, dto);
 	    		
 	    		dto.setTableName("infrMemberUploaded");
-	    		dto.setType(2);
+	    		dto.setType(3);
 	    		dto.setDefaultNy(j == 0 ? 1 : 0);
 	    		dto.setSort(j + 1);
 	    		dto.setPseq(dto.getIfmmSeq());
