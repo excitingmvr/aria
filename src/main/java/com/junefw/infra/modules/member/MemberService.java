@@ -17,6 +17,7 @@ public interface MemberService {
 	int uelete(Member dto) throws Exception; 
 	int delete(MemberVo vo) throws Exception;
 	
+	List<Member> selectListUploaded(MemberVo vo) throws Exception; 
 	int selectOneIdCheck(Member dto) throws Exception;
 	
 	

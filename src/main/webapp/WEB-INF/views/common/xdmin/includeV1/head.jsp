@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%-- <%@ page import="hanmi.onlinepharm.hmeps.common.constants.Constants" %> --%>
+<%@ page import="com.junefw.infra.common.constants.Constants" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -9,7 +9,6 @@
 <jsp:useBean id="CodeServiceImpl" class="com.junefw.infra.modules.code.CodeServiceImpl"/>
 
 <% pageContext.setAttribute("br", "\n"); %>
-
 
 <!doctype html>
 <html lang="ko">

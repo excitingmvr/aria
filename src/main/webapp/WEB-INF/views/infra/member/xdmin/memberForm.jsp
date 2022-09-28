@@ -110,6 +110,9 @@
 <!-- main s -->
 <c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/>
 <c:set var="listCodeTelecom" value="${CodeServiceImpl.selectListCachedCode('10')}"/>
+<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
+	<c:out value="${listUploaded.type }"/>
+</c:forEach>
 
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
 <form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
@@ -118,19 +121,26 @@
 <!-- *Vo.jsp e -->
 
 <h3 class="mt-3 mb-0">회원 관리</h3>		<!-- #-> -->
- 
+
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4 ">
         <div class="col-sm-12 text-center">
-            <img id="imgProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
+	<c:choose>
+		<c:when test="${not empty listUploaded.type && listUploaded.type eq 1 }">
+			<img id="imgProfile" src="<c:out value="${Constants.UPLOAD_PATH_PREFIX_FOR_VIEW }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded-circle mx-auto d-block" width="100" height="100">
+		</c:when>
+		<c:when test="${not empty listUploaded.type }">
+			<!-- empty -->
+		</c:when>
+		<c:otherwise>
+			<img id="imgProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+		</c:otherwise>
+	</c:choose>
+</c:forEach>        
+            
 			<label for="ifmmUploadedProfileImage" class="form-label input-file-button"><b>+</b></label>
  			<input class="form-control form-control-sm" id="ifmmUploadedProfileImage" name="ifmmUploadedProfileImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedProfileImage', 0, 1, 1, 0, 0, 3);">
-<!-- 			
-			<div class="addScroll">
-				<ul id="ulFile0" class="list-group">
-				</ul>
-			</div>
- -->			
         </div>
     </div>
     <div class="row mt-sm-4">

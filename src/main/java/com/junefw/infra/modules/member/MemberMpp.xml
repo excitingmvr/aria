@@ -243,6 +243,22 @@
 	</delete>
 	
 	
+	<select id="selectListUploaded" resultMap="resultMapObj">
+		SELECT 
+			seq
+			,type
+			,defaultNy
+			,originalName
+			,uuidName
+		FROM nct.infrMemberUploaded
+		WHERE 1=1
+			AND delNy = 0
+			AND pseq = #{ifmmSeq}
+		ORDER BY
+			type, sort
+	</select>
+	
+	
 	<select id="selectOneIdCheck" resultType="Integer">
 		SELECT
 			count(ifmmSeq)

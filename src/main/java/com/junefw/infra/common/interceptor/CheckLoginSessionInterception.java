@@ -20,5 +20,4 @@ public class CheckLoginSessionInterception extends HandlerInterceptorAdapter{
 		}
 		return super.preHandle(request, response, handler);
 	}
-
 }

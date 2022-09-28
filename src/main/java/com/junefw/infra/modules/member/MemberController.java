@@ -95,6 +95,7 @@ public class MemberController extends BaseController {
 			model.addAttribute("item", item);
 			
 			model.addAttribute("listPhone", service.selectListPhone(vo));
+			model.addAttribute("listUploaded", service.selectListUploaded(vo));
 		}
 
 //		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));

@@ -177,6 +177,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public List<Member> selectListUploaded(MemberVo vo) throws Exception {
+		return dao.selectListUploaded(vo);
+	}
+	
+	@Override
 	public int selectOneIdCheck(Member dto) throws Exception {
 		return dao.selectOneIdCheck(dto);
 	}
