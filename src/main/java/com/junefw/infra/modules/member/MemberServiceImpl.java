@@ -68,22 +68,29 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 	    	int j = 0;
 	    	for(MultipartFile multipartFile : dto.getIfmmUploadedProfileImage() ) {
-	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
-	    		UtilUpload.upload(multipartFile, pathModule, dto);
 	    		
-	    		dto.setTableName("infrMemberUploaded");
-	    		dto.setType(1);
-	    		dto.setDefaultNy(j == 0 ? 1 : 0);
-	    		dto.setSort(j + 1);
-	    		dto.setPseq(dto.getIfmmSeq());
+	    		if(!multipartFile.isEmpty()) {
 
-				dao.insertUploaded(dto);
-				j++;
+	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
+		    		UtilUpload.upload(multipartFile, pathModule, dto);
+		    		
+		    		dto.setTableName("infrMemberUploaded");
+		    		dto.setType(1);
+		    		dto.setDefaultNy(j == 0 ? 1 : 0);
+		    		dto.setSort(j + 1);
+		    		dto.setPseq(dto.getIfmmSeq());
+	
+					dao.insertUploaded(dto);
+					j++;
+	    		}
 	    	}
 	    	
 	    	
 	    	j = 0;
 	    	for(MultipartFile multipartFile : dto.getIfmmUploadedImage() ) {
+	    			
+	    		if(!multipartFile.isEmpty()) {
+	    		
 	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
 	    			UtilUpload.upload(multipartFile, pathModule, dto);
 	    			
@@ -92,24 +99,29 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		    		dto.setDefaultNy(j == 0 ? 1 : 0);
 		    		dto.setSort(j + 1);
 		    		dto.setPseq(dto.getIfmmSeq());
-
+	
 					dao.insertUploaded(dto);
 					j++;
+	    		}
 	    	}
 
 	    	j = 0;
 	    	for(MultipartFile multipartFile : dto.getIfmmUploadedFile() ) {
-	    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
-	    		UtilUpload.upload(multipartFile, pathModule, dto);
 	    		
-	    		dto.setTableName("infrMemberUploaded");
-	    		dto.setType(3);
-	    		dto.setDefaultNy(j == 0 ? 1 : 0);
-	    		dto.setSort(j + 1);
-	    		dto.setPseq(dto.getIfmmSeq());
+	    		if(!multipartFile.isEmpty()) {	    		
 	    		
-	    		dao.insertUploaded(dto);
-	    		j++;
+		    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
+		    		UtilUpload.upload(multipartFile, pathModule, dto);
+		    		
+		    		dto.setTableName("infrMemberUploaded");
+		    		dto.setType(3);
+		    		dto.setDefaultNy(j == 0 ? 1 : 0);
+		    		dto.setSort(j + 1);
+		    		dto.setPseq(dto.getIfmmSeq());
+		    		
+		    		dao.insertUploaded(dto);
+		    		j++;
+	    		}
 	    	}
 	    	
 	    	// infrMemberEmail
@@ -122,12 +134,14 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	
 			// infrMemberPhone
 			for(int i = 0 ; i < dto.getIfmpNumberArray().length ; i++) {
-				dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
-				dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
-				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
-				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
-				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
-				dao.insertPhone(dto);
+				if(!dto.getIfmpNumberArray()[i].isEmpty()) {	 
+					dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
+					dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
+					dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
+					dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
+					dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
+					dao.insertPhone(dto);
+				}
 			}
 			
 //			infrMemberAddress

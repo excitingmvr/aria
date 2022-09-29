@@ -12,6 +12,7 @@ public class Base {
 	private Integer type;
 	private Integer defaultNy;
 	private Integer sort;
+	private String path;
 	private String originalName;
 	private String uuidName;
 	private String ext;
@@ -63,6 +64,12 @@ public class Base {
 	}
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 	public String getOriginalName() {
 		return originalName;
@@ -172,6 +179,5 @@ public class Base {
 	public void setModDateTimeSvr(Date modDateTimeSvr) {
 		this.modDateTimeSvr = modDateTimeSvr;
 	}
-	
 	
 }

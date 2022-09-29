@@ -248,6 +248,7 @@
 			seq
 			,type
 			,defaultNy
+			,path
 			,originalName
 			,uuidName
 		FROM nct.infrMemberUploaded
