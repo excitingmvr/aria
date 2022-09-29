@@ -10,7 +10,6 @@ public class NationalityVo extends BaseVo implements Serializable{
 	
 	private String ifnaSeq;
 //	----------
-
 	public String getIfnaSeq() {
 		return ifnaSeq;
 	}

@@ -1,0 +1,17 @@
+package com.junefw.location.modules.location;
+
+import java.util.List;
+
+public interface LocationService {
+
+	public void setRegMod(Location dto) throws Exception;
+	
+	public int selectOneCount(LocationVo vo) throws Exception;
+	public List<Location> selectList(LocationVo vo) throws Exception; 
+	public Location selectOne(LocationVo vo) throws Exception;
+	public int insert(Location dto) throws Exception;
+	public int update(Location dto) throws Exception; 
+	public int uelete(Location dto) throws Exception; 
+	public int delete(LocationVo vo) throws Exception;
+	
+}
