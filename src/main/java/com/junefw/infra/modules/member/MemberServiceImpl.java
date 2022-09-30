@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.junefw.infra.common.base.BaseServiceImpl;
 import com.junefw.infra.common.constants.Constants;
 import com.junefw.infra.common.util.UtilDateTime;
+import com.junefw.infra.common.util.UtilMail;
 import com.junefw.infra.common.util.UtilRegMod;
 import com.junefw.infra.common.util.UtilSecurity;
 import com.junefw.infra.common.util.UtilUpload;
@@ -162,6 +163,15 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 			} else {
 				// by pass
 			}
+			
+			Thread thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					UtilMail.sendMail();
+				}
+			});
+			
+			thread.start();
 			
 			return 1;
 
