@@ -424,10 +424,14 @@
 	 		};
 		map = new kakao.maps.Map(container, options);
 		
+		
 		var markerPosition  = new kakao.maps.LatLng(lat, lng); 
 		var marker = new kakao.maps.Marker({ position: markerPosition });
 		marker.setMap(null);   
 		marker.setMap(map);
+
+
+		
 		
 		<c:forEach items='${list}' var='item' varStatus='status'>
 			var markerPosition  = new kakao.maps.LatLng('<c:out value="${item.ltltLat }"/>', '<c:out value="${item.ltltLng }"/>'); 
@@ -435,6 +439,7 @@
 			marker.setMap(null);   
 			marker.setMap(map);
 		</c:forEach>
+
 		/* kakao source e */
 	}
 	
