@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!-- head s -->
-<%@include file="../../include/head.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 <!-- head e -->
 
 <style type="text/css">
@@ -25,15 +25,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../../include/top.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../../include/gnb.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../../include/right.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -202,7 +202,7 @@
 
 <c:if test="${not empty item.ltltSeq }">	<!-- #-> -->
 <!-- regMod s -->
-<%@include file="../../include/regmod.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/regmod.jsp"%>
 <!-- regMod e -->
 </c:if>
 </div>
@@ -236,15 +236,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../../include/footer.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../../include/modalBase.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../../include/linkJs.jsp"%>
+<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
