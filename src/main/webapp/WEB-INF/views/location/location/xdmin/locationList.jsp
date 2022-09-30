@@ -2,6 +2,8 @@
 
 <%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 
+<title>Location</title>		<!-- #-> -->
+
 <style type="text/css">
 	
 </style>
@@ -97,7 +99,7 @@
 	<input type="hidden" name="checkboxSeqArray" >
 	<input type="hidden" name="ltltSeq">	<!-- #-> -->
 	
-<h3 class="mt-3 mb-0">위치관리</h3>			<!-- #-> -->
+<h3 class="mt-3 mb-0">위치 관리</h3>			<!-- #-> -->
 
 <div id="map" style="height:400px;"></div>
 
@@ -191,23 +193,23 @@
 		</tr>	
 	</c:when>
 	<c:otherwise>
-		<c:forEach items="${list}" var="item" varStatus="status">	
+		<c:forEach items="${list}" var="list" varStatus="status">	
             <tr>
                 <td class="text-center">
                     <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${item.ltltSeq }"/>" class="form-check-input">
+                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${list.ltltSeq }"/>" class="form-check-input">
                     </div>
                 </td>
                 <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${item.ltltSeq}"/>)"><c:out value="${item.ltltName }"/></a></td>
-                <td><c:out value="${item.ltltEstDate }"/></td>
-                <td><c:out value="${item.ltltStartDate }"/></td>
-                <td><c:out value="${item.ltltCeo }"/></td>
-                <td><c:out value="${item.ltltEmail }"/></td>
-                <td><c:out value="${item.ltltPhone1 }"/></td>
-                <td><c:out value="${item.ltltMobile }"/></td>
-                <td><c:out value="${item.ltltAddress1 }"/></td>
-                <td><fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><a href="javascript:goForm(<c:out value="${list.ltltSeq}"/>)" class="text-decoration-none"><c:out value="${list.ltltName }"/></a></td>
+                <td><c:out value="${list.ltltEstDate }"/></td>
+                <td><c:out value="${list.ltltStartDate }"/></td>
+                <td><c:out value="${list.ltltCeo }"/></td>
+                <td><c:out value="${list.ltltEmail }"/></td>
+                <td><c:out value="${list.ltltPhone1 }"/></td>
+                <td><c:out value="${list.ltltMobile }"/></td>
+                <td><c:out value="${list.ltltAddress1 }"/></td>
+                <td><fmt:formatDate value="${list.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
 		</c:forEach>
 	</c:otherwise>
@@ -273,6 +275,8 @@
 	var goUrlMultiUele = "/location/locationMultiUele";			/* #-> */
 	var goUrlMultiDele = "/location/locationMultiDele";			/* #-> */
 	
+	var excelUri = "/nationality/excelDownload";					/* #-> */
+	
 	var seq = $("input:hidden[name=ltltSeq]");				/* #-> */
 	
 	var form = $("form[name=formList]");
@@ -302,9 +306,24 @@
 	}); 
 		
 	
-	goForm = function(key) {
+	$("#checkboxAll").click(function() {
+		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+		else $("input[name=checkboxSeq]").prop("checked", false);
+	});
+	
+	
+	$("input[name=checkboxSeq]").click(function() {
+		var total = $("input[name=checkboxSeq]").length;
+		var checked = $("input[name=checkboxSeq]:checked").length;
+		
+		if(total != checked) $("#checkboxAll").prop("checked", false);
+		else $("#checkboxAll").prop("checked", true); 
+	});
+	
+	
+	goForm = function(keyValue) {
     	/* if(key != 0) seq.val(btoa(key)); */
-		seq.val(key);
+		seq.val(keyValue);
 		form.attr("action", goUrlForm).submit();
 	}
 	
@@ -373,23 +392,13 @@
 	});
 
 	
+	$("#btnExcel").click(function() {
+		form.attr("action", excelUri).submit();
+	});
+	
+	
 	$('#btnForm').on("click", function() {
 		goForm(0);                
-	});
-	
-	
-	$("#checkboxAll").click(function() {
-		if($("#checkboxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
-		else $("input[name=checkboxSeq]").prop("checked", false);
-	});
-	
-	
-	$("input[name=checkboxSeq]").click(function() {
-		var total = $("input[name=checkboxSeq]").length;
-		var checked = $("input[name=checkboxSeq]:checked").length;
-		
-		if(total != checked) $("#checkboxAll").prop("checked", false);
-		else $("#checkboxAll").prop("checked", true); 
 	});
 	
 	
@@ -439,19 +448,19 @@
 	}
      
 	
-function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
 	
-function deg2rad(deg) {
+	function deg2rad(deg) {
 		return deg * (Math.PI/180)
 	}
 	
-	var R = 6371; // Radius of the earth in km
-	var dLat = deg2rad(lat2-lat1);// deg2rad below
-	var dLon = deg2rad(lng2-lng1);
-	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	var d = R * c * 1000; // Distance in meters
-	return d;
+		var R = 6371; // Radius of the earth in km
+		var dLat = deg2rad(lat2-lat1);// deg2rad below
+		var dLon = deg2rad(lng2-lng1);
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		var d = R * c * 1000; // Distance in meters
+		return d;
 	}	
 </script>
 

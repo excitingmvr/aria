@@ -4,6 +4,8 @@
 <%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 <!-- head e -->
 
+<title>Location</title>		<!-- #-> -->
+
 <style type="text/css">
 
 	.addScroll{
@@ -106,8 +108,7 @@
 		<div class="col-sm-10">
 
 <!-- main s -->
-<c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/>
-<c:set var="listCodeTelecom" value="${CodeServiceImpl.selectListCachedCode('10')}"/>
+
 
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
 <form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
@@ -115,7 +116,7 @@
 <%@include file="locationVo.jsp"%>		<!-- #-> -->
 <!-- *Vo.jsp e -->
 
-<h3 class="mt-3 mb-0">위치관리</h3>		<!-- #-> -->
+<h3 class="mt-3 mb-0">위치 관리</h3>		<!-- #-> -->
  
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4">
@@ -225,7 +226,7 @@
 </form>
 <form name="formVo" id="formVo" method="post">
 <!-- *Vo.jsp s -->
-<%@include file="locationVo.jsp"%>
+<%@include file="locationVo.jsp"%>		<!-- #-> -->
 <!-- *Vo.jsp e -->
 </form>
 <!-- main e -->
@@ -280,6 +281,7 @@
 	   	} else {
 	   		// update
 	   		/* keyName.val(atob(keyName.val())); */
+	   		seq.remove();
 	   		if (validationUpdt() == false) return false;
 	   		form.attr("action", goUrlUpdt).submit();
 	   	}
