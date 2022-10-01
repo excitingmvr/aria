@@ -121,59 +121,66 @@
 <div class="container-fluid px-0 px-sm-5 mt-2">
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-            <label for="ltltName" class="form-label">이름</label>
+            <label for="ltltName" class="form-label">이름 <span class="text-danger">*</span></label>
             <input type="text" id="ltltName" name="ltltName" value="<c:out value="${item.ltltName}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltNameFeedback"></div>
         </div>
         <div class="col-sm-6">
 			<label for="ltltCeo" class="form-label">대표자</label>
             <input type="text" id="ltltCeo" name="ltltCeo" value="<c:out value="${item.ltltCeo}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltCeoFeedback"></div>
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
 			<label for="ltltStartDate" class="form-label">설립일</label>
             <input type="text" id="ltltEstDate" name="ltltEstDate" value="<c:out value="${item.ltltEstDate}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltEstDateFeedback"></div>
         </div>
         <div class="col-sm-6">
             <label for="ltltEstDate" class="form-label">시작일</label>
-            <input type="text" id="ltltStartDate" name="ltltStartDate" value="<c:out value="${item.ltltStartDate}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+            <input type="text" id="ltltStartDate" name="ltltStartDate" value="<c:out value="${item.ltltStartDate}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltStartDateFeedback"></div>        
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-            <label for="ltltPhone1" class="form-label">전화</label>
+            <label for="ltltPhone1" class="form-label">전화 <span class="text-danger">*</span></label>
             <input type="text" id="ltltPhone1" name="ltltPhone1" value="<c:out value="${item.ltltPhone1}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltPhone1Feedback"></div>
         </div>
         <div class="col-sm-6">
 			<label for="ltltMobile" class="form-label">모바일</label>
-            <input type="text" id="ltltMobile" name="ltltMobile" value="<c:out value="${item.ltltMobile}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+            <input type="text" id="ltltMobile" name="ltltMobile" value="<c:out value="${item.ltltMobile}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltMobileFeedback"></div>        
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ltltFax" class="form-label">팩스</label>
             <input type="text" id="ltltFax" name="ltltFax" value="<c:out value="${item.ltltFax}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltFaxFeedback"></div>
         </div>
         <div class="col-sm-6">
 			<label for="ltltEmail" class="form-label">이메일</label>
-            <input type="text" id="ltltEmail" name="ltltEmail" value="<c:out value="${item.ltltEmail}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">        
+            <input type="text" id="ltltEmail" name="ltltEmail" value="<c:out value="${item.ltltEmail}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <div class="invalid-feedback" id="ltltEmailFeedback"></div>        
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-			<label for="ltltUseNy" class="form-label">사용여부</label>
+			<label for="ltltUseNy" class="form-label">사용여부 <span class="text-danger">*</span></label>
             <select id="ltltUseNy" name="ltltUseNy" class="form-select form-select-sm">
-				<option value="">::선택::</option>
-				<option value="1" <c:if test="${item.ltltUseNy eq 1 or empty item.ltltUseNy }">selected</c:if>>Y</option>
-				<option value="0" <c:if test="${item.ltltUseNy eq 0}">selected</c:if>>N</option>
-              </select>   
+				<option value="1" <c:if test="${item.ltltUseNy eq 1 }">selected</c:if>>Y</option>
+				<option value="0" <c:if test="${item.ltltUseNy eq 0 }">selected</c:if>>N</option>
+              </select>  
         </div>
         <div class="col-sm-6">
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
-            <label for="ltltZipcode" class="form-label">주소</label>
+            <label for="ltltZipcode" class="form-label">주소 <span class="text-danger">*</span></label>
             <div class="input-group input-group-sm ">
                 <input type="text" id="ltltZipcode" name="ltltZipcode" value="<c:out value="${item.ltltZipcode }"/>" placeholder="우편번호" class="form-control" readonly>
                 <button type="button" id="btnAddress" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
@@ -261,7 +268,7 @@
 
 	var state = '<c:out value="${item.ltltSeq }" default="0"/>';
 	
-	var goUrlList = "/location/locationList"; 			/* #-> */
+	var goUrlList = "/location/locationAjaxList"; 			/* #-> */
 	var goUrlInst = "/location/locationInst"; 			/* #-> */
 	var goUrlUpdt = "/location/locationUpdt";			/* #-> */
 	var goUrlUele = "/location/locationUele";			/* #-> */
@@ -294,8 +301,8 @@
 
 	
 	validationUpdt = function() {
-		<!-- if(!checkNull($.trim($("input[name=MENU_NAME]").val()), "MENU_NAME")) return false;  -->
-		/* if(!checkNull($('input[name=AUTH_NM]'), $.trim($('input[name=AUTH_NM]').val()), "권한명을 등록 해주세요!")) return false; */
+		if(!checkOnlyKoreanEnglishNumber('ltltName', 2, 0, "이름을 입력해 주세요")) return false;
+		if(!checkOnlyKoreanEnglish('ltltCeo', 2, 1, "대표자을 입력해 주세요")) return false;
 	}
 	
 	

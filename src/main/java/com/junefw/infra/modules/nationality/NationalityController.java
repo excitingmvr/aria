@@ -30,22 +30,21 @@ public class NationalityController extends BaseController {
 	NationalityServiceImpl service;
 
 	
-	public void setSearchAndPaging(NationalityVo vo) throws Exception {
+	public void setSearch(NationalityVo vo) throws Exception {
 		
 		vo.setShUseNy(vo.getShUseNy() == null ? 1 : vo.getShUseNy());
 		vo.setShDelNy(vo.getShDelNy() == null ? 0 : vo.getShDelNy());
 		vo.setShOptionDate(vo.getShOptionDate() == null ? null : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
-
-		vo.setParamsPaging(service.selectOneCount(vo));
 	}
 	
 	
 	@RequestMapping(value = "nationalityList")
 	public String nationalityList(@ModelAttribute("vo") NationalityVo vo, Model model) throws Exception {
 
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 
 		if (vo.getTotalRows() > 0) {
 			List<Nationality> list = service.selectList(vo);
@@ -157,7 +156,8 @@ public class NationalityController extends BaseController {
 	@RequestMapping("excelDownload")
     public void excelDownload(NationalityVo vo, HttpServletResponse httpServletResponse) throws Exception {
 		
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 
 		if (vo.getTotalRows() > 0) {
 			List<Nationality> list = service.selectList(vo);

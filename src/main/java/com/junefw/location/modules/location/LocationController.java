@@ -1,9 +1,7 @@
 
 package com.junefw.location.modules.location;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.infra.common.base.BaseController;
@@ -33,21 +30,20 @@ public class LocationController extends BaseController {
 	@Autowired
 	LocationServiceImpl service;
 
-	public void setSearchAndPaging(LocationVo vo) throws Exception {
+	public void setSearch(LocationVo vo) throws Exception {
 		
 		vo.setShUseNy(vo.getShUseNy() == null ? 1 : vo.getShUseNy());
 		vo.setShDelNy(vo.getShDelNy() == null ? 0 : vo.getShDelNy());
 		vo.setShOptionDate(vo.getShOptionDate() == null ? null : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
-
-		vo.setParamsPaging(service.selectOneCount(vo));
 	}
 	
 	@RequestMapping(value = "locationList")
 	public String locationList(@ModelAttribute("vo") LocationVo vo, Model model) throws Exception {
 
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 		
 		if (vo.getTotalRows() > 0) {
 			List<Location> list = service.selectList(vo);
@@ -58,37 +54,27 @@ public class LocationController extends BaseController {
 	}
 	
 	
-	@ResponseBody
 	@RequestMapping(value = "locationAjaxList")
-	public Map<String, Object> locationAjaxList(LocationVo vo) throws Exception {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
+	public String locationAjaxList(@ModelAttribute("vo") LocationVo vo, Model model) throws Exception {
+		
+		setSearch(vo);
 
-		vo.setShOptionDate(vo.getShOptionDate() == null ? 1 : vo.getShOptionDate());
-		vo.setShDateStart(vo.getShDateStart() == null
-				? UtilDateTime.calculateDayString(UtilDateTime.nowLocalDateTime(), Constants.DATE_INTERVAL)
-				: UtilDateTime.add00TimeString(vo.getShDateStart()));
-		vo.setShDateEnd(vo.getShDateEnd() == null ? UtilDateTime.nowString()
-				: UtilDateTime.addNowTimeString(vo.getShDateEnd()));
-
+		return "location/location/xdmin/locationAjaxList";
+	}
+	
+	
+	@RequestMapping(value = "locationAjaxLita")
+	public String locationLita(@ModelAttribute("vo") LocationVo vo, Model model) throws Exception {
+		
 		vo.setParamsPaging(service.selectOneCount(vo));
 
 		if (vo.getTotalRows() > 0) {
 			List<Location> list = service.selectList(vo);
-			
-			System.out.println("list.get(0).getModDateTime(): " + list.get(0).getModDateTime());
-			System.out.println();
-			returnMap.put("list", list);
-			returnMap.put("count", list.size());
-			
-		} else {
-			returnMap.put("count", 0);
+			model.addAttribute("list", list);
 		}
 		
-		returnMap.put("rt", "success");
-		
-		return returnMap;
+		return "location/location/xdmin/locationAjaxLita";
 	}
-
 	
 
 	@RequestMapping(value = "locationForm")
@@ -118,7 +104,7 @@ public class LocationController extends BaseController {
 		if (Constants.INSERT_AFTER_TYPE == 1) {
 			return "redirect:/location/locationForm";
 		} else {
-			return "redirect:/location/locationList";
+			return "redirect:/location/locationAjaxList";
 		}
 	}
 	
@@ -134,7 +120,7 @@ public class LocationController extends BaseController {
 		if (Constants.UPDATE_AFTER_TYPE == 1) {
 			return "redirect:/location/locationForm";
 		} else {
-			return "redirect:/location/locationList";
+			return "redirect:/location/locationAjaxList";
 		}
 	}
 
@@ -146,7 +132,7 @@ public class LocationController extends BaseController {
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
-		return "redirect:/location/locationList";
+		return "redirect:/location/locationAjaxList";
 	}
 
 	
@@ -157,7 +143,7 @@ public class LocationController extends BaseController {
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
-		return "redirect:/location/locationList";
+		return "redirect:/location/locationAjaxList";
 	}
 
 	
@@ -171,7 +157,7 @@ public class LocationController extends BaseController {
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
-		return "redirect:/location/locationList";
+		return "redirect:/location/locationAjaxList";
 	}
 
 	
@@ -185,14 +171,15 @@ public class LocationController extends BaseController {
 
 		redirectAttributes.addFlashAttribute("vo", vo);
 
-		return "redirect:/location/locationList";
+		return "redirect:/location/locationAjaxList";
 	}
 	
 
 	@RequestMapping("excelDownload")
     public void excelDownload(LocationVo vo, HttpServletResponse httpServletResponse) throws Exception {
 		
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 
 		if (vo.getTotalRows() > 0) {
 			List<Location> list = service.selectList(vo);

@@ -46,7 +46,7 @@ public class MemberController extends BaseController {
 	NationalityServiceImpl serviceNationality;
 
 
-	public void setSearchAndPaging(MemberVo vo) throws Exception {
+	public void setSearch(MemberVo vo) throws Exception {
 		
 		vo.setShDelNy(vo.getShDelNy() == null ? 0 : vo.getShDelNy());
 		vo.setShOptionDate(vo.getShOptionDate() == null ? null : vo.getShOptionDate());
@@ -60,15 +60,14 @@ public class MemberController extends BaseController {
 //		vo.setShDateEnd(vo.getShDateEnd() == null
 //		    ? UtilDateTime.nowString()
 //		    : UtilDateTime.addNowTimeString(vo.getShDateEnd()));
-		
-		vo.setParamsPaging(service.selectOneCount(vo));
 	}
 	
 	
 	@RequestMapping(value = "memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);
@@ -192,7 +191,8 @@ public class MemberController extends BaseController {
 	@RequestMapping("excelDownload")
     public void excelDownload(MemberVo vo, HttpServletResponse httpServletResponse) throws Exception {
 		
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 
 		if (vo.getTotalRows() > 0) {
 			List<Member> list = service.selectList(vo);

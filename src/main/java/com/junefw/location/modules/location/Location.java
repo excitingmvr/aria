@@ -25,6 +25,11 @@ public class Location extends Base{
 	private Integer ltltUseNy;
 	private String ltltDesc;
 	private Integer ltltDelNy;
+	
+//	private Double xltltLatStart;
+//	private Double xltltLatEnd;
+//	private Double xltltLngStart;
+//	private Double xltltLngEnd;
 	//	----------
 	public String getLtltSeq() {
 		return ltltSeq;

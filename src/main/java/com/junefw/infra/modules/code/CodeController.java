@@ -37,22 +37,21 @@ public class CodeController extends BaseController{
 	CodeGroupServiceImpl codeGroupServiceImpl;
 	
 
-	public void setSearchAndPaging(CodeVo vo) throws Exception {
+	public void setSearch(CodeVo vo) throws Exception {
 		
 		vo.setShUseNy(vo.getShUseNy() == null ? 1 : vo.getShUseNy());
 		vo.setShDelNy(vo.getShDelNy() == null ? 0 : vo.getShDelNy());
 		vo.setShOptionDate(vo.getShOptionDate() == null ? 2 : vo.getShOptionDate());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
-
-		vo.setParamsPaging(service.selectOneCount(vo));
 	}
 	
 	
 	@RequestMapping(value = "codeList")
 	public String codeList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 		
 		if (vo.getTotalRows() > 0) {
 			List<Code> list = service.selectList(vo);
@@ -166,7 +165,8 @@ public class CodeController extends BaseController{
 	@RequestMapping("excelDownload")
     public void excelDownload(CodeVo vo, HttpServletResponse httpServletResponse) throws Exception {
 		
-		setSearchAndPaging(vo);
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCount(vo));
 
 		if (vo.getTotalRows() > 0) {
 			List<Code> list = service.selectList(vo);

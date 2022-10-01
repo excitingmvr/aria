@@ -12,7 +12,9 @@
 		FROM 
 			locnLocation a
 		WHERE 1=1
-			<if test="shDelNy != null and !shDelNy.equals('')">AND ltltDelNy = #{shDelNy}</if>
+			 AND a.ltltLat BETWEEN #{xltltLatStart} AND #{xltltLatEnd}
+			 AND a.ltltLng BETWEEN #{xltltLngStart} AND #{xltltLngEnd}
+			<if test="shDelNy != null and !shDelNy.equals('')">AND a.ltltDelNy = #{shDelNy}</if>
 <!-- 			
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
@@ -20,7 +22,7 @@
 			</choose>
  -->			
 			<choose>
-				<when test="shOption == 1">AND ltltName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 1">AND a.ltltName LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
 	</sql>
 	

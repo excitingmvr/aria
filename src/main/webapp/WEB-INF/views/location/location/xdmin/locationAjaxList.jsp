@@ -189,8 +189,8 @@
                 <th width="180px">최근수정일</th>
             </tr>
         </thead>
-        <tbody>
-
+        <tbody id="list">
+<%-- 
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
@@ -219,7 +219,7 @@
 		</c:forEach>
 	</c:otherwise>
 </c:choose>	            
-            
+ --%>            
          </tbody>
     </table>
 </div>
@@ -266,7 +266,7 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45c6f58ea9a7ecfabff6e596d5079958&libraries=services"></script>
 
-<script>
+<script type="text/javascript">
 
 	$(document).ready(function(){
 		divSearchControl();
@@ -275,7 +275,7 @@
 		 getNowLatLng();
 	}); 
 	
-	var goUrlList = "/location/locationList";					/* #-> */
+	var goUrlList = "/location/locationAjaxList";					/* #-> */
 	var goUrlForm = "/location/locationForm";					/* #-> */
 	var goUrlMultiUele = "/location/locationMultiUele";			/* #-> */
 	var goUrlMultiDele = "/location/locationMultiDele";			/* #-> */
@@ -431,11 +431,13 @@
 		
 		var zoomControl = new kakao.maps.ZoomControl();
 		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-		
+
+/*		
 		var markerPosition  = new kakao.maps.LatLng(lat, lng); 
 		var marker = new kakao.maps.Marker({ position: markerPosition });
 		marker.setMap(null);   
 		marker.setMap(map);
+*/
 
 		// 지도의 현재 영역을 얻어옵니다 
 		var bounds = map.getBounds();
@@ -456,30 +458,17 @@
 			,cache: false
 			,type: "post"
 			/* ,dataType:"json" */
-			,url: "/location/locationLita"
+			,url: "/location/locationAjaxLita"
 			,data : $("#formList").serialize()
 			/* ,data : {  } */
 			,success: function(response) {
-				if(response.rt == "success") {
-
-					alert("asdfasdf");
-				} else {
-
-				}
+				$("#list").append(response);
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 			}
 		});
 		
-		
-		<c:forEach items='${list}' var='item' varStatus='status'>
-			var markerPosition  = new kakao.maps.LatLng('<c:out value="${item.ltltLat }"/>', '<c:out value="${item.ltltLng }"/>'); 
-			var marker = new kakao.maps.Marker({ position: markerPosition });
-			marker.setMap(null);   
-			marker.setMap(map);
-		</c:forEach>
-
 		/* kakao source e */
 	}
 	
@@ -492,21 +481,6 @@
 		}
 	}
      
-	
-	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
-	
-	function deg2rad(deg) {
-		return deg * (Math.PI/180)
-	}
-	
-		var R = 6371; // Radius of the earth in km
-		var dLat = deg2rad(lat2-lat1);// deg2rad below
-		var dLon = deg2rad(lng2-lng1);
-		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		var d = R * c * 1000; // Distance in meters
-		return d;
-	}	
 </script>
 
 </body>
