@@ -3,14 +3,14 @@ validationTest = function() {
 }
 
 
-function checkNull (objName, message) {
+function checkNull (objName, pattern, message) {
 // checkNull = function(obj, value, message) {
 	var obj = document.getElementById(objName);
 	var objValue = document.getElementById(objName).value.trim();
 	var objFeedback = document.getElementById(objName+"Feedback");
 
     if (objValue == "" || objValue == null) {
-		checkLogicExpression (obj, objFeedback, 2, message);
+		checkLogicExpression (obj, objFeedback, pattern, message);
         return false;
     } else {
 		obj.classList.remove('is-invalid');
@@ -18,7 +18,7 @@ function checkNull (objName, message) {
     }
 }
 
-
+/*
 function checkNullWithoutFocus (value, message) {
 // checkNullWithoutFocus = function(value, message) {
     if (value == "" || value == null) {
@@ -28,7 +28,7 @@ function checkNullWithoutFocus (value, message) {
         return true;
     }
 }
-
+*/
 
 function checkOnlyKoreanEnglishNumber (objName, pattern, nullAllowedNy, message) {
 // checkOnlyKoreanEnglishNumber = function(obj, value, message) {

@@ -163,71 +163,7 @@
 </div>
 <!-- search e -->
 
-<!-- totalAndRowNum s -->
-<%@include file="../../../common/xdmin/includeV1/totalAndRowNum.jsp"%>
-<!-- totalAndRowNumu e -->
-
-<!-- table s -->
-<div class="table-responsive px-0 mt-2">
-    <table class="table table-bordered table-sm table-hover table-striped mb-0">
-        <thead class="table-dark">
-            <tr>
-                <th class="text-center" width="40px" >
-                    <div>
-                        <input type="checkbox" id="checkboxAll" name="" value="" class="form-check-input">
-                    </div>
-                </th>
-                <th width="80px">#</th>
-                <th>이름</th>
-                <th>설립일</th>
-                <th>시작일</th>
-                <th>대표자</th>
-                <th>이메일</th>
-                <th>연락처</th>
-                <th>모바일</th>
-                <th>주소</th>
-                <th width="180px">최근수정일</th>
-            </tr>
-        </thead>
-        <tbody id="list">
-<%-- 
-<c:choose>
-	<c:when test="${fn:length(list) eq 0}">
-		<tr>
-			<td class="text-center" colspan="10">There is no data!</td>
-		</tr>	
-	</c:when>
-	<c:otherwise>
-		<c:forEach items="${list}" var="list" varStatus="status">	
-            <tr>
-                <td class="text-center">
-                    <div>
-                        <input type="checkbox" id="checkboxSeq" name="checkboxSeq" value="<c:out value="${list.ltltSeq }"/>" class="form-check-input">
-                    </div>
-                </td>
-                <td><c:out value="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + status.index) }"/></td>
-                <td><a href="javascript:goForm(<c:out value="${list.ltltSeq}"/>)" class="text-decoration-none"><c:out value="${list.ltltName }"/></a></td>
-                <td><c:out value="${list.ltltEstDate }"/></td>
-                <td><c:out value="${list.ltltStartDate }"/></td>
-                <td><c:out value="${list.ltltCeo }"/></td>
-                <td><c:out value="${list.ltltEmail }"/></td>
-                <td><c:out value="${list.ltltPhone1 }"/></td>
-                <td><c:out value="${list.ltltMobile }"/></td>
-                <td><c:out value="${list.ltltAddress1 }"/></td>
-                <td><fmt:formatDate value="${list.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-            </tr>
-		</c:forEach>
-	</c:otherwise>
-</c:choose>	            
- --%>            
-         </tbody>
-    </table>
-</div>
-<!-- table e -->
-
-<!-- pagination s -->
-<%@include file="../../../common/xdmin/includeV1/pagination.jsp"%>
-<!-- pagination e -->
+<div id="lita"></div>		<!-- #-> -->
 
 <!-- button s -->
 <div class="container-fluid px-0 mt-2">
@@ -416,7 +352,7 @@
 		}
 	}
 	
-	
+
 	function showLocation(position) {
 		lat = position.coords.latitude;
 		lng = position.coords.longitude;
@@ -439,6 +375,30 @@
 		marker.setMap(map);
 */
 
+ 		setLita(map);
+		
+		kakao.maps.event.addListener(map, 'dragend', function() {     
+			setLita(map);
+		});
+		
+		kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+			setLita(map);
+		});
+		/* kakao source e */
+	}
+	
+	
+	function errorHandler(error) {
+		if(error.code == 1) {
+			alert("접근차단");
+		} else if( err.code == 2) {
+			alert("위치를 반환할 수 없습니다.");
+		}
+	}
+
+	
+	function setLita(map) {
+		
 		// 지도의 현재 영역을 얻어옵니다 
 		var bounds = map.getBounds();
 	    // 영역의 남서쪽 좌표를 얻어옵니다 
@@ -452,7 +412,6 @@
 		$("input:hidden[name=xltltLngStart]").val(swLatLng.getLng());
 		$("input:hidden[name=xltltLngEnd]").val(neLatLng.getLng());
 		
-		
 		$.ajax({
 			async: true 
 			,cache: false
@@ -462,23 +421,13 @@
 			,data : $("#formList").serialize()
 			/* ,data : {  } */
 			,success: function(response) {
-				$("#list").append(response);
+				$("#lita").empty();
+				$("#lita").append(response);
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 			}
 		});
-		
-		/* kakao source e */
-	}
-	
-	
-	function errorHandler(error) {
-		if(error.code == 1) {
-			alert("접근차단");
-		} else if( err.code == 2) {
-			alert("위치를 반환할 수 없습니다.");
-		}
 	}
      
 </script>

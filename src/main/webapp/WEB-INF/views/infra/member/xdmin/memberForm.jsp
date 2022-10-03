@@ -239,7 +239,7 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmDob" class="form-label">생일 <span class="text-danger">*</span></label>
-            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ifmmDob" name="ifmmDob" value="<c:out value="${item.ifmmDob }"/>" placeholder="" class="form-control form-control-sm" readonly>
             <div class="invalid-feedback" id="ifmmDobFeedback"></div>          
         </div>
     </div>    
@@ -368,8 +368,8 @@
 	            <div class="invalid-feedback" id="ifmaAddress2Array0Feedback"></div>
 	            <input type="text" id="ifmaAddress3Array0" name="ifmaAddress3Array" value="<c:out value="${item.ifmaAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
 				<div class="row">
-					<div class="col-sm-6"><input type="text" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
-					<div class="col-sm-6"><input type="text" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
+					<div class="col-sm-6"><input type="hidden" id="ifmaLatArray0" name="ifmaLatArray" value="<c:out value="${item.ifmaLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
+					<div class="col-sm-6"><input type="hidden" id="ifmaLngArray0" name="ifmaLngArray" value="<c:out value="${item.ifmaLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
 				</div>
 			</div>
 			<div id="addressOthers">
@@ -542,19 +542,18 @@
 		if(!checkOnlyKoreanEnglishNumber('ifmmLastName', 2, 0, "성을 입력해 주세요")) return false;
 		if(!checkOnlyKoreanEnglishNumber('ifmmFirstName', 2, 0, "이름을 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmmGenderCd', 2, "성별을 선택해 주세요.")) return false;
-		if(!checkNull('ifmmDob', "생일을 선택해 주세요.")) return false;
+		if(!checkNull('ifmmDob', 2, "생일을 선택해 주세요.")) return false;
 		if(!checkEmail('ifmeEmailFullArray0', 2, 0, "이메일 주소를 입력해 주세요")) return false;
 		if(!checkSelectNull('ifmpTelecomCdArray0', 2, "통신사를 선택해 주세요")) return false;
 		if(!checkMobile('ifmpNumberArray0', 2, 0, "모바일은 숫자만 입력해 주세요")) return false;
-		if(!checkOnlyNumber('ifmpNumberArray1', 2, 1, 0, 0, 0, "전화번호은 숫자만 입력해 주세요")) return false;
-		if(!checkOnlyNumber('ifmpNumberArray2', 2, 1, 0, 0, 0, "팩스번호은 숫자만 입력해 주세요")) return false;
+		if(!checkOnlyNumber('ifmpNumberArray1', 2, 1, 0, 0, 0, "전화는 숫자만 입력해 주세요")) return false;
+		if(!checkOnlyNumber('ifmpNumberArray2', 2, 1, 0, 0, 0, "팩스는 숫자만 입력해 주세요")) return false;
 		
 		if ($("#ifmaZipcodeArray0").val() != "" && $("#ifmaAddress2Array0").val().trim() == "") {
 			$("#ifmaAddress2Array0").addClass('is-invalid');
 			$("#ifmaAddress2Array0Feedback").text("상세주소를 입력해 주세요");
 			return false;
 		} else {
-			// by pass
 			$("#ifmaAddress2Array0").removeClass('is-invalid');
 		}
 	}

@@ -5,6 +5,33 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
+<!-- totalAndRowNum s -->
+<%@include file="../../../common/xdmin/includeV1/totalAndRowNum.jsp"%>
+<!-- totalAndRowNumu e -->
+
+<!-- table s -->
+<div class="table-responsive px-0 mt-2">
+    <table class="table table-bordered table-sm table-hover table-striped mb-0">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center" width="40px">
+                    <div>
+                        <input type="checkbox" id="checkboxAll" name="" value="" class="form-check-input">
+                    </div>
+                </th>
+                <th width="80px">#</th>
+                <th>이름</th>
+                <th>설립일</th>
+                <th>시작일</th>
+                <th>대표자</th>
+                <th>이메일</th>
+                <th>연락처</th>
+                <th>모바일</th>
+                <th>주소</th>
+                <th width="180px">최근수정일</th>
+            </tr>
+        </thead>
+        <tbody>
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
@@ -33,10 +60,15 @@
 		</c:forEach>
 	</c:otherwise>
 </c:choose>	            
+         </tbody>
+    </table>
+</div>
+<!-- table e -->
 
 <!-- pagination s -->
-<%-- <%@include file="../../../common/xdmin/includeV1/pagination.jsp"%> --%>
+<%@include file="../../../common/xdmin/includeV1/pagination.jsp"%>
 <!-- pagination e -->
+
 
 <script type="text/javascript">
 	<c:forEach items='${list}' var='list' varStatus='status'>

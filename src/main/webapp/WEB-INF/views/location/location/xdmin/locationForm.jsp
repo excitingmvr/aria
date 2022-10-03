@@ -134,31 +134,31 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6">
 			<label for="ltltStartDate" class="form-label">설립일</label>
-            <input type="text" id="ltltEstDate" name="ltltEstDate" value="<c:out value="${item.ltltEstDate}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ltltEstDate" name="ltltEstDate" value="<c:out value="${item.ltltEstDate}"/>" maxlength="20" placeholder="" class="form-control form-control-sm" readonly>
             <div class="invalid-feedback" id="ltltEstDateFeedback"></div>
         </div>
         <div class="col-sm-6">
             <label for="ltltEstDate" class="form-label">시작일</label>
-            <input type="text" id="ltltStartDate" name="ltltStartDate" value="<c:out value="${item.ltltStartDate}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ltltStartDate" name="ltltStartDate" value="<c:out value="${item.ltltStartDate}"/>" maxlength="20" placeholder="" class="form-control form-control-sm" readonly>
             <div class="invalid-feedback" id="ltltStartDateFeedback"></div>        
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ltltPhone1" class="form-label">전화 <span class="text-danger">*</span></label>
-            <input type="text" id="ltltPhone1" name="ltltPhone1" value="<c:out value="${item.ltltPhone1}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ltltPhone1" name="ltltPhone1" value="<c:out value="${item.ltltPhone1}"/>" maxlength="20" placeholder="숫자 (021231234)" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ltltPhone1Feedback"></div>
         </div>
         <div class="col-sm-6">
 			<label for="ltltMobile" class="form-label">모바일</label>
-            <input type="text" id="ltltMobile" name="ltltMobile" value="<c:out value="${item.ltltMobile}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ltltMobile" name="ltltMobile" value="<c:out value="${item.ltltMobile}"/>" maxlength="20" placeholder="숫자 (01022223333)" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ltltMobileFeedback"></div>        
         </div>
     </div>
     <div class="row mt-sm-4">
         <div class="col-sm-6">
             <label for="ltltFax" class="form-label">팩스</label>
-            <input type="text" id="ltltFax" name="ltltFax" value="<c:out value="${item.ltltFax}"/>" maxlength="20" placeholder="" class="form-control form-control-sm">
+            <input type="text" id="ltltFax" name="ltltFax" value="<c:out value="${item.ltltFax}"/>" maxlength="20" placeholder="숫자 (021231234)" class="form-control form-control-sm">
             <div class="invalid-feedback" id="ltltFaxFeedback"></div>
         </div>
         <div class="col-sm-6">
@@ -189,10 +189,12 @@
             <input type="text" id="ltltAddress1" name="ltltAddress1" value="<c:out value="${item.ltltAddress1 }"/>" maxlength="50" placeholder="주소" class="form-control form-control-sm mt-2" readonly>
             <input type="text" id="ltltAddress2" name="ltltAddress2" value="<c:out value="${item.ltltAddress2 }"/>" maxlength="50" placeholder="상세주소" class="form-control form-control-sm mt-2">
             <input type="text" id="ltltAddress3" name="ltltAddress3" value="<c:out value="${item.ltltAddress3 }"/>" maxlength="50" placeholder="참고항목" class="form-control form-control-sm mt-2" readonly>
+			<div class="invalid-feedback" id="ltltAddressFeedback"></div>
 			<div class="row">
-				<div class="col-sm-6"><input type="text" id="ltltLat" name="ltltLat" value="<c:out value="${item.ltltLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
-				<div class="col-sm-6"><input type="text" id="ltltLng" name="ltltLng" value="<c:out value="${item.ltltLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
+				<div class="col-sm-6"><input type="hidden" id="ltltLat" name="ltltLat" value="<c:out value="${item.ltltLat }"/>" maxlength="50" placeholder="위도" class="form-control form-control-sm mt-2" readonly></div>
+				<div class="col-sm-6"><input type="hidden" id="ltltLng" name="ltltLng" value="<c:out value="${item.ltltLng }"/>" maxlength="50" placeholder="경도" class="form-control form-control-sm mt-2" readonly></div>
 			</div>
+			
         </div>
         <div class="col-sm-6">
             <label for="ltltDesc" class="form-label">설명</label>
@@ -299,10 +301,27 @@
 	   	if(validationUpdt() == false) return false;
 	}
 
-	
+
 	validationUpdt = function() {
-		if(!checkOnlyKoreanEnglishNumber('ltltName', 2, 0, "이름을 입력해 주세요")) return false;
-		if(!checkOnlyKoreanEnglish('ltltCeo', 2, 1, "대표자을 입력해 주세요")) return false;
+		if(!checkNull('ltltName', 2, "이름을 입력해 주세요")) return false;
+		if(!checkOnlyNumber('ltltPhone1', 2, 0, 0, 0, 0, "전화는 숫자만 입력해 주세요")) return false;
+		if(!checkMobile('ltltMobile', 2, 1, "모바일은 형식에 맞추어 숫자만 입력해 주세요")) return false;
+		if(!checkOnlyNumber('ltltFax', 2, 1, 0, 0, 0, "팩스는 숫자만 입력해 주세요")) return false;
+		if(!checkEmail('ltltEmail', 2, 1, "이메일 주소를 입력해 주세요")) return false;
+
+		if ($("#ltltAddress1").val() == "" || $("#ltltAddress2").val().trim() == "") {
+			$("#ltltZipcode").addClass('is-invalid');
+			$("#ltltAddress1").addClass('is-invalid');
+			$("#ltltAddress2").addClass('is-invalid');
+			$("#ltltAddress3").addClass('is-invalid');
+			$("#ltltAddressFeedback").text("주소 와 상세주소를 입력해 주세요");
+			return false;
+		} else {
+			$("#ltltZipcode").removeClass('is-invalid');
+			$("#ltltAddress1").removeClass('is-invalid');
+			$("#ltltAddress2").removeClass('is-invalid');
+			$("#ltltAddress3").removeClass('is-invalid');
+		}
 	}
 	
 	
