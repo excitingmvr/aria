@@ -53,6 +53,29 @@ public class NationalityController extends BaseController {
 		
 		return "infra/nationality/xdmin/nationalityList";
 	}
+	
+	
+	@RequestMapping(value = "nationalityAjaxList")
+	public String nationalityAjaxList(@ModelAttribute("vo") NationalityVo vo, Model model) throws Exception {
+		
+		setSearch(vo);
+
+		return "infra/nationality/xdmin/nationalityAjaxList";
+	}
+	
+	
+	@RequestMapping(value = "nationalityAjaxLita")
+	public String nationalityAjaxLita(@ModelAttribute("vo") NationalityVo vo, Model model) throws Exception {
+		
+		vo.setParamsPaging(service.selectOneCount(vo));
+
+		if (vo.getTotalRows() > 0) {
+			List<Nationality> list = service.selectList(vo);
+			model.addAttribute("list", list);
+		}
+
+		return "infra/nationality/xdmin/nationalityAjaxLita";
+	}
 
 	
 	@RequestMapping(value = "nationalityForm")

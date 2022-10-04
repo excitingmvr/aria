@@ -78,6 +78,3 @@
 		marker.setMap(map);
 	</c:forEach>
 </script>
-
-</body>
-</html>

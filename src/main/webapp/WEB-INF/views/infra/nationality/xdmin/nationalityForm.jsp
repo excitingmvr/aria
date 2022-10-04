@@ -245,7 +245,7 @@
 	}); 
 
 
-	var goUrlList = "/nationality/nationalityList"; 			/* #-> */
+	var goUrlList = "/nationality/nationalityAjaxList"; 			/* #-> */
 	var goUrlInst = "/nationality/nationalityInst"; 			/* #-> */
 	var goUrlUpdt = "/nationality/nationalityUpdt";			/* #-> */
 	var goUrlUele = "/nationality/nationalityUele";			/* #-> */
