@@ -10,7 +10,7 @@
 
 	.addScroll{
 		overflow-y:auto;
-		height: 90px;
+		height: 200px;
 		background-color:#E9ECEF;
 	}
  	
@@ -20,7 +20,23 @@
 		border-radius: 4px;
 		color: white;
 		cursor: pointer;
-	}	
+	}
+	
+	/* Container holding the image and the text */
+.containerImage {
+  position: relative;
+/*  text-align: center;*/
+  color: red;
+}
+
+.overlay-text {position: absolute;
+  top: 8px;
+  right: 16px;}
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
 
 </style>
 </head>
@@ -429,6 +445,86 @@
 			</div>
         </div>
     </div>
+
+    <div class="row mt-sm-4">
+        <div class="col-sm-6 mt-3 mt-sm-0">
+            <label for="ifmmUploadedImage" class="form-label input-file-button">이미지첨부</label>
+ 			<input class="form-control form-control-sm" id="ifmmUploadedImage" name="ifmmUploadedImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage', 1, 0, 1, 0, 0, 1);">
+ 			<div class="addScroll" style="padding-top:5px; padding-left:5px;">
+ 				<div>
+					<div style="display: inline-block;">
+						<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
+						<div style="position: relative; top:-85px; left:5px"><span style="color: red;">X</span></div>
+					</div>
+					<div style="display: inline-block;">
+						<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
+						<div style="position: relative; top:-85px; left:5px"><span style="color: red;">X</span></div>
+					</div>
+					<div style="display: inline-block;">
+						<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
+						<div style="position: relative; top:-85px; left:5px"><span style="color: red;">X</span></div>
+					</div>
+					<div style="display: inline-block;">
+						<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
+						<div style="position: relative; top:-85px; left:5px"><span style="color: red;">X</span></div>
+					</div>
+
+<!-- 	 				<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
+	 				<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
+	 				<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
+	 				<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px"> -->
+ 				</div>
+ 			</div>
+<!--  			
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/resources/common/image/default_111.jpg" class="d-block w-100" alt="..." height="100px">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/common/image/default_111.jpg" class="d-block w-100" alt="..." height="100px">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/common/image/default_111.jpg" class="d-block w-100" alt="..." height="100px">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+ -->
+        </div>
+        <div class="col-sm-6 mt-3 mt-sm-0">
+			<label for="ifmmUploadedFile" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="ifmmUploadedFile" name="ifmmUploadedFile" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedFile', 2, 0, 2, 0, 0, 2);" >
+			<div class="addScroll">
+				<ul id="ulFile2" class="list-group">
+				</ul>
+			</div>
+        </div>
+    </div>    
 
 <c:if test="${not empty item.ifmmSeq }">
 <!-- regMod s -->
