@@ -822,8 +822,18 @@
 				 fileReader.readAsDataURL($("#" + objName +"")[0].files[i]);
 				alert($("#" + objName +"")[0].files[i]);
 				 fileReader.onload = function () {
-				 alert(i + " : " + fileReader.result);
-					 $("#aaa"+i).attr("src", fileReader.result);		/* #-> */
+				 /* alert(i + " : " + fileReader.result); */
+				 alert($("#aaa"+i+""));
+				 
+				 if(i == 0) {
+					 $("#aaa0").attr("src", fileReader.result);		/* #-> */
+				 } else if (i == 1) {
+					 $("#aaa0").attr("src", fileReader.result);		/* #-> */
+				 } else {
+					 
+				 }
+					 /* $("#aaa"+i+"").attr("src", fileReader.result);		/* #-> */
+					 /* $("#aaa1").attr("src", fileReader.result);		/* #-> */ 
 				 }
 			}			
  			
