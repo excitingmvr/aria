@@ -434,22 +434,33 @@
 
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
-            <label for="ifmmUploadedImage" class="form-label input-file-button">이미지첨부</label>
- 			<input class="form-control form-control-sm" id="ifmmUploadedImage" name="ifmmUploadedImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage', 1, 0, 1, 0, 0, 1);">
- 			<div class="addScroll">
+            <label for="ifmmUploadedImage1" class="form-label input-file-button">이미지첨부</label>
+ 			<input class="form-control form-control-sm" id="ifmmUploadedImage1" name="ifmmUploadedImage1" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage1', 1, 0, 1, 0, 0, 1);">
+ 			<div class="addScroll" id="ifmmUploadedImage1View">
+<!-- 
 				<div style="display: inline-block; height: 95px;">
 					<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">
 					<div style="position: relative; top:-85px; left:5px"><span style="color: red;">X</span></div>
 				</div>
+ -->				
  			</div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
-			<label for="ifmmUploadedFile" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="ifmmUploadedFile" name="ifmmUploadedFile" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedFile', 2, 0, 2, 0, 0, 2);" >
+			<label for="ifmmUploadedFile1" class="form-label input-file-button">파일첨부</label>
+			<input class="form-control form-control-sm" id="ifmmUploadedFile1" name="ifmmUploadedFil1e" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedFile1', 2, 0, 2, 0, 0, 2);" >
 			<div class="addScroll">
 				<ul id="ulFile2" class="list-group">
 				</ul>
 			</div>
+        </div>
+    </div>    
+    
+    <div class="row mt-sm-4">
+        <div class="col-sm-6 mt-3 mt-sm-0">
+			<input type="file" multiple>					
+        </div>
+        <div class="col-sm-6 mt-3 mt-sm-0">
+
         </div>
     </div>    
 
@@ -789,11 +800,33 @@
 		if(checkUploadedTotalFileSize(seq, totalFileSize, allowedTotalFileSize) == false) { return false; }
 		
 		if (uiType == 1) {
+/* 			
 			$("#ulFile" + seq).children().remove();
 			
 			for (var i = 0 ; i < fileCount ; i++) {
 				addUploadLi(seq, i, $("#" + objName +"")[0].files[i].name);
 			}
+ */			
+			for (var i = 0 ; i < fileCount ; i++) {
+				
+	 			var divImage = "";
+	 			divImage += '<div style="display: inline-block; height: 95px;">';
+				/* divImage += '	<img src="/resources/common/image/default_111.jpg" class="rounded" width= "85px" height="85px">'; */
+				divImage += '	<img id="aaa'+i+'" src="" class="rounded" width= "85px" height="85px">';
+				divImage += '	<div style="position: relative; top:-85px; left:5px"><span style="color: red;">X</span></div>';
+				divImage += '</div> ';
+				
+				$("#ifmmUploadedImage1View").append(divImage);
+				
+				var fileReader = new FileReader();
+				 fileReader.readAsDataURL($("#" + objName +"")[0].files[i]);
+				alert($("#" + objName +"")[0].files[i]);
+				 fileReader.onload = function () {
+				 alert(i + " : " + fileReader.result);
+					 $("#aaa"+i).attr("src", fileReader.result);		/* #-> */
+				 }
+			}			
+ 			
 		} else if(uiType == 2) {
 			$("#ulFile" + seq).children().remove();
 			
