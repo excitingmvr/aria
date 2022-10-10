@@ -28,8 +28,8 @@ $('#divSearchControl').on('click', function() {
  });
 
 
-checkUploadedTotalFileNumber = function(obj, allowedMaxTotalFileNumber, fileCount) {
-	if(allowedMaxTotalFileNumber < fileCount){
+checkUploadedTotalFileNumber = function(obj, allowedMaxTotalFileNumber, filesCount, uploadedFilesCount) {
+	if(allowedMaxTotalFileNumber < (filesCount + uploadedFilesCount)){
 		alert("전체 파일 갯수는 "+ allowedMaxTotalFileNumber +"개 까지 허용됩니다.");
 //		$("#file"+seq).val("");
 //		obj.val("");
