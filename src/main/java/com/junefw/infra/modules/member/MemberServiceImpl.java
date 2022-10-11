@@ -1,6 +1,8 @@
 package com.junefw.infra.modules.member;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,8 +18,6 @@ import com.junefw.infra.common.util.UtilDateTime;
 import com.junefw.infra.common.util.UtilMail;
 import com.junefw.infra.common.util.UtilRegMod;
 import com.junefw.infra.common.util.UtilSecurity;
-import com.junefw.infra.common.util.UtilUpload;
-import com.junefw.infra.modules.codegroup.CodeGroup;
 
 
 @Service
@@ -26,8 +26,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	@Autowired
 	MemberDao dao;
 	
+	
 	@Override
-	public void setRegMod(CodeGroup dto) throws Exception {
+	public void setRegMod(Member dto) throws Exception {
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
 		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
@@ -40,6 +41,55 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dto.setModDeviceCd(UtilRegMod.getDevice());
 		dto.setModDateTime(UtilDateTime.nowDate());
 	}
+
+
+	@Override
+	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName) throws Exception {
+		
+		int j = 0;
+    	for(MultipartFile multipartFile : multipartFiles) {
+    			
+    		if(!multipartFile.isEmpty()) {
+    		
+    			String className = dto.getClass().getSimpleName().toString().toLowerCase();		
+    			String fileName = multipartFile.getOriginalFilename();
+    			String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+    			String uuid = UUID.randomUUID().toString();
+    			String uuidFileName = uuid + "." + ext;
+    			String pathModule = className;
+    			String nowString = UtilDateTime.nowString();
+    			String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
+    			String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule + "/" + pathDate + "/";
+    			String pathForView = Constants.UPLOAD_PATH_PREFIX_FOR_VIEW + "/" + pathModule + "/" + pathDate + "/";
+    			
+    			File uploadPath = new File(path);
+    			
+    			if (!uploadPath.exists()) {
+    				uploadPath.mkdir();
+    			} else {
+    				// by pass
+    			}
+    			  
+    			multipartFile.transferTo(new File(path + uuidFileName));
+    			
+    			dto.setPath(pathForView);
+    			dto.setOriginalName(fileName);
+    			dto.setUuidName(uuidFileName);
+    			dto.setExt(ext);
+    			dto.setSize(multipartFile.getSize());
+    			
+	    		dto.setTableName(tableName);
+	    		dto.setType(2);
+	    		dto.setDefaultNy(j == 0 ? 1 : 0);
+	    		dto.setSort(j + 1);
+	    		dto.setPseq(dto.getIfmmSeq());
+
+				dao.insertUploaded(dto);
+				j++;
+    		}
+    	}
+	}
+
 
 	@Override
 	public int selectOneCount(MemberVo vo){
@@ -67,64 +117,10 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
 	    	dao.insert(dto);
 	    	
-	    	int j = 0;
-	    	for(MultipartFile multipartFile : dto.getIfmmUploadedProfileImage() ) {
-	    		
-	    		if(!multipartFile.isEmpty()) {
-
-	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
-		    		UtilUpload.upload(multipartFile, pathModule, dto);
-		    		
-		    		dto.setTableName("infrMemberUploaded");
-		    		dto.setType(1);
-		    		dto.setDefaultNy(j == 0 ? 1 : 0);
-		    		dto.setSort(j + 1);
-		    		dto.setPseq(dto.getIfmmSeq());
-	
-					dao.insertUploaded(dto);
-					j++;
-	    		}
-	    	}
-	    	
-	    	
-	    	j = 0;
-	    	for(MultipartFile multipartFile : dto.getIfmmUploadedImage() ) {
-	    			
-	    		if(!multipartFile.isEmpty()) {
-	    		
-	    			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
-	    			UtilUpload.upload(multipartFile, pathModule, dto);
-	    			
-		    		dto.setTableName("infrMemberUploaded");
-		    		dto.setType(2);
-		    		dto.setDefaultNy(j == 0 ? 1 : 0);
-		    		dto.setSort(j + 1);
-		    		dto.setPseq(dto.getIfmmSeq());
-	
-					dao.insertUploaded(dto);
-					j++;
-	    		}
-	    	}
-
-	    	j = 0;
-	    	for(MultipartFile multipartFile : dto.getIfmmUploadedFile() ) {
-	    		
-	    		if(!multipartFile.isEmpty()) {	    		
-	    		
-		    		String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");		
-		    		UtilUpload.upload(multipartFile, pathModule, dto);
-		    		
-		    		dto.setTableName("infrMemberUploaded");
-		    		dto.setType(3);
-		    		dto.setDefaultNy(j == 0 ? 1 : 0);
-		    		dto.setSort(j + 1);
-		    		dto.setPseq(dto.getIfmmSeq());
-		    		
-		    		dao.insertUploaded(dto);
-		    		j++;
-	    		}
-	    	}
-	    	
+	    	uploadFiles(dto.getIfmmUploadedProfileImage(), dto, "infrMemberUploaded");
+	    	uploadFiles(dto.getIfmmUploadedImage(), dto, "infrMemberUploaded");
+	    	uploadFiles(dto.getIfmmUploadedFile(), dto, "infrMemberUploaded");
+    	
 	    	// infrMemberEmail
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
 				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
@@ -222,20 +218,6 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		return dao.selectOneLogin(dto);
 	}
 	
-	
-	public void setRegMod(Member dto) throws Exception {
-		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		
-		dto.setRegIp(UtilRegMod.getClientIp(httpServletRequest));
-		dto.setRegSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-		dto.setRegDeviceCd(UtilRegMod.getDevice());
-		dto.setRegDateTime(UtilDateTime.nowDate());
-		
-		dto.setModIp(UtilRegMod.getClientIp(httpServletRequest));
-		dto.setModSeq(UtilRegMod.getSessionSeq(httpServletRequest));
-		dto.setModDeviceCd(UtilRegMod.getDevice());
-		dto.setModDateTime(UtilDateTime.nowDate());
-	}
 
 	@Override
 	public List<Member> selectListPhone(MemberVo vo) throws Exception {

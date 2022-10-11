@@ -25,4 +25,5 @@ public class LocationDao{
 	public int uelete(Location dto) { return sqlSession.update(namespace + ".uelete", dto); }
 	public int delete(LocationVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
 	
+	public int insertUploaded(Location dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
 }

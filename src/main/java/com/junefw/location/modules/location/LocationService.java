@@ -2,9 +2,12 @@ package com.junefw.location.modules.location;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public interface LocationService {
 
 	public void setRegMod(Location dto) throws Exception;
+	public void uploadFiles(MultipartFile[] multipartFiles, Location dto, String tableName) throws Exception;
 	
 	public int selectOneCount(LocationVo vo) throws Exception;
 	public List<Location> selectList(LocationVo vo) throws Exception; 

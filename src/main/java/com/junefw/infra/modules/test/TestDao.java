@@ -25,4 +25,6 @@ public class TestDao{
 	public int uelete(Test dto) { return sqlSession.update(namespace + ".uelete", dto); }
 	public int delete(TestVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
 	
+	public int insertUploaded(Test dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
+	
 }

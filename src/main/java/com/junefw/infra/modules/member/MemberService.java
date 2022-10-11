@@ -2,11 +2,12 @@ package com.junefw.infra.modules.member;
 
 import java.util.List;
 
-import com.junefw.infra.modules.codegroup.CodeGroup;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface MemberService {
 
-	public void setRegMod(CodeGroup dto) throws Exception;
+	public void setRegMod(Member dto) throws Exception;
+	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName) throws Exception;
 
 //	infrMember
 	int selectOneCount(MemberVo vo) throws Exception;

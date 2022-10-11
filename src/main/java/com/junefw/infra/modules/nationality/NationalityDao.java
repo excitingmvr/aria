@@ -25,4 +25,5 @@ public class NationalityDao{
 	public int uelete(Nationality dto) { return sqlSession.update(namespace + ".uelete", dto); }
 	public int delete(NationalityVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
 	
+	public int insertUploaded(Nationality dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
 }

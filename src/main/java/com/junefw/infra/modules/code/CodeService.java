@@ -2,9 +2,12 @@ package com.junefw.infra.modules.code;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public interface CodeService {
 
 	public void setRegMod(Code dto) throws Exception;
+	public void uploadFiles(MultipartFile[] multipartFiles, Code dto, String tableName) throws Exception;
 	
 	public int selectOneCount(CodeVo vo) throws Exception;
 	public List<Code> selectList(CodeVo vo) throws Exception; 

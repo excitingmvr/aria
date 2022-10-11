@@ -2,9 +2,12 @@ package com.junefw.infra.modules.test;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public interface TestService {
 
 	public void setRegMod(Test dto) throws Exception;
+	public void uploadFiles(MultipartFile[] multipartFiles, Test dto, String tableName) throws Exception;
 	
 	public int selectOneCount(TestVo vo) throws Exception;
 	public List<Test> selectList(TestVo vo) throws Exception; 

@@ -25,6 +25,8 @@ public class CodeGroupDao {
 	public int uelete(CodeGroup dto) { return sqlSession.update(namespace + ".uelete", dto); }
 	public int delete(CodeGroupVo vo) { return sqlSession.delete(namespace + ".delete", vo); }
 	
+	public int insertUploaded(CodeGroup dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
+	
 	public List<CodeGroup> selectListWithoutPaging(){ return sqlSession.selectList(namespace + ".selectListWithoutPaging", ""); }
 	
 }
