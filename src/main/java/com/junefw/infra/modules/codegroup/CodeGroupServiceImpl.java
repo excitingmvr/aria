@@ -40,7 +40,7 @@ public class CodeGroupServiceImpl extends BaseServiceImpl implements CodeGroupSe
 
 
 	@Override
-	public void uploadFiles(MultipartFile[] multipartFiles, CodeGroup dto, String tableName) throws Exception {
+	public void uploadFiles(MultipartFile[] multipartFiles, CodeGroup dto, String tableName, int type) throws Exception {
 		
 		int j = 0;
     	for(MultipartFile multipartFile : multipartFiles) {
@@ -75,7 +75,7 @@ public class CodeGroupServiceImpl extends BaseServiceImpl implements CodeGroupSe
     			dto.setSize(multipartFile.getSize());
     			
 	    		dto.setTableName(tableName);
-	    		dto.setType(2);
+	    		dto.setType(type);
 	    		dto.setDefaultNy(j == 0 ? 1 : 0);
 	    		dto.setSort(j + 1);
 	    		dto.setPseq(dto.getIfcgSeq());

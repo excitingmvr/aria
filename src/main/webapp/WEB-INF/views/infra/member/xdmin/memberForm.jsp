@@ -112,9 +112,6 @@
 <!-- main s -->
 <c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/>
 <c:set var="listCodeTelecom" value="${CodeServiceImpl.selectListCachedCode('10')}"/>
-<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
-	<c:out value="${listUploaded.type }"/>
-</c:forEach>
 
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
 <form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
@@ -128,34 +125,32 @@
     <div class="row mt-sm-4 ">
         <div class="col-sm-12 text-center">
 <c:choose>
-	<c:when test="${fn:length(listUploaded) eq 0 }">
+	<c:when test="${ifmmSeq eq 0 }">
 		<img id="imgProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
 	</c:when>
 	<c:otherwise>
-		<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
-			<c:if test="${listUploaded.type eq '1' }">
-				<img id="imgProfile" src="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded-circle mx-auto d-block" width="100" height="100">
-			</c:if>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${fn:length(listUploaded) eq 0 }">
+				<img id="imgProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+			</c:when>
+			<c:otherwise>
+				<c:set var="imgProfileGetNy" value="0"/>
+				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
+					<c:if test="${listUploaded.type eq '1' }">
+						<img id="imgProfile" src="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded-circle mx-auto d-block" width="100" height="100">
+						<c:set var="imgProfileGetNy" value="1"/>		
+					</c:if>
+				</c:forEach>
+				<c:if test="${imgProfileGetNy eq 0 }">
+					<img id="imgProfile" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
+				</c:if>
+			</c:otherwise>
+		</c:choose>
 	</c:otherwise>
 </c:choose>
-<%-- 
-<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
-	<c:choose>
-		<c:when test="${not empty listUploaded.type && listUploaded.type eq 1 }">
-			<img id="imgProfile" src="<c:out value="${Constants.UPLOAD_PATH_PREFIX_FOR_VIEW }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded-circle mx-auto d-block" width="100" height="100">
-		</c:when>
-		<c:when test="${not empty listUploaded.type }">
-			<!-- empty -->1<c:out value="${listUploaded.type }"/>
-		</c:when>
-		<c:otherwise>
-			
-		</c:otherwise>
-	</c:choose>
-</c:forEach>        
- --%>            
+            
 			<label for="ifmmUploadedProfileImage" class="form-label input-file-button"><b>+</b></label>
- 			<input class="form-control form-control-sm" id="ifmmUploadedProfileImage" name="ifmmUploadedProfileImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedProfileImage', 0, 1, 1, 0, 0, 3);">
+ 			<input class="form-control form-control-sm" id="ifmmUploadedProfileImage" name="ifmmUploadedProfileImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedProfileImage', 1, 1, 1, 0, 0, 3);">
         </div>
     </div>
     <div class="row mt-sm-4">
@@ -416,13 +411,13 @@
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
             <label for="ifmmUploadedImage" class="form-label input-file-button">이미지첨부</label>
- 			<input class="form-control form-control-sm" id="ifmmUploadedImage" name="ifmmUploadedImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage', 1, 0, 1, 0, 0, 1);">
+ 			<input class="form-control form-control-sm" id="ifmmUploadedImage" name="ifmmUploadedImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage', 2, 0, 1, 0, 0, 1);">
 			<div id="ifmmUploadedImagePreview" class="addScroll">
 			</div>
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
 			<label for="ifmmUploadedFile" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="ifmmUploadedFile" name="ifmmUploadedFile" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedFile', 2, 0, 2, 0, 0, 2);" >
+			<input class="form-control form-control-sm" id="ifmmUploadedFile" name="ifmmUploadedFile" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedFile', 3, 0, 2, 0, 0, 2);" >
 			<div class="addScroll">
 				<ul id="ifmmUploadedFilePreview" class="list-group">
 				</ul>

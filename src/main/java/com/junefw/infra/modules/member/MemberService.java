@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface MemberService {
 
 	public void setRegMod(Member dto) throws Exception;
-	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName) throws Exception;
+	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type) throws Exception;
 
 //	infrMember
 	int selectOneCount(MemberVo vo) throws Exception;

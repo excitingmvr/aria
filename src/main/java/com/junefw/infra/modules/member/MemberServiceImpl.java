@@ -44,7 +44,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 
 
 	@Override
-	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName) throws Exception {
+	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type) throws Exception {
 		
 		int j = 0;
     	for(MultipartFile multipartFile : multipartFiles) {
@@ -79,7 +79,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
     			dto.setSize(multipartFile.getSize());
     			
 	    		dto.setTableName(tableName);
-	    		dto.setType(2);
+	    		dto.setType(type);
 	    		dto.setDefaultNy(j == 0 ? 1 : 0);
 	    		dto.setSort(j + 1);
 	    		dto.setPseq(dto.getIfmmSeq());
@@ -117,9 +117,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
 	    	dao.insert(dto);
 	    	
-	    	uploadFiles(dto.getIfmmUploadedProfileImage(), dto, "infrMemberUploaded");
-	    	uploadFiles(dto.getIfmmUploadedImage(), dto, "infrMemberUploaded");
-	    	uploadFiles(dto.getIfmmUploadedFile(), dto, "infrMemberUploaded");
+	    	uploadFiles(dto.getIfmmUploadedProfileImage(), dto, "infrMemberUploaded", 1);
+	    	uploadFiles(dto.getIfmmUploadedImage(), dto, "infrMemberUploaded", 2);
+	    	uploadFiles(dto.getIfmmUploadedFile(), dto, "infrMemberUploaded", 3);
     	
 	    	// infrMemberEmail
 			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
