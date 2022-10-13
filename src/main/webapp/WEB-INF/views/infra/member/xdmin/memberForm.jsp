@@ -410,14 +410,16 @@
      
     <div class="row mt-sm-4">
         <div class="col-sm-6 mt-3 mt-sm-0">
+        	<c:set var="seq" value="2"/> 
             <label for="ifmmUploadedImage" class="form-label input-file-button">이미지첨부</label>
- 			<input class="form-control form-control-sm" id="ifmmUploadedImage" name="ifmmUploadedImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage', 2, 0, 1, 0, 0, 1);">
+ 			<input class="form-control form-control-sm" id="ifmmUploadedImage" name="ifmmUploadedImage" type="file" multiple="multiple" style="display: none;" onChange="upload('ifmmUploadedImage', <c:out value="${seq }"/>, 0, 1, 0, 0, 1);">
 			<div id="ifmmUploadedImagePreview" class="addScroll">
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
-					<c:if test="${listUploaded.type eq '2' }">
-						<div id="imgDiv_1_<c:out value="${statusUploaded.index }"/>" style="display: inline-block; height: 95px;">
+					<c:if test="${listUploaded.type eq seq }">
+						<input type="hidden" id="process_<c:out value="${seq }"/>_<c:out value="${statusUploaded.index }"/>" name="process" value="2">
+						<div id="imgDiv_<c:out value="${seq }"/>_<c:out value="${statusUploaded.index }"/>" style="display: inline-block; height: 95px;">
 							<img src="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded" width= "85px" height="85px">
-							<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv(1,<c:out value="${statusUploaded.index }"/>)">X</span></div>
+							<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv(<c:out value="${seq }"/>,<c:out value="${statusUploaded.index }"/>)">X</span></div>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -840,6 +842,7 @@
 			var index = parseInt(i) + parseInt(maxNumber);
 			
 	        var divImage = "";
+			divImage += '<input type="hidden" id="process_'+seq+'_'+ index +'" name="process" value="1">';
 			divImage += '<div id="imgDiv_'+seq+'_'+ index +'" style="display: inline-block; height: 95px;">';
 			divImage += '	<img src="'+ imageFile.result +'" class="rounded" width= "85px" height="85px">';
 			divImage += '	<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv('+ seq +','+ index +')">X</span></div>';
@@ -852,6 +855,7 @@
 	
 	delImgDiv = function(seq, index) {
 		$("#imgDiv_"+seq+"_"+index).remove();
+		$("#process_"+seq+"_"+index).val(3);
 	}
 	
 	

@@ -127,6 +127,7 @@ public class Member extends Base {
 //	private MultipartFile[] file2;		// memberForm.file
 	
 	private MultipartFile[] ifmmUploadedProfileImage;
+	private Integer[] process;
 	private MultipartFile[] ifmmUploadedImage;
 	private MultipartFile[] ifmmUploadedFile;
 //	----------
@@ -616,6 +617,12 @@ public class Member extends Base {
 	public void setIfmmUploadedProfileImage(MultipartFile[] ifmmUploadedProfileImage) {
 		this.ifmmUploadedProfileImage = ifmmUploadedProfileImage;
 	}
+	public Integer[] getProcess() {
+		return process;
+	}
+	public void setProcess(Integer[] process) {
+		this.process = process;
+	}
 	public MultipartFile[] getIfmmUploadedImage() {
 		return ifmmUploadedImage;
 	}
@@ -628,5 +635,7 @@ public class Member extends Base {
 	public void setIfmmUploadedFile(MultipartFile[] ifmmUploadedFile) {
 		this.ifmmUploadedFile = ifmmUploadedFile;
 	}
+	
+	
 	
 }

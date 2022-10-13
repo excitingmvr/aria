@@ -181,8 +181,14 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		setRegMod(dto);
     	
 		dto.setIfmmName(dto.getIfmmLastName() + dto.getIfmmFirstName());
+		dao.update(dto);
 		
-		return dao.update(dto);
+		
+		for(int i=0; i<dto.getProcess().length; i++) {
+			System.out.println(i + " : dto.getProcess()[i]: " + dto.getProcess()[i]);
+		}
+		
+		return 1;
 	}
 	
 	@Override
