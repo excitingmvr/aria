@@ -416,6 +416,8 @@
 			<div id="ifmmUploadedImagePreview" class="addScroll">
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 					<c:if test="${listUploaded.type eq seq }">
+						<input type="hidden" id="fileSeq_<c:out value="${seq }"/>_<c:out value="${statusUploaded.index }"/>" name="fileSeq" value="<c:out value="${listUploaded.seq }"/>">
+						<input type="hidden" id="pathFile_<c:out value="${seq }"/>_<c:out value="${statusUploaded.index }"/>" name="pathFile" value="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>">
 						<input type="hidden" id="process_<c:out value="${seq }"/>_<c:out value="${statusUploaded.index }"/>" name="process" value="2">
 						<div id="imgDiv_<c:out value="${seq }"/>_<c:out value="${statusUploaded.index }"/>" style="display: inline-block; height: 95px;">
 							<img src="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded" width= "85px" height="85px">
@@ -754,6 +756,8 @@
 //		uiType: 1 => 이미지형
 //		uiType: 2 => 파일형
 //		uiType: 3 => 프로파일형
+		
+		
 		
 		var files = $("#" + objName +"")[0].files;
 		var filePreview = $("#" + objName +"Preview");

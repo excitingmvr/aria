@@ -127,7 +127,15 @@ public class Member extends Base {
 //	private MultipartFile[] file2;		// memberForm.file
 	
 	private MultipartFile[] ifmmUploadedProfileImage;
+	private MultipartFile[] ifmmUploadImgProfile;
+	private MultipartFile[] ifmmUploadImgProfileProcess;
+	private MultipartFile[] ifmmUploadImgProfilePathFile;
+	private MultipartFile[] ifmmUploadImgProfileSeq;
+	
 	private Integer[] process;
+	private String[] pathFile;
+	private String[] fileSeq;
+	
 	private MultipartFile[] ifmmUploadedImage;
 	private MultipartFile[] ifmmUploadedFile;
 //	----------
@@ -635,7 +643,17 @@ public class Member extends Base {
 	public void setIfmmUploadedFile(MultipartFile[] ifmmUploadedFile) {
 		this.ifmmUploadedFile = ifmmUploadedFile;
 	}
-	
-	
+	public String[] getPathFile() {
+		return pathFile;
+	}
+	public void setPathFile(String[] pathFile) {
+		this.pathFile = pathFile;
+	}
+	public String[] getFileSeq() {
+		return fileSeq;
+	}
+	public void setFileSeq(String[] fileSeq) {
+		this.fileSeq = fileSeq;
+	}
 	
 }

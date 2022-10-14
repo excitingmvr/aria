@@ -176,6 +176,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	    }
 	}
 
+	
 	@Override
 	public int update(Member dto) throws Exception {
 		setRegMod(dto);
@@ -185,6 +186,29 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		
 		
 		for(int i=0; i<dto.getProcess().length; i++) {
+			switch (dto.getProcess()[i]) {
+			case 1:
+				//insert
+				uploadFiles(dto.getIfmmUploadedImage(), dto, "infrMemberUploaded", 2);
+				break;
+			case 2:
+				//stay
+				break;
+			case 3:
+				//uelete or delete
+
+				File file = new File(Constants.UPLOAD_PATH_PREFIX_EXTERNAL + dto.getPathFile()[i]);
+	            boolean result = file.delete();
+	            
+	            if(result) {
+	            	dto.setSeq(dto.getFileSeq()[i]);
+	            	dto.setTableName("infrMemberUploaded");
+	            	dao.deleteUploaded(dto);
+	            } else {
+	            	// by pass
+	            }
+				break;
+			}
 			System.out.println(i + " : dto.getProcess()[i]: " + dto.getProcess()[i]);
 		}
 		

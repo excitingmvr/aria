@@ -150,6 +150,20 @@
 			,#{pseq}
 		)
 	</insert>
+	
+	
+	<delete id="deleteUploaded">
+		DELETE FROM ${tableName}
+		WHERE 1=1
+			AND seq = #{seq}
+	</delete>
+	
+	
+	<update id="ueleteUploaded">
+		UPDATE ${tableName} SET delNy = 1
+		WHERE 1=1
+			AND seq = #{seq}
+	</update>
 	<!-- uploaded e -->	
 
 </mapper>

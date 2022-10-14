@@ -28,6 +28,8 @@ public class MemberDao{
 
 //	uploaded
 	public int insertUploaded(Member dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
+	public int ueleteUploaded(Member dto) { return sqlSession.insert("Base" + ".ueleteUploaded", dto); }
+	public int deleteUploaded(Member dto) { return sqlSession.insert("Base" + ".deleteUploaded", dto); }
 	
 	public List<Member> selectListUploaded(MemberVo vo){ return sqlSession.selectList(namespace + ".selectListUploaded", vo); }
 	public int selectOneIdCheck(Member dto) { return sqlSession.selectOne(namespace + ".selectOneIdCheck", dto); }
