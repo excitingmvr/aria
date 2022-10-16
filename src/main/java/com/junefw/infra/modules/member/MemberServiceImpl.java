@@ -43,53 +43,83 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	}
 
 
-	@Override
-	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type) throws Exception {
-		
-		int j = 0;
-    	for(MultipartFile multipartFile : multipartFiles) {
-    			
-    		if(!multipartFile.isEmpty()) {
-    		
-    			String className = dto.getClass().getSimpleName().toString().toLowerCase();		
-    			String fileName = multipartFile.getOriginalFilename();
-    			String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
-    			String uuid = UUID.randomUUID().toString();
-    			String uuidFileName = uuid + "." + ext;
-    			String pathModule = className;
-    			String nowString = UtilDateTime.nowString();
-    			String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
-    			String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule + "/" + pathDate + "/";
-    			String pathForView = Constants.UPLOAD_PATH_PREFIX_FOR_VIEW + "/" + pathModule + "/" + pathDate + "/";
-    			
-    			File uploadPath = new File(path);
-    			
-    			if (!uploadPath.exists()) {
-    				uploadPath.mkdir();
-    			} else {
-    				// by pass
-    			}
-    			  
-    			multipartFile.transferTo(new File(path + uuidFileName));
-    			
-    			dto.setPath(pathForView);
-    			dto.setOriginalName(fileName);
-    			dto.setUuidName(uuidFileName);
-    			dto.setExt(ext);
-    			dto.setSize(multipartFile.getSize());
-    			
-	    		dto.setTableName(tableName);
-	    		dto.setType(type);
-	    		dto.setDefaultNy(j == 0 ? 1 : 0);
-	    		dto.setSort(j + 1);
-	    		dto.setPseq(dto.getIfmmSeq());
+	
+	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type, Integer[] sorts) throws Exception {
+
+		for(int i=0; i<multipartFiles.length; i++) {
+    	
+			if(!multipartFiles[i].isEmpty()) {
+				String className = dto.getClass().getSimpleName().toString().toLowerCase();		
+				String fileName = multipartFiles[i].getOriginalFilename();
+				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+				String uuid = UUID.randomUUID().toString();
+				String uuidFileName = uuid + "." + ext;
+				String pathModule = className;
+				String nowString = UtilDateTime.nowString();
+				String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
+				String path = Constants.UPLOAD_PATH_PREFIX + "/" + pathModule + "/" + pathDate + "/";
+				String pathForView = Constants.UPLOAD_PATH_PREFIX_FOR_VIEW + "/" + pathModule + "/" + pathDate + "/";
+				
+				File uploadPath = new File(path);
+				
+				if (!uploadPath.exists()) {
+					uploadPath.mkdir();
+				} else {
+					// by pass
+				}
+				  
+				multipartFiles[i].transferTo(new File(path + uuidFileName));
+				
+				dto.setPath(pathForView);
+				dto.setOriginalName(fileName);
+				dto.setUuidName(uuidFileName);
+				dto.setExt(ext);
+				dto.setSize(multipartFiles[i].getSize());
+				
+				dto.setTableName(tableName);
+				dto.setType(type);
+//				dto.setDefaultNy(j == 0 ? 1 : 0);
+//				dto.setSort(j + 1);
+				dto.setSort(sorts[i]);
+				dto.setPseq(dto.getIfmmSeq());
 
 				dao.insertUploaded(dto);
-				j++;
     		}
-    	}
+		}
 	}
 
+	
+	@Override
+	public void deleteFiles(String[] deleteSeq, String[] deletePathFile, Member dto, String tableName) throws Exception{
+		
+		for (int i=0; i<deleteSeq.length; i++) {
+			File file = new File(Constants.UPLOAD_PATH_PREFIX_EXTERNAL + deletePathFile[i]);
+            boolean result = file.delete();
+            
+            if(result) {
+            	dto.setSeq(deleteSeq[i]);
+            	dto.setTableName(tableName);
+            	dao.deleteUploaded(dto);
+            }
+		}
+	}
+	
+	
+	@Override
+	public void ueleteFiles(String[] deleteSeq, String[] deletePathFile, Member dto, String tableName) throws Exception{
+		
+		for (int i=0; i<deleteSeq.length; i++) {
+//			File file = new File(Constants.UPLOAD_PATH_PREFIX_EXTERNAL + deletePathFile[i]);
+//			boolean result = file.delete();
+			
+//			if(result) {
+				dto.setSeq(deleteSeq[i]);
+				dto.setTableName(tableName);
+				dao.ueleteUploaded(dto);
+//			}
+		}
+	}
+	
 
 	@Override
 	public int selectOneCount(MemberVo vo){
@@ -108,110 +138,81 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	
 	@Override
 	public int insert(Member dto) throws Exception {
-	    try {
 	    	
-	    	setRegMod(dto);
-	    	
-	    	dto.setIfmmPassword(UtilSecurity.encryptSha256(dto.getIfmmPassword()));
-	    	dto.setIfmmName(dto.getIfmmLastName() + dto.getIfmmFirstName());
-	    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
-	    	dao.insert(dto);
-	    	
-	    	uploadFiles(dto.getIfmmUploadedProfileImage(), dto, "infrMemberUploaded", 1);
-	    	uploadFiles(dto.getIfmmUploadedImage(), dto, "infrMemberUploaded", 2);
-	    	uploadFiles(dto.getIfmmUploadedFile(), dto, "infrMemberUploaded", 3);
+    	setRegMod(dto);
     	
-	    	// infrMemberEmail
-			for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
-				dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
-				dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
-				dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
-				dao.insertEmail(dto);
+    	dto.setIfmmPassword(UtilSecurity.encryptSha256(dto.getIfmmPassword()));
+    	dto.setIfmmName(dto.getIfmmLastName() + dto.getIfmmFirstName());
+    	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
+    	dao.insert(dto);
+    	
+    	uploadFiles(dto.getUploadImgProfile(), dto, "infrMemberUploaded", 1, dto.getUploadImgProfileSort());
+    	uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgSort());
+    	uploadFiles(dto.getUploadFile(), dto, "infrMemberUploaded", 3, dto.getUploadFileSort());
+	
+    	// infrMemberEmail
+		for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
+			dto.setIfmeDefaultNy(dto.getIfmeDefaultNyArray()[i]);
+			dto.setIfmeTypeCd(dto.getIfmeTypeCdArray()[i]);
+			dto.setIfmeEmailFull(dto.getIfmeEmailFullArray()[i]);
+			dao.insertEmail(dto);
+		}
+    	
+		// infrMemberPhone
+		for(int i = 0 ; i < dto.getIfmpNumberArray().length ; i++) {
+			if(!dto.getIfmpNumberArray()[i].isEmpty()) {	 
+				dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
+				dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
+				dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
+				dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
+				dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
+				dao.insertPhone(dto);
 			}
-	    	
-			// infrMemberPhone
-			for(int i = 0 ; i < dto.getIfmpNumberArray().length ; i++) {
-				if(!dto.getIfmpNumberArray()[i].isEmpty()) {	 
-					dto.setIfmpDefaultNy(dto.getIfmpDefaultNyArray()[i]);
-					dto.setIfmpTypeCd(dto.getIfmpTypeCdArray()[i]);
-					dto.setIfmpDeviceCd(dto.getIfmpDeviceCdArray()[i]);
-					dto.setIfmpTelecomCd(dto.getIfmpTelecomCdArray()[i]);
-					dto.setIfmpNumber(dto.getIfmpNumberArray()[i]);
-					dao.insertPhone(dto);
-				}
-			}
-			
+		}
+		
 //			infrMemberAddress
-			if (dto.getIfmaZipcodeArray().length >= 1) {
-				for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
-					dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
-					dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
-					dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
-					dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
-					dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
-					dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
-					dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
-					dto.setIfmaLat(dto.getIfmaLatArray()[i]);
-					dto.setIfmaLng(dto.getIfmaLngArray()[i]);
-					
-					dao.insertAddress(dto);
-				}
-			} else {
-				// by pass
+		if (dto.getIfmaZipcodeArray().length >= 1) {
+			for(int i = 0 ; i < dto.getIfmaZipcodeArray().length ; i++) {
+				dto.setIfmaDefaultNy(dto.getIfmaDefaultNyArray()[i]);
+				dto.setIfmaTypeCd(dto.getIfmaTypeCdArray()[i]);
+				dto.setIfmaTitle(dto.getIfmaTitleArray()[i]);
+				dto.setIfmaAddress1(dto.getIfmaAddress1Array()[i]);
+				dto.setIfmaAddress2(dto.getIfmaAddress2Array()[i]);
+				dto.setIfmaAddress3(dto.getIfmaAddress3Array()[i]);
+				dto.setIfmaZipcode(dto.getIfmaZipcodeArray()[i]);
+				dto.setIfmaLat(dto.getIfmaLatArray()[i]);
+				dto.setIfmaLng(dto.getIfmaLngArray()[i]);
+				
+				dao.insertAddress(dto);
 			}
-			
-			Thread thread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					UtilMail.sendMail();
-				}
-			});
-			
-			thread.start();
-			
-			return 1;
-
-	    } catch (Exception e) {
-	        throw new Exception();
-	    }
+		} else {
+			// by pass
+		}
+		
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				UtilMail.sendMail();
+			}
+		});
+		
+		thread.start();
+		
+		return 1;
 	}
-
+	
 	
 	@Override
 	public int update(Member dto) throws Exception {
+		
 		setRegMod(dto);
     	
 		dto.setIfmmName(dto.getIfmmLastName() + dto.getIfmmFirstName());
 		dao.update(dto);
 		
-		
-		for(int i=0; i<dto.getProcess().length; i++) {
-			switch (dto.getProcess()[i]) {
-			case 1:
-				//insert
-				uploadFiles(dto.getIfmmUploadedImage(), dto, "infrMemberUploaded", 2);
-				break;
-			case 2:
-				//stay
-				break;
-			case 3:
-				//uelete or delete
+		deleteFiles(dto.getUploadImgDeleteSeq(), dto.getUploadImgDeletePathFile(), dto, "infrMemberUploaded");
+		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgSort());
 
-				File file = new File(Constants.UPLOAD_PATH_PREFIX_EXTERNAL + dto.getPathFile()[i]);
-	            boolean result = file.delete();
-	            
-	            if(result) {
-	            	dto.setSeq(dto.getFileSeq()[i]);
-	            	dto.setTableName("infrMemberUploaded");
-	            	dao.deleteUploaded(dto);
-	            } else {
-	            	// by pass
-	            }
-				break;
-			}
-			System.out.println(i + " : dto.getProcess()[i]: " + dto.getProcess()[i]);
-		}
-		
 		return 1;
 	}
 	
@@ -265,6 +266,5 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dto.setIfmmPwdModDate(UtilDateTime.calculateDayDate(UtilDateTime.nowLocalDateTime(), (int) Constants.PASSWOPRD_CHANGE_INTERVAL));
 		return dao.updateIfmmPwdModDate(dto);
 	}
-
 
 }

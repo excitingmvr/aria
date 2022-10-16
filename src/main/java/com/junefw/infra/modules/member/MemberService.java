@@ -7,8 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 public interface MemberService {
 
 	public void setRegMod(Member dto) throws Exception;
-	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type) throws Exception;
-
+	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type, Integer[] sort) throws Exception;
+	public void deleteFiles(String[] deleteSeq, String[] deletePathFile, Member dto, String tableName) throws Exception;
+	public void ueleteFiles(String[] deleteSeq, String[] deletePathFile, Member dto, String tableName) throws Exception;
+	
+	
 //	infrMember
 	int selectOneCount(MemberVo vo) throws Exception;
 	List<Member> selectList(MemberVo vo) throws Exception; 

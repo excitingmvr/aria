@@ -122,22 +122,29 @@ public class Member extends Base {
 	private Integer iflgResultNy;
 	private Integer iflgDelNy;
 	
-//	private MultipartFile[] file0;		// memberForm.profileImage
-//	private MultipartFile[] file1;		// memberForm.image
-//	private MultipartFile[] file2;		// memberForm.file
+	private MultipartFile[] uploadImgProfile;
+//	private Integer[] uploadImgProfileProcess;
+//	private String[] uploadImgProfilePathFile;
+//	private String[] uploadImgProfileSeq;
+	private Integer[] uploadImgProfileSort;
+	private String[] uploadImgProfileDeleteSeq;
+	private String[] uploadImgProfileDeletePathFile;
 	
-	private MultipartFile[] ifmmUploadedProfileImage;
-	private MultipartFile[] ifmmUploadImgProfile;
-	private MultipartFile[] ifmmUploadImgProfileProcess;
-	private MultipartFile[] ifmmUploadImgProfilePathFile;
-	private MultipartFile[] ifmmUploadImgProfileSeq;
+	private MultipartFile[] uploadImg;
+//	private Integer[] uploadImgProcess;
+//	private String[] uploadImgPathFile;
+//	private String[] uploadImgSeq;
+	private Integer[] uploadImgSort;
+	private String[] uploadImgDeleteSeq;
+	private String[] uploadImgDeletePathFile;	
 	
-	private Integer[] process;
-	private String[] pathFile;
-	private String[] fileSeq;
-	
-	private MultipartFile[] ifmmUploadedImage;
-	private MultipartFile[] ifmmUploadedFile;
+	private MultipartFile[] uploadFile;
+//	private Integer[] uploadFileProcess;
+//	private String[] uploadFilePathFile;
+//	private String[] uploadFileSeq;
+	private Integer[] uploadFileSort;
+	private String[] uploadFileDeleteSeq;
+	private String[] uploadFileDeletePathFile;
 //	----------
 	public Boolean getAutoLogin() {
 		return autoLogin;
@@ -619,41 +626,77 @@ public class Member extends Base {
 	public void setIflgDelNy(Integer iflgDelNy) {
 		this.iflgDelNy = iflgDelNy;
 	}
-	public MultipartFile[] getIfmmUploadedProfileImage() {
-		return ifmmUploadedProfileImage;
+	public MultipartFile[] getUploadImgProfile() {
+		return uploadImgProfile;
 	}
-	public void setIfmmUploadedProfileImage(MultipartFile[] ifmmUploadedProfileImage) {
-		this.ifmmUploadedProfileImage = ifmmUploadedProfileImage;
+	public void setUploadImgProfile(MultipartFile[] uploadImgProfile) {
+		this.uploadImgProfile = uploadImgProfile;
 	}
-	public Integer[] getProcess() {
-		return process;
+	public Integer[] getUploadImgProfileSort() {
+		return uploadImgProfileSort;
 	}
-	public void setProcess(Integer[] process) {
-		this.process = process;
+	public void setUploadImgProfileSort(Integer[] uploadImgProfileSort) {
+		this.uploadImgProfileSort = uploadImgProfileSort;
 	}
-	public MultipartFile[] getIfmmUploadedImage() {
-		return ifmmUploadedImage;
+	public String[] getUploadImgProfileDeleteSeq() {
+		return uploadImgProfileDeleteSeq;
 	}
-	public void setIfmmUploadedImage(MultipartFile[] ifmmUploadedImage) {
-		this.ifmmUploadedImage = ifmmUploadedImage;
+	public void setUploadImgProfileDeleteSeq(String[] uploadImgProfileDeleteSeq) {
+		this.uploadImgProfileDeleteSeq = uploadImgProfileDeleteSeq;
 	}
-	public MultipartFile[] getIfmmUploadedFile() {
-		return ifmmUploadedFile;
+	public String[] getUploadImgProfileDeletePathFile() {
+		return uploadImgProfileDeletePathFile;
 	}
-	public void setIfmmUploadedFile(MultipartFile[] ifmmUploadedFile) {
-		this.ifmmUploadedFile = ifmmUploadedFile;
+	public void setUploadImgProfileDeletePathFile(String[] uploadImgProfileDeletePathFile) {
+		this.uploadImgProfileDeletePathFile = uploadImgProfileDeletePathFile;
 	}
-	public String[] getPathFile() {
-		return pathFile;
+	public MultipartFile[] getUploadImg() {
+		return uploadImg;
 	}
-	public void setPathFile(String[] pathFile) {
-		this.pathFile = pathFile;
+	public void setUploadImg(MultipartFile[] uploadImg) {
+		this.uploadImg = uploadImg;
 	}
-	public String[] getFileSeq() {
-		return fileSeq;
+	public Integer[] getUploadImgSort() {
+		return uploadImgSort;
 	}
-	public void setFileSeq(String[] fileSeq) {
-		this.fileSeq = fileSeq;
+	public void setUploadImgSort(Integer[] uploadImgSort) {
+		this.uploadImgSort = uploadImgSort;
+	}
+	public String[] getUploadImgDeleteSeq() {
+		return uploadImgDeleteSeq;
+	}
+	public void setUploadImgDeleteSeq(String[] uploadImgDeleteSeq) {
+		this.uploadImgDeleteSeq = uploadImgDeleteSeq;
+	}
+	public String[] getUploadImgDeletePathFile() {
+		return uploadImgDeletePathFile;
+	}
+	public void setUploadImgDeletePathFile(String[] uploadImgDeletePathFile) {
+		this.uploadImgDeletePathFile = uploadImgDeletePathFile;
+	}
+	public MultipartFile[] getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile[] uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+	public Integer[] getUploadFileSort() {
+		return uploadFileSort;
+	}
+	public void setUploadFileSort(Integer[] uploadFileSort) {
+		this.uploadFileSort = uploadFileSort;
+	}
+	public String[] getUploadFileDeleteSeq() {
+		return uploadFileDeleteSeq;
+	}
+	public void setUploadFileDeleteSeq(String[] uploadFileDeleteSeq) {
+		this.uploadFileDeleteSeq = uploadFileDeleteSeq;
+	}
+	public String[] getUploadFileDeletePathFile() {
+		return uploadFileDeletePathFile;
+	}
+	public void setUploadFileDeletePathFile(String[] uploadFileDeletePathFile) {
+		this.uploadFileDeletePathFile = uploadFileDeletePathFile;
 	}
 	
 }
