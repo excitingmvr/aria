@@ -137,6 +137,7 @@ public class Member extends Base {
 	private Integer[] uploadImgSort;
 	private String[] uploadImgDeleteSeq;
 	private String[] uploadImgDeletePathFile;	
+	private Integer uploadImgMaxNumber;
 	
 	private MultipartFile[] uploadFile;
 //	private Integer[] uploadFileProcess;
@@ -673,6 +674,12 @@ public class Member extends Base {
 	}
 	public void setUploadImgDeletePathFile(String[] uploadImgDeletePathFile) {
 		this.uploadImgDeletePathFile = uploadImgDeletePathFile;
+	}
+	public Integer getUploadImgMaxNumber() {
+		return uploadImgMaxNumber;
+	}
+	public void setUploadImgMaxNumber(Integer uploadImgMaxNumber) {
+		this.uploadImgMaxNumber = uploadImgMaxNumber;
 	}
 	public MultipartFile[] getUploadFile() {
 		return uploadFile;

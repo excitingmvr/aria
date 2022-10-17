@@ -46,9 +46,14 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	
 	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type, Integer[] sorts) throws Exception {
 
+		System.out.println(" dto.getUploadImgMaxNumber() : " + dto.getUploadImgMaxNumber());
+		
 		for(int i=0; i<multipartFiles.length; i++) {
     	
 			if(!multipartFiles[i].isEmpty()) {
+				
+				System.out.println(i + ": multipartFiles[i].getOriginalFilename() : " + multipartFiles[i].getOriginalFilename());
+				
 				String className = dto.getClass().getSimpleName().toString().toLowerCase();		
 				String fileName = multipartFiles[i].getOriginalFilename();
 				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
@@ -80,7 +85,8 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setType(type);
 //				dto.setDefaultNy(j == 0 ? 1 : 0);
 //				dto.setSort(j + 1);
-				dto.setSort(sorts[i]);
+//				dto.setSort(sorts[i]);
+				dto.setSort(dto.get)
 				dto.setPseq(dto.getIfmmSeq());
 
 				dao.insertUploaded(dto);

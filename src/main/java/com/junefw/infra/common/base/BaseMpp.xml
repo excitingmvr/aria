@@ -139,7 +139,7 @@
 		) values (
 			#{type}
 			,#{defaultNy}
-			,#{sort}
+			,(select max(a.sort)+1 from ${tableName} a where a.pseq = #{pseq})
 			,#{path}
 			,#{originalName}
 			,#{uuidName}

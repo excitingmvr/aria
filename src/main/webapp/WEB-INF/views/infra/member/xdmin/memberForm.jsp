@@ -412,6 +412,7 @@
         <div class="col-sm-6 mt-3 mt-sm-0">
         	<c:set var="type" value="2"/>		<!-- #-> -->
         	<c:set var="name" value="uploadImg"/>		<!-- #-> -->
+        	<input type="hidden" id="uploadImgMaxNumber" name="uploadImgMaxNumber"/>
         	<input type="hidden" id="uploadImgDeleteSeq" name="uploadImgDeleteSeq"/>
         	<input type="hidden" id="uploadImgDeletePathFile" name="uploadImgDeletePathFile"/>
             <label for="uploadImg" class="form-label input-file-button">이미지첨부</label>
@@ -419,6 +420,7 @@
 			<div id="uploadImgPreview" class="addScroll">
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 					<c:if test="${listUploaded.type eq type }">
+						<%-- <input type="hidden" id="uploadImgSeq_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgSeq" value="<c:out value="${listUploaded.seq }"/>"> --%>
 						<%-- <input type="hidden" id="uploadImgSeq_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgSeq" value="<c:out value="${listUploaded.seq }"/>"> --%>
 						<%-- <input type="hidden" id="uploadImgPathFile_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgPathFile" value="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>"> --%>
 						<%-- <input type="hidden" id="uploadImgProcess_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgProcess" value="2"> --%>
@@ -812,6 +814,8 @@
 			// by pass
 		}
 		
+		$("#" + objName + "MaxNumber").val(maxNumber);
+
 		var totalFileSize = 0;
 		var filesCount = files.length;
 		var filesArray = [];
@@ -836,8 +840,8 @@
 		if (uiType == 1) {
 			for (var i=0; i<filesArray.length; i++) {
 				var file = filesArray[i];
-			
-			    var picReader = new FileReader();
+
+				var picReader = new FileReader();
 			    picReader.addEventListener("load", addEventListenerCustom (objName, seq, i, file, filePreview, maxNumber));
 			    picReader.readAsDataURL(file);
 			}			
@@ -863,8 +867,8 @@
 			var imageFile = event.target;
 			var index = parseInt(i) + parseInt(maxNumber);
 			var sort = index + 1;
-			
-	        var divImage = "";
+
+			var divImage = "";
 			divImage += '<input type="hidden" id="'+ objName +'Process_'+type+'_'+ index +'" name="'+ objName +'Process" value="1">';
 			divImage += '<input type="hidden" id="'+ objName +'Sort_'+type+'_'+ index +'" name="'+ objName +'Sort" value="'+ sort +'">';
 			divImage += '<div id="imgDiv_'+type+'_'+ index +'" style="display: inline-block; height: 95px;">';
