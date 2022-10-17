@@ -44,7 +44,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 
 
 	
-	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type, Integer[] sorts) throws Exception {
+	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type, int maxNumber) throws Exception {
 
 		System.out.println(" dto.getUploadImgMaxNumber() : " + dto.getUploadImgMaxNumber());
 		
@@ -84,9 +84,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 				dto.setTableName(tableName);
 				dto.setType(type);
 //				dto.setDefaultNy(j == 0 ? 1 : 0);
-//				dto.setSort(j + 1);
-//				dto.setSort(sorts[i]);
-				dto.setSort(dto.get)
+				dto.setSort(maxNumber + i + 1);
 				dto.setPseq(dto.getIfmmSeq());
 
 				dao.insertUploaded(dto);
@@ -152,9 +150,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
     	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
     	dao.insert(dto);
     	
-    	uploadFiles(dto.getUploadImgProfile(), dto, "infrMemberUploaded", 1, dto.getUploadImgProfileSort());
-    	uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgSort());
-    	uploadFiles(dto.getUploadFile(), dto, "infrMemberUploaded", 3, dto.getUploadFileSort());
+//    	uploadFiles(dto.getUploadImgProfile(), dto, "infrMemberUploaded", 1, dto.getUploadImgProfileSort());
+    	uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgMaxNumber());
+//    	uploadFiles(dto.getUploadFile(), dto, "infrMemberUploaded", 3, dto.getUploadFileSort());
 	
     	// infrMemberEmail
 		for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
@@ -217,7 +215,7 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dao.update(dto);
 		
 		deleteFiles(dto.getUploadImgDeleteSeq(), dto.getUploadImgDeletePathFile(), dto, "infrMemberUploaded");
-		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgSort());
+		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgMaxNumber());
 
 		return 1;
 	}

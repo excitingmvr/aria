@@ -248,6 +248,7 @@
 			seq
 			,type
 			,defaultNy
+			,sort
 			,path
 			,originalName
 			,uuidName
