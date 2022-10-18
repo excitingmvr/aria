@@ -412,22 +412,17 @@
         <div class="col-sm-6 mt-3 mt-sm-0">
         	<c:set var="type" value="2"/>		<!-- #-> -->
         	<c:set var="name" value="uploadImg"/>		<!-- #-> -->
-        	<input type="hidden" id="uploadImgMaxNumber" name="uploadImgMaxNumber"/>
-        	<input type="hidden" id="uploadImgDeleteSeq" name="uploadImgDeleteSeq"/>
-        	<input type="hidden" id="uploadImgDeletePathFile" name="uploadImgDeletePathFile"/>
+        	<input type="hidden" id="<c:out value="${name }"/>MaxNumber" name="<c:out value="${name }"/>MaxNumber" value="0"/>
+        	<input type="hidden" id="<c:out value="${name }"/>DeleteSeq" name="<c:out value="${name }"/>DeleteSeq"/>
+        	<input type="hidden" id="<c:out value="${name }"/>DeletePathFile" name="<c:out value="${name }"/>DeletePathFile"/>
             <label for="uploadImg" class="form-label input-file-button">이미지첨부</label>
- 			<input class="form-control form-control-sm" id="uploadImg" name="uploadImg" type="file" multiple="multiple" style="display: none;" onChange="upload('uploadImg', <c:out value="${type }"/>, 0, 1, 0, 0, 1);">
-			<div id="uploadImgPreview" class="addScroll">
+ 			<input class="form-control form-control-sm" id="<c:out value="${name }"/>" name="<c:out value="${name }"/>" type="file" multiple="multiple" style="display: none;" onChange="upload('<c:out value="${name }"/>', <c:out value="${type }"/>, 0, 1, 0, 0, 1);">
+			<div id="<c:out value="${name }"/>Preview" class="addScroll">
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 					<c:if test="${listUploaded.type eq type }">
-						<%-- <input type="hidden" id="uploadImgSeq_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgSeq" value="<c:out value="${listUploaded.seq }"/>"> --%>
-						<%-- <input type="hidden" id="uploadImgSeq_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgSeq" value="<c:out value="${listUploaded.seq }"/>"> --%>
-						<%-- <input type="hidden" id="uploadImgPathFile_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgPathFile" value="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>"> --%>
-						<%-- <input type="hidden" id="uploadImgProcess_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgProcess" value="2"> --%>
-						<input type="hidden" id="uploadImgSort_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadImgSort" value="1">
-						<div id="imgDiv_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" style="display: inline-block; height: 95px;">
+						<div id="imgDiv_<c:out value="${type }"/>_<c:out value="${listUploaded.sort }"/>" style="display: inline-block; height: 95px;">
 							<img src="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded" width= "85px" height="85px">
-							<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv('uploadImg', <c:out value="${type }"/>,<c:out value="${statusUploaded.index }"/>, <c:out value="${listUploaded.seq }"/>, '<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>')">X</span></div>
+							<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv('<c:out value="${name }"/>', <c:out value="${type }"/>,<c:out value="${listUploaded.sort }"/>, <c:out value="${listUploaded.seq }"/>, '<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>')">X</span></div>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -436,21 +431,18 @@
         <div class="col-sm-6 mt-3 mt-sm-0">
         	<c:set var="type" value="3"/>		<!-- #-> -->
         	<c:set var="name" value="uploadFile"/>		<!-- #-> -->
-        	<input type="hidden" id="uploadFileDeleteSeq" name="uploadFileDeleteSeq"/>
-        	<input type="hidden" id="uploadFileDeletePathFile" name="uploadFileDeletePathFile"/>        	
+        	<input type="hidden" id="<c:out value="${name }"/>MaxNumber" name="<c:out value="${name }"/>MaxNumber" value="0"/>
+        	<input type="hidden" id="<c:out value="${name }"/>DeleteSeq" name="<c:out value="${name }"/>DeleteSeq"/>
+        	<input type="hidden" id="<c:out value="${name }"/>DeletePathFile" name="<c:out value="${name }"/>DeletePathFile"/>   	
 			<label for="uploadFile" class="form-label input-file-button">파일첨부</label>
-			<input class="form-control form-control-sm" id="uploadFile" name="uploadFile" type="file" multiple="multiple" style="display: none;" onChange="upload('uploadFile', 3, 0, 2, 0, 0, 2);" >
+			<input class="form-control form-control-sm" id="<c:out value="${name }"/>" name="<c:out value="${name }"/>" type="file" multiple="multiple" style="display: none;" onChange="upload('<c:out value="${name }"/>', <c:out value="${type }"/>, 0, 2, 0, 0, 2);" >
 			<div class="addScroll">
-				<ul id="uploadFilePreview" class="list-group">
+				<ul id="<c:out value="${name }"/>Preview" class="list-group">
 					<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 						<c:if test="${listUploaded.type eq type }">
-							<%-- <input type="hidden" id="uploadFileSeq_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadFileSeq" value="<c:out value="${listUploaded.seq }"/>"> --%>
-							<%-- <input type="hidden" id="uploadFilePathFile_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadFilePathFile" value="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>"> --%>
-							<%-- <input type="hidden" id="uploadFileProcess_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadFileProcess" value="2"> --%>
-							<input type="hidden" id="uploadFileSort_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" name="uploadFileSort" value="1">
-							<li id="li_<c:out value="${type }"/>_<c:out value="${statusUploaded.index }"/>" class="list-group-item d-flex justify-content-between align-items-center">
-							<c:out value="${listUploaded.originalName }"/>
-							<span class="badge bg-danger rounded-pill" onClick="delLi('uploadFile', <c:out value="${type }"/>,<c:out value="${statusUploaded.index }"/>, <c:out value="${listUploaded.seq }"/>, '<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>')"><i class="fa-solid fa-x" style="cursor: pointer;"></i></span>
+							<li id="li_<c:out value="${type }"/>_<c:out value="${listUploaded.sort }"/>" class="list-group-item d-flex justify-content-between align-items-center">
+							<a href="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" download="<c:out value="${listUploaded.originalName }"/>" class="text-decoration-none"><c:out value="${listUploaded.originalName }"/></a>
+							<span class="badge bg-danger rounded-pill" onClick="delLi('<c:out value="${name }"/>', <c:out value="${type }"/>,<c:out value="${listUploaded.sort }"/>, <c:out value="${listUploaded.seq }"/>, '<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>')"><i class="fa-solid fa-x" style="cursor: pointer;"></i></span>
 							</li>
 						</c:if>
 					</c:forEach>				
@@ -865,15 +857,12 @@
 	addEventListenerCustom = function (objName, type, i, file, filePreview, maxNumber) { 
 		return function(event) {
 			var imageFile = event.target;
-			var index = parseInt(i) + parseInt(maxNumber);
-			var sort = index + 1;
+			var sort = parseInt(maxNumber) + i;
 
 			var divImage = "";
-			divImage += '<input type="hidden" id="'+ objName +'Process_'+type+'_'+ index +'" name="'+ objName +'Process" value="1">';
-			divImage += '<input type="hidden" id="'+ objName +'Sort_'+type+'_'+ index +'" name="'+ objName +'Sort" value="'+ sort +'">';
-			divImage += '<div id="imgDiv_'+type+'_'+ index +'" style="display: inline-block; height: 95px;">';
+			divImage += '<div id="imgDiv_'+type+'_'+ sort +'" style="display: inline-block; height: 95px;">';
 			divImage += '	<img src="'+ imageFile.result +'" class="rounded" width= "85px" height="85px">';
-			divImage += '	<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv(0,' + type +','+ index +')">X</span></div>';
+			divImage += '	<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv(0,' + type +','+ sort +')">X</span></div>';
 			divImage += '</div> ';
 			
 			filePreview.append(divImage);
@@ -881,9 +870,9 @@
 	}
 	
 	
-	delImgDiv = function(objName, type, index, deleteSeq, pathFile) {
+	delImgDiv = function(objName, type, sort, deleteSeq, pathFile) {
 		
-		$("#imgDiv_"+type+"_"+index).remove();
+		$("#imgDiv_"+type+"_"+sort).remove();
 		
 		var objDeleteSeq = $('input[name='+ objName +'DeleteSeq]');
 		var objDeletePathFile = $('input[name='+ objName +'DeletePathFile]');
@@ -903,23 +892,24 @@
 	
 	
 	addUploadLi = function (objName, type, i, name, filePreview, maxNumber){
-		var index = parseInt(i) + parseInt(maxNumber);
-		var sort = index + 1;
+//		var index = parseInt(i) + parseInt(maxNumber);
+//		var sort = index + i;
+		var sort = parseInt(maxNumber) + i;
 		
 		var li ="";
-		li += '<input type="hidden" id="'+ objName +'Process_'+type+'_'+ index +'" name="'+ objName +'Process" value="1">';
-		li += '<input type="hidden" id="'+ objName +'Sort_'+type+'_'+ index +'" name="'+ objName +'Sort" value="'+ sort +'">';
-		li += '<li id="li_'+type+'_'+index+'" class="list-group-item d-flex justify-content-between align-items-center">';
+		li += '<input type="hidden" id="'+ objName +'Process_'+type+'_'+ sort +'" name="'+ objName +'Process" value="1">';
+		li += '<input type="hidden" id="'+ objName +'Sort_'+type+'_'+ sort +'" name="'+ objName +'Sort" value="'+ sort +'">';
+		li += '<li id="li_'+type+'_'+sort+'" class="list-group-item d-flex justify-content-between align-items-center">';
 		li += name;
-		li +='<span class="badge bg-danger rounded-pill" onClick="delLi(0,'+ type +','+ index +')"><i class="fa-solid fa-x" style="cursor: pointer;"></i></span>';
+		li +='<span class="badge bg-danger rounded-pill" onClick="delLi(0,'+ type +','+ sort +')"><i class="fa-solid fa-x" style="cursor: pointer;"></i></span>';
 		li +='</li>';
 		
 		filePreview.append(li);
 	}
 	
 	
-	delLi = function(objName, type, index, deleteSeq, pathFile) {
-		$("#li_"+type+"_"+index).remove();
+	delLi = function(objName, type, sort, deleteSeq, pathFile) {
+		$("#li_"+type+"_"+sort).remove();
 
 		var objDeleteSeq = $('input[name='+ objName +'DeleteSeq]');
 		var objDeletePathFile = $('input[name='+ objName +'DeletePathFile]');

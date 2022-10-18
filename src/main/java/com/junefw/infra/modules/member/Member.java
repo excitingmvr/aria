@@ -123,27 +123,17 @@ public class Member extends Base {
 	private Integer iflgDelNy;
 	
 	private MultipartFile[] uploadImgProfile;
-//	private Integer[] uploadImgProfileProcess;
-//	private String[] uploadImgProfilePathFile;
-//	private String[] uploadImgProfileSeq;
-	private Integer[] uploadImgProfileSort;
+	private Integer uploadImgProfileMaxNumber;
 	private String[] uploadImgProfileDeleteSeq;
-	private String[] uploadImgProfileDeletePathFile;
+	private String[] uploadImgProfileDeletePathFile;	
 	
 	private MultipartFile[] uploadImg;
-//	private Integer[] uploadImgProcess;
-//	private String[] uploadImgPathFile;
-//	private String[] uploadImgSeq;
-	private Integer[] uploadImgSort;
+	private Integer uploadImgMaxNumber;
 	private String[] uploadImgDeleteSeq;
 	private String[] uploadImgDeletePathFile;	
-	private Integer uploadImgMaxNumber;
 	
 	private MultipartFile[] uploadFile;
-//	private Integer[] uploadFileProcess;
-//	private String[] uploadFilePathFile;
-//	private String[] uploadFileSeq;
-	private Integer[] uploadFileSort;
+	private Integer uploadFileMaxNumber;
 	private String[] uploadFileDeleteSeq;
 	private String[] uploadFileDeletePathFile;
 //	----------
@@ -633,11 +623,11 @@ public class Member extends Base {
 	public void setUploadImgProfile(MultipartFile[] uploadImgProfile) {
 		this.uploadImgProfile = uploadImgProfile;
 	}
-	public Integer[] getUploadImgProfileSort() {
-		return uploadImgProfileSort;
+	public Integer getUploadImgProfileMaxNumber() {
+		return uploadImgProfileMaxNumber;
 	}
-	public void setUploadImgProfileSort(Integer[] uploadImgProfileSort) {
-		this.uploadImgProfileSort = uploadImgProfileSort;
+	public void setUploadImgProfileMaxNumber(Integer uploadImgProfileMaxNumber) {
+		this.uploadImgProfileMaxNumber = uploadImgProfileMaxNumber;
 	}
 	public String[] getUploadImgProfileDeleteSeq() {
 		return uploadImgProfileDeleteSeq;
@@ -657,11 +647,11 @@ public class Member extends Base {
 	public void setUploadImg(MultipartFile[] uploadImg) {
 		this.uploadImg = uploadImg;
 	}
-	public Integer[] getUploadImgSort() {
-		return uploadImgSort;
+	public Integer getUploadImgMaxNumber() {
+		return uploadImgMaxNumber;
 	}
-	public void setUploadImgSort(Integer[] uploadImgSort) {
-		this.uploadImgSort = uploadImgSort;
+	public void setUploadImgMaxNumber(Integer uploadImgMaxNumber) {
+		this.uploadImgMaxNumber = uploadImgMaxNumber;
 	}
 	public String[] getUploadImgDeleteSeq() {
 		return uploadImgDeleteSeq;
@@ -675,23 +665,17 @@ public class Member extends Base {
 	public void setUploadImgDeletePathFile(String[] uploadImgDeletePathFile) {
 		this.uploadImgDeletePathFile = uploadImgDeletePathFile;
 	}
-	public Integer getUploadImgMaxNumber() {
-		return uploadImgMaxNumber;
-	}
-	public void setUploadImgMaxNumber(Integer uploadImgMaxNumber) {
-		this.uploadImgMaxNumber = uploadImgMaxNumber;
-	}
 	public MultipartFile[] getUploadFile() {
 		return uploadFile;
 	}
 	public void setUploadFile(MultipartFile[] uploadFile) {
 		this.uploadFile = uploadFile;
 	}
-	public Integer[] getUploadFileSort() {
-		return uploadFileSort;
+	public Integer getUploadFileMaxNumber() {
+		return uploadFileMaxNumber;
 	}
-	public void setUploadFileSort(Integer[] uploadFileSort) {
-		this.uploadFileSort = uploadFileSort;
+	public void setUploadFileMaxNumber(Integer uploadFileMaxNumber) {
+		this.uploadFileMaxNumber = uploadFileMaxNumber;
 	}
 	public String[] getUploadFileDeleteSeq() {
 		return uploadFileDeleteSeq;

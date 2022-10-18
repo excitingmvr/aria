@@ -126,12 +126,6 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "memberUpdt")
 	public String memberUpdt(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 
-		System.out.println("asdfasdf");
-		
-		for (int i = 0; i<dto.getUploadImgDeleteSeq().length; i++) {
-			System.out.println(dto.getUploadImgDeleteSeq()[i]);
-		}
-		
 		service.update(dto);
 
 		redirectAttributes.addFlashAttribute("vo", vo);
