@@ -421,7 +421,7 @@
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 					<c:if test="${listUploaded.type eq type }">
 						<div id="imgDiv_<c:out value="${type }"/>_<c:out value="${listUploaded.sort }"/>" style="display: inline-block; height: 95px;">
-							<img src="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded" width= "85px" height="85px">
+							<img src="<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>" class="rounded" width= "85px" height="85px" style="cursor:pointer;" onClick="openViewer(<c:out value="${listUploaded.type }"/>, <c:out value="${listUploaded. sort }"/>);">
 							<div style="position: relative; top:-85px; left:5px"><span style="color: red; cursor:pointer;" onClick="delImgDiv('<c:out value="${name }"/>', <c:out value="${type }"/>,<c:out value="${listUploaded.sort }"/>, <c:out value="${listUploaded.seq }"/>, '<c:out value="${listUploaded.path }"/><c:out value="${listUploaded.uuidName }"/>')">X</span></div>
 						</div>
 					</c:if>
@@ -892,8 +892,7 @@
 	
 	
 	addUploadLi = function (objName, type, i, name, filePreview, maxNumber){
-//		var index = parseInt(i) + parseInt(maxNumber);
-//		var sort = index + i;
+
 		var sort = parseInt(maxNumber) + i;
 		
 		var li ="";
@@ -909,6 +908,7 @@
 	
 	
 	delLi = function(objName, type, sort, deleteSeq, pathFile) {
+		
 		$("#li_"+type+"_"+sort).remove();
 
 		var objDeleteSeq = $('input[name='+ objName +'DeleteSeq]');
@@ -925,6 +925,10 @@
 		} else {
 			objDeletePathFile.val(objDeletePathFile.val() + "," + pathFile);
 		}
+	}
+	
+	openViewer = function (type, sort) {
+		$("#modalImgViewer").modal("show");
 	}
 	
 	
