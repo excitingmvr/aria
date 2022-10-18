@@ -928,6 +928,8 @@
 	}
 	
 	openViewer = function (type, sort) {
+		var str = '<c:set var="tmp" value="'+ type +'"/>';
+		$("#modalImgViewer").append(str);
 		$("#modalImgViewer").modal("show");
 	}
 	
