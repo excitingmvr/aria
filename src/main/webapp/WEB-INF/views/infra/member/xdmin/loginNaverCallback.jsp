@@ -6,7 +6,7 @@
 </head>
 <body>
 <form name="form">
-	<input type="hidden" name="ifmmName"/>
+	<input type="hidden" name="ifmmName" value="asdasdf"/>
 	<input type="hidden" name="ifmmId"/>
 	<input type="hidden" name="ifmpNumber"/>
 	<input type="hidden" name="ifmeEmailFull"/>
@@ -14,7 +14,7 @@
 	<input type="hidden" name="ifmmDob"/>
 </form>
 <script type="text/javascript">
-	var naver_id_login = new naver_id_login("YOUR_CLIENT_ID", "YOUR_CALLBACK_URL");
+	var naver_id_login = new naver_id_login("_oyurJg7dwBPwPfZsJEV", "YOUR_CALLBACK_URL");
 	// 접근 토큰 값 출력
 	/* alert(naver_id_login.oauthParams.access_token); */
 	// 네이버 사용자 프로필 조회
@@ -30,18 +30,19 @@
 		$("input[name=ifmmName]").val(naver_id_login.getProfileData('name'));
 		$("input[name=ifmpNumber]").val(naver_id_login.getProfileData('mobile'));
 		$("input[name=ifmeEmailFull]").val(naver_id_login.getProfileData('email'));
-		
-		
-		$("input[name=ifmmGenderCd]").val(naver_id_login.getProfileData('gender'));
-		
-		$("input[name=ifmmDob]").val(naver_id_login.getProfileData('birthday'));// 05-05
-		
-		$("input[name=age]").val(naver_id_login.getProfileData('age'));
-		$("input[name=birthyear]").val(naver_id_login.getProfileData('birthyear')); 2002
- 
+		$("input[name=ifmmDob]").val(naver_id_login.getProfileData('birthyear') + "-" + naver_id_login.getProfileData('birthday'));
+
+		if (naver_id_login.getProfileData('gender') == 'M'){
+			$("input[name=ifmmGenderCd]").val(30);
+		} else if (naver_id_login.getProfileData('gender') == 'F') {
+			$("input[name=ifmmGenderCd]").val(31);
+		} else {
+ 			$("input[name=ifmmGenderCd]").val(32);
+		}
+
+		$("form[name=form]").attr("action", "/member/loginNaverProc").submit();
 	}
 
-	$("form[name=form]").attr("action", "/member/loginNaverProc").submit();
 //	window.location.href = "/member/loginNaverProc";
   
 </script>

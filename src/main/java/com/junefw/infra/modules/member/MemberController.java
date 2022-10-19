@@ -425,7 +425,12 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "loginNaverProc")
 	public String loginNaverProc(Member dto) throws Exception {
 		System.out.println("loginNaverProc");
-		
+		System.out.println("dto.getIfmmId() : " + dto.getIfmmId());
+		System.out.println("dto.getIfmmName() : " + dto.getIfmmName());
+		System.out.println("dto.getIfmpNumber() : " + dto.getIfmpNumber());
+		System.out.println("dto.getIfmeEmailFull() : " + dto.getIfmeEmailFull());
+		System.out.println("dto.getIfmmDob() : " + dto.getIfmmDob());
+		System.out.println("dto.getIfmmGenderCd() : " + dto.getIfmmGenderCd());
 		// id 값 있는지 체크
 		
 		// 있으면 로그인 세션 등록
