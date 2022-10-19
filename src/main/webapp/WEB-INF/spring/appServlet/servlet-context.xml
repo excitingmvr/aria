@@ -32,6 +32,8 @@
 			<exclude-mapping path="/member/loginForm" />
 			<exclude-mapping path="/member/loginProc" />
 			<exclude-mapping path="/member/findIdPwdForm" />
+			<exclude-mapping path="/member/loginNaverCallback" />
+			<exclude-mapping path="/member/loginNaverProc" />
 			<exclude-mapping path="/test/**" />
 			<exclude-mapping path="/rest/**" />
 			<beans:bean id="checkLoginSessionInterception" class="com.junefw.infra.common.interceptor.CheckLoginSessionInterception"/>

@@ -413,5 +413,27 @@ public class MemberController extends BaseController {
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
+	
+	
+	@RequestMapping(value = "loginNaverCallback")
+	public String loginNaverCallback() throws Exception {
+
+		return "infra/member/xdmin/loginNaverCallback";
+	}
+	
+	
+	@RequestMapping(value = "loginNaverProc")
+	public String loginNaverProc(Member dto) throws Exception {
+		System.out.println("loginNaverProc");
+		
+		// id 값 있는지 체크
+		
+		// 있으면 로그인 세션 등록
+		
+		// 없으면 가입시키고 세션 등록
+	
+		
+		return "redirect:/index/indexView";
+	}
 
 }
