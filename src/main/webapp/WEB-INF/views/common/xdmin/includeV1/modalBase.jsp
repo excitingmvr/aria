@@ -43,7 +43,7 @@
 	</div>
 </div>
 
-
+<c:set var="imgType" value=""/>		<!-- 어떻게 해야 될지 고민 중이다. -->
 <div class="modal fade" id="modalImgViewer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -52,7 +52,6 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-      
 				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
 					<div class="carousel-indicators">
 						<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
@@ -62,15 +61,11 @@
 										<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 									</c:when>
 									<c:otherwise>
-										<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<c:out value="${statusUploaded.count + 1 }"/>" aria-label="Slide <c:out value="${statusUploaded.count }"/>"></button>
+										<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<c:out value="${statusUploaded.index }"/>" aria-label="Slide <c:out value="${statusUploaded.count }"/>"></button>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
 						</c:forEach>
-<!-- 
-						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
- -->						
 					</div>
 					<div class="carousel-inner">
 						<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
@@ -89,18 +84,6 @@
 								</c:choose>
 							</c:if>
 						</c:forEach>	
-					
-<!-- 					
-						<div class="carousel-item active">
-							<img src="/resources/uploaded/member/2022/10/18/e0211cbe-5107-46bd-858e-66aaf20a0d82.jpg" class="d-block w-100" alt="...">
-						</div>
-						<div class="carousel-item">
-							<img src="/resources/uploaded/member/2022/10/18/71044dd2-902d-46b2-a896-40b664e3bf7e.jpg" class="d-block w-100" alt="...">
-						</div>
-						<div class="carousel-item">
-							<img src="/resources/uploaded/member/2022/10/18/1714ca5a-a2f0-4a14-a558-1c97f47c96be.jpg" class="d-block w-100" alt="...">
-						</div>
- -->						
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
