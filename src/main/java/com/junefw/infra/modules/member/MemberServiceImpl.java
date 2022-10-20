@@ -269,5 +269,14 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dto.setIfmmPwdModDate(UtilDateTime.calculateDayDate(UtilDateTime.nowLocalDateTime(), (int) Constants.PASSWOPRD_CHANGE_INTERVAL));
 		return dao.updateIfmmPwdModDate(dto);
 	}
+	
+//	social login
+	
+	public int insertSocialLoginMember(Member dto) throws Exception {
+		setRegMod(dto);
+		dto.setIfmmSocialLoginCd(105);
+		return dao.insertSocialLoginMember(dto);
+	}
+	
 
 }

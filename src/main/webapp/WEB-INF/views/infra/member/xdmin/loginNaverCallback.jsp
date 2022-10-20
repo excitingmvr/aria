@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -28,9 +30,7 @@
  */
 		$("input[name=ifmmId]").val(naver_id_login.getProfileData('id'));
 		$("input[name=ifmmName]").val(naver_id_login.getProfileData('name'));
-		$("input[name=ifmpNumber]").val(naver_id_login.getProfileData('mobile'));
 		$("input[name=ifmeEmailFull]").val(naver_id_login.getProfileData('email'));
-		$("input[name=ifmmDob]").val(naver_id_login.getProfileData('birthyear') + "-" + naver_id_login.getProfileData('birthday'));
 
 		if (naver_id_login.getProfileData('gender') == 'M'){
 			$("input[name=ifmmGenderCd]").val(30);
@@ -40,6 +40,10 @@
  			$("input[name=ifmmGenderCd]").val(32);
 		}
 
+/* 		
+		$("input[name=ifmpNumber]").val(naver_id_login.getProfileData('mobile'));
+		$("input[name=ifmmDob]").val(naver_id_login.getProfileData('birthyear') + "-" + naver_id_login.getProfileData('birthday'));
+ */
 		$("form[name=form]").attr("action", "/member/loginNaverProc").submit();
 	}
 

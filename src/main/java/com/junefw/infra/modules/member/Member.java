@@ -15,6 +15,7 @@ public class Member extends Base {
 	private String ifmmSeq;
 	private Integer ifmmAdminNy;
 	private Integer ifmmDormancyNy;
+	private Integer ifmmSocialLoginCd;
 	private String ifmmName;
 	private String ifmmNameEng;
 	private String ifmmLastName;
@@ -160,6 +161,12 @@ public class Member extends Base {
 	}
 	public void setIfmmDormancyNy(Integer ifmmDormancyNy) {
 		this.ifmmDormancyNy = ifmmDormancyNy;
+	}
+	public Integer getIfmmSocialLoginCd() {
+		return ifmmSocialLoginCd;
+	}
+	public void setIfmmSocialLoginCd(Integer ifmmSocialLoginCd) {
+		this.ifmmSocialLoginCd = ifmmSocialLoginCd;
 	}
 	public String getIfmmName() {
 		return ifmmName;

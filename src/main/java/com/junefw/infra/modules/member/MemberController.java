@@ -352,6 +352,7 @@ public class MemberController extends BaseController {
 				httpSession.setAttribute("sessId", rtMember2.getIfmmId());
 				httpSession.setAttribute("sessName", rtMember2.getIfmmName());
 
+				rtMember2.setIfmmSocialLoginCd(103);
 				rtMember2.setIflgResultNy(1);
 				service.insertLogLogin(rtMember2);
 
@@ -364,6 +365,7 @@ public class MemberController extends BaseController {
 
 				returnMap.put("rt", "success");
 			} else {
+				dto.setIfmmSocialLoginCd(103);
 				dto.setIfmmSeq(rtMember.getIfmmSeq());
 				dto.setIflgResultNy(0);
 				service.insertLogLogin(dto);
@@ -371,6 +373,7 @@ public class MemberController extends BaseController {
 				returnMap.put("rt", "fail");
 			}
 		} else {
+			dto.setIfmmSocialLoginCd(103);
 			dto.setIflgResultNy(0);
 			service.insertLogLogin(dto);
 
@@ -423,20 +426,35 @@ public class MemberController extends BaseController {
 	
 	
 	@RequestMapping(value = "loginNaverProc")
-	public String loginNaverProc(Member dto) throws Exception {
-		System.out.println("loginNaverProc");
-		System.out.println("dto.getIfmmId() : " + dto.getIfmmId());
-		System.out.println("dto.getIfmmName() : " + dto.getIfmmName());
-		System.out.println("dto.getIfmpNumber() : " + dto.getIfmpNumber());
-		System.out.println("dto.getIfmeEmailFull() : " + dto.getIfmeEmailFull());
-		System.out.println("dto.getIfmmDob() : " + dto.getIfmmDob());
-		System.out.println("dto.getIfmmGenderCd() : " + dto.getIfmmGenderCd());
-		// id 값 있는지 체크
+	public String loginNaverProc(Member dto, HttpSession httpSession) throws Exception {
+
+		Member rtMember = service.selectOneId(dto);
 		
-		// 있으면 로그인 세션 등록
-		
-		// 없으면 가입시키고 세션 등록
-	
+		if (rtMember != null) {
+			
+			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+			httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
+			httpSession.setAttribute("sessId", rtMember.getIfmmId());
+			httpSession.setAttribute("sessName", "네이버로그인");
+			
+			dto.setIfmmSocialLoginCd(105);
+			dto.setIflgResultNy(1);
+			service.insertLogLogin(dto);
+			
+		} else {
+
+			dto.setIfmmSocialLoginCd(105);
+			service.insertSocialLoginMember(dto);
+			
+			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+			httpSession.setAttribute("sessSeq", dto.getIfmmSeq());
+			httpSession.setAttribute("sessId", dto.getIfmmId());
+			httpSession.setAttribute("sessName", "네이버로그인");
+			
+			dto.setIfmmSocialLoginCd(105);
+			dto.setIflgResultNy(0);
+			service.insertLogLogin(dto);
+		}
 		
 		return "redirect:/index/indexView";
 	}

@@ -33,4 +33,7 @@ public interface MemberService {
 	Member selectOneId(Member dto) throws Exception;
 	Member selectOneLogin(Member dto) throws Exception;
 	
+// social login
+	
+	public int insertSocialLoginMember(Member dto) throws Exception;
 }

@@ -37,6 +37,7 @@
 				a.ifmmSeq
 				,a.ifmmAdminNy
 				,a.ifmmDormancyNy
+				,a.ifmmSocialLoginCd
 				,a.ifmmName
 				,a.ifmmNameEng
 				,a.ifmmLastName
@@ -91,6 +92,7 @@
 			a.ifmmSeq
 			,a.ifmmAdminNy
 			,a.ifmmDormancyNy
+			,a.ifmmSocialLoginCd
 			,a.ifmmName
 			,a.ifmmNameEng
 			,a.ifmmLastName
@@ -136,6 +138,7 @@
 		INSERT INTO infrMember (
 			ifmmAdminNy
 			,ifmmDormancyNy
+			,ifmmSocialLoginCd
 			,ifmmName
 			,ifmmNameEng
 			,ifmmLastName
@@ -162,6 +165,7 @@
 		) VALUES (
 			0
 			,0
+			,103
 			,#{ifmmName}
 			,#{ifmmNameEng}
 			,#{ifmmLastName}
@@ -402,13 +406,15 @@
 	<!-- logLogin s -->
 	<insert id="insertLogLogin">
 		INSERT INTO infrLogLogin (
-			ifmmId
+			ifmmSocialLoginCd
+			,ifmmId
 			,ifmmSeq
 			,iflgResultNy
 			,iflgDelNy
 			<include refid="Base.insertRegColumn" />
 		) values (
-			#{ifmmId}
+			#{ifmmSocialLoginCd}
+			,#{ifmmId}
 			,#{ifmmSeq}
 			,#{iflgResultNy}
 			,0
@@ -423,6 +429,71 @@
 		WHERE 1=1
 			AND ifmmSeq = #{ifmmSeq}
 	</update>
+	
+	
+	<insert id="insertSocialLoginMember">
+		INSERT INTO infrMember (
+			ifmmAdminNy
+			,ifmmDormancyNy
+			,ifmmSocialLoginCd
+			,ifmmName
+			,ifmmNameEng
+			,ifmmLastName
+			,ifmmFirstName
+			,ifmmLastNameEng
+			,ifmmFirstNameEng
+			,ifmmId
+			,ifmmPassword
+			,ifmmNickname
+			,ifmmGenderCd
+			,ifmmDob
+			,ifmmSavedCd
+			,ifmmMarriageCd
+			,ifmmChildrenNum
+			,ifmmFavoriteColor
+			,ifmmRecommenderSeq
+			,ifmmEmailConsentNy
+			,ifmmSmsConsentNy
+			,ifmmPushConsentNy
+			,ifmmCountryResidence
+			,ifmmDesc
+			,ifmmDelNy
+			<include refid="Base.insertRegModColumn" />
+		) VALUES (
+			0
+			,0
+			,#{ifmmSocialLoginCd}
+			,#{ifmmName}
+			,#{ifmmNameEng}
+			,#{ifmmLastName}
+			,#{ifmmFirstName}
+			,#{ifmmLastNameEng}
+			,#{ifmmFirstNameEng}
+			,#{ifmmId}
+			,#{ifmmPassword}
+			,#{ifmmNickname}
+			,#{ifmmGenderCd}
+			<choose>
+				<when test="ifmmDob.equals('')">,NULL</when>
+				<otherwise>,#{ifmmDob}</otherwise>
+			</choose>
+			,#{ifmmSavedCd}
+			,#{ifmmMarriageCd}
+			,#{ifmmChildrenNum}
+			,#{ifmmFavoriteColor}
+			,#{ifmmRecommenderSeq}
+			,#{ifmmEmailConsentNy}
+			,#{ifmmSmsConsentNy}
+			,#{ifmmPushConsentNy}
+			,#{ifmmCountryResidence}
+			,#{ifmmDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+		)
+		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
 </mapper>
 
 

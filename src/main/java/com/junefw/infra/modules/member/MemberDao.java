@@ -50,6 +50,10 @@ public class MemberDao{
 	public int insertLogLogin(Member dto) { return sqlSession.insert(namespace + ".insertLogLogin", dto); }
 	public int updateIfmmPwdModDate(Member dto) { return sqlSession.update(namespace + ".updateIfmmPwdModDate", dto); }
 	
+// social login
+	public int insertSocialLoginMember(Member dto) { return sqlSession.insert(namespace + ".insertSocialLoginMember", dto); }
+	
+	
 
 	
 }
