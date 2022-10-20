@@ -278,5 +278,11 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		return dao.insertSocialLoginMember(dto);
 	}
 	
+	
+//	find id pwd
+	@Override
+	public Member selectOneFindIdPwd(Member dto) throws Exception {
+		return dao.selectOneFindIdPwd(dto);
+	}
 
 }

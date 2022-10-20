@@ -4,6 +4,8 @@
 <%@include file="../../../common/xdmin/includeV1/head.jsp"%>
 <!-- head e -->
 
+<title>Login</title>		<!-- #-> -->
+
 <style type="text/css">
 
 	.my-btn-kakao,
@@ -104,13 +106,15 @@
 	
 <script type="text/javascript">
 
-var naver_id_login = new naver_id_login("_oyurJg7dwBPwPfZsJEV", "http://localhost:8080/member/loginNaverCallback");
-var state = naver_id_login.getUniqState();
-naver_id_login.setButton("white", 2,40);
-naver_id_login.setDomain("http://localhost:8080");
-naver_id_login.setState(state);
-naver_id_login.init_naver_id_login();
-
+	/* naver 로그인 s */
+	var naver_id_login = new naver_id_login("_oyurJg7dwBPwPfZsJEV", "http://localhost:8080/member/loginNaverCallback");
+	var state = naver_id_login.getUniqState();
+	naver_id_login.setButton("white", 2,40);
+	naver_id_login.setDomain("http://localhost:8080");
+	naver_id_login.setState(state);
+	naver_id_login.init_naver_id_login();
+	/* naver 로그인 e */
+	
 	$("#btnLogin").on("click", function(){
 		if(validation() == false) return false;
 		

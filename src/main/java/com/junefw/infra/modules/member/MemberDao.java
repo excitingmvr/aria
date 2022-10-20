@@ -53,6 +53,8 @@ public class MemberDao{
 // social login
 	public int insertSocialLoginMember(Member dto) { return sqlSession.insert(namespace + ".insertSocialLoginMember", dto); }
 	
+//	find id pwd
+	public Member selectOneFindIdPwd(Member dto) { return sqlSession.selectOne(namespace + ".selectOneFindIdPwd", dto); }
 	
 
 	

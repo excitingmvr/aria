@@ -34,6 +34,9 @@ public interface MemberService {
 	Member selectOneLogin(Member dto) throws Exception;
 	
 // social login
-	
 	public int insertSocialLoginMember(Member dto) throws Exception;
+	
+//	find id pwd
+	Member selectOneFindIdPwd(Member dto) throws Exception;
+	
 }

@@ -494,6 +494,20 @@
 			SELECT last_insert_id()
 		 </selectKey>
 	</insert>
+	
+	<select id="selectOneFindIdPwd" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmId
+			,a.ifmmName
+		FROM
+			infrMember a
+			LEFT JOIN infrMemberEmail b ON b.ifmmSeq = a.ifmmSeq
+		WHERE 1=1
+			AND a.ifmmName = #{ifmmName}
+			AND b.ifmeEmailFull = #{ifmeEmailFull}
+			<if test="ifmmId != null and !ifmmId.equals('')">AND a.ifmmId = #{ifmmId}</if>
+	</select>
 </mapper>
 
 

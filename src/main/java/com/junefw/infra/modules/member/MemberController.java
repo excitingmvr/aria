@@ -392,7 +392,7 @@ public class MemberController extends BaseController {
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
-
+	
 	
 	@RequestMapping(value = "findIdPwdForm")
 	public String findIdPwdForm() throws Exception {
@@ -400,6 +400,25 @@ public class MemberController extends BaseController {
 		return "infra/member/xdmin/findIdPwdForm";
 	}
 
+	
+	@ResponseBody
+	@RequestMapping(value = "findIdPwdProc")
+	public Map<String, Object> findIdPwdForm(Member dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		Member rtMember = service.selectOneFindIdPwd(dto);
+		
+		if (rtMember != null) {
+			returnMap.put("rt", "success");
+			returnMap.put("item", rtMember);
+		
+		} else {
+			returnMap.put("rt", "fail");
+			
+		}
+		return returnMap;
+	}
+	
 	
 	@RequestMapping(value = "changePwdForm")
 	public String changePwdForm() throws Exception {
@@ -458,5 +477,5 @@ public class MemberController extends BaseController {
 		
 		return "redirect:/index/indexView";
 	}
-
+	
 }
