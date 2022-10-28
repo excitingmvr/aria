@@ -81,7 +81,7 @@
 			<hr>
 			cookie.seq: <c:out value="${cookie.cookieSeq.value }"/><br>
 			<button class="btn my-btn-kakao" type="button">Kakao</button>
-			<button class="btn my-btn-naver" type="button">Naver</button>
+			<button class="btn my-btn-naver" type="button" id="btnLoginNaver">Naver</button>
 			<button class="btn my-btn-google" type="button">Google</button>
 			<button class="btn my-btn-facebook" type="button">Facebook</button>
 		</div>
@@ -101,19 +101,52 @@
 <%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
 <!-- linkJs e -->
 
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 	
 <script type="text/javascript">
 
 	/* naver 로그인 s */
+/* 	
 	var naver_id_login = new naver_id_login("_oyurJg7dwBPwPfZsJEV", "http://localhost:8080/member/loginNaverCallback");
 	var state = naver_id_login.getUniqState();
 	naver_id_login.setButton("white", 2,40);
 	naver_id_login.setDomain("http://localhost:8080");
 	naver_id_login.setState(state);
 	naver_id_login.init_naver_id_login();
+ */	
 	/* naver 로그인 e */
+	
+	
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "_oyurJg7dwBPwPfZsJEV", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+			callbackUrl: "http://localhost:8080/member/LoginForm", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			isPopup: false,
+			callbackHandle: true
+		}
+	);	
+
+naverLogin.init();
+$("#btnLoginNaver").on("click", function(){
+// window.addEventListener('load', function () {
+	naverLogin.getLoginStatus(function (status) {
+		if (status) {
+			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+    		
+			console.log(naverLogin.user); 
+    		
+            if( email == undefined || email == null) {
+				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+				naverLogin.reprompt();
+				return;
+			}
+		} else {
+			console.log("callback 처리에 실패하였습니다.");
+		}
+	});
+});
 	
 	$("#btnLogin").on("click", function(){
 		if(validation() == false) return false;
@@ -150,7 +183,7 @@
     }
 	
 
-</script>
+	</script>
 	
 </body>
 </html>
