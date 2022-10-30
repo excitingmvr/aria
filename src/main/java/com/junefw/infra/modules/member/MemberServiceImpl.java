@@ -146,9 +146,9 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
     	dto.setIfmmPwdModDate(UtilDateTime.nowDate());
     	dao.insert(dto);
     	
-//    	uploadFiles(dto.getUploadImgProfile(), dto, "infrMemberUploaded", 1, dto.getUploadImgProfileSort());
-    	uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgMaxNumber());
-    	uploadFiles(dto.getUploadFile(), dto, "infrMemberUploaded", 3, dto.getUploadFileMaxNumber());
+    	uploadFiles(dto.getUploadImgProfile(), dto, "infrMemberUploaded", dto.getUploadImgProfileType(), dto.getUploadImgProfileMaxNumber());
+    	uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", dto.getUploadImgType(), dto.getUploadImgMaxNumber());
+    	uploadFiles(dto.getUploadFile(), dto, "infrMemberUploaded", dto.getUploadFileType(), dto.getUploadFileMaxNumber());
 	
     	// infrMemberEmail
 		for(int i = 0 ; i < dto.getIfmeEmailFullArray().length ; i++) {
@@ -210,11 +210,14 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dto.setIfmmName(dto.getIfmmLastName() + dto.getIfmmFirstName());
 		dao.update(dto);
 		
+		deleteFiles(dto.getUploadImgProfileDeleteSeq(), dto.getUploadImgProfileDeletePathFile(), dto, "infrMemberUploaded");
+		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", dto.getUploadImgProfileType(), dto.getUploadImgProfileMaxNumber());
+		
 		deleteFiles(dto.getUploadImgDeleteSeq(), dto.getUploadImgDeletePathFile(), dto, "infrMemberUploaded");
-		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", 2, dto.getUploadImgMaxNumber());
+		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", dto.getUploadImgType(), dto.getUploadImgMaxNumber());
 		
 		deleteFiles(dto.getUploadFileDeleteSeq(), dto.getUploadFileDeletePathFile(), dto, "infrMemberUploaded");
-		uploadFiles(dto.getUploadFile(), dto, "infrMemberUploaded", 3, dto.getUploadFileMaxNumber());
+		uploadFiles(dto.getUploadFile(), dto, "infrMemberUploaded", dto.getUploadFileType(), dto.getUploadFileMaxNumber());
 
 		return 1;
 	}

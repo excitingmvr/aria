@@ -124,16 +124,19 @@ public class Member extends Base {
 	private Integer iflgDelNy;
 	
 	private MultipartFile[] uploadImgProfile;
+	private Integer uploadImgProfileType;	
 	private Integer uploadImgProfileMaxNumber;
 	private String[] uploadImgProfileDeleteSeq;
 	private String[] uploadImgProfileDeletePathFile;	
 	
 	private MultipartFile[] uploadImg;
+	private Integer uploadImgType;	
 	private Integer uploadImgMaxNumber;
 	private String[] uploadImgDeleteSeq;
 	private String[] uploadImgDeletePathFile;	
 	
 	private MultipartFile[] uploadFile;
+	private Integer uploadFileType;
 	private Integer uploadFileMaxNumber;
 	private String[] uploadFileDeleteSeq;
 	private String[] uploadFileDeletePathFile;
@@ -630,6 +633,12 @@ public class Member extends Base {
 	public void setUploadImgProfile(MultipartFile[] uploadImgProfile) {
 		this.uploadImgProfile = uploadImgProfile;
 	}
+	public Integer getUploadImgProfileType() {
+		return uploadImgProfileType;
+	}
+	public void setUploadImgProfileType(Integer uploadImgProfileType) {
+		this.uploadImgProfileType = uploadImgProfileType;
+	}
 	public Integer getUploadImgProfileMaxNumber() {
 		return uploadImgProfileMaxNumber;
 	}
@@ -654,6 +663,12 @@ public class Member extends Base {
 	public void setUploadImg(MultipartFile[] uploadImg) {
 		this.uploadImg = uploadImg;
 	}
+	public Integer getUploadImgType() {
+		return uploadImgType;
+	}
+	public void setUploadImgType(Integer uploadImgType) {
+		this.uploadImgType = uploadImgType;
+	}
 	public Integer getUploadImgMaxNumber() {
 		return uploadImgMaxNumber;
 	}
@@ -677,6 +692,12 @@ public class Member extends Base {
 	}
 	public void setUploadFile(MultipartFile[] uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+	public Integer getUploadFileType() {
+		return uploadFileType;
+	}
+	public void setUploadFileType(Integer uploadFileType) {
+		this.uploadFileType = uploadFileType;
 	}
 	public Integer getUploadFileMaxNumber() {
 		return uploadFileMaxNumber;
