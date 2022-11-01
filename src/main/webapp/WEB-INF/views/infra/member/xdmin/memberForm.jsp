@@ -137,7 +137,7 @@
 				<img id="<c:out value="${name }"/>Preview" src="/resources/xdmin/image/default_100_100.png" class="rounded-circle mx-auto d-block" width="100" height="100">
 			</c:when>
 			<c:otherwise>
-				<c:set var="<c:out value="${name }"/>GetNy" value="0"/>
+				<c:set var="${name + "GetNy"}" value="0"/>
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 					<c:if test="${listUploaded.type eq type }">
 						
