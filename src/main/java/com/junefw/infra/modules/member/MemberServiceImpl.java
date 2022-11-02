@@ -91,10 +91,10 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 	
 	@Override
 	public void deleteFiles(String[] deleteSeq, String[] deletePathFile, Member dto, String tableName) throws Exception{
-		
 		for (int i=0; i<deleteSeq.length; i++) {
 			File file = new File(Constants.UPLOAD_PATH_PREFIX_EXTERNAL + deletePathFile[i]);
-            boolean result = file.delete();
+        
+			boolean result = file.delete();
             
             if(result) {
             	dto.setSeq(deleteSeq[i]);
@@ -210,8 +210,12 @@ public class MemberServiceImpl extends BaseServiceImpl implements MemberService{
 		dto.setIfmmName(dto.getIfmmLastName() + dto.getIfmmFirstName());
 		dao.update(dto);
 		
-		deleteFiles(dto.getUploadImgProfileDeleteSeq(), dto.getUploadImgProfileDeletePathFile(), dto, "infrMemberUploaded");
-		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", dto.getUploadImgProfileType(), dto.getUploadImgProfileMaxNumber());
+		if(!dto.getUploadImgProfile()[0].isEmpty()) {
+			deleteFiles(dto.getUploadImgProfileDeleteSeq(), dto.getUploadImgProfileDeletePathFile(), dto, "infrMemberUploaded");
+			uploadFiles(dto.getUploadImgProfile(), dto, "infrMemberUploaded", dto.getUploadImgProfileType(), dto.getUploadImgProfileMaxNumber());
+		} else {
+			// by pass : empty
+		}
 		
 		deleteFiles(dto.getUploadImgDeleteSeq(), dto.getUploadImgDeletePathFile(), dto, "infrMemberUploaded");
 		uploadFiles(dto.getUploadImg(), dto, "infrMemberUploaded", dto.getUploadImgType(), dto.getUploadImgMaxNumber());

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +13,9 @@
 </head>
 <body>
 
-      		<c:set var="type" value="1"/>		<!-- #-> -->
-        	<c:set var="name" value="uploadImgProfile"/>		<!-- #-> -->
-        	
-        	<c:set var="${name }" value="0"/>
-
-
+   
+			
+			
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc0680fedff73402526955076f9c7d53"></script>
 	<script>
