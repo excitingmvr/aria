@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.junefw.infra.common.base.Base;
 
 @Controller
-@RequestMapping(value="/index/")
 public class IndexController extends Base{
 
-	@RequestMapping(value = "indexView")
+	@RequestMapping(value = "/")
 	public String indexView() throws Exception {
-	
-		return "infra/index/xdmin/indexView";
+
+		return "infra/index/usr/indexView";
 	}
 }

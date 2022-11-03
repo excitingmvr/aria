@@ -262,7 +262,7 @@ public class MemberController extends BaseController {
 	            cell = row.createCell(6);
 	            cellStyle.setAlignment(HorizontalAlignment.CENTER);
 	            cell.setCellStyle(cellStyle);
-	            cell.setCellValue(list.get(i).getIfmpNumber());	            
+	            cell.setCellValue(list.get(i).getIfmpNumber());    
 	            
 	            cell = row.createCell(7);
 	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
@@ -477,5 +477,24 @@ public class MemberController extends BaseController {
 		
 		return "redirect:/index/indexView";
 	}
+	
+	
+	@RequestMapping(value = "/memberUsrForm")
+	public String memberUsrForm() throws Exception {
+
+
+		
+		return "infra/member/usr/memberUsrForm";
+	}
+	
+	
+	@RequestMapping(value = "/memberLoginUsrForm")
+	public String memberLoginUsrFrom() throws Exception {
+
+
+		
+		return "infra/member/usr/memberLoginUsrForm";
+	}
+	
 	
 }
