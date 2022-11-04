@@ -92,7 +92,7 @@
 		</div>
 		
 		   <!-- 네이버 로그인 버튼 노출 영역 -->
-    <div id="naver_id_login"></div>
+    <div id="naver_id_login"></div> 
 	</div>
 </form>
 </div>
