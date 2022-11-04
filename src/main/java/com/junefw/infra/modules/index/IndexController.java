@@ -11,6 +11,6 @@ public class IndexController extends Base{
 	@RequestMapping(value = "/")
 	public String indexView() throws Exception {
 
-		return "infra/index/usr/indexView";
+		return "infra/index/usr/indexUsrView";
 	}
 }
