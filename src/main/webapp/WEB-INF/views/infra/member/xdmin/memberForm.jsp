@@ -286,7 +286,7 @@
         	<input type="hidden" id="ifmpDeviceCdArray0" name="ifmpDeviceCdArray" value="58">
             <label for="ifmpTelecomCdArray0" class="form-label">통신사 <span class="text-danger">*</span></label>
             <select id="ifmpTelecomCdArray0" name="ifmpTelecomCdArray" class="form-select form-select-sm">
-				<option value="">::선택::</option>            
+				<option value="">::선택::</option>
 	            	<c:forEach items="${listCodeTelecom}" var="itemTelecom" varStatus="statusTelecom">
 				<option value="<c:out value="${itemTelecom.ifcdSeq }"/>" <c:if test="${ifmpTelecom58 eq itemTelecom.ifcdSeq }">selected</c:if>><c:out value="${itemTelecom.ifcdName }"/></option>
 					</c:forEach>
@@ -385,8 +385,9 @@
         </div>
         <div class="col-sm-6 mt-3 mt-sm-0">
         	<label for="ifmmDesc" class="form-label">설명</label>
-            <textarea id="ifmmDesc" name="ifmmDesc" class="form-control" rows="4"><c:out value="${item.ifmmDesc }"/></textarea>
-            <%-- <p><c:out value="${fn:replace(item.ifmmDesc, br, '<br/>')}" escapeXml = "false"/></p> --%>     
+        	<%-- <textarea id="ifmmDesc" name="ifmmDesc" class="form-control" rows="4"><c:out value="${item.ifmmDesc }"/></textarea> --%>
+        	<p><c:out value="${fn:replace(item.ifmmDesc, br, '<br/>')}" escapeXml = "false"/></p> 
+			<%-- <p><c:out value="${item.ifmmDesc}" /></p> --%>
         </div>
     </div>
 <c:if test="${not empty item.ifmmId }">        
