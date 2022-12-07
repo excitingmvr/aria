@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.modules.chat.ChatMapper">
+
+	<resultMap id="resultMapObj" type="com.junefw.infra.modules.chat.Chat" ></resultMap>
+
+	<select id="selectChatListFromOne" parameterType="Integer" resultMap="resultMapObj">
+		SELECT
+			cu.cuChatSeq as chatSeq
+		FROM chatUser cu
+		JOIN chat ct
+		ON ct.chatSeq = cu.cuChatSeq
+		AND ct.chatDelNy = 0
+		WHERE 1=1
+		AND cu.cuMember = #{seq} 
+	</select>
+
+	<select id="selectChatWithoutLoginUser" resultMap="resultMapObj">
+		
+		SELECT 
+			cu.cuChatSeq as chatSeq 
+			,cu.cuMember 
+			,mm.ifmmSeq          <!-- 채팅상대의 시퀀스 -->
+			,mm.ifmmName     <!-- 채팅상대의 이름 or 닉네임 -->
+			,up.upPath         <!-- 채팅상대의 프로필 이미지 경로 -->
+			,up.upUuidName     <!-- 채팅상대의 프로필 이미지 파일명 -->
+		FROM chatUser cu 
+		JOIN infrMember mm 
+		ON cu.cuMember  = mm.mmSeq
+		LEFT JOIN uploadedMember up    <!-- 프로필 이미지가 없을 경우에 대비해 LEFT JOIN -->
+		ON mm.mmSeq = up.upMemberSeq   
+		AND up.delNy = 0             <!-- 프로필 이미지의 삭제유무 -->
+		AND up.defaultNy = 1         <!-- 기본 프로필이미지 체크 -->
+		WHERE 1=1 
+		AND cu.cuMember != #{cuMember} <!-- cuMember[로그인 USER 시퀀스가 담겨있음] -->
+		AND cu.cuChatSeq = #{chatSeq}  <!-- 내가 찾으려는 채팅방 번호 -->
+		<!-- 마지막 WHERE 두가지를 통해 로그인한 USER가 참여한 채팅방의 상대방 정보를 추출 -->
+	
+	</select>
+
+	<select id="selectOneChat" resultMap="resultMapObj">
+		SELECT
+			cu.cuChatSeq as chatSeq 
+			,cu.cuMember 
+			,mm.ifmmSeq      
+			,mm.ifmmName     
+			,up.upPath         
+			,up.upUuidName     
+			FROM chatUser cu 
+		JOIN infrMember mm 
+		ON cu.cuMember  = mm.mmSeq
+		LEFT JOIN uploadedMember up    
+		ON mm.mmSeq = up.upMemberSeq   
+		AND up.delNy = 0             
+		AND up.DefaultNy = 1        
+		WHERE 1=1 
+		AND cu.cuMember = #{cuMember} <!-- 신규 채팅방 상대유저 정보를 위한 seq -->
+	</select>
+	 
+	<insert id="insertChat">
+		INSERT INTO chat
+		(
+			chatDelNy
+		)
+		VALUES
+		(
+			0
+		)
+		<selectKey resultType="Integer" keyProperty="chatSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<insert id="insertChatUser">
+		INSERT INTO chatUser
+		(
+			cuChatSeq
+			,cuMember
+		)
+		VALUES
+		(
+			#{chatSeq}
+			,#{cuMember}
+		)
+	</insert>
+
+</mapper>
